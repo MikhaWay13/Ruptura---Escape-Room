@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 3855076841855336694}
   - component: {fileID: 7386904671459825851}
   - component: {fileID: 1036878528130171469}
+  - component: {fileID: 5393632096852090459}
   m_Layer: 0
   m_Name: ParedeBonita
   m_TagString: Untagged
@@ -91,3 +92,24 @@ MeshRenderer:
   m_SortingOrder: 0
   m_MaskInteraction: 0
   m_AdditionalVertexStreams: {fileID: 0}
+--- !u!65 &5393632096852090459
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6807927069011993120}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 4.0245137, y: 0.32234994, z: 3.1601906}
+  m_Center: {x: 0.009904385, y: 0.061428446, z: -0.56961083}

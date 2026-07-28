@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 3504744675040415481}
   - component: {fileID: 2426086525251348131}
   - component: {fileID: 1273249314136864587}
+  - component: {fileID: 1961794081543408334}
   m_Layer: 0
   m_Name: Porta
   m_TagString: Untagged
@@ -90,3 +91,24 @@ MeshRenderer:
   m_SortingOrder: 0
   m_MaskInteraction: 0
   m_AdditionalVertexStreams: {fileID: 0}
+--- !u!65 &1961794081543408334
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5250138323395034325}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 0.60725224, y: 0.15962707, z: 2.376}
+  m_Center: {x: 0.0000013411047, y: -0.0000015236435, z: -0.0000007152556}

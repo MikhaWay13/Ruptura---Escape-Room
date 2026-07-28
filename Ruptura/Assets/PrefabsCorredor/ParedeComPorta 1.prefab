@@ -11,6 +11,9 @@ GameObject:
   - component: {fileID: 7242696707020680929}
   - component: {fileID: 1608248314312678892}
   - component: {fileID: 5806955733521015660}
+  - component: {fileID: 4625465585613601167}
+  - component: {fileID: 8731982118903822550}
+  - component: {fileID: 7915903424291844763}
   m_Layer: 0
   m_Name: ParedeComPorta 1
   m_TagString: Untagged
@@ -92,3 +95,66 @@ MeshRenderer:
   m_SortingOrder: 0
   m_MaskInteraction: 0
   m_AdditionalVertexStreams: {fileID: 0}
+--- !u!65 &4625465585613601167
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 9191706961128086238}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 0.35169476, y: 1.5794497, z: 3.1601903}
+  m_Center: {x: -0.009076387, y: 1.0958061, z: -0.017956853}
+--- !u!65 &8731982118903822550
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 9191706961128086238}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 0.35169476, y: 1.3679004, z: 3.1601903}
+  m_Center: {x: -0.009076387, y: -1.4550316, z: -0.017956853}
+--- !u!65 &7915903424291844763
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 9191706961128086238}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 0.35169476, y: 1.079298, z: 0.7793288}
+  m_Center: {x: -0.009076387, y: -0.23103522, z: -1.2083876}

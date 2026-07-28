@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 3635844961707437371}
   - component: {fileID: 823022661921475563}
   - component: {fileID: 571778076537529874}
+  - component: {fileID: 7370557421454179136}
   m_Layer: 0
   m_Name: "ParedePadr\xE3o"
   m_TagString: Untagged
@@ -91,3 +92,24 @@ MeshRenderer:
   m_SortingOrder: 0
   m_MaskInteraction: 0
   m_AdditionalVertexStreams: {fileID: 0}
+--- !u!65 &7370557421454179136
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1853038920702442538}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 4.0245137, y: 0.32234994, z: 3.1601906}
+  m_Center: {x: 0.010806799, y: 0.056514766, z: -0.49787718}
