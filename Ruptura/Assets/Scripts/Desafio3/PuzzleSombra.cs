@@ -40,13 +40,10 @@ public class PuzzleSombra : MonoBehaviour
 
     private void Awake()
     {
-        // Guarda a posição inicial da estante.
-        if (estante != null)
-        {
             posicaoFechadaEstante = estante.position;
             posicaoAbertaEstante =
                 posicaoFechadaEstante + deslocamentoEstante;
-        }
+    
     }
 
     private void OnEnable()
@@ -81,11 +78,6 @@ public class PuzzleSombra : MonoBehaviour
 
     private void GirarEstatueta()
     {
-        if (rotateAction == null || rotateAction.action == null)
-        {
-            return;
-        }
-
         // A retorna -1, D retorna 1 e nenhuma tecla retorna 0.
         float entrada = rotateAction.action.ReadValue<float>();
 
@@ -101,10 +93,6 @@ public class PuzzleSombra : MonoBehaviour
 
     private void VerificarRotacao()
     {
-        if (alvoRotacao == null)
-        {
-            return;
-        }
 
         // Calcula a diferença entre o ângulo atual
         // e o ângulo considerado correto.
@@ -141,11 +129,6 @@ public class PuzzleSombra : MonoBehaviour
 
     private void AbrirEstante()
     {
-        if (estante == null)
-        {
-            return;
-        }
-
         estante.position = Vector3.MoveTowards(
             estante.position,
             posicaoAbertaEstante,
@@ -155,9 +138,6 @@ public class PuzzleSombra : MonoBehaviour
 
     private void AtualizarTexto(string mensagem)
     {
-        if (textoStatus != null)
-        {
-            textoStatus.text = mensagem;
-        }
+         textoStatus.text = mensagem;
     }
 }
