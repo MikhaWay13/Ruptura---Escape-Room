@@ -16,7 +16,10 @@ public class DialogueManager : MonoBehaviour
     public float letterSpeed = 0.04f;
 
     [Header("FMOD")]
-    [SerializeField] private EventReference dialogueBlip;
+    [SerializeField] private EventReference narratorVoice;
+    [SerializeField] private EventReference playerVoice;
+
+    private EventReference currentVoice;
 
     private Coroutine typingCoroutine;
 
@@ -27,16 +30,19 @@ public class DialogueManager : MonoBehaviour
 
     public bool IsDialogueOpen => dialoguePanel.activeSelf;
 
-    void Awake()
+    private void Awake()
     {
         Instance = this;
-
         dialoguePanel.SetActive(false);
     }
 
-    public void ShowDialogue(string text)
+    // narrator = true -> voz do narrador
+    // narrator = false -> voz do player
+    public void ShowDialogue(string text, bool narrator)
     {
         currentText = text;
+
+        currentVoice = narrator ? narratorVoice : playerVoice;
 
         if (typingCoroutine != null)
             StopCoroutine(typingCoroutine);
@@ -44,7 +50,7 @@ public class DialogueManager : MonoBehaviour
         typingCoroutine = StartCoroutine(TypeText());
     }
 
-    IEnumerator TypeText()
+    private IEnumerator TypeText()
     {
         dialoguePanel.SetActive(true);
 
@@ -53,13 +59,13 @@ public class DialogueManager : MonoBehaviour
         isTyping = true;
         waitingInput = false;
 
-        foreach(char letter in currentText)
+        foreach (char letter in currentText)
         {
             dialogueText.text += letter;
 
-            if(char.IsLetterOrDigit(letter))
+            if (char.IsLetterOrDigit(letter))
             {
-                RuntimeManager.PlayOneShot(dialogueBlip);
+                RuntimeManager.PlayOneShot(currentVoice);
             }
 
             yield return new WaitForSeconds(letterSpeed);
@@ -71,7 +77,7 @@ public class DialogueManager : MonoBehaviour
 
     public void ContinueDialogue()
     {
-        if(isTyping)
+        if (isTyping)
         {
             StopCoroutine(typingCoroutine);
 
@@ -83,24 +89,21 @@ public class DialogueManager : MonoBehaviour
             return;
         }
 
-        if(waitingInput)
+        if (waitingInput)
         {
             dialoguePanel.SetActive(false);
-
             waitingInput = false;
         }
     }
+
     public void OnInteract(InputAction.CallbackContext context)
-{
-    if (!context.performed)
-        return;
-
-    if(DialogueManager.Instance.IsDialogueOpen)
     {
-        DialogueManager.Instance.ContinueDialogue();
-        return;
-    }
+        if (!context.performed)
+            return;
 
-    
-}
+        if (IsDialogueOpen)
+        {
+            ContinueDialogue();
+        }
+    }
 }
