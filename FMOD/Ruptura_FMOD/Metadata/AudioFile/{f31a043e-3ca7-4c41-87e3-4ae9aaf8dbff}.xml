@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<objects serializationModel="Studio.02.03.00">
+	<object class="AudioFile" id="{f31a043e-3ca7-4c41-87e3-4ae9aaf8dbff}">
+		<property name="assetPath">
+			<value>bleep009.mp3</value>
+		</property>
+		<property name="frequencyInKHz">
+			<value>44.0999985</value>
+		</property>
+		<property name="channelCount">
+			<value>2</value>
+		</property>
+		<property name="length">
+			<value>0.15673469387755101</value>
+		</property>
+		<relationship name="masterAssetFolder">
+			<destination>{81a9fb7a-aeca-4357-b425-8277b892d60d}</destination>
+		</relationship>
+	</object>
+</objects>
