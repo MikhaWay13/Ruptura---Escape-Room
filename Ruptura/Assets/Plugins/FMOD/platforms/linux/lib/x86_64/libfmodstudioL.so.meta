@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: 2c5282106dc6d914d9bea4743f666756
+guid: 73139f69ef146c94a9ec5fce82218106
 PluginImporter:
   externalObjects: {}
   serializedVersion: 3
@@ -11,15 +11,11 @@ PluginImporter:
   isExplicitlyReferenced: 0
   validateReferences: 1
   platformData:
-    Android:
-      enabled: 0
-      settings:
-        Is16KbAligned: false
     Any:
       enabled: 0
       settings: {}
     Editor:
-      enabled: 0
+      enabled: 1
       settings:
         CPU: x86_64
         DefaultValueInitialized: true

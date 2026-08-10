@@ -50,7 +50,7 @@ public class DialogueManager : MonoBehaviour
         // Depois você pode desativar/remover essa parte.
         if (testDialogue != null)
         {
-            StartDialogue(testDialogue);
+            
         }
     }
 
