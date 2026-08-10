@@ -4,18 +4,15 @@ using UnityEngine;
 
 public class PlayerInteraction : MonoBehaviour
 {
-
-    public float rayDistance=2f;
+    public float rayDistance = 2f;
 
     private Camera myCam;
 
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
         myCam = Camera.main;
     }
 
-    // Update is called once per frame
     void Update()
     {
         CheckInteractables();
@@ -24,12 +21,16 @@ public class PlayerInteraction : MonoBehaviour
     void CheckInteractables()
     {
         RaycastHit hit;
-        Vector3 rayOrigin = myCam.ViewportToWorldPoint(new Vector3(0.5f,0.5f,0.5f));
-        
-        if(Physics.Raycast(rayOrigin, myCam.transform.forward, out hit, rayDistance))
+
+        Vector3 rayOrigin = myCam.ViewportToWorldPoint(
+            new Vector3(0.5f, 0.5f, 0.5f)
+        );
+
+        if (Physics.Raycast(rayOrigin, myCam.transform.forward, out hit, rayDistance))
         {
             Interactables interactable = hit.collider.GetComponent<Interactables>();
-            if(interactable != null)
+
+            if (interactable != null)
             {
                 UIManager.instance.SetHandCursor(true);
             }
@@ -37,14 +38,10 @@ public class PlayerInteraction : MonoBehaviour
             {
                 UIManager.instance.SetHandCursor(false);
             }
-             else
-            {
-                UIManager.instance.SetHandCursor(false);
-            }
         }
-            
-
+        else
+        {
+            UIManager.instance.SetHandCursor(false);
+        }
     }
-
-
 }

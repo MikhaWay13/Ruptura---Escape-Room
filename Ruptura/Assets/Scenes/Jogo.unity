@@ -1851,7 +1851,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1106953303}
-  - component: {fileID: 1106953302}
   m_Layer: 0
   m_Name: DialogoManager
   m_TagString: Untagged
@@ -1859,35 +1858,6 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!114 &1106953302
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1106953301}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 29f0c9d6e9b7f14468779f6f547733bd, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::DialogueManager
-  dialoguePanel: {fileID: 273094511}
-  dialogueText: {fileID: 1558206085}
-  letterSpeed: 0.04
-  narratorVoice:
-    Guid:
-      Data1: -1252502676
-      Data2: 1135870705
-      Data3: 453702841
-      Data4: 1763659053
-    Path: event:/DialogoNarrador
-  playerVoice:
-    Guid:
-      Data1: -1076570651
-      Data2: 1094660635
-      Data3: -379477059
-      Data4: -1468290671
-    Path: event:/DialogoPlayer
 --- !u!4 &1106953303
 Transform:
   m_ObjectHideFlags: 0
