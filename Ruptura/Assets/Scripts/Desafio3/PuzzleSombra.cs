@@ -38,7 +38,6 @@ public class PuzzleSombra : MonoBehaviour, IRaycastInteractable
 
     private bool puzzleConcluido;
     private bool puzzleAtivo;
-    private bool referenciasValidas;
     private PlayerController jogadorAtivo;
     private float anguloHorizontal;
     private float anguloVertical;
@@ -48,35 +47,9 @@ public class PuzzleSombra : MonoBehaviour, IRaycastInteractable
 
     private void Awake()
     {
-        referenciasValidas =
-            rotateAction != null &&
-            rotateAction.action != null &&
-            alvoRotacao != null &&
-            estante != null;
-
-        if (!referenciasValidas)
-        {
-            Debug.LogError(
-                "PuzzleSombra está sem Rotate Action, Alvo Rotação ou Estante.",
-                this
-            );
-            enabled = false;
-            return;
-        }
-
         posicaoFechadaEstante = estante.position;
         posicaoAbertaEstante =
             posicaoFechadaEstante + deslocamentoEstante;
-    }
-
-    private void OnDisable()
-    {
-        if (rotateAction != null && rotateAction.action != null)
-        {
-            rotateAction.action.Disable();
-        }
-
-        LiberarJogador();
     }
 
     private void Start()
@@ -103,7 +76,7 @@ public class PuzzleSombra : MonoBehaviour, IRaycastInteractable
 
     public void Interact(PlayerController player)
     {
-        if (!referenciasValidas || puzzleConcluido)
+        if (puzzleConcluido)
         {
             return;
         }
@@ -164,13 +137,10 @@ public class PuzzleSombra : MonoBehaviour, IRaycastInteractable
             alvoRotacao.rotation
         );
 
-        if (textoStatus != null)
-        {
-            textoStatus.SetText(
-                "Mouse: girar  |  E: sair\nDiferença: {0:0} graus",
-                diferenca
-            );
-        }
+        textoStatus.SetText(
+            "Mouse: girar  |  E: sair\nDiferença: {0:0} graus",
+            diferenca
+        );
 
         if (diferenca <= toleranciaRotacao)
         {
@@ -203,19 +173,13 @@ public class PuzzleSombra : MonoBehaviour, IRaycastInteractable
 
     private void AtualizarTexto(string mensagem)
     {
-        if (textoStatus != null)
-        {
-            textoStatus.text = mensagem;
-        }
+        textoStatus.text = mensagem;
     }
 
     private void LiberarJogador()
     {
-        if (jogadorAtivo != null)
-        {
-            jogadorAtivo.SetGameplayControlEnabled(true);
-            jogadorAtivo = null;
-        }
+        jogadorAtivo.SetGameplayControlEnabled(true);
+        jogadorAtivo = null;
     }
 
     private static float NormalizarAngulo(float angulo)

@@ -50,7 +50,7 @@ public class PlayerController : MonoBehaviour
     }
     private void Update()
     {
-        if (interactAction != null && interactAction.WasPressedThisFrame())
+        if (interactAction.WasPressedThisFrame())
         {
             TryInteract();
         }
@@ -78,13 +78,6 @@ public class PlayerController : MonoBehaviour
     {
         Camera interactionCamera = Camera.main;
 
-        if (interactionCamera == null)
-        {
-            Debug.LogWarning("Não foi encontrada uma câmera com a tag MainCamera.", this);
-            return;
-        }
-
-        float distance = interactionDistance > 0f ? interactionDistance : 3f;
         Ray ray = new Ray(
             interactionCamera.transform.position,
             interactionCamera.transform.forward
@@ -93,7 +86,7 @@ public class PlayerController : MonoBehaviour
         if (!Physics.Raycast(
                 ray,
                 out RaycastHit hit,
-                distance,
+                interactionDistance,
                 Physics.DefaultRaycastLayers,
                 QueryTriggerInteraction.Ignore))
         {
