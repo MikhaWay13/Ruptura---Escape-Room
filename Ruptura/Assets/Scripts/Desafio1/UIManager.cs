@@ -10,6 +10,7 @@ public class UIManager : MonoBehaviour
     public static UIManager instance;
 
     public GameObject HandCursor;
+    public GameObject BackImage;
 
     private void Awake()
     {
@@ -30,5 +31,11 @@ public class UIManager : MonoBehaviour
     public void SetHandCursor (bool state)
     {
         HandCursor.SetActive(state);
+    }
+
+
+     public void SetBackImage (bool state)
+    {
+        BackImage.SetActive(state);
     }
 }

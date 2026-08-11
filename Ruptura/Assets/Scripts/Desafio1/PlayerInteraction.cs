@@ -11,6 +11,7 @@ public class PlayerInteraction : MonoBehaviour
     public Transform objectViewer;
 
     public UnityEvent OnView;
+    public UnityEvent OnFinishView;
 
     private Camera myCam;
 
@@ -19,6 +20,8 @@ public class PlayerInteraction : MonoBehaviour
     private Vector3 originPosition;
     private Quaternion originRotation;
     private bool isViewing;
+
+    private bool canFinish;
 
     void Start()
     {
@@ -34,9 +37,16 @@ public class PlayerInteraction : MonoBehaviour
     {
 
         if(isViewing){
-            if(currentInteractable.ite.grabbable && Input.GetMouseButton(0)){
+            if(currentInteractable.item.grabbable && Input.GetMouseButton(0)){
                 RotateObject();
             }
+
+
+            if(canFinish && Input.GetMouseButtonDown(1)){
+                FinishView();
+            }
+
+
             return;
         }
         RaycastHit hit;
@@ -55,11 +65,18 @@ public class PlayerInteraction : MonoBehaviour
                 UIManager.instance.SetHandCursor(true);
                 if(Input.GetMouseButtonDown(0)) 
                 {
+
+                    if(interactable.isMoving){
+                        return;
+                    }
+
                     OnView.Invoke();
 
                     currentInteractable = interactable;
 
                     isViewing= true;
+
+                    Invoke("CanFinish", 1f);
 
                     if(currentInteractable.item.grabbable)
                     {
@@ -82,10 +99,27 @@ public class PlayerInteraction : MonoBehaviour
 
     }
 
+    void CanFinish(){
+        canFinish=true;
+        UIManager.instance.SetBackImage(true);
+    }
 
+    void FinishView()
+    {
+        canFinish = false;
+        isViewing = false;
+        UIManager.instance.SetBackImage(false);
+        if(currentInteractable.item.grabbable)
+        {
+            currentInteractable.transform.rotation = originRotation;
+            StartCoroutine(MovingObject(currentInteractable, originPosition));
+        }
+        OnFinishView.Invoke();
+    }
 
     IEnumerator MovingObject(Interactables obj, Vector3 position)
     {
+        obj.isMoving = true;
         float timer=0;
         while(timer<1)
         {
@@ -95,13 +129,14 @@ public class PlayerInteraction : MonoBehaviour
         }
 
         obj.transform.position=position;
+        obj.isMoving = false;
     }
 
 
     void RotateObject(){
         float x = Input.GetAxis("Mouse X");
         float y =Input.GetAxis("Mouse Y");
-        currentInteractable.transform.Rotate(myCam.transform.right, Mathf.Deg2Rad* y* rotateSpeed, Space.World);
+        currentInteractable.transform.Rotate(myCam.transform.right, Mathf.Deg2Rad* y* RotateSpeed, Space.World);
         currentInteractable.transform.Rotate(myCam.transform.up, Mathf.Deg2Rad* x* RotateSpeed, Space.World);
 
     }
