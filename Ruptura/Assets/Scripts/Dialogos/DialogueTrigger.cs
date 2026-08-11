@@ -1,16 +1,16 @@
 using UnityEngine;
 
-public class DialogueTrigger : MonoBehaviour
+public class DialogueTrigger : MonoBehaviour, IInteractable
 {
     [Header("Diálogo")]
     [SerializeField] private DialogueData dialogue;
 
-    public void TriggerDialogue()
+    public void Interact()
     {
         if (dialogue == null)
         {
             Debug.LogWarning(
-                $"DialogueTrigger no objeto '{gameObject.name}' não possui um DialogueData."
+                $"O objeto '{gameObject.name}' não possui um DialogueData."
             );
 
             return;
