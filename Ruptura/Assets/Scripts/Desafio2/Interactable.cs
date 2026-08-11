@@ -3,7 +3,7 @@ using UnityEngine;
 public class Interactable : MonoBehaviour, IInteractable
 {
     [Header("Interação")]
-    [SerializeField] private string interactionName;
+    [SerializeField] private string interactionName = "Interagir";
 
     public string InteractionName => interactionName;
 

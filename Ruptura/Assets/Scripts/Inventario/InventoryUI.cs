@@ -1,30 +1,70 @@
+using System.Collections;
+using TMPro;
 using UnityEngine;
 using UnityEngine.InputSystem;
-using TMPro;
 
 public class InventoryUI : MonoBehaviour
 {
+    [Header("Input System")]
+    [SerializeField]
+    private InputActionReference inventoryAction;
+
     [Header("Painel")]
-    [SerializeField] private GameObject inventoryPanel;
+    [SerializeField]
+    private GameObject inventoryPanel;
 
-    [Header("Lista de itens")]
-    [SerializeField] private Transform itemContainer;
+    [Header("Itens")]
+    [SerializeField]
+    private Transform itemContainer;
 
-    [SerializeField] private GameObject itemSlotPrefab;
+    [SerializeField]
+    private GameObject itemSlotPrefab;
 
-    [Header("Mensagem")]
-    [SerializeField] private GameObject itemMessage;
-    [SerializeField] private TMP_Text itemMessageText;
+    [Header("Notificação")]
+    [SerializeField]
+    private GameObject itemNotification;
 
-    [Header("Configuração")]
-    [SerializeField] private float messageDuration = 2f;
+    [SerializeField]
+    private TMP_Text notificationText;
 
-    private Coroutine messageCoroutine;
+    [SerializeField, Min(0.1f)]
+    private float notificationDuration = 2f;
+
+    private Coroutine notificationCoroutine;
+
+    public bool IsOpen =>
+        inventoryPanel != null &&
+        inventoryPanel.activeSelf;
 
     private void Awake()
     {
-        inventoryPanel.SetActive(false);
-        itemMessage.SetActive(false);
+        if (inventoryPanel != null)
+        {
+            inventoryPanel.SetActive(false);
+        }
+
+        if (itemNotification != null)
+        {
+            itemNotification.SetActive(false);
+        }
+    }
+
+    private void OnEnable()
+    {
+        if (inventoryAction != null)
+        {
+            inventoryAction.action.performed += OnInventory;
+            inventoryAction.action.Enable();
+        }
+    }
+
+    private void OnDisable()
+    {
+        if (inventoryAction != null)
+        {
+            inventoryAction.action.performed -= OnInventory;
+            inventoryAction.action.Disable();
+        }
     }
 
     private void Start()
@@ -32,7 +72,8 @@ public class InventoryUI : MonoBehaviour
         if (Inventory.Instance == null)
             return;
 
-        Inventory.Instance.OnItemAdded += OnItemAdded;
+        Inventory.Instance.OnItemAdded += HandleItemAdded;
+        Inventory.Instance.OnItemRemoved += HandleItemRemoved;
 
         RefreshInventory();
     }
@@ -42,10 +83,12 @@ public class InventoryUI : MonoBehaviour
         if (Inventory.Instance == null)
             return;
 
-        Inventory.Instance.OnItemAdded -= OnItemAdded;
+        Inventory.Instance.OnItemAdded -= HandleItemAdded;
+        Inventory.Instance.OnItemRemoved -= HandleItemRemoved;
     }
 
-    public void OnInventory(InputAction.CallbackContext context)
+    private void OnInventory(
+        InputAction.CallbackContext context)
     {
         if (!context.performed)
             return;
@@ -55,7 +98,11 @@ public class InventoryUI : MonoBehaviour
 
     private void ToggleInventory()
     {
-        bool newState = !inventoryPanel.activeSelf;
+        if (inventoryPanel == null)
+            return;
+
+        bool newState =
+            !inventoryPanel.activeSelf;
 
         inventoryPanel.SetActive(newState);
 
@@ -67,6 +114,9 @@ public class InventoryUI : MonoBehaviour
 
     private void RefreshInventory()
     {
+        if (itemContainer == null)
+            return;
+
         foreach (Transform child in itemContainer)
         {
             Destroy(child.gameObject);
@@ -75,19 +125,25 @@ public class InventoryUI : MonoBehaviour
         if (Inventory.Instance == null)
             return;
 
-        foreach (InventoryItemData item in Inventory.Instance.Items)
+        foreach (
+            InventoryItemData item
+            in Inventory.Instance.Items)
         {
             CreateItemSlot(item);
         }
     }
 
-    private void CreateItemSlot(InventoryItemData item)
+    private void CreateItemSlot(
+        InventoryItemData item)
     {
         if (itemSlotPrefab == null)
             return;
 
         GameObject slot =
-            Instantiate(itemSlotPrefab, itemContainer);
+            Instantiate(
+                itemSlotPrefab,
+                itemContainer
+            );
 
         InventorySlot inventorySlot =
             slot.GetComponent<InventorySlot>();
@@ -98,34 +154,55 @@ public class InventoryUI : MonoBehaviour
         }
     }
 
-    private void OnItemAdded(InventoryItemData item)
+    private void HandleItemAdded(
+        InventoryItemData item)
     {
         RefreshInventory();
-        ShowItemMessage(item);
+
+        ShowNotification(item);
     }
 
-    private void ShowItemMessage(InventoryItemData item)
+    private void HandleItemRemoved(
+        InventoryItemData item)
     {
-        if (itemMessage == null ||
-            itemMessageText == null)
+        RefreshInventory();
+    }
+
+    private void ShowNotification(
+        InventoryItemData item)
+    {
+        if (itemNotification == null ||
+            notificationText == null)
+        {
             return;
+        }
 
-        itemMessageText.text =
-            $"Adicionado ao inventário:\n{item.ItemName}";
+        notificationText.text =
+            $"Adicionado ao inventário:\n" +
+            $"{item.ItemName}";
 
-        itemMessage.SetActive(true);
+        itemNotification.SetActive(true);
 
-        if (messageCoroutine != null)
-            StopCoroutine(messageCoroutine);
+        if (notificationCoroutine != null)
+        {
+            StopCoroutine(notificationCoroutine);
+        }
 
-        messageCoroutine =
-            StartCoroutine(HideMessageAfterTime());
+        notificationCoroutine =
+            StartCoroutine(
+                HideNotification()
+            );
     }
 
-    private System.Collections.IEnumerator HideMessageAfterTime()
+    private IEnumerator HideNotification()
     {
-        yield return new WaitForSeconds(messageDuration);
+        yield return new WaitForSeconds(
+            notificationDuration
+        );
 
-        itemMessage.SetActive(false);
+        if (itemNotification != null)
+        {
+            itemNotification.SetActive(false);
+        }
     }
 }

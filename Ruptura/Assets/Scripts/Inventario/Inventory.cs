@@ -7,7 +7,8 @@ public class Inventory : MonoBehaviour
     public static Inventory Instance { get; private set; }
 
     [Header("Itens")]
-    [SerializeField] private List<InventoryItemData> items = new();
+    [SerializeField]
+    private List<InventoryItemData> items = new();
 
     public IReadOnlyList<InventoryItemData> Items => items;
 
@@ -55,6 +56,7 @@ public class Inventory : MonoBehaviour
 
     public bool HasItem(InventoryItemData item)
     {
-        return item != null && items.Contains(item);
+        return item != null &&
+               items.Contains(item);
     }
 }
