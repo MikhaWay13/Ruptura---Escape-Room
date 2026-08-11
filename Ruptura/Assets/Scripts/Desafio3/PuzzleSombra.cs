@@ -2,7 +2,7 @@ using TMPro;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
-public class PuzzleSombra : MonoBehaviour
+public class PuzzleSombra : MonoBehaviour, IRaycastInteractable
 {
     [Header("Input System")]
     [SerializeField]
@@ -19,8 +19,11 @@ public class PuzzleSombra : MonoBehaviour
     private TMP_Text textoStatus;
 
     [Header("Configuração da estatueta")]
-    [SerializeField]
-    private float velocidadeRotacao = 90f;
+    [SerializeField, Min(0.001f)]
+    private float sensibilidadeMouse = 0.15f;
+
+    [SerializeField, Range(0f, 89f)]
+    private float limiteVertical = 80f;
 
     [SerializeField]
     [Range(0.1f, 30f)]
@@ -34,34 +37,51 @@ public class PuzzleSombra : MonoBehaviour
     private float velocidadeEstante = 2f;
 
     private bool puzzleConcluido;
+    private bool puzzleAtivo;
+    private bool referenciasValidas;
+    private PlayerController jogadorAtivo;
+    private float anguloHorizontal;
+    private float anguloVertical;
 
     private Vector3 posicaoFechadaEstante;
     private Vector3 posicaoAbertaEstante;
 
     private void Awake()
     {
-            posicaoFechadaEstante = estante.position;
-            posicaoAbertaEstante =
-                posicaoFechadaEstante + deslocamentoEstante;
-    
-    }
+        referenciasValidas =
+            rotateAction != null &&
+            rotateAction.action != null &&
+            alvoRotacao != null &&
+            estante != null;
 
-    private void OnEnable()
-    {
-            rotateAction.action.Enable();
-        
+        if (!referenciasValidas)
+        {
+            Debug.LogError(
+                "PuzzleSombra está sem Rotate Action, Alvo Rotação ou Estante.",
+                this
+            );
+            enabled = false;
+            return;
+        }
+
+        posicaoFechadaEstante = estante.position;
+        posicaoAbertaEstante =
+            posicaoFechadaEstante + deslocamentoEstante;
     }
 
     private void OnDisable()
     {
-
+        if (rotateAction != null && rotateAction.action != null)
+        {
             rotateAction.action.Disable();
-        
+        }
+
+        LiberarJogador();
     }
 
     private void Start()
     {
-        AtualizarTexto("Use A e D para ajustar a sombra");
+        AtualizarTexto("Aponte para a estatueta e pressione E");
     }
 
     private void Update()
@@ -72,30 +92,73 @@ public class PuzzleSombra : MonoBehaviour
             return;
         }
 
+        if (!puzzleAtivo)
+        {
+            return;
+        }
+
         GirarEstatueta();
         VerificarRotacao();
     }
 
+    public void Interact(PlayerController player)
+    {
+        if (!referenciasValidas || puzzleConcluido)
+        {
+            return;
+        }
+
+        if (puzzleAtivo)
+        {
+            EncerrarAjuste();
+        }
+        else
+        {
+            IniciarAjuste(player);
+        }
+    }
+
+    private void IniciarAjuste(PlayerController player)
+    {
+        puzzleAtivo = true;
+        jogadorAtivo = player;
+        anguloHorizontal = transform.eulerAngles.y;
+        anguloVertical = NormalizarAngulo(transform.eulerAngles.x);
+        jogadorAtivo.SetGameplayControlEnabled(false);
+        rotateAction.action.Enable();
+
+        AtualizarTexto("Mouse: girar  |  E: sair");
+    }
+
+    private void EncerrarAjuste()
+    {
+        puzzleAtivo = false;
+        rotateAction.action.Disable();
+        LiberarJogador();
+
+        AtualizarTexto("Aponte para a estatueta e pressione E");
+    }
+
     private void GirarEstatueta()
     {
-        // A retorna -1, D retorna 1 e nenhuma tecla retorna 0.
-        float entrada = rotateAction.action.ReadValue<float>();
+        Vector2 entrada = rotateAction.action.ReadValue<Vector2>();
 
-        float quantidadeRotacao =
-            entrada * velocidadeRotacao * Time.deltaTime;
+        anguloHorizontal += entrada.x * sensibilidadeMouse;
+        anguloVertical = Mathf.Clamp(
+            anguloVertical - entrada.y * sensibilidadeMouse,
+            -limiteVertical,
+            limiteVertical
+        );
 
-        transform.Rotate(
-            Vector3.up,
-            quantidadeRotacao,
-            Space.Self
+        transform.rotation = Quaternion.Euler(
+            anguloVertical,
+            anguloHorizontal,
+            0f
         );
     }
 
     private void VerificarRotacao()
     {
-
-        // Calcula a diferença entre o ângulo atual
-        // e o ângulo considerado correto.
         float diferenca = Quaternion.Angle(
             transform.rotation,
             alvoRotacao.rotation
@@ -104,7 +167,7 @@ public class PuzzleSombra : MonoBehaviour
         if (textoStatus != null)
         {
             textoStatus.SetText(
-                "Use A e D para girar\nDiferença: {0:0} graus",
+                "Mouse: girar  |  E: sair\nDiferença: {0:0} graus",
                 diferenca
             );
         }
@@ -118,9 +181,11 @@ public class PuzzleSombra : MonoBehaviour
     private void ConcluirPuzzle()
     {
         puzzleConcluido = true;
+        puzzleAtivo = false;
+        rotateAction.action.Disable();
 
-        // Encaixa exatamente na rotação correta.
         transform.rotation = alvoRotacao.rotation;
+        LiberarJogador();
 
         AtualizarTexto(
             "Sombra correta!\nEstante destravada."
@@ -138,6 +203,23 @@ public class PuzzleSombra : MonoBehaviour
 
     private void AtualizarTexto(string mensagem)
     {
-         textoStatus.text = mensagem;
+        if (textoStatus != null)
+        {
+            textoStatus.text = mensagem;
+        }
+    }
+
+    private void LiberarJogador()
+    {
+        if (jogadorAtivo != null)
+        {
+            jogadorAtivo.SetGameplayControlEnabled(true);
+            jogadorAtivo = null;
+        }
+    }
+
+    private static float NormalizarAngulo(float angulo)
+    {
+        return angulo > 180f ? angulo - 360f : angulo;
     }
 }

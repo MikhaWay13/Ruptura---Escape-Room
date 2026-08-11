@@ -14,13 +14,19 @@ public class PlayerController : MonoBehaviour
     public float minPitch = -80f;
     public float maxPitch = 80f;
 
+    [Header("Interação")]
+    [SerializeField, Min(0.1f)]
+    private float interactionDistance = 3f;
+
     private InputAction moveAction;
     private InputAction lookAction;
     private InputAction jumpAction;
+    private InputAction interactAction;
 
     private CharacterController controller;
     private Vector3 velocity;
-    private float pitch;  
+    private float pitch;
+    private bool gameplayControlEnabled = true;
 
     private void Awake()
     {
@@ -29,6 +35,7 @@ public class PlayerController : MonoBehaviour
         moveAction = InputSystem.actions.FindAction("Move");
         lookAction = InputSystem.actions.FindAction("Look");
         jumpAction = InputSystem.actions.FindAction("Jump");
+        interactAction = InputSystem.actions.FindAction("Interact");
 
         Cursor.lockState = CursorLockMode.Locked;
     }
@@ -43,8 +50,67 @@ public class PlayerController : MonoBehaviour
     }
     private void Update()
     {
+        if (interactAction != null && interactAction.WasPressedThisFrame())
+        {
+            TryInteract();
+        }
+
+        if (!gameplayControlEnabled)
+        {
+            return;
+        }
+
         Look();
         Move();
+    }
+
+    public void SetGameplayControlEnabled(bool isEnabled)
+    {
+        gameplayControlEnabled = isEnabled;
+
+        if (!isEnabled)
+        {
+            velocity = Vector3.zero;
+        }
+    }
+
+    private void TryInteract()
+    {
+        Camera interactionCamera = Camera.main;
+
+        if (interactionCamera == null)
+        {
+            Debug.LogWarning("Não foi encontrada uma câmera com a tag MainCamera.", this);
+            return;
+        }
+
+        float distance = interactionDistance > 0f ? interactionDistance : 3f;
+        Ray ray = new Ray(
+            interactionCamera.transform.position,
+            interactionCamera.transform.forward
+        );
+
+        if (!Physics.Raycast(
+                ray,
+                out RaycastHit hit,
+                distance,
+                Physics.DefaultRaycastLayers,
+                QueryTriggerInteraction.Ignore))
+        {
+            return;
+        }
+
+        MonoBehaviour[] behaviours =
+            hit.collider.GetComponentsInParent<MonoBehaviour>(true);
+
+        foreach (MonoBehaviour behaviour in behaviours)
+        {
+            if (behaviour is IRaycastInteractable interactable)
+            {
+                interactable.Interact(this);
+                return;
+            }
+        }
     }
 
     private void Look()

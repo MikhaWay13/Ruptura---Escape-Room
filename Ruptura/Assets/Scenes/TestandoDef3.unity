@@ -954,7 +954,7 @@ MonoBehaviour:
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 51d69ddd4fe5f67449b30c9d61297db1, type: 3}
   m_Name: 
-  m_EditorClassIdentifier: '::'
+  m_EditorClassIdentifier: Assembly-CSharp::EletricPanelScript
   openAngle: 90
   openSpeed: 2
   isOpen: 0
@@ -1308,10 +1308,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::PuzzleSombra
   rotateAction: {fileID: 468487187706357209, guid: 052faaac586de48259a63d0c4782560b, type: 3}
-  alvoRotacao: {fileID: 0}
-  estante: {fileID: 0}
-  textoStatus: {fileID: 0}
-  velocidadeRotacao: 90
+  alvoRotacao: {fileID: 719204453}
+  estante: {fileID: 1415985822}
+  textoStatus: {fileID: 1460314828}
+  sensibilidadeMouse: 0.15
+  limiteVertical: 80
   toleranciaRotacao: 6
   deslocamentoEstante: {x: 2.5, y: 0, z: 0}
   velocidadeEstante: 2
@@ -1977,6 +1978,7 @@ GameObject:
   - component: {fileID: 8117209783842035191}
   - component: {fileID: 897611006735701380}
   - component: {fileID: 7242085779207474940}
+  - component: {fileID: 3125537910246872345}
   m_Layer: 0
   m_Name: Cup
   m_TagString: Untagged
@@ -2292,6 +2294,28 @@ MeshFilter:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 148550109663811360}
+  m_Mesh: {fileID: -4119317738140548247, guid: e35379fad6334164186a552d0738df36, type: 3}
+--- !u!64 &3125537910246872345
+MeshCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 148550109663811360}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 5
+  m_Convex: 0
+  m_CookingOptions: 30
   m_Mesh: {fileID: -4119317738140548247, guid: e35379fad6334164186a552d0738df36, type: 3}
 --- !u!23 &1009516181488705038
 MeshRenderer:
