@@ -8,6 +8,7 @@ public class MenuPrincipal : MonoBehaviour
 
     [SerializeField] private GameObject painelMenuInicial;
     [SerializeField] private GameObject painelOpcoes;
+    [SerializeField] private GameObject painelCreditos;
     [SerializeField] private GameObject painelSair;
     public bool PlayGame=false;
     public void Jogar()
@@ -17,6 +18,13 @@ public class MenuPrincipal : MonoBehaviour
         print("Cutscene iniciada");
     }
 
+
+void Start(){
+    painelMenuInicial.SetActive(true);
+        painelOpcoes.SetActive(false);
+        painelCreditos.SetActive(false);
+        painelSair.SetActive(false);
+}
 
 //opções
     public void AbrirOpcoes()
@@ -29,6 +37,19 @@ public class MenuPrincipal : MonoBehaviour
     {
         painelMenuInicial.SetActive(true);
         painelOpcoes.SetActive(false);
+    }
+
+//Créditos
+     public void AbrirCreditos()
+    {
+        painelMenuInicial.SetActive(false);
+        painelCreditos.SetActive(true);
+    }
+
+    public void FecharCreditos()
+    {
+        painelMenuInicial.SetActive(true);
+        painelCreditos.SetActive(false);
     }
 
     //saida
@@ -57,6 +78,8 @@ public class MenuPrincipal : MonoBehaviour
   #if UNITY_EDITOR
         UnityEditor.EditorApplication.isPlaying = false;
         Debug.Log("Sair");
+        painelMenuInicial.SetActive(true);
+        painelSair.SetActive(false);
         Application.Quit();
         #endif
         Application.Quit();
