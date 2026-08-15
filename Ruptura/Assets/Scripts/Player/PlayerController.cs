@@ -17,6 +17,8 @@ public class PlayerController : MonoBehaviour
     private InputAction moveAction;
     private InputAction lookAction;
     private InputAction jumpAction;
+    private InputAction PlayerInventory; //abrir o inventário
+    private InputAction UIInventory; //fechar o inventário
 
     private CharacterController controller;
 
@@ -25,6 +27,8 @@ public class PlayerController : MonoBehaviour
 
     private bool gameplayControlEnabled = true;
 
+    private bool verify;
+
     private void Awake()
     {
         controller = GetComponent<CharacterController>();
@@ -32,6 +36,8 @@ public class PlayerController : MonoBehaviour
         moveAction = InputSystem.actions.FindAction("Move");
         lookAction = InputSystem.actions.FindAction("Look");
         jumpAction = InputSystem.actions.FindAction("Jump");
+        PlayerInventory = InputSystem.actions.FindAction("Player/Inventory");
+        //UIInventory = InputSystem.actions.FindAction("UI/Inventory");
 
         Cursor.lockState = CursorLockMode.Locked;
         Cursor.visible = false;
@@ -53,12 +59,47 @@ public class PlayerController : MonoBehaviour
 
     private void Update()
     {
+        Inventario();
+
         if (!gameplayControlEnabled)
             return;
 
-        Look();
         Move();
     }
+
+    private void LateUpdate()
+    {
+        if (!gameplayControlEnabled)
+            return;
+        Look();
+    }
+
+
+
+ private void Inventario()
+    {
+
+
+        if (PlayerInventory.WasPressedThisFrame())
+        {
+            if (verify)
+            {
+                SetGameplayControlEnabled(true);
+                UIManager.instance.SetInventory(true);
+                verify = false;
+            }
+            else
+            {
+                SetGameplayControlEnabled(false);
+                UIManager.instance.SetInventory(false);
+                verify = true;
+            }
+        }
+        
+    }
+
+
+
 
     public void SetGameplayControlEnabled(bool isEnabled)
     {

@@ -11538,6 +11538,7 @@ GameObject:
   - component: {fileID: 1411445051}
   - component: {fileID: 1411445050}
   - component: {fileID: 1411445049}
+  - component: {fileID: 1411445054}
   m_Layer: 5
   m_Name: Canvas
   m_TagString: Untagged
@@ -11571,7 +11572,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: dc42784cf147c0c48a680349fa168899, type: 3}
   m_Name: 
   m_EditorClassIdentifier: UnityEngine.UI::UnityEngine.UI.GraphicRaycaster
-  m_IgnoreReversedGraphics: 1
+  m_IgnoreReversedGraphics: 0
   m_BlockingObjects: 0
   m_BlockingMask:
     serializedVersion: 2
@@ -11645,6 +11646,19 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0, y: 0}
+--- !u!114 &1411445054
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1411445048}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 852e55cede6bb84448822e8e474e76a7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::InterfaceController
+  panelInventory: {fileID: 1317897401}
 --- !u!1001 &1413437150
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -12143,6 +12157,51 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 400000, guid: 3ac38b686065dab48927682843360da9, type: 3}
   m_PrefabInstance: {fileID: 1532671313}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &1532728405
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1532728407}
+  - component: {fileID: 1532728406}
+  m_Layer: 0
+  m_Name: InterfaceController
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &1532728406
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1532728405}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 852e55cede6bb84448822e8e474e76a7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::InterfaceController
+  panelInventory: {fileID: 0}
+--- !u!4 &1532728407
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1532728405}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 138.51624, y: 756.07135, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &1539795343
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -16889,6 +16948,7 @@ SceneRoots:
   - {fileID: 1820780273}
   - {fileID: 223418527}
   - {fileID: 1501887843}
+  - {fileID: 1532728407}
   - {fileID: 387079271}
   - {fileID: 817504653}
   - {fileID: 926709667}

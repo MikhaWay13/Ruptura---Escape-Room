@@ -1,12 +1,46 @@
 using UnityEngine;
 using System.Collections;
 using System.Collections.Generic;
+using UnityEngine.UI;
 
-[CreateAssetMenu(fileName = "New Object", menuName = "Inventory Objects/Create New")]
-public class InventoryController : ScriptableObject
+public class InventoryController : MonoBehaviour
 {
-    
-    public string itemName;
+    public Objects[] slots;
+    public Image[] slotImage;
+    public int[] slotAmount;
 
-    public Sprite itemSprite;
+    // Start is called once before the first execution of Update after the MonoBehaviour is created
+    void Start()
+    {
+
+    }
+
+    // Update is called once per frame
+    void Update()
+    {
+        RaycastHit hit;
+        Ray ray = Camera.main.ScreenPointToRay(new Vector3(Screen.width / 2, Screen.height / 2));
+
+        if (Physics.Raycast(ray, out hit, 5f))
+        {
+            if (hit.collider.tag == "Object")
+            {
+                if (Input.GetKeyDown(KeyCode.E))
+                {
+                    for (int i = 0; i < slots.Length; i++)
+                    {
+                        if (slots[i] == null || slots[i].name == hit.transform.GetComponent<ObjectType>().objectType.name)
+                        {
+                            slots[i] = hit.transform.GetComponent<ObjectType>().objectType;
+                            slotAmount[i]++;
+                            slotImage[i].sprite = (slots[i]).itemSprite;
+
+                            Destroy(hit.transform.gameObject);
+                            break;
+                        }
+                    }
+                }
+            }
+        }
+    }
 }

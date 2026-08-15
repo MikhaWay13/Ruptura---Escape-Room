@@ -5,37 +5,57 @@ using UnityEngine;
 
 public class UIManager : MonoBehaviour
 {
+    public static UIManager instance; //singleton
 
 
-    public static UIManager instance;
-
+//inventário
+    public GameObject painelInventory;
+    //interação
     public GameObject HandCursor;
     public GameObject BackImage;
 
     private void Awake()
     {
-        instance=this;
+        instance = this; //singleton
+
     }
 
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
-    void Start()
+    private void Start()
     {
+        painelInventory.SetActive(false);
         
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
+
     public void SetHandCursor (bool state)
     {
         HandCursor.SetActive(state);
     }
 
 
-     public void SetBackImage (bool state)
+    public void SetBackImage(bool state)
     {
         BackImage.SetActive(state);
     }
+
+    
+
+
+    public void SetInventory(bool invActive)
+    {
+         invActive = !invActive;
+        painelInventory.SetActive(invActive);
+        if (invActive)
+        {
+            Cursor.lockState = CursorLockMode.None;
+        }
+        else
+        {   
+            Cursor.lockState = CursorLockMode.Locked;
+        }
+    }
+
+
+    
+
 }
