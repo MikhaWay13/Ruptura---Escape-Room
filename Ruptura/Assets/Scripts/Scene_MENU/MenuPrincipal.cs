@@ -5,6 +5,7 @@ public class MenuPrincipal : MonoBehaviour
 {
     [SerializeField] private string nomeDoLevelDeJogo;
     [SerializeField] private GameObject Canvas;
+    [SerializeField] private GameObject Gatilho;
 
     [SerializeField] private GameObject painelMenuInicial;
     [SerializeField] private GameObject painelOpcoes;
@@ -14,7 +15,8 @@ public class MenuPrincipal : MonoBehaviour
     public void Jogar()
     {
         PlayGame=true;
-        Canvas.SetActive(false); 
+        Canvas.SetActive(false);
+         Gatilho.SetActive(true); 
         print("Cutscene iniciada");
     }
 
@@ -24,6 +26,7 @@ void Start(){
         painelOpcoes.SetActive(false);
         painelCreditos.SetActive(false);
         painelSair.SetActive(false);
+        Gatilho.SetActive(false);
 }
 
 //opções
