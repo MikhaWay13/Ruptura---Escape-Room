@@ -15,3 +15,6 @@ MonoBehaviour:
   grabbable: 1
   audioClip: {fileID: 0}
   text: 
+  ToInventory: 1
+  itemName: 
+  itemSprite: {fileID: 0}

@@ -15,3 +15,6 @@ MonoBehaviour:
   grabbable: 1
   audioClip: {fileID: 0}
   text: 
+  ToInventory: 1
+  itemName: saf
+  itemSprite: {fileID: 21300000, guid: 57907e3bf0317974d85e5c668e694947, type: 3}

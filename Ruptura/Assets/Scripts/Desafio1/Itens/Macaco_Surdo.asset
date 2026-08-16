@@ -12,9 +12,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 350becae4b414014c835792cadb25726, type: 3}
   m_Name: Macaco_Surdo
   m_EditorClassIdentifier: Assembly-CSharp::Item
-  grabbable: 0
+  grabbable: 1
   audioClip: {fileID: 0}
   text: 
-  ToInventory: 0
-  itemName: 
-  itemSprite: {fileID: 0}
+  ToInventory: 1
+  itemName: Mizaru
+  itemSprite: {fileID: 21300000, guid: ede3dbf6fe836694081e05c393907b61, type: 3}

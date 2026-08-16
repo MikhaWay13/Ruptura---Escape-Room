@@ -12,9 +12,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 350becae4b414014c835792cadb25726, type: 3}
   m_Name: New Item
   m_EditorClassIdentifier: Assembly-CSharp::Item
-  grabbable: 0
+  grabbable: 1
   audioClip: {fileID: 0}
   text: 
-  ToInventory: 0
-  itemName: 
+  ToInventory: 1
+  itemName: cu
   itemSprite: {fileID: 0}
