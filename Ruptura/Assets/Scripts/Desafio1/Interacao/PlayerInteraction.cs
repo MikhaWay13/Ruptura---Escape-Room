@@ -32,25 +32,12 @@ public class PlayerInteraction : MonoBehaviour
 
     private void Awake()
     {
-        pressAction = InputSystem.actions.FindAction("Press");
-        InteractAction = InputSystem.actions.FindAction("Interact");
-        BackAction = InputSystem.actions.FindAction("Back");
-        lookAction = InputSystem.actions.FindAction("Look");
+        pressAction = InputSystem.actions.FindAction("Interaction/Press");
+        InteractAction = InputSystem.actions.FindAction("Interaction/Interact");
+        BackAction = InputSystem.actions.FindAction("Interaction/Back");
+        lookAction = InputSystem.actions.FindAction("Interaction/Look");
     }
 
-  private void OnEnable()
-    {
-        InputSystem.actions
-            .FindActionMap("Player")
-            .Enable();
-    }
-
-    private void OnDisable()
-    {
-        InputSystem.actions
-            .FindActionMap("Player")
-            .Disable();
-    }
 
 
     void Start()
