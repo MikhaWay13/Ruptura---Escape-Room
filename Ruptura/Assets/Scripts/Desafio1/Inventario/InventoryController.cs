@@ -2,45 +2,70 @@ using UnityEngine;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine.UI;
+using UnityEngine.InputSystem;
 
 public class InventoryController : MonoBehaviour
 {
-    public Objects[] slots;
+    public static InventoryController instance;
+
+    public Item[] slots;
     public Image[] slotImage;
     public int[] slotAmount;
 
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
-    void Start()
+    private void Awake()
     {
-
+        instance = this;
     }
 
-    // Update is called once per frame
-    void Update()
+
+    public bool AddItem(Item newItem)
     {
-        RaycastHit hit;
-        Ray ray = Camera.main.ScreenPointToRay(new Vector3(Screen.width / 2, Screen.height / 2));
 
-        if (Physics.Raycast(ray, out hit, 5f))
-        {
-            if (hit.collider.tag == "Object")
+        
+            for (int i = 0; i < slots.Length; i++)
             {
-                if (Input.GetKeyDown(KeyCode.E))
+                if (slots[i] == null || slots[i].itemName == newItem.itemName)
                 {
-                    for (int i = 0; i < slots.Length; i++)
-                    {
-                        if (slots[i] == null || slots[i].name == hit.transform.GetComponent<ObjectType>().objectType.name)
-                        {
-                            slots[i] = hit.transform.GetComponent<ObjectType>().objectType;
-                            slotAmount[i]++;
-                            slotImage[i].sprite = (slots[i]).itemSprite;
+                    slots[i] = newItem;
+                    slotAmount[i]++;
+                    slotImage[i].sprite = slots[i].itemSprite;
 
-                            Destroy(hit.transform.gameObject);
-                            break;
-                        }
-                    }
+                    return true;
                 }
             }
-        }
+            return false;
+        
+
     }
+
 }
+
+
+
+
+
+
+
+
+
+//   public void RayInventory(RaycastHit hit,Interactables inventory)
+//     {
+
+//             if (Input.GetKeyDown(KeyCode.E) && inventory.item.ToInventory)
+//             {
+//                 for (int i = 0; i < slots.Length; i++)
+//                 {
+//                     if (slots[i] == null || slots[i].ItemName == inventory.item.ItemName)
+//                     {
+//                         slots[i] = inventory.item;
+//                         slotAmount[i]++;
+//                         slotImage[i].sprite = slots[i].itemSprite;
+
+//                         Destroy(hit.transform.gameObject);
+//                         break;
+//                     }
+//                 }
+//             }
+    
+//     }
+

@@ -73,7 +73,7 @@
                     "name": "Next",
                     "type": "Button",
                     "id": "b7230bb6-fc9b-4f52-8b25-f5e19cb2c2ba",
-                    "expectedControlType": "Button",
+                    "expectedControlType": "",
                     "processors": "",
                     "interactions": "",
                     "initialStateCheck": false
@@ -100,6 +100,24 @@
                     "name": "InspectRotate",
                     "type": "Button",
                     "id": "049c40fc-55e1-442e-b1bf-8722102d1e1c",
+                    "expectedControlType": "",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
+                    "name": "Press",
+                    "type": "Button",
+                    "id": "5749de48-b9e0-45b1-8811-13221cc5d93d",
+                    "expectedControlType": "",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
+                    "name": "Back",
+                    "type": "Button",
+                    "id": "58508f04-2ed8-4a34-a1ae-cd893a3e066f",
                     "expectedControlType": "",
                     "processors": "",
                     "interactions": "",
@@ -524,6 +542,28 @@
                     "action": "InspectRotate",
                     "isComposite": false,
                     "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "6bfb0380-873e-49dd-b488-fc0abbe67a1d",
+                    "path": "<Mouse>/leftButton",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": ";Keyboard&Mouse",
+                    "action": "Press",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "1ab9d357-ca62-46ae-b7bc-631147de9a47",
+                    "path": "<Mouse>/rightButton",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": ";Keyboard&Mouse",
+                    "action": "Back",
+                    "isComposite": false,
+                    "isPartOfComposite": false
                 }
             ]
         },
@@ -541,19 +581,10 @@
                     "initialStateCheck": false
                 },
                 {
-                    "name": "Inventory",
-                    "type": "Button",
-                    "id": "c577b31d-87eb-4e49-9740-8ef4c7021078",
-                    "expectedControlType": "",
-                    "processors": "",
-                    "interactions": "",
-                    "initialStateCheck": false
-                },
-                {
                     "name": "Submit",
                     "type": "Button",
                     "id": "7607c7b6-cd76-4816-beef-bd0341cfe950",
-                    "expectedControlType": "Button",
+                    "expectedControlType": "",
                     "processors": "",
                     "interactions": "",
                     "initialStateCheck": false
@@ -895,28 +926,6 @@
                     "action": "Navigate",
                     "isComposite": false,
                     "isPartOfComposite": true
-                },
-                {
-                    "name": "",
-                    "id": "89662403-524a-4ed8-abc1-31c7fdcde24d",
-                    "path": "<Keyboard>/i",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "",
-                    "action": "Inventory",
-                    "isComposite": false,
-                    "isPartOfComposite": false
-                },
-                {
-                    "name": "",
-                    "id": "51196fcf-d9b5-4736-b4eb-6dad0c0d1d89",
-                    "path": "<Keyboard>/tab",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "",
-                    "action": "Inventory",
-                    "isComposite": false,
-                    "isPartOfComposite": false
                 },
                 {
                     "name": "",

@@ -18,7 +18,7 @@ public class PlayerController : MonoBehaviour
     private InputAction lookAction;
     private InputAction jumpAction;
     private InputAction PlayerInventory; //abrir o inventário
-    private InputAction UIInventory; //fechar o inventário
+   // private InputAction UIInventory; //fechar o inventário
 
     private CharacterController controller;
 
@@ -37,7 +37,6 @@ public class PlayerController : MonoBehaviour
         lookAction = InputSystem.actions.FindAction("Look");
         jumpAction = InputSystem.actions.FindAction("Jump");
         PlayerInventory = InputSystem.actions.FindAction("Player/Inventory");
-        //UIInventory = InputSystem.actions.FindAction("UI/Inventory");
 
         Cursor.lockState = CursorLockMode.Locked;
         Cursor.visible = false;
@@ -61,10 +60,15 @@ public class PlayerController : MonoBehaviour
     {
         Inventario();
 
+    }
+
+    private void FixedUpdate()
+    {
         if (!gameplayControlEnabled)
             return;
 
         Move();
+        
     }
 
     private void LateUpdate()
