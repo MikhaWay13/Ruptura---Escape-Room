@@ -14,9 +14,17 @@ public class PlayerInteraction : MonoBehaviour
     public UnityEvent OnView;
     public UnityEvent OnFinishView;
 
+    [Header("Outline")]
+    [SerializeField]
+    private Color outlineColor = Color.yellow;
+
+    [SerializeField, Range(0f, 10f)]
+    private float outlineWidth = 4f;
+
     private Camera myCam;
 
     private Interactables currentInteractable;
+    private Outline currentOutline;
 
     private Vector3 originPosition;
     private Quaternion originRotation;
@@ -54,6 +62,7 @@ public class PlayerInteraction : MonoBehaviour
     {
    
         if(isViewing){
+            SetOutline(null);
 
             if(currentInteractable.item.grabbable && pressAction.IsPressed()){
                 RotateObject();
@@ -75,7 +84,7 @@ public class PlayerInteraction : MonoBehaviour
                 {
                     isViewing = false;
                     canFinish = false;
-                    UIManager.instance.SetBackImage(false);
+                    SetBackImage(false);
                     //criar UI de pressionar E
                     OnFinishView.Invoke();
                     
@@ -96,15 +105,33 @@ public class PlayerInteraction : MonoBehaviour
 
         if (Physics.Raycast(rayOrigin, myCam.transform.forward, out hit, rayDistance))
         {
-            Interactables interactable = hit.collider.GetComponent<Interactables>();
+            IRaycastInteractable directInteractable =
+                hit.collider.GetComponentInParent<IRaycastInteractable>();
+
+            Interactables interactable =
+                hit.collider.GetComponentInParent<Interactables>();
 
             
 
 
-            if (interactable != null)
+            if (directInteractable != null || interactable != null)
             {
-                UIManager.instance.SetHandCursor(true);
-                if(pressAction.WasPressedThisFrame()) 
+                SetHandCursor(true);
+                SetOutline(
+                    directInteractable is MonoBehaviour directBehaviour
+                        ? directBehaviour.gameObject
+                        : interactable.gameObject
+                );
+
+                if (directInteractable != null &&
+                    InteractAction.WasPressedThisFrame())
+                {
+                    directInteractable.Interact();
+                    return;
+                }
+
+                if (interactable != null &&
+                    pressAction.WasPressedThisFrame())
                 {
 
                     if(interactable.isMoving){
@@ -130,26 +157,28 @@ public class PlayerInteraction : MonoBehaviour
             }
             else
             {
-                UIManager.instance.SetHandCursor(false);
+                SetHandCursor(false);
+                SetOutline(null);
             }
         }
         else
         {
-            UIManager.instance.SetHandCursor(false);
+            SetHandCursor(false);
+            SetOutline(null);
         }
 
     }
 
     void CanFinish(){
         canFinish=true;
-        UIManager.instance.SetBackImage(true);
+        SetBackImage(true);
     }
 
     void FinishView()
     {
         canFinish = false;
         isViewing = false;
-        UIManager.instance.SetBackImage(false);
+        SetBackImage(false);
         if(currentInteractable.item.grabbable)
         {
             currentInteractable.transform.rotation = originRotation;
@@ -173,6 +202,61 @@ public class PlayerInteraction : MonoBehaviour
         obj.isMoving = false;
     }
 
+    void SetHandCursor(bool state)
+    {
+        if (UIManager.instance != null)
+        {
+            UIManager.instance.SetHandCursor(state);
+        }
+    }
+
+    void SetBackImage(bool state)
+    {
+        if (UIManager.instance != null)
+        {
+            UIManager.instance.SetBackImage(state);
+        }
+    }
+
+    void SetOutline(GameObject target)
+    {
+        Outline nextOutline = null;
+
+        if (target != null)
+        {
+            nextOutline = target.GetComponent<Outline>();
+
+            if (nextOutline == null)
+            {
+                nextOutline = target.AddComponent<Outline>();
+            }
+        }
+
+        if (currentOutline == nextOutline)
+        {
+            return;
+        }
+
+        if (currentOutline != null)
+        {
+            currentOutline.enabled = false;
+        }
+
+        currentOutline = nextOutline;
+
+        if (currentOutline != null)
+        {
+            currentOutline.OutlineMode = Outline.Mode.OutlineVisible;
+            currentOutline.OutlineColor = outlineColor;
+            currentOutline.OutlineWidth = outlineWidth;
+            currentOutline.enabled = true;
+        }
+    }
+
+    private void OnDisable()
+    {
+        SetOutline(null);
+    }
 
     void RotateObject()
     {

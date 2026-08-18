@@ -22,20 +22,29 @@ public class UIManager : MonoBehaviour
 
     private void Start()
     {
-        painelInventory.SetActive(false);
+        if (painelInventory != null)
+        {
+            painelInventory.SetActive(false);
+        }
         
     }
 
 
     public void SetHandCursor (bool state)
     {
-        HandCursor.SetActive(state);
+        if (HandCursor != null)
+        {
+            HandCursor.SetActive(state);
+        }
     }
 
 
     public void SetBackImage(bool state)
     {
-        BackImage.SetActive(state);
+        if (BackImage != null)
+        {
+            BackImage.SetActive(state);
+        }
     }
 
     
@@ -43,15 +52,22 @@ public class UIManager : MonoBehaviour
 
     public void SetInventory(bool invActive)
     {
-         invActive = !invActive;
+        if (painelInventory == null)
+        {
+            return;
+        }
+
+        invActive = !invActive;
         painelInventory.SetActive(invActive);
         if (invActive)
         {
             Cursor.lockState = CursorLockMode.None;
+            Cursor.visible = true;
         }
         else
         {   
             Cursor.lockState = CursorLockMode.Locked;
+            Cursor.visible = false;
         }
     }
 

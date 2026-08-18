@@ -16,6 +16,8 @@ public class EletricPanelScript : MonoBehaviour, IRaycastInteractable
     private Quaternion openRotation;
     private Coroutine currentCoroutine;
 
+    public bool EstaAberto => isOpen && currentCoroutine == null;
+
     private void Start()
     {
         closedRotation = transform.rotation;
@@ -23,9 +25,9 @@ public class EletricPanelScript : MonoBehaviour, IRaycastInteractable
             Quaternion.AngleAxis(openAngle, Vector3.up) * closedRotation;
     }
 
-    // O Input System é lido pelo PlayerController. Este método só é
-    // chamado quando o raycast central da câmera acerta este painel.
-    public void Interact(PlayerController player)
+    // O PlayerInteraction chama este método quando o jogador
+    // aponta para o painel e pressiona E.
+    public void Interact()
     {
         if (currentCoroutine != null)
         {

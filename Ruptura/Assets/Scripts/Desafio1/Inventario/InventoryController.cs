@@ -20,22 +20,78 @@ public class InventoryController : MonoBehaviour
 
     public bool AddItem(Item newItem)
     {
+        if (newItem == null)
+            return false;
 
-        
-            for (int i = 0; i < slots.Length; i++)
+        for (int i = 0; i < slots.Length; i++)
+        {
+            if (slots[i] == null || slots[i].itemName == newItem.itemName)
             {
-                if (slots[i] == null || slots[i].itemName == newItem.itemName)
-                {
-                    slots[i] = newItem;
-                    slotAmount[i]++;
-                    slotImage[i].sprite = slots[i].itemSprite;
+                slots[i] = newItem;
+                slotAmount[i]++;
 
-                    return true;
+                if (slotImage[i] != null)
+                {
+                    slotImage[i].sprite = newItem.itemSprite;
+                    slotImage[i].enabled = true;
+                }
+
+                return true;
+            }
+        }
+
+        return false;
+    }
+
+    public bool HasItem(Item item)
+    {
+        if (item == null)
+            return false;
+
+        for (int i = 0; i < slots.Length; i++)
+        {
+            if (slots[i] != null &&
+                slots[i].itemName == item.itemName &&
+                slotAmount[i] > 0)
+            {
+                return true;
+            }
+        }
+
+        return false;
+    }
+
+    public bool RemoveItem(Item item)
+    {
+        if (item == null)
+            return false;
+
+        for (int i = 0; i < slots.Length; i++)
+        {
+            if (slots[i] == null ||
+                slots[i].itemName != item.itemName ||
+                slotAmount[i] <= 0)
+            {
+                continue;
+            }
+
+            slotAmount[i]--;
+
+            if (slotAmount[i] == 0)
+            {
+                slots[i] = null;
+
+                if (slotImage[i] != null)
+                {
+                    slotImage[i].sprite = null;
+                    slotImage[i].enabled = false;
                 }
             }
-            return false;
-        
 
+            return true;
+        }
+
+        return false;
     }
 
 }
