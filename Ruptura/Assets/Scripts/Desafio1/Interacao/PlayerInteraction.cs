@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.Events;
 using UnityEngine.InputSystem;
@@ -90,6 +91,7 @@ public class PlayerInteraction : MonoBehaviour
                     SetTextItem(false);
                     OnFinishView.Invoke();
 
+                    UIManager.instance.CloseItemUI();
                     Destroy(currentInteractable.gameObject);
                     return;
                 }
@@ -113,8 +115,7 @@ public class PlayerInteraction : MonoBehaviour
             IRaycastInteractable directInteractable =
                 hit.collider.GetComponentInParent<IRaycastInteractable>();
 
-            Interactables interactable =
-                hit.collider.GetComponentInParent<Interactables>();
+            Interactables interactable = hit.collider.GetComponentInParent<Interactables>();
 
             if (directInteractable is MonoBehaviour directComponent &&
                 interactable != null &&
@@ -131,7 +132,7 @@ public class PlayerInteraction : MonoBehaviour
 
             if (directInteractable != null || interactable != null)
             {
-                SetHandCursor(true);
+                UIManager.instance.SetHandCursor(true);
                 SetOutline(
                     directInteractable is MonoBehaviour directBehaviour
                         ? directBehaviour.gameObject
@@ -162,6 +163,12 @@ public class PlayerInteraction : MonoBehaviour
 
                     Invoke("CanFinish", 1f);
 
+                    if (currentInteractable.item.hasReadableUI)
+                    {
+                        UIManager.instance.OpenItemUI(currentInteractable.item);
+                        return;
+                    }
+
                     if (currentInteractable.item.grabbable)
                     {
                         originPosition = currentInteractable.transform.position;
@@ -173,13 +180,13 @@ public class PlayerInteraction : MonoBehaviour
             }
             else
             {
-                SetHandCursor(false);
+                UIManager.instance.SetHandCursor(false);
                 SetOutline(null);
             }
         }
         else
         {
-            SetHandCursor(false);
+            UIManager.instance.SetHandCursor(false);
             SetOutline(null);
         }
 
@@ -189,7 +196,7 @@ public class PlayerInteraction : MonoBehaviour
     {
         canFinish = true;
         SetBackImage(true);
-       SetTextItem(true);
+        SetTextItem(true);
     }
 
     void FinishView()
@@ -198,6 +205,16 @@ public class PlayerInteraction : MonoBehaviour
         isViewing = false;
         SetBackImage(false);
         if (currentInteractable.item.grabbable)
+        {
+            
+        }
+            UIManager.instance.SetBackImage(false);
+
+        if (currentInteractable.item.hasReadableUI)
+        {
+            UIManager.instance.CloseItemUI();
+        }
+        else if (currentInteractable.item.grabbable)
         {
             currentInteractable.transform.rotation = originRotation;
             StartCoroutine(MovingObject(currentInteractable, originPosition));
