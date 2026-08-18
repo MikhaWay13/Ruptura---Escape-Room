@@ -111,6 +111,16 @@ public class PlayerInteraction : MonoBehaviour
             Interactables interactable =
                 hit.collider.GetComponentInParent<Interactables>();
 
+            if (directInteractable is MonoBehaviour directComponent &&
+                interactable != null &&
+                HierarchyDistance(hit.collider.transform, interactable.transform) <=
+                HierarchyDistance(hit.collider.transform, directComponent.transform))
+            {
+                // Um item dentro de outro objeto interagível (como a alavanca
+                // dentro da gaveta) deve receber o foco antes do objeto-pai.
+                directInteractable = null;
+            }
+
             
 
 
@@ -266,6 +276,25 @@ public class PlayerInteraction : MonoBehaviour
         currentInteractable.transform.Rotate(myCam.transform.right, Mathf.Deg2Rad * y * RotateSpeed, Space.World);
         currentInteractable.transform.Rotate(myCam.transform.up, Mathf.Deg2Rad * x * RotateSpeed, Space.World);
 
+    }
+
+    private static int HierarchyDistance(Transform origin, Transform ancestor)
+    {
+        int distance = 0;
+
+        for (Transform current = origin;
+             current != null;
+             current = current.parent)
+        {
+            if (current == ancestor)
+            {
+                return distance;
+            }
+
+            distance++;
+        }
+
+        return int.MaxValue;
     }
     
 

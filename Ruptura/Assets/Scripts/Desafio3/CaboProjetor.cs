@@ -43,6 +43,7 @@ public class CaboProjetor : MonoBehaviour, IRaycastInteractable
 
     public bool EstaSegurando { get; private set; }
     public bool EstaConectado { get; private set; }
+    public bool EstaLiberado => liberado;
 
     private bool liberado;
     private int quadroEmQuePegou = -1;
@@ -92,7 +93,13 @@ public class CaboProjetor : MonoBehaviour, IRaycastInteractable
 
     public void Interact()
     {
-        if (!liberado || EstaConectado)
+        if (!liberado)
+        {
+            Debug.Log("Ligue a energia antes de pegar o cabo.", this);
+            return;
+        }
+
+        if (EstaConectado)
         {
             return;
         }
@@ -109,6 +116,11 @@ public class CaboProjetor : MonoBehaviour, IRaycastInteractable
 
     public void LiberarCabo()
     {
+        if (EstaConectado)
+        {
+            return;
+        }
+
         liberado = true;
     }
 

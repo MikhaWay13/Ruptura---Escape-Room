@@ -22,6 +22,8 @@ public class TomadaProjetor : MonoBehaviour, IRaycastInteractable
 
     private bool conectado;
 
+    public bool EstaConectada => conectado;
+
     private void Awake()
     {
         if (luzProjetor != null)

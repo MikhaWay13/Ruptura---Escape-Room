@@ -2,6 +2,7 @@ using System.Collections;
 using TMPro;
 using UnityEngine;
 
+[DefaultExecutionOrder(100)]
 [DisallowMultipleComponent]
 public class SistemaAlavancaPainel : MonoBehaviour, IRaycastInteractable
 {
@@ -28,6 +29,9 @@ public class SistemaAlavancaPainel : MonoBehaviour, IRaycastInteractable
     [SerializeField]
     private TMP_Text textoStatus;
 
+    [SerializeField]
+    private CaboProjetor caboProjetor;
+
     [Header("Rotação")]
     [SerializeField]
     private float anguloLigadoX = -38.058f;
@@ -53,6 +57,9 @@ public class SistemaAlavancaPainel : MonoBehaviour, IRaycastInteractable
     private Quaternion rotacaoLigada;
     private Coroutine animacao;
 
+    public bool AlavancaInstalada => estado != EstadoAlavanca.Ausente;
+    public bool EnergiaLigada => estado == EstadoAlavanca.Ligada;
+
     private void Awake()
     {
         if (alavancaInstalada != null)
@@ -68,6 +75,11 @@ public class SistemaAlavancaPainel : MonoBehaviour, IRaycastInteractable
         estado = EstadoAlavanca.Ausente;
         DefinirAlavancaVisivel(false);
         DefinirIluminacao(false);
+    }
+
+    private void Start()
+    {
+        AtualizarTexto("Encontre a alavanca dentro da gaveta.");
     }
 
     public void Interact()
@@ -149,7 +161,13 @@ public class SistemaAlavancaPainel : MonoBehaviour, IRaycastInteractable
 
         estado = EstadoAlavanca.Ligada;
         DefinirIluminacao(true);
-        AtualizarTexto("Energia ligada!");
+
+        if (caboProjetor != null)
+        {
+            caboProjetor.LiberarCabo();
+        }
+
+        AtualizarTexto("Energia ligada! Pegue o cabo do projetor.");
         animacao = null;
     }
 

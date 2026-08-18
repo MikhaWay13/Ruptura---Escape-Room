@@ -26,6 +26,9 @@ public class UIManager : MonoBehaviour
         {
             painelInventory.SetActive(false);
         }
+
+        SetHandCursor(false);
+        SetBackImage(false);
         
     }
 

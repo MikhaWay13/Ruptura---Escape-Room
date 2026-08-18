@@ -49,11 +49,18 @@ public class PuzzleSombra : MonoBehaviour, IRaycastInteractable
     private InputAction lookAction;
     private InputAction backAction;
 
+    public bool ProjetorLigado => projetorLigado;
+    public bool Concluido => puzzleConcluido;
+
     private void Awake()
     {
         lookAction = InputSystem.actions.FindAction("Interaction/Look");
         backAction = InputSystem.actions.FindAction("Interaction/Back");
-        posicaoAbertaEstante = estante.position + deslocamentoEstante;
+        if (estante != null)
+        {
+            posicaoAbertaEstante = estante.position + deslocamentoEstante;
+        }
+
         projetorLigado = projetorLigadoNoInicio;
     }
 
@@ -68,7 +75,7 @@ public class PuzzleSombra : MonoBehaviour, IRaycastInteractable
 
     private void Update()
     {
-        if (puzzleConcluido)
+        if (puzzleConcluido && estante != null)
         {
             estante.position = Vector3.MoveTowards(
                 estante.position,
@@ -83,13 +90,15 @@ public class PuzzleSombra : MonoBehaviour, IRaycastInteractable
             return;
         }
 
-        if (backAction.WasPressedThisFrame())
+        if (backAction != null && backAction.WasPressedThisFrame())
         {
             EncerrarAjuste();
             return;
         }
 
-        Vector2 entrada = lookAction.ReadValue<Vector2>();
+        Vector2 entrada = lookAction != null
+            ? lookAction.ReadValue<Vector2>()
+            : Vector2.zero;
 
         anguloHorizontal += entrada.x * sensibilidadeMouse;
         anguloVertical = Mathf.Clamp(
@@ -109,10 +118,13 @@ public class PuzzleSombra : MonoBehaviour, IRaycastInteractable
             alvoRotacao.rotation
         );
 
-        textoStatus.SetText(
-            "Mouse: girar  |  Botão direito: sair\nDiferença: {0:0} graus",
-            diferenca
-        );
+        if (textoStatus != null)
+        {
+            textoStatus.SetText(
+                "Mouse: girar  |  Botão direito: sair\nDiferença: {0:0} graus",
+                diferenca
+            );
+        }
 
         if (diferenca <= toleranciaRotacao)
         {
@@ -136,7 +148,10 @@ public class PuzzleSombra : MonoBehaviour, IRaycastInteractable
         puzzleAtivo = true;
         anguloHorizontal = transform.eulerAngles.y;
         anguloVertical = NormalizarAngulo(transform.eulerAngles.x);
-        jogador.enabled = false;
+        if (jogador != null)
+        {
+            jogador.enabled = false;
+        }
 
         AtualizarTexto("Mouse: girar  |  Botão direito: sair");
     }
@@ -154,7 +169,10 @@ public class PuzzleSombra : MonoBehaviour, IRaycastInteractable
     private void EncerrarAjuste()
     {
         puzzleAtivo = false;
-        jogador.enabled = true;
+        if (jogador != null)
+        {
+            jogador.enabled = true;
+        }
         AtualizarTexto("Aponte para a estatueta e pressione E");
     }
 
@@ -163,7 +181,10 @@ public class PuzzleSombra : MonoBehaviour, IRaycastInteractable
         puzzleConcluido = true;
         puzzleAtivo = false;
         transform.rotation = alvoRotacao.rotation;
-        jogador.enabled = true;
+        if (jogador != null)
+        {
+            jogador.enabled = true;
+        }
 
         AtualizarTexto("Sombra correta!\nEstante destravada.");
     }
@@ -179,7 +200,10 @@ public class PuzzleSombra : MonoBehaviour, IRaycastInteractable
 
     private void AtualizarTexto(string mensagem)
     {
-        textoStatus.text = mensagem;
+        if (textoStatus != null)
+        {
+            textoStatus.text = mensagem;
+        }
     }
 
     private static float NormalizarAngulo(float angulo)
