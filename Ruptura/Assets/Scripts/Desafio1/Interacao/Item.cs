@@ -16,6 +16,11 @@ public class Item : ScriptableObject
     public string itemName;
     public Sprite itemSprite;
 
+    [Header("Leitura (UI)")]
+    public bool hasReadableUI;
+    [TextArea(3, 10)]
+    public string uiText;
+    public Sprite uiImage; // opcional � deixe null se o item n�o tiver imagem
 
 }
 
