@@ -205,10 +205,6 @@ public class PlayerInteraction : MonoBehaviour
         {
             UIManager.instance.CloseItemUI();
         }
-        if (currentInteractable.item.hasReadableUI && currentInteractable.item.ToInventory)
-        {
-            UIManager.instance.CloseItemUI();
-        }
         else if (currentInteractable.item.grabbable)
         {
             currentInteractable.transform.rotation = originRotation;
