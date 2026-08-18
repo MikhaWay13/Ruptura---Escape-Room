@@ -1877,7 +1877,7 @@ MonoBehaviour:
   colisao: {fileID: 603000016}
   linha: {fileID: 603000014}
   liberadoNoInicio: 0
-  comprimentoMaximo: 7
+  comprimentoMaximo: 8
   forcaSeguir: 60
   amortecimento: 10
   curvatura: 0.35
@@ -2191,7 +2191,7 @@ SpringJoint:
   m_Spring: 80
   m_Damper: 8
   m_MinDistance: 0
-  m_MaxDistance: 7
+  m_MaxDistance: 8
   m_Tolerance: 0.025
   m_BreakForce: Infinity
   m_BreakTorque: Infinity
