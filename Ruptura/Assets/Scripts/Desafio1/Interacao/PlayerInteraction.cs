@@ -75,7 +75,7 @@ public class PlayerInteraction : MonoBehaviour
             }
            
 
-            if (InteractAction.WasPressedThisFrame() && currentInteractable.item.ToInventory)
+            if (canFinish && InteractAction.WasPressedThisFrame() && currentInteractable.item.ToInventory)
             {
                 
                 bool verificate = InventoryController.instance.AddItem(currentInteractable.item);
@@ -162,7 +162,7 @@ public class PlayerInteraction : MonoBehaviour
                         originRotation=currentInteractable.transform.rotation;
                         StartCoroutine(MovingObject(currentInteractable, objectViewer.position));
                     }
-                }                                         //mudar pro Input Manager
+                }                                         
             
             }
             else
@@ -367,9 +367,6 @@ public class PlayerInteraction : MonoBehaviour
 
 
 */
-
-
-
 
 
 }
