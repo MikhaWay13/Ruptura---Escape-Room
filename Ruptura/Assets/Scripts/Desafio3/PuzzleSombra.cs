@@ -5,39 +5,22 @@ using UnityEngine.InputSystem;
 public class PuzzleSombra : MonoBehaviour, IRaycastInteractable
 {
     [Header("Referências da cena")]
-    [SerializeField]
-    private Transform alvoRotacao;
-
-    [SerializeField]
-    private Transform estante;
-
-    [SerializeField]
-    private TMP_Text textoStatus;
-
-    [SerializeField]
-    private PlayerController jogador;
+    [SerializeField] private Transform alvoRotacao;
+    [SerializeField] private Transform estante;
+    [SerializeField] private TMP_Text textoStatus;
+    [SerializeField] private PlayerController jogador;
 
     [Header("Estado do projetor")]
-    [SerializeField]
-    private bool projetorLigadoNoInicio;
+    [SerializeField] private bool projetorLigadoNoInicio;
 
     [Header("Configuração da estatueta")]
-    [SerializeField, Min(0.001f)]
-    private float sensibilidadeMouse = 0.15f;
-
-    [SerializeField, Range(0f, 89f)]
-    private float limiteVertical = 80f;
-
-    [SerializeField]
-    [Range(0.1f, 30f)]
-    private float toleranciaRotacao = 6f;
+    [SerializeField, Min(0.001f)] private float sensibilidadeMouse = 0.15f;
+    [SerializeField, Range(0f, 89f)] private float limiteVertical = 80f;
+    [SerializeField, Range(0.1f, 30f)] private float toleranciaRotacao = 6f;
 
     [Header("Configuração da estante")]
-    [SerializeField]
-    private Vector3 deslocamentoEstante = new Vector3(2.5f, 0f, 0f);
-
-    [SerializeField]
-    private float velocidadeEstante = 2f;
+    [SerializeField] private Vector3 deslocamentoEstante = new Vector3(2.5f, 0f, 0f);
+    [SerializeField] private float velocidadeEstante = 2f;
 
     private bool puzzleConcluido;
     private bool puzzleAtivo;
@@ -56,6 +39,7 @@ public class PuzzleSombra : MonoBehaviour, IRaycastInteractable
     {
         lookAction = InputSystem.actions.FindAction("Interaction/Look");
         backAction = InputSystem.actions.FindAction("Interaction/Back");
+
         if (estante != null)
         {
             posicaoAbertaEstante = estante.position + deslocamentoEstante;
@@ -75,13 +59,9 @@ public class PuzzleSombra : MonoBehaviour, IRaycastInteractable
 
     private void Update()
     {
-        if (puzzleConcluido && estante != null)
+        if (puzzleConcluido)
         {
-            estante.position = Vector3.MoveTowards(
-                estante.position,
-                posicaoAbertaEstante,
-                velocidadeEstante * Time.deltaTime
-            );
+            AbrirEstante();
             return;
         }
 
@@ -90,12 +70,63 @@ public class PuzzleSombra : MonoBehaviour, IRaycastInteractable
             return;
         }
 
-        if (backAction != null && backAction.WasPressedThisFrame())
+        if (JogadorPediuParaSair())
         {
             EncerrarAjuste();
             return;
         }
 
+        GirarEstatueta();
+        VerificarSombra();
+    }
+
+    public void Interact()
+    {
+        if (puzzleAtivo || puzzleConcluido)
+        {
+            return;
+        }
+
+        if (!projetorLigado)
+        {
+            AtualizarTexto("Conecte o cabo para ligar o projetor");
+            return;
+        }
+
+        IniciarAjuste();
+    }
+
+    public void AtivarProjetor()
+    {
+        projetorLigado = true;
+
+        if (!puzzleAtivo && !puzzleConcluido)
+        {
+            AtualizarTexto("Projetor ligado! Aponte para a estatueta e pressione E");
+        }
+    }
+
+    private void AbrirEstante()
+    {
+        if (estante == null)
+        {
+            return;
+        }
+
+        estante.position = Vector3.MoveTowards(
+            estante.position,
+            posicaoAbertaEstante,
+            velocidadeEstante * Time.deltaTime
+        );
+    }
+
+    private bool JogadorPediuParaSair()
+    {
+        return backAction != null && backAction.WasPressedThisFrame();
+    }
+
+    private void GirarEstatueta()
+    {
         Vector2 entrada = lookAction != null
             ? lookAction.ReadValue<Vector2>()
             : Vector2.zero;
@@ -112,7 +143,10 @@ public class PuzzleSombra : MonoBehaviour, IRaycastInteractable
             anguloHorizontal,
             0f
         );
+    }
 
+    private void VerificarSombra()
+    {
         float diferenca = Quaternion.Angle(
             transform.rotation,
             alvoRotacao.rotation
@@ -132,47 +166,19 @@ public class PuzzleSombra : MonoBehaviour, IRaycastInteractable
         }
     }
 
-    public void Interact()
+    private void IniciarAjuste()
     {
-        if (puzzleAtivo || puzzleConcluido)
-        {
-            return;
-        }
-
-        if (!projetorLigado)
-        {
-            AtualizarTexto("Conecte o cabo para ligar o projetor");
-            return;
-        }
-
         puzzleAtivo = true;
         anguloHorizontal = transform.eulerAngles.y;
         anguloVertical = NormalizarAngulo(transform.eulerAngles.x);
-        if (jogador != null)
-        {
-            jogador.enabled = false;
-        }
-
+        DefinirControleDoJogador(false);
         AtualizarTexto("Mouse: girar  |  Botão direito: sair");
-    }
-
-    public void AtivarProjetor()
-    {
-        projetorLigado = true;
-
-        if (!puzzleAtivo && !puzzleConcluido)
-        {
-            AtualizarTexto("Projetor ligado! Aponte para a estatueta e pressione E");
-        }
     }
 
     private void EncerrarAjuste()
     {
         puzzleAtivo = false;
-        if (jogador != null)
-        {
-            jogador.enabled = true;
-        }
+        DefinirControleDoJogador(true);
         AtualizarTexto("Aponte para a estatueta e pressione E");
     }
 
@@ -181,11 +187,7 @@ public class PuzzleSombra : MonoBehaviour, IRaycastInteractable
         puzzleConcluido = true;
         puzzleAtivo = false;
         transform.rotation = alvoRotacao.rotation;
-        if (jogador != null)
-        {
-            jogador.enabled = true;
-        }
-
+        DefinirControleDoJogador(true);
         AtualizarTexto("Sombra correta!\nEstante destravada.");
     }
 
@@ -193,8 +195,16 @@ public class PuzzleSombra : MonoBehaviour, IRaycastInteractable
     {
         if (puzzleAtivo && jogador != null)
         {
-            jogador.enabled = true;
             puzzleAtivo = false;
+            DefinirControleDoJogador(true);
+        }
+    }
+
+    private void DefinirControleDoJogador(bool ativo)
+    {
+        if (jogador != null)
+        {
+            jogador.enabled = ativo;
         }
     }
 

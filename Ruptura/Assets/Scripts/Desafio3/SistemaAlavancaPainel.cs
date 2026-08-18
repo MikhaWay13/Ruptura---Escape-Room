@@ -6,6 +6,8 @@ using UnityEngine;
 [DisallowMultipleComponent]
 public class SistemaAlavancaPainel : MonoBehaviour, IRaycastInteractable
 {
+    // A interação avança sempre nesta ordem:
+    // Ausente -> InstaladaDesligada -> Ligada.
     private enum EstadoAlavanca
     {
         Ausente,
@@ -14,43 +16,22 @@ public class SistemaAlavancaPainel : MonoBehaviour, IRaycastInteractable
     }
 
     [Header("Referências")]
-    [SerializeField]
-    private EletricPanelScript painel;
-
-    [SerializeField]
-    private Item itemAlavanca;
-
-    [SerializeField]
-    private Transform alavancaInstalada;
-
-    [SerializeField]
-    private Renderer[] renderizadoresAlavanca;
-
-    [SerializeField]
-    private TMP_Text textoStatus;
-
-    [SerializeField]
-    private CaboProjetor caboProjetor;
+    [SerializeField] private EletricPanelScript painel;
+    [SerializeField] private Item itemAlavanca;
+    [SerializeField] private Transform alavancaInstalada;
+    [SerializeField] private Renderer[] renderizadoresAlavanca;
+    [SerializeField] private TMP_Text textoStatus;
+    [SerializeField] private CaboProjetor caboProjetor;
 
     [Header("Rotação")]
-    [SerializeField]
-    private float anguloLigadoX = -38.058f;
-
-    [SerializeField, Min(0.05f)]
-    private float duracaoMovimento = 0.65f;
+    [SerializeField] private float anguloLigadoX = -38.058f;
+    [SerializeField, Min(0.05f)] private float duracaoMovimento = 0.65f;
 
     [Header("Iluminação")]
-    [SerializeField]
-    private Light luzAmbiente;
-
-    [SerializeField, Min(0f)]
-    private float intensidadeAmbienteDesligada = 0.2f;
-
-    [SerializeField, Min(0f)]
-    private float intensidadeAmbienteLigada = 1f;
-
-    [SerializeField]
-    private Light[] luzesPrincipais;
+    [SerializeField] private Light luzAmbiente;
+    [SerializeField, Min(0f)] private float intensidadeAmbienteDesligada = 0.2f;
+    [SerializeField, Min(0f)] private float intensidadeAmbienteLigada = 1f;
+    [SerializeField] private Light[] luzesPrincipais;
 
     private EstadoAlavanca estado;
     private Quaternion rotacaoDesligada;
@@ -62,16 +43,7 @@ public class SistemaAlavancaPainel : MonoBehaviour, IRaycastInteractable
 
     private void Awake()
     {
-        if (alavancaInstalada != null)
-        {
-            rotacaoDesligada = alavancaInstalada.localRotation;
-
-            Vector3 angulosLigados =
-                alavancaInstalada.localEulerAngles;
-            angulosLigados.x = anguloLigadoX;
-            rotacaoLigada = Quaternion.Euler(angulosLigados);
-        }
-
+        ConfigurarRotacoes();
         estado = EstadoAlavanca.Ausente;
         DefinirAlavancaVisivel(false);
         DefinirIluminacao(false);
@@ -104,6 +76,20 @@ public class SistemaAlavancaPainel : MonoBehaviour, IRaycastInteractable
         animacao = StartCoroutine(LigarEnergia());
     }
 
+    private void ConfigurarRotacoes()
+    {
+        if (alavancaInstalada == null)
+        {
+            return;
+        }
+
+        rotacaoDesligada = alavancaInstalada.localRotation;
+
+        Vector3 angulosLigados = alavancaInstalada.localEulerAngles;
+        angulosLigados.x = anguloLigadoX;
+        rotacaoLigada = Quaternion.Euler(angulosLigados);
+    }
+
     private void InstalarAlavanca()
     {
         if (InventoryController.instance == null ||
@@ -118,11 +104,7 @@ public class SistemaAlavancaPainel : MonoBehaviour, IRaycastInteractable
             return;
         }
 
-        if (alavancaInstalada != null)
-        {
-            alavancaInstalada.localRotation = rotacaoDesligada;
-        }
-
+        DefinirRotacao(rotacaoDesligada);
         DefinirAlavancaVisivel(true);
         estado = EstadoAlavanca.InstaladaDesligada;
         AtualizarTexto("Alavanca instalada. Pressione E novamente.");
@@ -142,23 +124,17 @@ public class SistemaAlavancaPainel : MonoBehaviour, IRaycastInteractable
             float progresso = Mathf.Clamp01(tempo / duracaoMovimento);
             progresso = Mathf.SmoothStep(0f, 1f, progresso);
 
-            if (alavancaInstalada != null)
-            {
-                alavancaInstalada.localRotation = Quaternion.Slerp(
-                    inicio,
-                    rotacaoLigada,
-                    progresso
-                );
-            }
+            Quaternion rotacaoAtual = Quaternion.Slerp(
+                inicio,
+                rotacaoLigada,
+                progresso
+            );
+            DefinirRotacao(rotacaoAtual);
 
             yield return null;
         }
 
-        if (alavancaInstalada != null)
-        {
-            alavancaInstalada.localRotation = rotacaoLigada;
-        }
-
+        DefinirRotacao(rotacaoLigada);
         estado = EstadoAlavanca.Ligada;
         DefinirIluminacao(true);
 
@@ -169,6 +145,14 @@ public class SistemaAlavancaPainel : MonoBehaviour, IRaycastInteractable
 
         AtualizarTexto("Energia ligada! Pegue o cabo do projetor.");
         animacao = null;
+    }
+
+    private void DefinirRotacao(Quaternion rotacao)
+    {
+        if (alavancaInstalada != null)
+        {
+            alavancaInstalada.localRotation = rotacao;
+        }
     }
 
     private void DefinirAlavancaVisivel(bool visivel)

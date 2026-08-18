@@ -6,18 +6,12 @@ using UnityEngine;
 public class GavetaInterativa : MonoBehaviour, IRaycastInteractable
 {
     [Header("Referências")]
-    [SerializeField]
-    private Transform gavetaMovel;
-
-    [SerializeField]
-    private TMP_Text textoStatus;
+    [SerializeField] private Transform gavetaMovel;
+    [SerializeField] private TMP_Text textoStatus;
 
     [Header("Movimento")]
-    [SerializeField]
-    private Vector3 deslocamentoAberta = new Vector3(-0.7f, 0f, 0f);
-
-    [SerializeField, Min(0.05f)]
-    private float duracaoMovimento = 0.55f;
+    [SerializeField] private Vector3 deslocamentoAberta = new Vector3(-0.7f, 0f, 0f);
+    [SerializeField, Min(0.05f)] private float duracaoMovimento = 0.55f;
 
     public bool EstaAberta => aberta && animacao == null;
 
@@ -39,7 +33,7 @@ public class GavetaInterativa : MonoBehaviour, IRaycastInteractable
 
     public void Interact()
     {
-        if (animacao != null || gavetaMovel == null)
+        if (animacao != null)
         {
             return;
         }
@@ -72,12 +66,18 @@ public class GavetaInterativa : MonoBehaviour, IRaycastInteractable
 
         gavetaMovel.localPosition = destino;
         animacao = null;
+        AtualizarTexto();
+    }
 
-        if (textoStatus != null)
+    private void AtualizarTexto()
+    {
+        if (textoStatus == null)
         {
-            textoStatus.text = aberta
-                ? "Alavanca encontrada! Clique esquerdo para inspecionar."
-                : "Encontre a alavanca dentro da gaveta.";
+            return;
         }
+
+        textoStatus.text = aberta
+            ? "Alavanca encontrada! Clique esquerdo para inspecionar."
+            : "Encontre a alavanca dentro da gaveta.";
     }
 }

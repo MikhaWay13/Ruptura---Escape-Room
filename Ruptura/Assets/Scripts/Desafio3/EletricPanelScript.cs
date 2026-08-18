@@ -3,14 +3,9 @@ using UnityEngine;
 
 public class EletricPanelScript : MonoBehaviour, IRaycastInteractable
 {
-    [SerializeField]
-    private float openAngle = 90f;
-
-    [SerializeField]
-    private float openSpeed = 2f;
-
-    [SerializeField]
-    private bool isOpen;
+    [SerializeField] private float openAngle = 90f;
+    [SerializeField] private float openSpeed = 2f;
+    [SerializeField] private bool isOpen;
 
     private Quaternion closedRotation;
     private Quaternion openRotation;
@@ -25,8 +20,6 @@ public class EletricPanelScript : MonoBehaviour, IRaycastInteractable
             Quaternion.AngleAxis(openAngle, Vector3.up) * closedRotation;
     }
 
-    // O PlayerInteraction chama este método quando o jogador
-    // aponta para o painel e pressiona E.
     public void Interact()
     {
         if (currentCoroutine != null)
@@ -34,28 +27,24 @@ public class EletricPanelScript : MonoBehaviour, IRaycastInteractable
             StopCoroutine(currentCoroutine);
         }
 
-        currentCoroutine = StartCoroutine(TogglePanel());
+        isOpen = !isOpen;
+        Quaternion destino = isOpen ? openRotation : closedRotation;
+        currentCoroutine = StartCoroutine(GirarPainel(destino));
     }
 
-    private IEnumerator TogglePanel()
+    private IEnumerator GirarPainel(Quaternion destino)
     {
-        Quaternion targetRotation = isOpen
-            ? closedRotation
-            : openRotation;
-
-        isOpen = !isOpen;
-
-        while (Quaternion.Angle(transform.rotation, targetRotation) > 0.01f)
+        while (Quaternion.Angle(transform.rotation, destino) > 0.01f)
         {
             transform.rotation = Quaternion.Lerp(
                 transform.rotation,
-                targetRotation,
+                destino,
                 Time.deltaTime * openSpeed
             );
             yield return null;
         }
 
-        transform.rotation = targetRotation;
+        transform.rotation = destino;
         currentCoroutine = null;
     }
 }

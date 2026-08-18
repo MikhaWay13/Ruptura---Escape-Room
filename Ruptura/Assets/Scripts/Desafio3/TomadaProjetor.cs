@@ -4,21 +4,13 @@ using UnityEngine;
 public class TomadaProjetor : MonoBehaviour, IRaycastInteractable
 {
     [Header("Referências")]
-    [SerializeField]
-    private CaboProjetor cabo;
-
-    [SerializeField]
-    private Transform pontoEncaixe;
-
-    [SerializeField]
-    private Light luzProjetor;
-
-    [SerializeField]
-    private PuzzleSombra puzzleSombra;
+    [SerializeField] private CaboProjetor cabo;
+    [SerializeField] private Transform pontoEncaixe;
+    [SerializeField] private Light luzProjetor;
+    [SerializeField] private PuzzleSombra puzzleSombra;
 
     [Header("Configuração")]
-    [SerializeField, Min(0.1f)]
-    private float distanciaEncaixe = 0.75f;
+    [SerializeField, Min(0.1f)] private float distanciaEncaixe = 0.75f;
 
     private bool conectado;
 
@@ -45,12 +37,7 @@ public class TomadaProjetor : MonoBehaviour, IRaycastInteractable
             return;
         }
 
-        float distancia = Vector3.Distance(
-            cabo.transform.position,
-            pontoEncaixe.position
-        );
-
-        if (distancia > distanciaEncaixe)
+        if (!PlugueEstaPerto())
         {
             Debug.Log("Aproxime o plugue da tomada.", this);
             return;
@@ -58,7 +45,22 @@ public class TomadaProjetor : MonoBehaviour, IRaycastInteractable
 
         conectado = true;
         cabo.Conectar(pontoEncaixe);
+        LigarProjetor();
+        Debug.Log("Projetor conectado e ligado.", this);
+    }
 
+    private bool PlugueEstaPerto()
+    {
+        float distancia = Vector3.Distance(
+            cabo.transform.position,
+            pontoEncaixe.position
+        );
+
+        return distancia <= distanciaEncaixe;
+    }
+
+    private void LigarProjetor()
+    {
         if (luzProjetor != null)
         {
             luzProjetor.enabled = true;
@@ -68,7 +70,5 @@ public class TomadaProjetor : MonoBehaviour, IRaycastInteractable
         {
             puzzleSombra.AtivarProjetor();
         }
-
-        Debug.Log("Projetor conectado e ligado.", this);
     }
 }
