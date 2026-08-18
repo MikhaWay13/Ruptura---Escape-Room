@@ -60,11 +60,13 @@ public class PlayerInteraction : MonoBehaviour
 
     void CheckInteractables()
     {
-   
-        if(isViewing){
+
+        if (isViewing)
+        {
             SetOutline(null);
 
-            if(currentInteractable.item.grabbable && pressAction.IsPressed()){
+            if (currentInteractable.item.grabbable && pressAction.IsPressed())
+            {
                 RotateObject();
             }
 
@@ -73,29 +75,32 @@ public class PlayerInteraction : MonoBehaviour
             {
                 FinishView();
             }
-           
+
 
             if (canFinish && InteractAction.WasPressedThisFrame() && currentInteractable.item.ToInventory)
             {
-                
-                bool verificate = InventoryController.instance.AddItem(currentInteractable.item);
-                
+
+                bool verificate = TESTE_InventoryController.instance.AddItem(currentInteractable.item);
+
                 if (verificate)
                 {
                     isViewing = false;
                     canFinish = false;
                     SetBackImage(false);
-                    //criar UI de pressionar E
+                    SetTextItem(false);
                     OnFinishView.Invoke();
-                    
+
                     Destroy(currentInteractable.gameObject);
-                    return; 
+                    return;
                 }
             }
 
 
             return;
         }
+
+
+
         RaycastHit hit;
 
 
@@ -121,7 +126,7 @@ public class PlayerInteraction : MonoBehaviour
                 directInteractable = null;
             }
 
-            
+
 
 
             if (directInteractable != null || interactable != null)
@@ -144,7 +149,8 @@ public class PlayerInteraction : MonoBehaviour
                     pressAction.WasPressedThisFrame())
                 {
 
-                    if(interactable.isMoving){
+                    if (interactable.isMoving)
+                    {
                         return;
                     }
 
@@ -152,18 +158,18 @@ public class PlayerInteraction : MonoBehaviour
 
                     currentInteractable = interactable;
 
-                    isViewing= true;
+                    isViewing = true;
 
                     Invoke("CanFinish", 1f);
 
-                    if(currentInteractable.item.grabbable)
+                    if (currentInteractable.item.grabbable)
                     {
-                        originPosition=currentInteractable.transform.position;
-                        originRotation=currentInteractable.transform.rotation;
+                        originPosition = currentInteractable.transform.position;
+                        originRotation = currentInteractable.transform.rotation;
                         StartCoroutine(MovingObject(currentInteractable, objectViewer.position));
                     }
-                }                                         
-            
+                }
+
             }
             else
             {
@@ -179,9 +185,11 @@ public class PlayerInteraction : MonoBehaviour
 
     }
 
-    void CanFinish(){
-        canFinish=true;
+    void CanFinish()
+    {
+        canFinish = true;
         SetBackImage(true);
+       SetTextItem(true);
     }
 
     void FinishView()
@@ -189,7 +197,7 @@ public class PlayerInteraction : MonoBehaviour
         canFinish = false;
         isViewing = false;
         SetBackImage(false);
-        if(currentInteractable.item.grabbable)
+        if (currentInteractable.item.grabbable)
         {
             currentInteractable.transform.rotation = originRotation;
             StartCoroutine(MovingObject(currentInteractable, originPosition));
@@ -200,15 +208,15 @@ public class PlayerInteraction : MonoBehaviour
     IEnumerator MovingObject(Interactables obj, Vector3 position)
     {
         obj.isMoving = true;
-        float timer=0;
-        while(timer<1)
+        float timer = 0;
+        while (timer < 1)
         {
-            obj.transform.position = Vector3.Lerp(obj.transform.position, position, Time.deltaTime*5); 
-            timer+= Time.deltaTime;
+            obj.transform.position = Vector3.Lerp(obj.transform.position, position, Time.deltaTime * 5);
+            timer += Time.deltaTime;
             yield return null;
         }
 
-        obj.transform.position=position;
+        obj.transform.position = position;
         obj.isMoving = false;
     }
 
@@ -225,6 +233,14 @@ public class PlayerInteraction : MonoBehaviour
         if (UIManager.instance != null)
         {
             UIManager.instance.SetBackImage(state);
+        }
+    }
+
+    void SetTextItem(bool state)
+    {
+        if (UIManager.instance != null)
+        {
+            UIManager.instance.SetTextItem(state);
         }
     }
 
@@ -296,7 +312,6 @@ public class PlayerInteraction : MonoBehaviour
 
         return int.MaxValue;
     }
-    
 
 
 
@@ -307,66 +322,67 @@ public class PlayerInteraction : MonoBehaviour
 
 
 
-/*
-        // ==========================================
-        // 2. ESTADO NORMAL (OLHANDO PELO MUNDO)
-        // ==========================================
-        RaycastHit hit;
-        Vector3 rayOrigin = myCam.ViewportToWorldPoint(new Vector3(0.5f, 0.5f, 0.5f));
 
-        if (Physics.Raycast(rayOrigin, myCam.transform.forward, out hit, rayDistance))
-        {
-            Interactables interactable = hit.collider.GetComponent<Interactables>();
+    /*
+            // ==========================================
+            // 2. ESTADO NORMAL (OLHANDO PELO MUNDO)
+            // ==========================================
+            RaycastHit hit;
+            Vector3 rayOrigin = myCam.ViewportToWorldPoint(new Vector3(0.5f, 0.5f, 0.5f));
 
-            if (interactable != null)
+            if (Physics.Raycast(rayOrigin, myCam.transform.forward, out hit, rayDistance))
             {
-                UIManager.instance.SetHandCursor(true);
-                
-                // INSPECIONAR OBJETO (Botão Esquerdo)
-                if(pressAction.WasPressedThisFrame()) 
+                Interactables interactable = hit.collider.GetComponent<Interactables>();
+
+                if (interactable != null)
                 {
-                    if(interactable.isMoving){
-                        return;
+                    UIManager.instance.SetHandCursor(true);
+
+                    // INSPECIONAR OBJETO (Botão Esquerdo)
+                    if(pressAction.WasPressedThisFrame()) 
+                    {
+                        if(interactable.isMoving){
+                            return;
+                        }
+
+                        OnView.Invoke();
+                        currentInteractable = interactable;
+                        isViewing = true;
+                        Invoke("CanFinish", 1f);
+
+                        if(currentInteractable.item.grabbable)
+                        {
+                            originPosition = currentInteractable.transform.position;
+                            originRotation = currentInteractable.transform.rotation;
+                            StartCoroutine(MovingObject(currentInteractable, objectViewer.position));
+                        }
                     }
 
-                    OnView.Invoke();
-                    currentInteractable = interactable;
-                    isViewing = true;
-                    Invoke("CanFinish", 1f);
-
-                    if(currentInteractable.item.grabbable)
+                    // PEGAR DIRETO DO CHÃO (Botão E)
+                    if (Input.GetKeyDown(KeyCode.E) && interactable.item.toInventory)
                     {
-                        originPosition = currentInteractable.transform.position;
-                        originRotation = currentInteractable.transform.rotation;
-                        StartCoroutine(MovingObject(currentInteractable, objectViewer.position));
+                        bool guardouComSucesso = InventoryController.instance.AddItem(interactable.item);
+
+                        if (guardouComSucesso)
+                        {
+                            Destroy(hit.transform.gameObject);
+                            UIManager.instance.SetHandCursor(false);
+                        }
                     }
                 }
-                
-                // PEGAR DIRETO DO CHÃO (Botão E)
-                if (Input.GetKeyDown(KeyCode.E) && interactable.item.toInventory)
+                else
                 {
-                    bool guardouComSucesso = InventoryController.instance.AddItem(interactable.item);
-
-                    if (guardouComSucesso)
-                    {
-                        Destroy(hit.transform.gameObject);
-                        UIManager.instance.SetHandCursor(false);
-                    }
+                    UIManager.instance.SetHandCursor(false);
                 }
             }
             else
             {
                 UIManager.instance.SetHandCursor(false);
             }
-        }
-        else
-        {
-            UIManager.instance.SetHandCursor(false);
-        }
-    
 
 
-*/
+
+    */
 
 
 }
