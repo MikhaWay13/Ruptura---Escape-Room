@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine.UI;
 using UnityEngine.InputSystem;
+using UnityEngine.EventSystems;
 
 public class InventoryController : MonoBehaviour
 {
@@ -12,8 +13,45 @@ public class InventoryController : MonoBehaviour
     public Image[] slotImage;
     public int[] slotAmount;
 
+    public GameObject[] OptionsSlot;
+
+
+
+
+
+
+ /*
+    public void OnPointerEnter(PointerEventData eventData)
+    {
+        for (int i = 0; i < OptionsSlot.Length; i++)
+        {
+        OptionsSlot[i].SetActive(true);
+        }
+    }
+
+    public void OnPointerExit(PointerEventData eventData)
+    {
+        for (int i = 0; i < OptionsSlot.Length; i++)
+    {
+        OptionsSlot[i].SetActive(false);
+    }
+    }
+
+
+*/
+
+
+
+
+
+
+
     private void Awake()
     {
+       for (int i = 0; i < OptionsSlot.Length; i++)
+    {
+        OptionsSlot[i].SetActive(false);
+    }
         instance = this;
     }
 
@@ -92,6 +130,12 @@ public class InventoryController : MonoBehaviour
         }
 
         return false;
+    }
+
+
+    public void Options_Slot(int i)
+    {
+        
     }
 
 }
