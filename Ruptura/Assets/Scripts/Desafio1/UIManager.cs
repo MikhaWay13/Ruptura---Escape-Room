@@ -13,6 +13,7 @@ public class UIManager : MonoBehaviour
     //interação
     public GameObject HandCursor;
     public GameObject BackImage;
+    public GameObject TextItem;
 
     private void Awake()
     {
@@ -29,6 +30,7 @@ public class UIManager : MonoBehaviour
 
         SetHandCursor(false);
         SetBackImage(false);
+        SetTextItem(false);
         
     }
 
@@ -47,6 +49,14 @@ public class UIManager : MonoBehaviour
         if (BackImage != null)
         {
             BackImage.SetActive(state);
+        }
+    }
+
+    public void SetTextItem(bool state)
+    {
+        if (TextItem != null)
+        {
+            TextItem.SetActive(state);
         }
     }
 
