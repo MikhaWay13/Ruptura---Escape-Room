@@ -15,9 +15,9 @@ MonoBehaviour:
   grabbable: 0
   audioClip: {fileID: 0}
   text: 
-  ToInventory: 0
+  ToInventory: 1
   itemName: 
   itemSprite: {fileID: 0}
-  hasReadableUI: 0
+  hasReadableUI: 1
   uiText: 
-  uiImage: {fileID: 0}
+  uiImage: {fileID: 21300000, guid: 795ca9eec2163e044baea309ac55b8d3, type: 3}

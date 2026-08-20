@@ -354,6 +354,9 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: -927199367670048503, guid: 009b9f48a477a2a4ab577cb2c1cf61fe, type: 3}
       insertIndex: -1
       addedObject: {fileID: 37096147}
+    - targetCorrespondingSourceObject: {fileID: -927199367670048503, guid: 009b9f48a477a2a4ab577cb2c1cf61fe, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 37096148}
   m_SourcePrefab: {fileID: 100100000, guid: 009b9f48a477a2a4ab577cb2c1cf61fe, type: 3}
 --- !u!1 &37096145 stripped
 GameObject:
@@ -393,6 +396,18 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 79a5d79f33c24e4499913f3fcd806592, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::InteractablesF4
+--- !u!114 &37096148
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 37096145}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 13fab787119b7634eb3da676cbc03cac, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Interactables
   item: {fileID: 11400000, guid: 238505a9c84ac5f4181048e44d0836d0, type: 2}
   isMoving: 0
 --- !u!1001 &48612432
@@ -473,6 +488,9 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 8164078558771037576, guid: 0a8339f997bbc2449b0143b39b16fdf0, type: 3}
       insertIndex: -1
       addedObject: {fileID: 165588036}
+    - targetCorrespondingSourceObject: {fileID: 8164078558771037576, guid: 0a8339f997bbc2449b0143b39b16fdf0, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 165588038}
   m_SourcePrefab: {fileID: 100100000, guid: 0a8339f997bbc2449b0143b39b16fdf0, type: 3}
 --- !u!1 &54469349
 GameObject:
@@ -1095,7 +1113,19 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 79a5d79f33c24e4499913f3fcd806592, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::InteractablesF4
-  item: {fileID: 11400000, guid: 0e65d7a034c0dec4abc1ef3ba86f5827, type: 2}
+--- !u!114 &165588038
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 165588031}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 13fab787119b7634eb3da676cbc03cac, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Interactables
+  item: {fileID: 11400000, guid: 65fc2e7b91a54dd40941c381762c1f8c, type: 2}
   isMoving: 0
 --- !u!1001 &170869360
 PrefabInstance:
@@ -1351,6 +1381,9 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: -927199367670048503, guid: 009b9f48a477a2a4ab577cb2c1cf61fe, type: 3}
       insertIndex: -1
       addedObject: {fileID: 223899628}
+    - targetCorrespondingSourceObject: {fileID: -927199367670048503, guid: 009b9f48a477a2a4ab577cb2c1cf61fe, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 223899629}
   m_SourcePrefab: {fileID: 100100000, guid: 009b9f48a477a2a4ab577cb2c1cf61fe, type: 3}
 --- !u!1 &223899626 stripped
 GameObject:
@@ -1390,6 +1423,18 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 79a5d79f33c24e4499913f3fcd806592, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::InteractablesF4
+--- !u!114 &223899629
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 223899626}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 13fab787119b7634eb3da676cbc03cac, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Interactables
   item: {fileID: 11400000, guid: 007e7344f089d1f47bfb7f559013981f, type: 2}
   isMoving: 0
 --- !u!1001 &225208170
@@ -1466,6 +1511,9 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: -927199367670048503, guid: 009b9f48a477a2a4ab577cb2c1cf61fe, type: 3}
       insertIndex: -1
       addedObject: {fileID: 225208173}
+    - targetCorrespondingSourceObject: {fileID: -927199367670048503, guid: 009b9f48a477a2a4ab577cb2c1cf61fe, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 225208174}
   m_SourcePrefab: {fileID: 100100000, guid: 009b9f48a477a2a4ab577cb2c1cf61fe, type: 3}
 --- !u!1 &225208171 stripped
 GameObject:
@@ -1505,6 +1553,18 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 79a5d79f33c24e4499913f3fcd806592, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::InteractablesF4
+--- !u!114 &225208174
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 225208171}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 13fab787119b7634eb3da676cbc03cac, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Interactables
   item: {fileID: 11400000, guid: ef277deb1b7fb73429f3375c316fe623, type: 2}
   isMoving: 0
 --- !u!1001 &245034737
@@ -2551,8 +2611,8 @@ GameObject:
   - component: {fileID: 488830809}
   - component: {fileID: 488830808}
   - component: {fileID: 488830807}
-  - component: {fileID: 488830812}
   - component: {fileID: 488830813}
+  - component: {fileID: 488830815}
   - component: {fileID: 488830814}
   m_Layer: 0
   m_Name: Player
@@ -2683,7 +2743,7 @@ Transform:
   - {fileID: 617314554}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 172.407, z: 0}
---- !u!114 &488830812
+--- !u!114 &488830813
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -2692,9 +2752,59 @@ MonoBehaviour:
   m_GameObject: {fileID: 488830803}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 289ac3db6a83d834a8b5ba3647472736, type: 3}
+  m_Script: {fileID: 11500000, guid: 4d98730f7f077a745b1d95074c2799b9, type: 3}
   m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::PlayerInteractionF4
+  m_EditorClassIdentifier: Assembly-CSharp::PlayerController
+  moveSpeed: 5
+  jumpHeight: 2
+  gravity: -9.81
+  cameraTarget: {fileID: 1121717809}
+  lookSensitivity: 0.1
+  minPitch: -80
+  maxPitch: 80
+--- !u!114 &488830814
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 488830803}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 594b83e4bb863d641aa71909b3052a8f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::InventoryController
+  slots:
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  slotImage:
+  - {fileID: 1349981865}
+  - {fileID: 1963609334}
+  - {fileID: 2129115938}
+  - {fileID: 1429747137}
+  - {fileID: 1522531584}
+  - {fileID: 1050062360}
+  - {fileID: 443953226}
+  - {fileID: 2061417166}
+  slotAmount: 0000000000000000000000000000000000000000000000000000000000000000
+--- !u!114 &488830815
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 488830803}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8d43249d4a3b75a4d98eb53a27c2ef5b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::PlayerInteraction
   rayDistance: 3
   RotateSpeed: 200
   objectViewer: {fileID: 786012703}
@@ -2728,56 +2838,8 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 1
         m_CallState: 2
---- !u!114 &488830813
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 488830803}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4d98730f7f077a745b1d95074c2799b9, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::PlayerController
-  moveSpeed: 5
-  jumpHeight: 2
-  gravity: -9.81
-  cameraTarget: {fileID: 1121717809}
-  lookSensitivity: 0.1
-  minPitch: -80
-  maxPitch: 80
---- !u!114 &488830814
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 488830803}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 853c4eb70c5ffc241b371719f656bb7c, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::InventarioF4
-  slots:
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  slotImage:
-  - {fileID: 1349981865}
-  - {fileID: 1963609334}
-  - {fileID: 2129115938}
-  - {fileID: 1429747137}
-  - {fileID: 1522531584}
-  - {fileID: 1050062360}
-  - {fileID: 443953226}
-  - {fileID: 2061417166}
-  slotAmount: 0000000000000000000000000000000000000000000000000000000000000000
+  outlineColor: {r: 1, g: 0.92156863, b: 0.015686275, a: 1}
+  outlineWidth: 4
 --- !u!1001 &498837131
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -3862,7 +3924,19 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 79a5d79f33c24e4499913f3fcd806592, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::InteractablesF4
-  item: {fileID: 11400000, guid: 63ce24963ec5d7c4ebcab6b9f988405c, type: 2}
+--- !u!114 &673250597
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 673250587}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 13fab787119b7634eb3da676cbc03cac, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Interactables
+  item: {fileID: 11400000, guid: 34b0bf40f6ad33346963c748948c476f, type: 2}
   isMoving: 0
 --- !u!1001 &681167098
 PrefabInstance:
@@ -5407,6 +5481,9 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 8164078558771037576, guid: 0a8339f997bbc2449b0143b39b16fdf0, type: 3}
       insertIndex: -1
       addedObject: {fileID: 673250595}
+    - targetCorrespondingSourceObject: {fileID: 8164078558771037576, guid: 0a8339f997bbc2449b0143b39b16fdf0, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 673250597}
   m_SourcePrefab: {fileID: 100100000, guid: 0a8339f997bbc2449b0143b39b16fdf0, type: 3}
 --- !u!1 &1050062358
 GameObject:
@@ -5647,6 +5724,9 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: -927199367670048503, guid: 009b9f48a477a2a4ab577cb2c1cf61fe, type: 3}
       insertIndex: -1
       addedObject: {fileID: 1096263042}
+    - targetCorrespondingSourceObject: {fileID: -927199367670048503, guid: 009b9f48a477a2a4ab577cb2c1cf61fe, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1096263043}
   m_SourcePrefab: {fileID: 100100000, guid: 009b9f48a477a2a4ab577cb2c1cf61fe, type: 3}
 --- !u!1 &1096263040 stripped
 GameObject:
@@ -5686,6 +5766,18 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 79a5d79f33c24e4499913f3fcd806592, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::InteractablesF4
+--- !u!114 &1096263043
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1096263040}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 13fab787119b7634eb3da676cbc03cac, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Interactables
   item: {fileID: 11400000, guid: a7a160f94d27097438b21af1c302f423, type: 2}
   isMoving: 0
 --- !u!1 &1101490625
@@ -5700,6 +5792,7 @@ GameObject:
   - component: {fileID: 1101490626}
   - component: {fileID: 1101490628}
   - component: {fileID: 1101490629}
+  - component: {fileID: 1101490630}
   m_Layer: 0
   m_Name: imagem_2026-05-19_113003731-removebg-preview (3)
   m_TagString: Untagged
@@ -5814,6 +5907,18 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 79a5d79f33c24e4499913f3fcd806592, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::InteractablesF4
+--- !u!114 &1101490630
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1101490625}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 13fab787119b7634eb3da676cbc03cac, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Interactables
   item: {fileID: 11400000, guid: 886e0c1c7303b654281a87a68064325b, type: 2}
   isMoving: 0
 --- !u!1001 &1116650227
@@ -7444,6 +7549,10 @@ MonoBehaviour:
   painelInventory: {fileID: 9214002}
   HandCursor: {fileID: 1355710809}
   BackImage: {fileID: 484022643}
+  itemUIPanel: {fileID: 1213254010}
+  itemUITitleText: {fileID: 1926944176}
+  itemUIBodyText: {fileID: 1750588732}
+  itemUIImage: {fileID: 649316840}
 --- !u!114 &1392247813
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -7544,13 +7653,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 872d86850ec85474c8dfdedad230c173, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::UIF4
-  painelInventory: {fileID: 9214002}
-  HandCursor: {fileID: 1355710809}
-  BackImage: {fileID: 484022643}
-  itemUIPanel: {fileID: 1213254010}
-  itemUITitleText: {fileID: 1926944176}
-  itemUIBodyText: {fileID: 1750588732}
-  itemUIImage: {fileID: 649316840}
 --- !u!1 &1402495680 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: -8378516203608153471, guid: 77d9e596ba2f2c54a8c8c2c0d3f1ae10, type: 3}
@@ -8159,6 +8261,9 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: -927199367670048503, guid: 009b9f48a477a2a4ab577cb2c1cf61fe, type: 3}
       insertIndex: -1
       addedObject: {fileID: 1490250931}
+    - targetCorrespondingSourceObject: {fileID: -927199367670048503, guid: 009b9f48a477a2a4ab577cb2c1cf61fe, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1490250932}
   m_SourcePrefab: {fileID: 100100000, guid: 009b9f48a477a2a4ab577cb2c1cf61fe, type: 3}
 --- !u!1 &1490250929 stripped
 GameObject:
@@ -8198,6 +8303,18 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 79a5d79f33c24e4499913f3fcd806592, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::InteractablesF4
+--- !u!114 &1490250932
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1490250929}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 13fab787119b7634eb3da676cbc03cac, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Interactables
   item: {fileID: 11400000, guid: b281ea59876f52c4e8b30b17046fc251, type: 2}
   isMoving: 0
 --- !u!1001 &1491933632
@@ -9296,6 +9413,9 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: -927199367670048503, guid: 009b9f48a477a2a4ab577cb2c1cf61fe, type: 3}
       insertIndex: -1
       addedObject: {fileID: 1851001248}
+    - targetCorrespondingSourceObject: {fileID: -927199367670048503, guid: 009b9f48a477a2a4ab577cb2c1cf61fe, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1851001249}
   m_SourcePrefab: {fileID: 100100000, guid: 009b9f48a477a2a4ab577cb2c1cf61fe, type: 3}
 --- !u!1 &1851001246 stripped
 GameObject:
@@ -9335,6 +9455,18 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 79a5d79f33c24e4499913f3fcd806592, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::InteractablesF4
+--- !u!114 &1851001249
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1851001246}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 13fab787119b7634eb3da676cbc03cac, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Interactables
   item: {fileID: 11400000, guid: 1b043dfd98e40ee4b9991a37fde96b48, type: 2}
   isMoving: 0
 --- !u!1001 &1866212837
@@ -10532,6 +10664,7 @@ GameObject:
   - component: {fileID: 1985371258}
   - component: {fileID: 1985371260}
   - component: {fileID: 1985371261}
+  - component: {fileID: 1985371262}
   m_Layer: 0
   m_Name: imagem_2026-05-19_113003731-removebg-preview (5)
   m_TagString: Untagged
@@ -10646,6 +10779,18 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 79a5d79f33c24e4499913f3fcd806592, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::InteractablesF4
+--- !u!114 &1985371262
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1985371257}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 13fab787119b7634eb3da676cbc03cac, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Interactables
   item: {fileID: 11400000, guid: a7fef1db65ad7df41b01e055a7cc6597, type: 2}
   isMoving: 0
 --- !u!1001 &1994866446
