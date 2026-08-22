@@ -26,6 +26,7 @@ public class PlayerInteraction : MonoBehaviour
 
     private Interactables currentInteractable;
     private Outline currentOutline;
+    private MoveObject currentMovableObject;
 
     private Vector3 originPosition;
     private Quaternion originRotation;
@@ -61,6 +62,19 @@ public class PlayerInteraction : MonoBehaviour
 
     void CheckInteractables()
     {
+        if (currentMovableObject != null)
+        {
+            SetOutline(null);
+            UIManager.instance.SetHandCursor(false);
+
+            if (InteractAction.WasPressedThisFrame())
+            {
+                currentMovableObject.Drop();
+                currentMovableObject = null;
+            }
+
+            return;
+        }
 
         if (isViewing)
         {
@@ -137,8 +151,15 @@ public class PlayerInteraction : MonoBehaviour
                 );
 
                 if (directInteractable != null &&
-                    InteractAction.WasPressedThisFrame())
+      InteractAction.WasPressedThisFrame())
                 {
+                    if (directInteractable is MoveObject movableObject)
+                    {
+                        movableObject.PickUp();
+                        currentMovableObject = movableObject;
+                        return;
+                    }
+
                     directInteractable.Interact();
                     return;
                 }

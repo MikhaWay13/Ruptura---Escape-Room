@@ -175,6 +175,14 @@ PrefabInstance:
       propertyPath: m_Name
       value: Tile_B (25)
       objectReference: {fileID: 0}
+    - target: {fileID: 4202724668555032227, guid: f96442df40a0bf74bbd6431cf2ee05d9, type: 3}
+      propertyPath: m_Layer
+      value: 7
+      objectReference: {fileID: 0}
+    - target: {fileID: 4202724668555032227, guid: f96442df40a0bf74bbd6431cf2ee05d9, type: 3}
+      propertyPath: m_TagString
+      value: Geral
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -685,6 +693,14 @@ PrefabInstance:
       propertyPath: m_Name
       value: Tile_B (28)
       objectReference: {fileID: 0}
+    - target: {fileID: 4202724668555032227, guid: f96442df40a0bf74bbd6431cf2ee05d9, type: 3}
+      propertyPath: m_Layer
+      value: 7
+      objectReference: {fileID: 0}
+    - target: {fileID: 4202724668555032227, guid: f96442df40a0bf74bbd6431cf2ee05d9, type: 3}
+      propertyPath: m_TagString
+      value: Geral
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -1035,6 +1051,14 @@ PrefabInstance:
       propertyPath: m_Name
       value: Victorian Bookcase Tall and Small (5)
       objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: ffabf506f05a1ff47b68e8bbdb592c94, type: 3}
+      propertyPath: m_Layer
+      value: 7
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: ffabf506f05a1ff47b68e8bbdb592c94, type: 3}
+      propertyPath: m_TagString
+      value: Geral
+      objectReference: {fileID: 0}
     - target: {fileID: 2946727076115806574, guid: ffabf506f05a1ff47b68e8bbdb592c94, type: 3}
       propertyPath: m_LocalPosition.x
       value: -0.00003
@@ -1183,6 +1207,14 @@ PrefabInstance:
       propertyPath: m_Name
       value: Tile_B (27)
       objectReference: {fileID: 0}
+    - target: {fileID: 4202724668555032227, guid: f96442df40a0bf74bbd6431cf2ee05d9, type: 3}
+      propertyPath: m_Layer
+      value: 7
+      objectReference: {fileID: 0}
+    - target: {fileID: 4202724668555032227, guid: f96442df40a0bf74bbd6431cf2ee05d9, type: 3}
+      propertyPath: m_TagString
+      value: Geral
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -1272,6 +1304,14 @@ PrefabInstance:
     - target: {fileID: 4202724668555032227, guid: f96442df40a0bf74bbd6431cf2ee05d9, type: 3}
       propertyPath: m_Name
       value: Tile_B (22)
+      objectReference: {fileID: 0}
+    - target: {fileID: 4202724668555032227, guid: f96442df40a0bf74bbd6431cf2ee05d9, type: 3}
+      propertyPath: m_Layer
+      value: 7
+      objectReference: {fileID: 0}
+    - target: {fileID: 4202724668555032227, guid: f96442df40a0bf74bbd6431cf2ee05d9, type: 3}
+      propertyPath: m_TagString
+      value: Geral
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -1578,6 +1618,14 @@ PrefabInstance:
     - target: {fileID: 3591644860445115680, guid: a55e8b944b49e774899ecb13192840e5, type: 3}
       propertyPath: m_Name
       value: Wall_A (53)
+      objectReference: {fileID: 0}
+    - target: {fileID: 3591644860445115680, guid: a55e8b944b49e774899ecb13192840e5, type: 3}
+      propertyPath: m_Layer
+      value: 7
+      objectReference: {fileID: 0}
+    - target: {fileID: 3591644860445115680, guid: a55e8b944b49e774899ecb13192840e5, type: 3}
+      propertyPath: m_TagString
+      value: Geral
       objectReference: {fileID: 0}
     - target: {fileID: 4220934241292132250, guid: a55e8b944b49e774899ecb13192840e5, type: 3}
       propertyPath: m_LocalPosition.x
@@ -2024,6 +2072,14 @@ PrefabInstance:
       propertyPath: m_Name
       value: Wall_A (41)
       objectReference: {fileID: 0}
+    - target: {fileID: 3591644860445115680, guid: a55e8b944b49e774899ecb13192840e5, type: 3}
+      propertyPath: m_Layer
+      value: 7
+      objectReference: {fileID: 0}
+    - target: {fileID: 3591644860445115680, guid: a55e8b944b49e774899ecb13192840e5, type: 3}
+      propertyPath: m_TagString
+      value: Geral
+      objectReference: {fileID: 0}
     - target: {fileID: 4220934241292132250, guid: a55e8b944b49e774899ecb13192840e5, type: 3}
       propertyPath: m_LocalPosition.x
       value: -9.809002
@@ -2257,6 +2313,14 @@ PrefabInstance:
       propertyPath: m_Name
       value: Wall_A (43)
       objectReference: {fileID: 0}
+    - target: {fileID: 3591644860445115680, guid: a55e8b944b49e774899ecb13192840e5, type: 3}
+      propertyPath: m_Layer
+      value: 7
+      objectReference: {fileID: 0}
+    - target: {fileID: 3591644860445115680, guid: a55e8b944b49e774899ecb13192840e5, type: 3}
+      propertyPath: m_TagString
+      value: Geral
+      objectReference: {fileID: 0}
     - target: {fileID: 4220934241292132250, guid: a55e8b944b49e774899ecb13192840e5, type: 3}
       propertyPath: m_LocalPosition.x
       value: -13.809002
@@ -2487,6 +2551,14 @@ PrefabInstance:
     - target: {fileID: 4202724668555032227, guid: f96442df40a0bf74bbd6431cf2ee05d9, type: 3}
       propertyPath: m_Name
       value: Tile_B (19)
+      objectReference: {fileID: 0}
+    - target: {fileID: 4202724668555032227, guid: f96442df40a0bf74bbd6431cf2ee05d9, type: 3}
+      propertyPath: m_Layer
+      value: 7
+      objectReference: {fileID: 0}
+    - target: {fileID: 4202724668555032227, guid: f96442df40a0bf74bbd6431cf2ee05d9, type: 3}
+      propertyPath: m_TagString
+      value: Geral
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -2852,6 +2924,14 @@ PrefabInstance:
       propertyPath: m_Name
       value: Wall_A (46)
       objectReference: {fileID: 0}
+    - target: {fileID: 3591644860445115680, guid: a55e8b944b49e774899ecb13192840e5, type: 3}
+      propertyPath: m_Layer
+      value: 7
+      objectReference: {fileID: 0}
+    - target: {fileID: 3591644860445115680, guid: a55e8b944b49e774899ecb13192840e5, type: 3}
+      propertyPath: m_TagString
+      value: Geral
+      objectReference: {fileID: 0}
     - target: {fileID: 4220934241292132250, guid: a55e8b944b49e774899ecb13192840e5, type: 3}
       propertyPath: m_LocalPosition.x
       value: -13.809002
@@ -3075,6 +3155,14 @@ PrefabInstance:
       propertyPath: m_Name
       value: Drawer02
       objectReference: {fileID: 0}
+    - target: {fileID: 1555238124502446, guid: 92caae8afe1371b45b3e7fa9442a75aa, type: 3}
+      propertyPath: m_Layer
+      value: 7
+      objectReference: {fileID: 0}
+    - target: {fileID: 1555238124502446, guid: 92caae8afe1371b45b3e7fa9442a75aa, type: 3}
+      propertyPath: m_TagString
+      value: Geral
+      objectReference: {fileID: 0}
     - target: {fileID: 4849431316403206, guid: 92caae8afe1371b45b3e7fa9442a75aa, type: 3}
       propertyPath: m_LocalScale.x
       value: 1.5985577
@@ -3143,6 +3231,14 @@ PrefabInstance:
     - target: {fileID: 1467964783057150, guid: e68a619303cb1e44ea3dde236af3366e, type: 3}
       propertyPath: m_Name
       value: Chair01 (1)
+      objectReference: {fileID: 0}
+    - target: {fileID: 1467964783057150, guid: e68a619303cb1e44ea3dde236af3366e, type: 3}
+      propertyPath: m_Layer
+      value: 7
+      objectReference: {fileID: 0}
+    - target: {fileID: 1467964783057150, guid: e68a619303cb1e44ea3dde236af3366e, type: 3}
+      propertyPath: m_TagString
+      value: Geral
       objectReference: {fileID: 0}
     - target: {fileID: 4862071993560892, guid: e68a619303cb1e44ea3dde236af3366e, type: 3}
       propertyPath: m_LocalScale.x
@@ -3219,6 +3315,14 @@ PrefabInstance:
     - target: {fileID: 3591644860445115680, guid: a55e8b944b49e774899ecb13192840e5, type: 3}
       propertyPath: m_Name
       value: Wall_A (45)
+      objectReference: {fileID: 0}
+    - target: {fileID: 3591644860445115680, guid: a55e8b944b49e774899ecb13192840e5, type: 3}
+      propertyPath: m_Layer
+      value: 7
+      objectReference: {fileID: 0}
+    - target: {fileID: 3591644860445115680, guid: a55e8b944b49e774899ecb13192840e5, type: 3}
+      propertyPath: m_TagString
+      value: Geral
       objectReference: {fileID: 0}
     - target: {fileID: 4220934241292132250, guid: a55e8b944b49e774899ecb13192840e5, type: 3}
       propertyPath: m_LocalPosition.x
@@ -3717,6 +3821,14 @@ PrefabInstance:
       propertyPath: m_Name
       value: Wall_A (39)
       objectReference: {fileID: 0}
+    - target: {fileID: 3591644860445115680, guid: a55e8b944b49e774899ecb13192840e5, type: 3}
+      propertyPath: m_Layer
+      value: 7
+      objectReference: {fileID: 0}
+    - target: {fileID: 3591644860445115680, guid: a55e8b944b49e774899ecb13192840e5, type: 3}
+      propertyPath: m_TagString
+      value: Geral
+      objectReference: {fileID: 0}
     - target: {fileID: 4220934241292132250, guid: a55e8b944b49e774899ecb13192840e5, type: 3}
       propertyPath: m_LocalPosition.x
       value: -9.809
@@ -3802,6 +3914,14 @@ PrefabInstance:
     - target: {fileID: 1447644813269514, guid: 847d7f5934db1764d99da1216c39e37d, type: 3}
       propertyPath: m_Name
       value: WoodTableSquare01b
+      objectReference: {fileID: 0}
+    - target: {fileID: 1447644813269514, guid: 847d7f5934db1764d99da1216c39e37d, type: 3}
+      propertyPath: m_Layer
+      value: 7
+      objectReference: {fileID: 0}
+    - target: {fileID: 1447644813269514, guid: 847d7f5934db1764d99da1216c39e37d, type: 3}
+      propertyPath: m_TagString
+      value: Geral
       objectReference: {fileID: 0}
     - target: {fileID: 4750071604352870, guid: 847d7f5934db1764d99da1216c39e37d, type: 3}
       propertyPath: m_LocalScale.x
@@ -4218,6 +4338,14 @@ PrefabInstance:
     - target: {fileID: 3591644860445115680, guid: a55e8b944b49e774899ecb13192840e5, type: 3}
       propertyPath: m_Name
       value: Wall_A (44)
+      objectReference: {fileID: 0}
+    - target: {fileID: 3591644860445115680, guid: a55e8b944b49e774899ecb13192840e5, type: 3}
+      propertyPath: m_Layer
+      value: 7
+      objectReference: {fileID: 0}
+    - target: {fileID: 3591644860445115680, guid: a55e8b944b49e774899ecb13192840e5, type: 3}
+      propertyPath: m_TagString
+      value: Geral
       objectReference: {fileID: 0}
     - target: {fileID: 4220934241292132250, guid: a55e8b944b49e774899ecb13192840e5, type: 3}
       propertyPath: m_LocalPosition.x
@@ -4793,6 +4921,14 @@ PrefabInstance:
       propertyPath: m_Name
       value: Tile_B (23)
       objectReference: {fileID: 0}
+    - target: {fileID: 4202724668555032227, guid: f96442df40a0bf74bbd6431cf2ee05d9, type: 3}
+      propertyPath: m_Layer
+      value: 7
+      objectReference: {fileID: 0}
+    - target: {fileID: 4202724668555032227, guid: f96442df40a0bf74bbd6431cf2ee05d9, type: 3}
+      propertyPath: m_TagString
+      value: Geral
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -4910,6 +5046,14 @@ PrefabInstance:
     - target: {fileID: 919132149155446097, guid: ffabf506f05a1ff47b68e8bbdb592c94, type: 3}
       propertyPath: m_Name
       value: Victorian Bookcase Tall and Small (7)
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: ffabf506f05a1ff47b68e8bbdb592c94, type: 3}
+      propertyPath: m_Layer
+      value: 7
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: ffabf506f05a1ff47b68e8bbdb592c94, type: 3}
+      propertyPath: m_TagString
+      value: Geral
       objectReference: {fileID: 0}
     - target: {fileID: 5217224052581936396, guid: ffabf506f05a1ff47b68e8bbdb592c94, type: 3}
       propertyPath: 'm_Materials.Array.data[0]'
@@ -5120,6 +5264,14 @@ PrefabInstance:
       propertyPath: m_Name
       value: Victorian Bookcase Tall and Small
       objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: ffabf506f05a1ff47b68e8bbdb592c94, type: 3}
+      propertyPath: m_Layer
+      value: 7
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: ffabf506f05a1ff47b68e8bbdb592c94, type: 3}
+      propertyPath: m_TagString
+      value: Geral
+      objectReference: {fileID: 0}
     - target: {fileID: 3202984525959183420, guid: ffabf506f05a1ff47b68e8bbdb592c94, type: 3}
       propertyPath: 'm_Materials.Array.data[0]'
       value: 
@@ -5231,6 +5383,14 @@ PrefabInstance:
       propertyPath: m_Name
       value: Victorian Bookcase Tall and Small (1)
       objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: ffabf506f05a1ff47b68e8bbdb592c94, type: 3}
+      propertyPath: m_Layer
+      value: 7
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: ffabf506f05a1ff47b68e8bbdb592c94, type: 3}
+      propertyPath: m_TagString
+      value: Geral
+      objectReference: {fileID: 0}
     - target: {fileID: 2946727076115806574, guid: ffabf506f05a1ff47b68e8bbdb592c94, type: 3}
       propertyPath: m_LocalPosition.x
       value: -0.00753
@@ -5313,6 +5473,14 @@ PrefabInstance:
       propertyPath: m_Name
       value: Chair01
       objectReference: {fileID: 0}
+    - target: {fileID: 1467964783057150, guid: e68a619303cb1e44ea3dde236af3366e, type: 3}
+      propertyPath: m_Layer
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1467964783057150, guid: e68a619303cb1e44ea3dde236af3366e, type: 3}
+      propertyPath: m_TagString
+      value: Untagged
+      objectReference: {fileID: 0}
     - target: {fileID: 4862071993560892, guid: e68a619303cb1e44ea3dde236af3366e, type: 3}
       propertyPath: m_LocalScale.x
       value: 1.5617679
@@ -5366,7 +5534,15 @@ PrefabInstance:
       value: 49.380005
       objectReference: {fileID: 0}
     - target: {fileID: 54262758084679014, guid: e68a619303cb1e44ea3dde236af3366e, type: 3}
+      propertyPath: m_Interpolate
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 54262758084679014, guid: e68a619303cb1e44ea3dde236af3366e, type: 3}
       propertyPath: m_IsKinematic
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 54262758084679014, guid: e68a619303cb1e44ea3dde236af3366e, type: 3}
+      propertyPath: m_CollisionDetection
       value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
@@ -5376,6 +5552,9 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 1467964783057150, guid: e68a619303cb1e44ea3dde236af3366e, type: 3}
       insertIndex: -1
       addedObject: {fileID: 1008703067}
+    - targetCorrespondingSourceObject: {fileID: 1467964783057150, guid: e68a619303cb1e44ea3dde236af3366e, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1008703073}
   m_SourcePrefab: {fileID: 100100000, guid: e68a619303cb1e44ea3dde236af3366e, type: 3}
 --- !u!1 &1008703066 stripped
 GameObject:
@@ -5403,6 +5582,25 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 0.5715062, y: 0.042401683, z: 1.1549208}
   m_Center: {x: 0.0006502652, y: -0.2788029, z: 0.5774604}
+--- !u!114 &1008703073
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1008703066}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2bb7ae7e35f32a04d8f95d6731d385c0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::MoveObject
+  holdDistance: 2
+  followSpeed: 12
+  collisionRadius: 0.35
+  wallOffset: 0.1
+  collisionLayers:
+    serializedVersion: 2
+    m_Bits: 192
 --- !u!1001 &1023808457
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -5615,6 +5813,14 @@ PrefabInstance:
     - target: {fileID: 4202724668555032227, guid: f96442df40a0bf74bbd6431cf2ee05d9, type: 3}
       propertyPath: m_Name
       value: Tile_B (20)
+      objectReference: {fileID: 0}
+    - target: {fileID: 4202724668555032227, guid: f96442df40a0bf74bbd6431cf2ee05d9, type: 3}
+      propertyPath: m_Layer
+      value: 7
+      objectReference: {fileID: 0}
+    - target: {fileID: 4202724668555032227, guid: f96442df40a0bf74bbd6431cf2ee05d9, type: 3}
+      propertyPath: m_TagString
+      value: Geral
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -7289,6 +7495,14 @@ PrefabInstance:
       propertyPath: m_Name
       value: Wall_A (49)
       objectReference: {fileID: 0}
+    - target: {fileID: 3591644860445115680, guid: a55e8b944b49e774899ecb13192840e5, type: 3}
+      propertyPath: m_Layer
+      value: 7
+      objectReference: {fileID: 0}
+    - target: {fileID: 3591644860445115680, guid: a55e8b944b49e774899ecb13192840e5, type: 3}
+      propertyPath: m_TagString
+      value: Geral
+      objectReference: {fileID: 0}
     - target: {fileID: 4220934241292132250, guid: a55e8b944b49e774899ecb13192840e5, type: 3}
       propertyPath: m_LocalPosition.x
       value: -21.809
@@ -7691,6 +7905,14 @@ PrefabInstance:
       propertyPath: m_Name
       value: Wall_A (52)
       objectReference: {fileID: 0}
+    - target: {fileID: 3591644860445115680, guid: a55e8b944b49e774899ecb13192840e5, type: 3}
+      propertyPath: m_Layer
+      value: 7
+      objectReference: {fileID: 0}
+    - target: {fileID: 3591644860445115680, guid: a55e8b944b49e774899ecb13192840e5, type: 3}
+      propertyPath: m_TagString
+      value: Geral
+      objectReference: {fileID: 0}
     - target: {fileID: 4220934241292132250, guid: a55e8b944b49e774899ecb13192840e5, type: 3}
       propertyPath: m_LocalPosition.x
       value: -9.809002
@@ -7956,6 +8178,14 @@ PrefabInstance:
       propertyPath: m_Name
       value: Wall_A (48)
       objectReference: {fileID: 0}
+    - target: {fileID: 3591644860445115680, guid: a55e8b944b49e774899ecb13192840e5, type: 3}
+      propertyPath: m_Layer
+      value: 7
+      objectReference: {fileID: 0}
+    - target: {fileID: 3591644860445115680, guid: a55e8b944b49e774899ecb13192840e5, type: 3}
+      propertyPath: m_TagString
+      value: Geral
+      objectReference: {fileID: 0}
     - target: {fileID: 4220934241292132250, guid: a55e8b944b49e774899ecb13192840e5, type: 3}
       propertyPath: m_LocalPosition.x
       value: -21.809002
@@ -8135,6 +8365,14 @@ PrefabInstance:
     - target: {fileID: 919132149155446097, guid: ffabf506f05a1ff47b68e8bbdb592c94, type: 3}
       propertyPath: m_Name
       value: Victorian Bookcase Tall and Small (3)
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: ffabf506f05a1ff47b68e8bbdb592c94, type: 3}
+      propertyPath: m_Layer
+      value: 7
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: ffabf506f05a1ff47b68e8bbdb592c94, type: 3}
+      propertyPath: m_TagString
+      value: Geral
       objectReference: {fileID: 0}
     - target: {fileID: 2946727076115806574, guid: ffabf506f05a1ff47b68e8bbdb592c94, type: 3}
       propertyPath: m_LocalPosition.x
@@ -8329,6 +8567,14 @@ PrefabInstance:
       propertyPath: m_Name
       value: Wall_A (47)
       objectReference: {fileID: 0}
+    - target: {fileID: 3591644860445115680, guid: a55e8b944b49e774899ecb13192840e5, type: 3}
+      propertyPath: m_Layer
+      value: 7
+      objectReference: {fileID: 0}
+    - target: {fileID: 3591644860445115680, guid: a55e8b944b49e774899ecb13192840e5, type: 3}
+      propertyPath: m_TagString
+      value: Geral
+      objectReference: {fileID: 0}
     - target: {fileID: 4220934241292132250, guid: a55e8b944b49e774899ecb13192840e5, type: 3}
       propertyPath: m_LocalPosition.x
       value: -17.809002
@@ -8414,6 +8660,14 @@ PrefabInstance:
     - target: {fileID: 3591644860445115680, guid: a55e8b944b49e774899ecb13192840e5, type: 3}
       propertyPath: m_Name
       value: Wall_A (42)
+      objectReference: {fileID: 0}
+    - target: {fileID: 3591644860445115680, guid: a55e8b944b49e774899ecb13192840e5, type: 3}
+      propertyPath: m_Layer
+      value: 7
+      objectReference: {fileID: 0}
+    - target: {fileID: 3591644860445115680, guid: a55e8b944b49e774899ecb13192840e5, type: 3}
+      propertyPath: m_TagString
+      value: Geral
       objectReference: {fileID: 0}
     - target: {fileID: 4220934241292132250, guid: a55e8b944b49e774899ecb13192840e5, type: 3}
       propertyPath: m_LocalPosition.x
@@ -8654,6 +8908,14 @@ PrefabInstance:
       propertyPath: m_Name
       value: WoodCupboard03
       objectReference: {fileID: 0}
+    - target: {fileID: 1017316775514278, guid: d13fce7de3764704598f3d1300a7586c, type: 3}
+      propertyPath: m_Layer
+      value: 7
+      objectReference: {fileID: 0}
+    - target: {fileID: 1017316775514278, guid: d13fce7de3764704598f3d1300a7586c, type: 3}
+      propertyPath: m_TagString
+      value: Geral
+      objectReference: {fileID: 0}
     - target: {fileID: 4867953396367456, guid: d13fce7de3764704598f3d1300a7586c, type: 3}
       propertyPath: m_LocalScale.x
       value: 1.8132
@@ -8766,6 +9028,14 @@ PrefabInstance:
     - target: {fileID: 4202724668555032227, guid: f96442df40a0bf74bbd6431cf2ee05d9, type: 3}
       propertyPath: m_Name
       value: Tile_B (29)
+      objectReference: {fileID: 0}
+    - target: {fileID: 4202724668555032227, guid: f96442df40a0bf74bbd6431cf2ee05d9, type: 3}
+      propertyPath: m_Layer
+      value: 7
+      objectReference: {fileID: 0}
+    - target: {fileID: 4202724668555032227, guid: f96442df40a0bf74bbd6431cf2ee05d9, type: 3}
+      propertyPath: m_TagString
+      value: Geral
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -9041,6 +9311,14 @@ PrefabInstance:
       propertyPath: m_Name
       value: Tile_B (18)
       objectReference: {fileID: 0}
+    - target: {fileID: 4202724668555032227, guid: f96442df40a0bf74bbd6431cf2ee05d9, type: 3}
+      propertyPath: m_Layer
+      value: 7
+      objectReference: {fileID: 0}
+    - target: {fileID: 4202724668555032227, guid: f96442df40a0bf74bbd6431cf2ee05d9, type: 3}
+      propertyPath: m_TagString
+      value: Geral
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -9138,6 +9416,14 @@ PrefabInstance:
     - target: {fileID: 8680301532144282658, guid: e3729cab5cd8f4c459ef8d249965eeae, type: 3}
       propertyPath: m_Name
       value: BedSingle01emptyV1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8680301532144282658, guid: e3729cab5cd8f4c459ef8d249965eeae, type: 3}
+      propertyPath: m_Layer
+      value: 7
+      objectReference: {fileID: 0}
+    - target: {fileID: 8680301532144282658, guid: e3729cab5cd8f4c459ef8d249965eeae, type: 3}
+      propertyPath: m_TagString
+      value: Geral
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -9549,6 +9835,14 @@ PrefabInstance:
       propertyPath: m_Name
       value: Victorian Bookcase Tall and Small (2)
       objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: ffabf506f05a1ff47b68e8bbdb592c94, type: 3}
+      propertyPath: m_Layer
+      value: 7
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: ffabf506f05a1ff47b68e8bbdb592c94, type: 3}
+      propertyPath: m_TagString
+      value: Geral
+      objectReference: {fileID: 0}
     - target: {fileID: 3202984525959183420, guid: ffabf506f05a1ff47b68e8bbdb592c94, type: 3}
       propertyPath: 'm_Materials.Array.data[0]'
       value: 
@@ -9636,6 +9930,14 @@ PrefabInstance:
     - target: {fileID: 4202724668555032227, guid: f96442df40a0bf74bbd6431cf2ee05d9, type: 3}
       propertyPath: m_Name
       value: Tile_B (24)
+      objectReference: {fileID: 0}
+    - target: {fileID: 4202724668555032227, guid: f96442df40a0bf74bbd6431cf2ee05d9, type: 3}
+      propertyPath: m_Layer
+      value: 7
+      objectReference: {fileID: 0}
+    - target: {fileID: 4202724668555032227, guid: f96442df40a0bf74bbd6431cf2ee05d9, type: 3}
+      propertyPath: m_TagString
+      value: Geral
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -9891,6 +10193,14 @@ PrefabInstance:
       propertyPath: m_Name
       value: Victorian Bookcase Tall and Small (6)
       objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: ffabf506f05a1ff47b68e8bbdb592c94, type: 3}
+      propertyPath: m_Layer
+      value: 7
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: ffabf506f05a1ff47b68e8bbdb592c94, type: 3}
+      propertyPath: m_TagString
+      value: Geral
+      objectReference: {fileID: 0}
     - target: {fileID: 3508341452020831760, guid: ffabf506f05a1ff47b68e8bbdb592c94, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0.00205
@@ -10015,6 +10325,14 @@ PrefabInstance:
     - target: {fileID: 919132149155446097, guid: ffabf506f05a1ff47b68e8bbdb592c94, type: 3}
       propertyPath: m_Name
       value: Victorian Bookcase Tall and Small (4)
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: ffabf506f05a1ff47b68e8bbdb592c94, type: 3}
+      propertyPath: m_Layer
+      value: 7
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: ffabf506f05a1ff47b68e8bbdb592c94, type: 3}
+      propertyPath: m_TagString
+      value: Geral
       objectReference: {fileID: 0}
     - target: {fileID: 3202984525959183420, guid: ffabf506f05a1ff47b68e8bbdb592c94, type: 3}
       propertyPath: 'm_Materials.Array.data[0]'
@@ -10946,6 +11264,14 @@ PrefabInstance:
       propertyPath: m_Name
       value: Wall_A (50)
       objectReference: {fileID: 0}
+    - target: {fileID: 3591644860445115680, guid: a55e8b944b49e774899ecb13192840e5, type: 3}
+      propertyPath: m_Layer
+      value: 7
+      objectReference: {fileID: 0}
+    - target: {fileID: 3591644860445115680, guid: a55e8b944b49e774899ecb13192840e5, type: 3}
+      propertyPath: m_TagString
+      value: Geral
+      objectReference: {fileID: 0}
     - target: {fileID: 4220934241292132250, guid: a55e8b944b49e774899ecb13192840e5, type: 3}
       propertyPath: m_LocalPosition.x
       value: -21.809002
@@ -11075,6 +11401,14 @@ PrefabInstance:
     - target: {fileID: 4202724668555032227, guid: f96442df40a0bf74bbd6431cf2ee05d9, type: 3}
       propertyPath: m_Name
       value: Tile_B (26)
+      objectReference: {fileID: 0}
+    - target: {fileID: 4202724668555032227, guid: f96442df40a0bf74bbd6431cf2ee05d9, type: 3}
+      propertyPath: m_Layer
+      value: 7
+      objectReference: {fileID: 0}
+    - target: {fileID: 4202724668555032227, guid: f96442df40a0bf74bbd6431cf2ee05d9, type: 3}
+      propertyPath: m_TagString
+      value: Geral
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -11536,6 +11870,14 @@ PrefabInstance:
       propertyPath: m_Name
       value: Wall_A (51)
       objectReference: {fileID: 0}
+    - target: {fileID: 3591644860445115680, guid: a55e8b944b49e774899ecb13192840e5, type: 3}
+      propertyPath: m_Layer
+      value: 7
+      objectReference: {fileID: 0}
+    - target: {fileID: 3591644860445115680, guid: a55e8b944b49e774899ecb13192840e5, type: 3}
+      propertyPath: m_TagString
+      value: Geral
+      objectReference: {fileID: 0}
     - target: {fileID: 4220934241292132250, guid: a55e8b944b49e774899ecb13192840e5, type: 3}
       propertyPath: m_LocalPosition.x
       value: -21.809002
@@ -11665,6 +12007,14 @@ PrefabInstance:
     - target: {fileID: 4202724668555032227, guid: f96442df40a0bf74bbd6431cf2ee05d9, type: 3}
       propertyPath: m_Name
       value: Tile_B (21)
+      objectReference: {fileID: 0}
+    - target: {fileID: 4202724668555032227, guid: f96442df40a0bf74bbd6431cf2ee05d9, type: 3}
+      propertyPath: m_Layer
+      value: 7
+      objectReference: {fileID: 0}
+    - target: {fileID: 4202724668555032227, guid: f96442df40a0bf74bbd6431cf2ee05d9, type: 3}
+      propertyPath: m_TagString
+      value: Geral
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
