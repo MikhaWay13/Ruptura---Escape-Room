@@ -7,6 +7,7 @@ public class Item : ScriptableObject
 {
 [Header("Interação")]
     public bool grabbable;
+    public bool movable;
     public AudioClip audioClip;
     public string text;
 
