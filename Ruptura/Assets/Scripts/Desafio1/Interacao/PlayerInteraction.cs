@@ -1,321 +1,609 @@
 using System.Collections;
-using System.Collections.Generic;
-using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.Events;
 using UnityEngine.InputSystem;
 
 public class PlayerInteraction : MonoBehaviour
 {
+    [Header("Interação")]
     public float rayDistance = 2f;
     public float RotateSpeed = 200f;
-
     public Transform objectViewer;
+
+    [Header("Objeto Movimentável")]
+    [SerializeField] private float movableSpeed = 8f;
+    [SerializeField] private float collisionPadding = 0.05f;
+
+    [Header("Outline")]
+    [SerializeField] private Color outlineColor = Color.yellow;
+    [SerializeField, Range(0f, 10f)] private float outlineWidth = 4f;
 
     public UnityEvent OnView;
     public UnityEvent OnFinishView;
 
-    [Header("Outline")]
-    [SerializeField]
-    private Color outlineColor = Color.yellow;
-
-    [SerializeField, Range(0f, 10f)]
-    private float outlineWidth = 4f;
-
     private Camera myCam;
 
     private Interactables currentInteractable;
+    private Interactables currentMovableObject;
+
+    private Rigidbody movableRb;
     private Outline currentOutline;
-    private MoveObject currentMovableObject;
 
     private Vector3 originPosition;
     private Quaternion originRotation;
-    private bool isViewing;
 
+    private bool isViewing;
     private bool canFinish;
 
+    private bool originalGravity;
+    private bool originalKinematic;
 
     private InputAction InteractAction;
     private InputAction pressAction;
     private InputAction BackAction;
     private InputAction lookAction;
 
+
     private void Awake()
     {
-        pressAction = InputSystem.actions.FindAction("Interaction/Press");
-        InteractAction = InputSystem.actions.FindAction("Interaction/Interact");
-        BackAction = InputSystem.actions.FindAction("Interaction/Back");
-        lookAction = InputSystem.actions.FindAction("Interaction/Look");
+        pressAction =
+            InputSystem.actions.FindAction("Interaction/Press");
+
+        InteractAction =
+            InputSystem.actions.FindAction("Interaction/Interact");
+
+        BackAction =
+            InputSystem.actions.FindAction("Interaction/Back");
+
+        lookAction =
+            InputSystem.actions.FindAction("Interaction/Look");
     }
 
 
-
-    void Start()
+    private void Start()
     {
         myCam = Camera.main;
     }
 
-    void Update()
+
+    private void Update()
     {
         CheckInteractables();
     }
 
-    void CheckInteractables()
+
+    private void FixedUpdate()
+    {
+        if (currentMovableObject != null)
+            MoveMovableObject();
+    }
+
+
+    // =====================================================
+    // CONTROLE PRINCIPAL
+    // =====================================================
+
+    private void CheckInteractables()
     {
         if (currentMovableObject != null)
         {
-            SetOutline(null);
-            UIManager.instance.SetHandCursor(false);
-
-            if (InteractAction.WasPressedThisFrame())
-            {
-                currentMovableObject.Drop();
-                currentMovableObject = null;
-            }
-
+            HandleMovableObject();
             return;
         }
 
         if (isViewing)
         {
-            SetOutline(null);
+            HandleInspection();
+            return;
+        }
 
-            if (currentInteractable.item.grabbable && pressAction.IsPressed())
-            {
-                RotateObject();
-            }
-
-
-            if (canFinish && BackAction.WasPressedThisFrame())
-            {
-                FinishView();
-            }
+        CheckRaycast();
+    }
 
 
-            if (canFinish && InteractAction.WasPressedThisFrame() && currentInteractable.item.ToInventory)
-            {
+    // =====================================================
+    // OBJETO MOVIMENTÁVEL
+    // =====================================================
 
-                bool verificate = InventoryController.instance.AddItem(currentInteractable.item);
+    private void HandleMovableObject()
+    {
+        SetOutline(null);
+        SetHandCursor(false);
 
-                if (verificate)
-                {
-                    isViewing = false;
-                    canFinish = false;
-                    UIManager.instance.SetBackImage(false);
-                    //criar UI de pressionar E
-                    OnFinishView.Invoke();
+        // Segurar botão esquerdo = girar
+        if (pressAction.IsPressed())
+            RotateObject(currentMovableObject);
 
-                    UIManager.instance.CloseItemUI();
-                    Destroy(currentInteractable.gameObject);
-                    return;
-                }
-            }
+        // E = soltar
+        if (InteractAction.WasPressedThisFrame())
+            DropMovableObject();
+    }
 
+
+    private void PickUpMovableObject(Interactables obj)
+    {
+        Rigidbody rb = obj.GetComponent<Rigidbody>();
+
+        if (rb == null)
+        {
+            Debug.LogWarning(
+                $"{obj.name} está marcado como Movimentável, " +
+                "mas não possui Rigidbody."
+            );
 
             return;
         }
-        RaycastHit hit;
+
+        currentMovableObject = obj;
+        movableRb = rb;
+
+        originalGravity = rb.useGravity;
+        originalKinematic = rb.isKinematic;
+
+        rb.linearVelocity = Vector3.zero;
+        rb.angularVelocity = Vector3.zero;
+
+        rb.useGravity = false;
+        rb.isKinematic = true;
+
+        obj.isMoving = true;
+    }
 
 
-        Vector3 rayOrigin = myCam.ViewportToWorldPoint(
-            new Vector3(0.5f, 0.5f, 0.5f)
+    private void MoveMovableObject()
+    {
+        if (objectViewer == null || movableRb == null)
+            return;
+
+        Vector3 movement =
+            objectViewer.position - movableRb.position;
+
+        float distance = movement.magnitude;
+
+        if (distance < 0.01f)
+            return;
+
+        Vector3 direction = movement.normalized;
+
+        float step = Mathf.Min(
+            distance,
+            movableSpeed * Time.fixedDeltaTime
         );
 
-        if (Physics.Raycast(rayOrigin, myCam.transform.forward, out hit, rayDistance))
+        // Impede o objeto de atravessar paredes
+        if (movableRb.SweepTest(
+            direction,
+            out RaycastHit hit,
+            step,
+            QueryTriggerInteraction.Ignore))
         {
-            IRaycastInteractable directInteractable =
-                hit.collider.GetComponentInParent<IRaycastInteractable>();
-
-            Interactables interactable = hit.collider.GetComponentInParent<Interactables>();
-
-            if (directInteractable is MonoBehaviour directComponent &&
-                interactable != null &&
-                HierarchyDistance(hit.collider.transform, interactable.transform) <=
-                HierarchyDistance(hit.collider.transform, directComponent.transform))
-            {
-                // Um item dentro de outro objeto interagível (como a alavanca
-                // dentro da gaveta) deve receber o foco antes do objeto-pai.
-                directInteractable = null;
-            }
-
-
-
-
-            if (directInteractable != null || interactable != null)
-            {
-                UIManager.instance.SetHandCursor(true);
-                SetOutline(
-                    directInteractable is MonoBehaviour directBehaviour
-                        ? directBehaviour.gameObject
-                        : interactable.gameObject
-                );
-
-                if (directInteractable != null &&
-      InteractAction.WasPressedThisFrame())
-                {
-                    if (directInteractable is MoveObject movableObject)
-                    {
-                        movableObject.PickUp();
-                        currentMovableObject = movableObject;
-                        return;
-                    }
-
-                    directInteractable.Interact();
-                    return;
-                }
-
-                if (interactable != null &&
-                    pressAction.WasPressedThisFrame())
-                {
-
-                    if (interactable.isMoving)
-                    {
-                        return;
-                    }
-
-                    OnView.Invoke();
-
-                    currentInteractable = interactable;
-
-                    isViewing = true;
-
-                    Invoke("CanFinish", 1f);
-
-                    if (currentInteractable.item.hasReadableUI)
-                    {
-                        UIManager.instance.OpenItemUI(currentInteractable.item);
-                        return;
-                    }
-
-                    if (currentInteractable.item.grabbable)
-                    {
-                        originPosition = currentInteractable.transform.position;
-                        originRotation = currentInteractable.transform.rotation;
-                        StartCoroutine(MovingObject(currentInteractable, objectViewer.position));
-                    }
-                }
-
-            }
-            else
-            {
-                UIManager.instance.SetHandCursor(false);
-                SetOutline(null);
-            }
-        }
-        else
-        {
-            UIManager.instance.SetHandCursor(false);
-            SetOutline(null);
+            step = Mathf.Max(
+                0f,
+                hit.distance - collisionPadding
+            );
         }
 
+        movableRb.MovePosition(
+            movableRb.position +
+            direction * step
+        );
     }
 
-    void CanFinish()
+
+    private void DropMovableObject()
     {
-        canFinish = true;
-        UIManager.instance.SetBackImage(true);
+        if (movableRb != null)
+        {
+            movableRb.linearVelocity = Vector3.zero;
+            movableRb.angularVelocity = Vector3.zero;
+
+            movableRb.isKinematic = originalKinematic;
+            movableRb.useGravity = originalGravity;
+        }
+
+        currentMovableObject.isMoving = false;
+
+        currentMovableObject = null;
+        movableRb = null;
     }
 
-    void FinishView()
+
+    // =====================================================
+    // INSPEÇÃO
+    // =====================================================
+
+    private void HandleInspection()
     {
+        SetOutline(null);
+
+        if (currentInteractable == null ||
+            currentInteractable.item == null)
+        {
+            isViewing = false;
+            return;
+        }
+
+        Item item = currentInteractable.item;
+
+        // Rotação durante inspeção
+        if (item.grabbable && pressAction.IsPressed())
+            RotateObject(currentInteractable);
+
+        // Voltar
+        if (canFinish &&
+            BackAction.WasPressedThisFrame())
+        {
+            FinishView();
+            return;
+        }
+
+        // Adicionar ao inventário
+        if (canFinish &&
+            item.ToInventory &&
+            InteractAction.WasPressedThisFrame())
+        {
+            AddCurrentItemToInventory();
+        }
+    }
+
+
+    private void StartInspection(Interactables obj)
+    {
+        if (obj.isMoving || obj.item == null)
+            return;
+
+        Item item = obj.item;
+
+        // Não entra em inspeção se não houver
+        // nenhuma interação desse tipo.
+        if (!item.grabbable &&
+            !item.hasReadableUI &&
+            !item.ToInventory)
+        {
+            return;
+        }
+
+        currentInteractable = obj;
+        isViewing = true;
         canFinish = false;
-        isViewing = false;
-        UIManager.instance.SetBackImage(false);
 
-        if (currentInteractable.item.hasReadableUI)
+        OnView.Invoke();
+        Invoke(nameof(CanFinish), 1f);
+
+        if (item.hasReadableUI)
+        {
+            UIManager.instance.OpenItemUI(item);
+            return;
+        }
+
+        if (item.grabbable)
+        {
+            originPosition = obj.transform.position;
+            originRotation = obj.transform.rotation;
+
+            StartCoroutine(
+                MovingObject(
+                    obj,
+                    objectViewer.position
+                )
+            );
+        }
+    }
+
+
+    private void FinishView()
+    {
+        Item item = currentInteractable.item;
+        Interactables obj = currentInteractable;
+
+        isViewing = false;
+        canFinish = false;
+
+        SetBackImage(false);
+
+        if (item.hasReadableUI)
         {
             UIManager.instance.CloseItemUI();
         }
-        else if (currentInteractable.item.grabbable)
+        else if (item.grabbable)
         {
-            currentInteractable.transform.rotation = originRotation;
-            StartCoroutine(MovingObject(currentInteractable, originPosition));
+            obj.transform.rotation = originRotation;
+
+            StartCoroutine(
+                MovingObject(
+                    obj,
+                    originPosition
+                )
+            );
         }
+
+        currentInteractable = null;
+
         OnFinishView.Invoke();
     }
 
-    IEnumerator MovingObject(Interactables obj, Vector3 position)
+
+    private void AddCurrentItemToInventory()
+    {
+        if (!InventoryController.instance.AddItem(
+            currentInteractable.item))
+        {
+            return;
+        }
+
+        Interactables obj = currentInteractable;
+
+        if (obj.item.hasReadableUI)
+            UIManager.instance.CloseItemUI();
+
+        isViewing = false;
+        canFinish = false;
+        currentInteractable = null;
+
+        SetBackImage(false);
+
+        OnFinishView.Invoke();
+
+        Destroy(obj.gameObject);
+    }
+
+
+    private void CanFinish()
+    {
+        canFinish = true;
+        SetBackImage(true);
+    }
+
+
+    // =====================================================
+    // RAYCAST
+    // =====================================================
+
+    private void CheckRaycast()
+    {
+        Vector3 rayOrigin =
+            myCam.ViewportToWorldPoint(
+                new Vector3(0.5f, 0.5f, 0.5f)
+            );
+
+        if (!Physics.Raycast(
+            rayOrigin,
+            myCam.transform.forward,
+            out RaycastHit hit,
+            rayDistance))
+        {
+            ClearFocus();
+            return;
+        }
+
+        IRaycastInteractable directInteractable =
+            hit.collider.GetComponentInParent
+            <IRaycastInteractable>();
+
+        Interactables interactable =
+            hit.collider.GetComponentInParent
+            <Interactables>();
+
+
+        // Mantém a prioridade entre objetos
+        // filhos e objetos-pai.
+        if (directInteractable is MonoBehaviour direct &&
+            interactable != null &&
+            HierarchyDistance(
+                hit.collider.transform,
+                interactable.transform)
+            <=
+            HierarchyDistance(
+                hit.collider.transform,
+                direct.transform))
+        {
+            directInteractable = null;
+        }
+
+
+        if (directInteractable == null &&
+            interactable == null)
+        {
+            ClearFocus();
+            return;
+        }
+
+
+        SetHandCursor(true);
+
+        SetOutline(
+            directInteractable is MonoBehaviour behaviour
+                ? behaviour.gameObject
+                : interactable.gameObject
+        );
+
+
+        // Interações especiais:
+        // gaveta, alavanca etc.
+        if (directInteractable != null &&
+            InteractAction.WasPressedThisFrame())
+        {
+            directInteractable.Interact();
+            return;
+        }
+
+
+        if (interactable == null ||
+            interactable.item == null)
+        {
+            return;
+        }
+
+
+        // E = pegar objeto movimentável
+        if (interactable.item.movable &&
+            InteractAction.WasPressedThisFrame())
+        {
+            PickUpMovableObject(interactable);
+            return;
+        }
+
+
+        // Botão esquerdo = inspeção
+        if (pressAction.WasPressedThisFrame())
+        {
+            StartInspection(interactable);
+        }
+    }
+
+
+    // =====================================================
+    // MOVIMENTO DE INSPEÇÃO
+    // =====================================================
+
+    private IEnumerator MovingObject(
+        Interactables obj,
+        Vector3 target)
     {
         obj.isMoving = true;
-        float timer = 0;
-        while (timer < 1)
+
+        float timer = 0f;
+
+        while (timer < 1f)
         {
-            obj.transform.position = Vector3.Lerp(obj.transform.position, position, Time.deltaTime * 5);
+            obj.transform.position =
+                Vector3.Lerp(
+                    obj.transform.position,
+                    target,
+                    Time.deltaTime * 5f
+                );
+
             timer += Time.deltaTime;
             yield return null;
         }
 
-        obj.transform.position = position;
+        obj.transform.position = target;
         obj.isMoving = false;
     }
 
-    void SetHandCursor(bool state)
+
+    // =====================================================
+    // ROTAÇÃO
+    // =====================================================
+
+    private void RotateObject(Interactables obj)
+    {
+        Vector2 mouseDelta =
+            lookAction.ReadValue<Vector2>();
+
+        obj.transform.Rotate(
+            myCam.transform.right,
+            Mathf.Deg2Rad *
+            mouseDelta.y *
+            RotateSpeed,
+            Space.World
+        );
+
+        obj.transform.Rotate(
+            myCam.transform.up,
+            Mathf.Deg2Rad *
+            mouseDelta.x *
+            RotateSpeed,
+            Space.World
+        );
+    }
+
+
+    // =====================================================
+    // UI / OUTLINE
+    // =====================================================
+
+    private void ClearFocus()
+    {
+        SetHandCursor(false);
+        SetOutline(null);
+    }
+
+
+    private void SetHandCursor(bool state)
     {
         if (UIManager.instance != null)
-        {
             UIManager.instance.SetHandCursor(state);
-        }
     }
 
-    void SetBackImage(bool state)
+
+    private void SetBackImage(bool state)
     {
         if (UIManager.instance != null)
-        {
             UIManager.instance.SetBackImage(state);
-        }
     }
 
-    void SetOutline(GameObject target)
+
+    void SetOutline(
+        GameObject target)
     {
-        Outline nextOutline = null;
+        Outline nextOutline =
+            null;
+
 
         if (target != null)
         {
-            nextOutline = target.GetComponent<Outline>();
+            nextOutline =
+                target.GetComponent<Outline>();
+
 
             if (nextOutline == null)
             {
-                nextOutline = target.AddComponent<Outline>();
+                nextOutline =
+                    target.AddComponent<Outline>();
             }
         }
 
-        if (currentOutline == nextOutline)
+
+        if (currentOutline ==
+            nextOutline)
         {
             return;
         }
 
+
         if (currentOutline != null)
         {
-            currentOutline.enabled = false;
+            currentOutline.enabled =
+                false;
         }
 
-        currentOutline = nextOutline;
+
+        currentOutline =
+            nextOutline;
+
 
         if (currentOutline != null)
         {
-            currentOutline.OutlineMode = Outline.Mode.OutlineVisible;
-            currentOutline.OutlineColor = outlineColor;
-            currentOutline.OutlineWidth = outlineWidth;
-            currentOutline.enabled = true;
+            currentOutline.OutlineMode =
+                Outline.Mode.OutlineVisible;
+
+
+            currentOutline.OutlineColor =
+                outlineColor;
+
+
+            currentOutline.OutlineWidth =
+                outlineWidth;
+
+
+            currentOutline.enabled =
+                true;
         }
     }
 
     private void OnDisable()
     {
         SetOutline(null);
+
+        if (currentMovableObject != null)
+            DropMovableObject();
     }
 
-    void RotateObject()
-    {
-        Vector2 mouseDelta = lookAction.ReadValue<Vector2>();
-        float x = mouseDelta.x;
-        float y = mouseDelta.y;
-        currentInteractable.transform.Rotate(myCam.transform.right, Mathf.Deg2Rad * y * RotateSpeed, Space.World);
-        currentInteractable.transform.Rotate(myCam.transform.up, Mathf.Deg2Rad * x * RotateSpeed, Space.World);
 
-    }
-
-    private static int HierarchyDistance(Transform origin, Transform ancestor)
+    private static int HierarchyDistance(
+        Transform origin,
+        Transform ancestor)
     {
         int distance = 0;
 
@@ -324,86 +612,11 @@ public class PlayerInteraction : MonoBehaviour
              current = current.parent)
         {
             if (current == ancestor)
-            {
                 return distance;
-            }
 
             distance++;
         }
 
         return int.MaxValue;
     }
-
-
-
-
-
-
-
-
-
-
-
-    /*
-            // ==========================================
-            // 2. ESTADO NORMAL (OLHANDO PELO MUNDO)
-            // ==========================================
-            RaycastHit hit;
-            Vector3 rayOrigin = myCam.ViewportToWorldPoint(new Vector3(0.5f, 0.5f, 0.5f));
-
-            if (Physics.Raycast(rayOrigin, myCam.transform.forward, out hit, rayDistance))
-            {
-                Interactables interactable = hit.collider.GetComponent<Interactables>();
-
-                if (interactable != null)
-                {
-                    UIManager.instance.SetHandCursor(true);
-
-                    // INSPECIONAR OBJETO (Botão Esquerdo)
-                    if(pressAction.WasPressedThisFrame()) 
-                    {
-                        if(interactable.isMoving){
-                            return;
-                        }
-
-                        OnView.Invoke();
-                        currentInteractable = interactable;
-                        isViewing = true;
-                        Invoke("CanFinish", 1f);
-
-                        if(currentInteractable.item.grabbable)
-                        {
-                            originPosition = currentInteractable.transform.position;
-                            originRotation = currentInteractable.transform.rotation;
-                            StartCoroutine(MovingObject(currentInteractable, objectViewer.position));
-                        }
-                    }
-
-                    // PEGAR DIRETO DO CHÃO (Botão E)
-                    if (Input.GetKeyDown(KeyCode.E) && interactable.item.toInventory)
-                    {
-                        bool guardouComSucesso = InventoryController.instance.AddItem(interactable.item);
-
-                        if (guardouComSucesso)
-                        {
-                            Destroy(hit.transform.gameObject);
-                            UIManager.instance.SetHandCursor(false);
-                        }
-                    }
-                }
-                else
-                {
-                    UIManager.instance.SetHandCursor(false);
-                }
-            }
-            else
-            {
-                UIManager.instance.SetHandCursor(false);
-            }
-
-
-
-    */
-
-
 }
