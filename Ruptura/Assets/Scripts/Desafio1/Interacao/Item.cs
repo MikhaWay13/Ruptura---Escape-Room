@@ -6,9 +6,7 @@ using System.Collections.Generic;
 public class Item : ScriptableObject
 {
 [Header("Interação")]
-
     public bool grabbable;
-    public bool movable;
     public AudioClip audioClip;
     public string text;
 
@@ -22,7 +20,7 @@ public class Item : ScriptableObject
     public bool hasReadableUI;
     [TextArea(3, 10)]
     public string uiText;
-    public Sprite uiImage; 
+    public Sprite uiImage; // opcional � deixe null se o item n�o tiver imagem
 
 }
 
