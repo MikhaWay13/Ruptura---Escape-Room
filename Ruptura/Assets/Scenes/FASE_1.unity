@@ -7480,10 +7480,34 @@ MonoBehaviour:
   objectViewer2: {fileID: 0}
   OnView:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 679716717}
+        m_TargetAssemblyTypeName: 
+        m_MethodName: 
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: 
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
   OnFinishView:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 679716717}
+        m_TargetAssemblyTypeName: 
+        m_MethodName: 
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: 
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
   outlineColor: {r: 1, g: 0.92156863, b: 0.015686275, a: 1}
   outlineWidth: 4
   movableSpeed: 8
@@ -15694,6 +15718,7 @@ MonoBehaviour:
   painelInventory: {fileID: 1317897401}
   HandCursor: {fileID: 1186235582}
   BackImage: {fileID: 849532439}
+  PressE: {fileID: 0}
   itemUIPanel: {fileID: 184985118}
   itemUITitleText: {fileID: 1037885023}
   itemUIBodyText: {fileID: 220298007}

@@ -67,6 +67,13 @@ public class PlayerInteraction : MonoBehaviour
     }
 
 
+    // NOVO: somente para acompanhar o jogador
+    private void FixedUpdate()  //Américo
+    {
+        if (currentMovableObject != null)
+            MoveMovableObject();
+    }
+
     void Start()
     {
         myCam = Camera.main;
@@ -79,21 +86,11 @@ public class PlayerInteraction : MonoBehaviour
     }
 
 
-    // NOVO: somente para acompanhar o jogador
-    private void FixedUpdate()
-    {
-        if (currentMovableObject != null)
-            MoveMovableObject();
-    }
-
 
     void CheckInteractables()
     {
-        // =================================================
-        // NOVO: OBJETO MOVIMENTÁVEL SENDO CARREGADO
-        // =================================================
 
-        if (currentMovableObject != null)
+        if (currentMovableObject != null) //mover objeto enquanto mexe
         {
             SetOutline(null);
             UIManager.instance.SetHandCursor(false);
@@ -109,37 +106,26 @@ public class PlayerInteraction : MonoBehaviour
             return;
         }
 
-
-        // =================================================
-        // CÓDIGO ANTIGO DE INSPEÇÃO
-        // =================================================
-
-        if (isViewing)
+        if (isViewing) //Rotação Objeto Fixo
         {
             SetOutline(null);
 
-            if (currentInteractable.item.grabbable &&
-                pressAction.IsPressed())
+            if (currentInteractable.item.grabbable && pressAction.IsPressed())
             {
                 RotateObject();
             }
 
 
-            if (canFinish &&
-                BackAction.WasPressedThisFrame())
+            if (canFinish && BackAction.WasPressedThisFrame())
             {
                 FinishView();
             }
 
 
-            if (canFinish &&
-                InteractAction.WasPressedThisFrame() &&
-                currentInteractable.item.ToInventory)
+            if (canFinish && InteractAction.WasPressedThisFrame() && currentInteractable.item.ToInventory)
             {
-                bool verificate =   InventoryController.instance.AddItem(     currentInteractable.item );
-                  
-                   
-                    
+                bool verificate = InventoryController.instance.AddItem(currentInteractable.item);
+
                 if (verificate)
                 {
                     isViewing = false;
@@ -151,9 +137,7 @@ public class PlayerInteraction : MonoBehaviour
 
                     UIManager.instance.CloseItemUI();
 
-                    Destroy(
-                        currentInteractable.gameObject
-                    );
+                    Destroy(currentInteractable.gameObject);
 
                     return;
                 }
@@ -162,24 +146,12 @@ public class PlayerInteraction : MonoBehaviour
             return;
         }
 
-
-        // =================================================
-        // CÓDIGO ANTIGO DO RAYCAST
-        // =================================================
-
         RaycastHit hit;
 
-        Vector3 rayOrigin =
-            myCam.ViewportToWorldPoint(
-                new Vector3(0.5f, 0.5f, 0.5f)
-            );
+        Vector3 rayOrigin =myCam.ViewportToWorldPoint(new Vector3(0.5f, 0.5f, 0.5f));
 
 
-        if (Physics.Raycast(
-            rayOrigin,
-            myCam.transform.forward,
-            out hit,
-            rayDistance))
+        if (Physics.Raycast(rayOrigin,myCam.transform.forward,out hit,rayDistance))
         {
             IRaycastInteractable directInteractable =
                 hit.collider.GetComponentInParent
@@ -213,10 +185,7 @@ public class PlayerInteraction : MonoBehaviour
             {
                 UIManager.instance.SetHandCursor(true);
 
-                // EXATAMENTE O SISTEMA ANTIGO DE OUTLINE
-                SetOutline(
-                    directInteractable
-                        is MonoBehaviour directBehaviour
+                SetOutline(directInteractable is MonoBehaviour directBehaviour
                             ? directBehaviour.gameObject
                             : interactable.gameObject
                 );
@@ -234,83 +203,50 @@ public class PlayerInteraction : MonoBehaviour
                 }
 
 
-                // =========================================
-                // NOVO: ITEM MOVIMENTÁVEL
-                // =========================================
 
-                if (
-                    interactable != null &&
-                    interactable.item != null &&
-                    interactable.item.movable &&
-                    InteractAction.WasPressedThisFrame())
+                if (interactable.item.movable && InteractAction.WasPressedThisFrame())
                 {
-                    PickUpMovableObject(
-                        interactable
-                    );
+                    PickUpMovableObject(interactable);
 
                     return;
                 }
 
 
-                // =========================================
-                // INSPEÇÃO ANTIGA
-                // =========================================
-            
-                       
-                    if (interactable != null &&
-                        interactable.item != null &&
-                        !interactable.item.movable &&
-                        pressAction.WasPressedThisFrame())
+
+                if (!interactable.item.movable && pressAction.WasPressedThisFrame())
+                {
+                    if (interactable.isMoving)
                     {
-                        if (interactable.isMoving)
-                        {
-                            return;
-                        }
-
-                        OnView.Invoke();
-
-                        currentInteractable =
-                            interactable;
-
-                        isViewing = true;
-
-                        Invoke(
-                            "CanFinish",
-                            1f
-                        );
-
-
-                        if (currentInteractable
-                            .item.hasReadableUI)
-                        {
-                            UIManager.instance.OpenItemUI(
-                                currentInteractable.item
-                            );
-
-                            return;
-                        }
-
-
-                        if (currentInteractable
-                            .item.grabbable)
-                        {
-                            originPosition =
-                                currentInteractable
-                                .transform.position;
-
-                            originRotation =
-                                currentInteractable
-                                .transform.rotation;
-
-                            StartCoroutine(
-                                MovingObject(
-                                    currentInteractable,
-                                    objectViewer.position
-                                )
-                            );
-                        }
+                        return;
                     }
-                
+
+                    OnView.Invoke();
+
+                    currentInteractable = interactable;
+
+                    isViewing = true;
+
+                    Invoke("CanFinish",1f);
+
+
+                    if (currentInteractable.item.hasReadableUI)
+                    {
+                        UIManager.instance.OpenItemUI(currentInteractable.item);
+
+                        return;
+                    }
+
+
+                    if (currentInteractable.item.grabbable)
+                    {
+                        originPosition =currentInteractable.transform.position;
+
+                        originRotation =currentInteractable.transform.rotation;
+
+                        StartCoroutine(MovingObject(currentInteractable,objectViewer.position));
+                    }
+                }
+
             }
             else
             {
@@ -333,38 +269,28 @@ public class PlayerInteraction : MonoBehaviour
     private void PickUpMovableObject(
         Interactables obj)
     {
-        Rigidbody rb =
-            obj.GetComponent<Rigidbody>();
+        Rigidbody rb =obj.GetComponent<Rigidbody>();
 
         if (rb == null)
         {
-            Debug.LogWarning(
-                obj.name +
-                " é Movimentável mas não possui Rigidbody."
-            );
-
+            Debug.LogWarning(obj.name +" é Movimentável mas não possui Rigidbody.");
             return;
         }
 
         currentMovableObject = obj;
         movableRb = rb;
 
-        originalGravity =
-            rb.useGravity;
+        originalGravity = rb.useGravity;
 
-        originalKinematic =
-            rb.isKinematic;
+        originalKinematic = rb.isKinematic;
 
-        rb.linearVelocity =
-            Vector3.zero;
+        rb.linearVelocity = Vector3.zero;
 
-        rb.angularVelocity =
-            Vector3.zero;
+        rb.angularVelocity = Vector3.zero;
 
         rb.useGravity = false;
-        rb.isKinematic = true;
 
-       
+        rb.isKinematic = true;
 
         obj.isMoving = true;
     }
@@ -372,12 +298,9 @@ public class PlayerInteraction : MonoBehaviour
 
     private void MoveMovableObject()
     {
-        Vector3 movement =
-            objectViewer2.position -
-            movableRb.position;
+        Vector3 movement = objectViewer2.position - movableRb.position;
 
-        float distance =
-            movement.magnitude;
+        float distance = movement.magnitude;
 
         if (distance < 0.01f)
             return;
@@ -386,70 +309,39 @@ public class PlayerInteraction : MonoBehaviour
             movement.normalized;
 
         float step =
-            Mathf.Min(
-                distance,
-                movableSpeed *
-                Time.fixedDeltaTime
-            );
+            Mathf.Min(distance,movableSpeed *Time.fixedDeltaTime);
 
 
         // Evita atravessar paredes
-        if (movableRb.SweepTest(
-            direction,
-            out RaycastHit hit,
-            step,
-            QueryTriggerInteraction.Ignore))
+        if (movableRb.SweepTest(direction, out RaycastHit hit, step, QueryTriggerInteraction.Ignore))
         {
-            step =
-                Mathf.Max(
-                    0f,
-                    hit.distance -
-                    collisionPadding
-                );
+            step = Mathf.Max(0f, hit.distance - collisionPadding);
         }
 
 
-        movableRb.MovePosition(
-            movableRb.position +
-            direction * step
-        );
+        movableRb.MovePosition(movableRb.position + direction * step);
     }
 
 
     private void DropMovableObject()
     {
-        movableRb.linearVelocity =
-            Vector3.zero;
-
-        movableRb.angularVelocity =
-            Vector3.zero;
-
-        movableRb.isKinematic =
-            originalKinematic;
-
-        movableRb.useGravity =
-            originalGravity;
-
-        currentMovableObject.isMoving =
-            false;
-
-
+        movableRb.linearVelocity = Vector3.zero;
+        movableRb.angularVelocity = Vector3.zero;
+        movableRb.isKinematic = originalKinematic;
+        movableRb.useGravity = originalGravity;
+        currentMovableObject.isMoving = false;
         currentMovableObject = null;
         movableRb = null;
     }
 
 
-    // =====================================================
-    // TODO ABAIXO É O SISTEMA ANTIGO
-    // =====================================================
-   
+
+
     void CanFinish()
     {
         canFinish = true;
 
-        UIManager.instance.SetBackImage(
-            true
-        );
+        UIManager.instance.SetBackImage(true);
     }
 
 
@@ -458,28 +350,18 @@ public class PlayerInteraction : MonoBehaviour
         canFinish = false;
         isViewing = false;
 
-        UIManager.instance.SetBackImage(
-            false
-        );
+        UIManager.instance.SetBackImage(false);
 
 
-        if (currentInteractable
-            .item.hasReadableUI)
+        if (currentInteractable.item.hasReadableUI)
         {
             UIManager.instance.CloseItemUI();
         }
-        else if (currentInteractable
-            .item.grabbable)
+        else if (currentInteractable.item.grabbable)
         {
-            currentInteractable
-                .transform.rotation =
-                originRotation;
+            currentInteractable.transform.rotation = originRotation;
 
-            StartCoroutine(
-                MovingObject(
-                    currentInteractable,
-                    originPosition
-                )
+            StartCoroutine(MovingObject(currentInteractable,originPosition)
             );
         }
 
@@ -487,35 +369,20 @@ public class PlayerInteraction : MonoBehaviour
     }
 
 
-    IEnumerator MovingObject(
-        Interactables obj,
-        Vector3 position)
+    IEnumerator MovingObject(Interactables obj, Vector3 position)
     {
         obj.isMoving = true;
-
         float timer = 0;
-
 
         while (timer < 1)
         {
-            obj.transform.position =
-                Vector3.Lerp(
-                    obj.transform.position,
-                    position,
-                    Time.deltaTime * 5
-                );
-
+            obj.transform.position = Vector3.Lerp(obj.transform.position, position, Time.deltaTime * 5);
             timer += Time.deltaTime;
-
             yield return null;
         }
 
-
-        obj.transform.position =
-            position;
-
-        obj.isMoving =
-            false;
+        obj.transform.position = position;
+        obj.isMoving = false;
     }
 
 
@@ -523,9 +390,7 @@ public class PlayerInteraction : MonoBehaviour
     {
         if (UIManager.instance != null)
         {
-            UIManager.instance.SetHandCursor(
-                state
-            );
+            UIManager.instance.SetHandCursor(state);
         }
     }
 
@@ -534,16 +399,11 @@ public class PlayerInteraction : MonoBehaviour
     {
         if (UIManager.instance != null)
         {
-            UIManager.instance.SetBackImage(
-                state
-            );
+            UIManager.instance.SetBackImage(state);
         }
     }
 
 
-    // =====================================================
-    // OUTLINE ANTIGO — NÃO ALTERADO
-    // =====================================================
 
     void SetOutline(GameObject target)
     {
@@ -551,147 +411,91 @@ public class PlayerInteraction : MonoBehaviour
 
         if (target != null)
         {
-            nextOutline =
-                target.GetComponent<Outline>();
+            nextOutline = target.GetComponent<Outline>();
 
             if (nextOutline == null)
             {
-                nextOutline =
-                    target.AddComponent<Outline>();
+                nextOutline = target.AddComponent<Outline>();
             }
         }
 
-
-        if (currentOutline ==
-            nextOutline)
+        if (currentOutline == nextOutline)
         {
             return;
         }
 
-
         if (currentOutline != null)
         {
-            currentOutline.enabled =
-                false;
+            currentOutline.enabled = false;
         }
 
-
-        currentOutline =
-            nextOutline;
-
+        currentOutline = nextOutline;
 
         if (currentOutline != null)
         {
-            currentOutline.OutlineMode =
-                Outline.Mode.OutlineVisible;
+            currentOutline.OutlineMode =Outline.Mode.OutlineVisible;
 
-            currentOutline.OutlineColor =
-                outlineColor;
+            currentOutline.OutlineColor = outlineColor;
 
-            currentOutline.OutlineWidth =
-                outlineWidth;
+            currentOutline.OutlineWidth = outlineWidth;
 
-            currentOutline.enabled =
-                true;
+            currentOutline.enabled = true;
         }
     }
-
 
     private void OnDisable()
     {
         SetOutline(null);
-
         if (currentMovableObject != null)
+        {
             DropMovableObject();
+        }
     }
 
-
-    // =====================================================
-    // MESMA ROTAÇÃO, AGORA ACEITANDO OPCIONALMENTE UM OBJETO
-    // =====================================================
 
     void RotateObject(Interactables obj = null)
     {
-        Interactables target =
-            obj != null ? obj : currentInteractable;
+        Interactables target = obj != null ? obj : currentInteractable;
 
-        Vector2 mouseDelta =
-            lookAction.ReadValue<Vector2>();
+        Vector2 mouseDelta = lookAction.ReadValue<Vector2>();
 
-        float x =
-            Mathf.Deg2Rad *
-            mouseDelta.x *
-            RotateSpeed;
+        float x = Mathf.Deg2Rad * mouseDelta.x * RotateSpeed;
 
-        float y =
-            Mathf.Deg2Rad *
-            mouseDelta.y *
-            RotateSpeed;
+        float y =Mathf.Deg2Rad *mouseDelta.y *RotateSpeed;
 
-          if (obj == null)
+        if (obj == null)
         {
-            target.transform.Rotate(
-                myCam.transform.right,
-                y,
-                Space.World
-            );
+            target.transform.Rotate(myCam.transform.right,y,Space.World);
 
-            target.transform.Rotate(
-                myCam.transform.up,
-                x,
-                Space.World
-            );
+            target.transform.Rotate(myCam.transform.up,x,Space.World);
 
             return;
         }
-            
-        RotateWithCollision(
-            target,
-            myCam.transform.right,
-            y
-        );
 
-        RotateWithCollision(
-            target,
-            myCam.transform.up,
-            x
-        );
+        RotateWithCollision(target,myCam.transform.right,y);
+
+        RotateWithCollision(target,myCam.transform.up,x);
     }
-    private void RotateWithCollision(
-    Interactables obj,
-    Vector3 axis,
-    float angle)
+
+
+    private void RotateWithCollision(Interactables obj,Vector3 axis,float angle)
     {
         float maxStep = 2f;
 
-        int steps =
-            Mathf.Max(
-                1,
-                Mathf.CeilToInt(
-                    Mathf.Abs(angle) / maxStep
-                )
-            );
+        int steps =Mathf.Max(1,Mathf.CeilToInt(Mathf.Abs(angle) / maxStep));
 
-        float step =
-            angle / steps;
+        float step = angle / steps;
 
         for (int i = 0; i < steps; i++)
         {
-            Quaternion previousRotation =
-                obj.transform.rotation;
-
-            obj.transform.Rotate(
-                axis,
-                step,
-                Space.World
-            );
+            Quaternion previousRotation = obj.transform.rotation;
+            obj.transform.Rotate(axis,step,Space.World);
 
             Physics.SyncTransforms();
 
             if (IsOverlapping(obj))
             {
-                obj.transform.rotation =
-                    previousRotation;
+                obj.transform.rotation = previousRotation;
 
                 Physics.SyncTransforms();
 
@@ -700,35 +504,33 @@ public class PlayerInteraction : MonoBehaviour
         }
     }
 
-    private bool IsOverlapping (Interactables obj)
+    private bool IsOverlapping(Interactables obj)
     {
         Collider[] colliders = obj.GetComponentsInChildren<Collider>();
 
         Physics.SyncTransforms();
 
-        foreach(Collider col in colliders)
+        foreach (Collider col in colliders)
         {
-            Collider[] hits = Physics.OverlapBox(col.bounds.center, col.bounds.extents, Quaternion.identity, ~0, QueryTriggerInteraction.Ignore);     
+            Collider[] hits = Physics.OverlapBox(col.bounds.center, col.bounds.extents, Quaternion.identity, ~0, QueryTriggerInteraction.Ignore);
 
-            foreach(Collider hit in hits)
+            foreach (Collider hit in hits)
             {
                 if (!hit.transform.IsChildOf(obj.transform))
+                {
                     return true;
+                }
             }
         }
         return false;
     }
 
 
-    private static int HierarchyDistance(
-        Transform origin,
-        Transform ancestor)
+    private static int HierarchyDistance(Transform origin, Transform ancestor)
     {
         int distance = 0;
 
-        for (Transform current = origin;
-             current != null;
-             current = current.parent)
+        for (Transform current = origin;current != null;current = current.parent)
         {
             if (current == ancestor)
             {

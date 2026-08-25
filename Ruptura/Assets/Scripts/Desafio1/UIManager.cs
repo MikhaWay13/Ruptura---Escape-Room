@@ -14,6 +14,7 @@ public class UIManager : MonoBehaviour
     //intera��o
     public GameObject HandCursor;
     public GameObject BackImage;
+    public GameObject PressE;
 
     //leitura de item
     public GameObject itemUIPanel;
@@ -42,6 +43,10 @@ public class UIManager : MonoBehaviour
         BackImage.SetActive(state);
     }
 
+    public void SetPressE (bool state)
+    {
+        PressE.SetActive(state);
+    }
 
     public void SetInventory(bool invActive)
     {
