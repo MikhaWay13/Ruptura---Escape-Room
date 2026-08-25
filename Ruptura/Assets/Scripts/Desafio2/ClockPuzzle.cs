@@ -348,5 +348,8 @@ public class ClockPuzzle : MonoBehaviour
         if (mirrorCollider != null)
             mirrorCollider.enabled = state;
  // teste githubbbbbbb
+ 
     }
+
+
 }
