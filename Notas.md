@@ -38,7 +38,7 @@ iluminação da sala
 
 \-> Terminar de ajustar o Canva ## Essencial
 
-\-> Modelo final da estatueta ## Essencial
+\-> Modelo final da estatueta ## Essencial ✅
 
 \-> Refinar design da sala
 
