@@ -31,6 +31,7 @@ public class UIManager : MonoBehaviour
     {
         painelInventory.SetActive(false);
         itemUIPanel.SetActive(false);
+        PressE.SetActive(false);
     }
 
     public void SetHandCursor(bool state)

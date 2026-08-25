@@ -284,7 +284,7 @@ public class PlayerInteraction : MonoBehaviour
     private void CanFinish()
     {
         canFinish = true;
-
+        UIManager.instance.SetPressE(true);
         SetBackImage(true);
     }
 
@@ -293,7 +293,7 @@ public class PlayerInteraction : MonoBehaviour
     {
         canFinish = false;
         isViewing = false;
-
+        UIManager.instance.SetPressE(false);
         SetBackImage(false);
 
 
