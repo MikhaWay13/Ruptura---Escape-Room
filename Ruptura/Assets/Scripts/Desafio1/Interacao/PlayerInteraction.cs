@@ -136,11 +136,10 @@ public class PlayerInteraction : MonoBehaviour
                 InteractAction.WasPressedThisFrame() &&
                 currentInteractable.item.ToInventory)
             {
-                bool verificate =
-                    InventoryController.instance.AddItem(
-                        currentInteractable.item
-                    );
-
+                bool verificate =   InventoryController.instance.AddItem(     currentInteractable.item );
+                  
+                   
+                    
                 if (verificate)
                 {
                     isViewing = false;

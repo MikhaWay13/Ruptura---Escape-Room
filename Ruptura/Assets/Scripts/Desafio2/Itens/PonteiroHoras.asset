@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: PonteiroHoras
   m_EditorClassIdentifier: Assembly-CSharp::Item
   grabbable: 1
-  movable: 1
+  movable: 0
   audioClip: {fileID: 0}
   text: 
   ToInventory: 1
