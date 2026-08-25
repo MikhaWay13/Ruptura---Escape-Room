@@ -1759,7 +1759,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 249505857}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 0de55d1e4088733419877a9e25117bcf, type: 3}
   m_Name: 
@@ -1797,9 +1797,11 @@ MonoBehaviour:
   m_GameObject: {fileID: 249505857}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 3d23adf0d9586c04ba57d4c88ecb861f, type: 3}
+  m_Script: {fileID: 11500000, guid: 13fab787119b7634eb3da676cbc03cac, type: 3}
   m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::ClockExitController
+  m_EditorClassIdentifier: Assembly-CSharp::Interactables
+  item: {fileID: 0}
+  isMoving: 0
 --- !u!1001 &260896200
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -2451,7 +2453,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &379109834
 RectTransform:
   m_ObjectHideFlags: 0
@@ -3998,7 +4000,7 @@ BoxCollider:
   m_LayerOverridePriority: 0
   m_IsTrigger: 0
   m_ProvidesContacts: 0
-  m_Enabled: 1
+  m_Enabled: 0
   serializedVersion: 3
   m_Size: {x: 0.5894933, y: 1.9779972, z: 0.3212559}
   m_Center: {x: -1.149688, y: 4.7531223, z: 17.95095}
@@ -4009,7 +4011,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 623105996}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 4027c44be12da974a8f910c9d927944b, type: 3}
   m_Name: 
@@ -4570,7 +4572,7 @@ MonoBehaviour:
   painelInventory: {fileID: 1363972943}
   HandCursor: {fileID: 1580396804}
   BackImage: {fileID: 645210245}
-  PressE: {fileID: 0}
+  PressE: {fileID: 591256908}
   itemUIPanel: {fileID: 427983270}
   itemUITitleText: {fileID: 1107481697}
   itemUIBodyText: {fileID: 1425980892}
@@ -6825,7 +6827,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2d9cadb71ac195d438d87d1b09da72e1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Inventory
-  items: []
 --- !u!4 &996353776
 Transform:
   m_ObjectHideFlags: 0
@@ -6859,7 +6860,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &1001391264
 RectTransform:
   m_ObjectHideFlags: 0
@@ -7346,7 +7347,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &1052291333
 RectTransform:
   m_ObjectHideFlags: 0
@@ -8021,7 +8022,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &1150753152
 RectTransform:
   m_ObjectHideFlags: 0
@@ -8965,7 +8966,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &1215427050
 RectTransform:
   m_ObjectHideFlags: 0
@@ -10260,7 +10261,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &1402632863
 RectTransform:
   m_ObjectHideFlags: 0
@@ -10530,6 +10531,7 @@ GameObject:
   - component: {fileID: 1417248271}
   - component: {fileID: 1417248270}
   - component: {fileID: 1417248276}
+  - component: {fileID: 1417248277}
   m_Layer: 0
   m_Name: Player
   m_TagString: Player
@@ -10697,14 +10699,69 @@ MonoBehaviour:
   objectViewer2: {fileID: 1686614061}
   OnView:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 1417248270}
+        m_TargetAssemblyTypeName: PlayerController, Assembly-CSharp
+        m_MethodName: set_enabled
+        m_Mode: 6
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
   OnFinishView:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 1417248270}
+        m_TargetAssemblyTypeName: PlayerController, Assembly-CSharp
+        m_MethodName: set_enabled
+        m_Mode: 6
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 1
+        m_CallState: 2
   outlineColor: {r: 1, g: 0.92156863, b: 0.015686275, a: 1}
   outlineWidth: 4
   movableSpeed: 8
   collisionPadding: 0.05
+--- !u!114 &1417248277
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1417248269}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 594b83e4bb863d641aa71909b3052a8f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::InventoryController
+  slots:
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  slotImage:
+  - {fileID: 2082282489}
+  - {fileID: 2022964196}
+  - {fileID: 261676407}
+  - {fileID: 191911321}
+  - {fileID: 1288931928}
+  - {fileID: 589818231}
+  - {fileID: 328587173}
+  - {fileID: 1808408901}
+  slotAmount: 0000000000000000000000000000000000000000000000000000000000000000
 --- !u!1 &1425980889
 GameObject:
   m_ObjectHideFlags: 0
@@ -10854,7 +10911,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1462840533}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 47a38346d3d011b409ba12298178df16, type: 3}
   m_Name: 
@@ -11485,7 +11542,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &1520562741
 RectTransform:
   m_ObjectHideFlags: 0
@@ -13688,7 +13745,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1815287964}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 47a38346d3d011b409ba12298178df16, type: 3}
   m_Name: 
@@ -16222,7 +16279,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &2120432099
 RectTransform:
   m_ObjectHideFlags: 0

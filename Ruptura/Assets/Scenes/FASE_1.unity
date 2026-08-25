@@ -15718,7 +15718,7 @@ MonoBehaviour:
   painelInventory: {fileID: 1317897401}
   HandCursor: {fileID: 1186235582}
   BackImage: {fileID: 849532439}
-  PressE: {fileID: 0}
+  PressE: {fileID: 924957607}
   itemUIPanel: {fileID: 184985118}
   itemUITitleText: {fileID: 1037885023}
   itemUIBodyText: {fileID: 220298007}
@@ -23245,6 +23245,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 543450652952210519}
     m_Modifications:
+    - target: {fileID: 942028880442966011, guid: aa98b31669a3fad42bc915572a659598, type: 3}
+      propertyPath: item
+      value: 
+      objectReference: {fileID: 11400000, guid: 98e109aca4990f741a42bcb988e8066b, type: 2}
     - target: {fileID: 3341092785445735581, guid: aa98b31669a3fad42bc915572a659598, type: 3}
       propertyPath: m_Name
       value: Cego

@@ -140,9 +140,7 @@ public class PlayerInteraction : MonoBehaviour
             Interactables interactable = hit.collider.GetComponentInParent<Interactables>();
 
 
-            if (directInteractable is MonoBehaviour directComponent &&
-                HierarchyDistance(hit.collider.transform,interactable.transform) <=
-                HierarchyDistance(hit.collider.transform,directComponent.transform))
+            if (directInteractable is MonoBehaviour directComponent && HierarchyDistance(hit.collider.transform,interactable.transform) <= HierarchyDistance(hit.collider.transform,directComponent.transform))
             {
                 directInteractable = null;
             }
