@@ -12,7 +12,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 350becae4b414014c835792cadb25726, type: 3}
   m_Name: Chave2
   m_EditorClassIdentifier: Assembly-CSharp::Item
-  grabbable: 0
+  grabbable: 1
+  movable: 0
   audioClip: {fileID: 0}
   text: 
   ToInventory: 1

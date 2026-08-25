@@ -10,10 +10,10 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 350becae4b414014c835792cadb25726, type: 3}
-  m_Name: Cadeira2
+  m_Name: Cofre
   m_EditorClassIdentifier: Assembly-CSharp::Item
   grabbable: 0
-  movable: 1
+  movable: 0
   audioClip: {fileID: 0}
   text: 
   ToInventory: 0
