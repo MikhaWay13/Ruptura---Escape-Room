@@ -12,5 +12,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5a7e1056f88461e46b7c09a5b97bb187, type: 3}
   m_Name: PonteiroHoras
   m_EditorClassIdentifier: Assembly-CSharp::InventoryItemData
-  itemName: 
-  icon: {fileID: 0}
+  itemName: Horas
+  icon: {fileID: 21300000, guid: 16577f96955b8144daa29bf14d7e676b, type: 3}

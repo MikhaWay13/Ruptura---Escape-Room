@@ -12,5 +12,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5a7e1056f88461e46b7c09a5b97bb187, type: 3}
   m_Name: ChaveDourada
   m_EditorClassIdentifier: Assembly-CSharp::InventoryItemData
-  itemName: 
-  icon: {fileID: 0}
+  itemName: Chave Dourada
+  icon: {fileID: 21300000, guid: d88a409b9fb13cc469a27037d1f60bc4, type: 3}

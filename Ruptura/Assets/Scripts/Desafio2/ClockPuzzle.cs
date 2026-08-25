@@ -41,6 +41,11 @@ public class ClockPuzzle : MonoBehaviour
     private GameObject hourVisual;
     private GameObject minuteVisual;
 
+     public void OpenClock()
+    {
+        Debug.Log("CLOCK PUZZLE FUNCIONOU!");
+    }
+
     private void Awake()
     {
         if (backAction != null)
@@ -73,7 +78,7 @@ public class ClockPuzzle : MonoBehaviour
         HandleClockRotation();
     }
 
-    public void OpenClock()
+    public void OpenClocck()
     {
         if (isOpen)
             return;
