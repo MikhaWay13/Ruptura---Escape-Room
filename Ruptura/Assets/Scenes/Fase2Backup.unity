@@ -1600,6 +1600,18 @@ PrefabInstance:
       propertyPath: m_Name
       value: Candle01b_on (6)
       objectReference: {fileID: 0}
+    - target: {fileID: 4615245413453080, guid: fb71d571078e952469f83dcc9bb68890, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0.255
+      objectReference: {fileID: 0}
+    - target: {fileID: 4615245413453080, guid: fb71d571078e952469f83dcc9bb68890, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0.249
+      objectReference: {fileID: 0}
+    - target: {fileID: 4615245413453080, guid: fb71d571078e952469f83dcc9bb68890, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0.299
+      objectReference: {fileID: 0}
     - target: {fileID: 4653786702808938, guid: fb71d571078e952469f83dcc9bb68890, type: 3}
       propertyPath: m_LocalScale.x
       value: 1
@@ -1651,6 +1663,10 @@ PrefabInstance:
     - target: {fileID: 4653786702808938, guid: fb71d571078e952469f83dcc9bb68890, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 108460654045448504, guid: fb71d571078e952469f83dcc9bb68890, type: 3}
+      propertyPath: m_Intensity
+      value: 3.24
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -4468,6 +4484,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 108460654045448504, guid: fb71d571078e952469f83dcc9bb68890, type: 3}
+      propertyPath: m_Intensity
+      value: 8.37
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -4550,6 +4570,7 @@ MonoBehaviour:
   painelInventory: {fileID: 1363972943}
   HandCursor: {fileID: 1580396804}
   BackImage: {fileID: 645210245}
+  PressE: {fileID: 0}
   itemUIPanel: {fileID: 427983270}
   itemUITitleText: {fileID: 1107481697}
   itemUIBodyText: {fileID: 1425980892}
@@ -5758,7 +5779,6 @@ GameObject:
   - component: {fileID: 897738469}
   - component: {fileID: 897738468}
   - component: {fileID: 897738470}
-  - component: {fileID: 897738471}
   - component: {fileID: 897738472}
   m_Layer: 0
   m_Name: PonteiroMinutos
@@ -5861,20 +5881,6 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 0.0018203958, y: 0.001745595, z: 0.0008213608}
   m_Center: {x: 0.000012511614, y: 0.0007274316, z: -0.000037402053}
---- !u!114 &897738471
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 897738466}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 13fab787119b7634eb3da676cbc03cac, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::Interactables
-  item: {fileID: 0}
-  isMoving: 0
 --- !u!114 &897738472
 MonoBehaviour:
   m_ObjectHideFlags: 0
