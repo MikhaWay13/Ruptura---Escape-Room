@@ -32,6 +32,10 @@ public class ClockPuzzle : MonoBehaviour
     [SerializeField] private Animator clockDoorAnimator;
     [SerializeField] private string openTrigger = "Open";
 
+    [Header("Inventário")]
+    [SerializeField] private InventoryItemSelection itemSelection;
+    public bool IsOpen => isOpen;
+
     private InputAction backInput;
 
     private bool isOpen;
@@ -41,10 +45,6 @@ public class ClockPuzzle : MonoBehaviour
     private GameObject hourVisual;
     private GameObject minuteVisual;
 
-     public void OpenClock()
-    {
-        Debug.Log("CLOCK PUZZLE FUNCIONOU!");
-    }
 
     private void Awake()
     {
@@ -55,13 +55,38 @@ public class ClockPuzzle : MonoBehaviour
     private void OnEnable()
     {
         if (backInput != null)
+        {
             backInput.Enable();
+        }
+
+        if (itemSelection != null)
+        {
+            itemSelection.OnItemSelected += HandleItemSelected;
+        }
     }
 
     private void OnDisable()
     {
         if (backInput != null)
+        {
             backInput.Disable();
+        }
+
+        if (itemSelection != null)
+        {
+            itemSelection.OnItemSelected -= HandleItemSelected;
+        }
+    }
+
+    private void HandleItemSelected(Item item)
+    {
+        if (!isOpen)
+            return;
+
+        if (item == null)
+            return;
+
+        TryInsertItem(item);
     }
 
     private void Update()
@@ -78,7 +103,7 @@ public class ClockPuzzle : MonoBehaviour
         HandleClockRotation();
     }
 
-    public void OpenClocck()
+    public void OpenClock()
     {
         if (isOpen)
             return;

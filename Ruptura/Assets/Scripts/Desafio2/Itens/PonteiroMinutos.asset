@@ -10,14 +10,14 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 350becae4b414014c835792cadb25726, type: 3}
-  m_Name: 45
+  m_Name: PonteiroMinutos
   m_EditorClassIdentifier: Assembly-CSharp::Item
-  grabbable: 0
-  movable: 0
+  grabbable: 1
+  movable: 1
   audioClip: {fileID: 0}
   text: 
-  ToInventory: 0
-  itemName: 
+  ToInventory: 1
+  itemName: Ponteiro Minutos
   itemSprite: {fileID: 0}
   hasReadableUI: 0
   uiText: 

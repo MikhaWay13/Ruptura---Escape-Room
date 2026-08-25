@@ -93,6 +93,16 @@ public class InventoryController : MonoBehaviour
 
         return false;
     }
+    public Item GetItemAtSlot(int index)
+{
+    if (index < 0 || index >= slots.Length)
+        return null;
+
+    if (slotAmount[index] <= 0)
+        return null;
+
+    return slots[index];
+}
 
 }
 

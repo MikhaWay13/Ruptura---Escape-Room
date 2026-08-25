@@ -4,22 +4,10 @@ using UnityEngine.UI;
 
 public class InventoryItemSelection : MonoBehaviour
 {
-    [Header("Inventário")]
-    [SerializeField] private InventoryController inventory;
-
     [Header("Botões dos Slots")]
     [SerializeField] private Button[] slotButtons;
 
     public event Action<Item> OnItemSelected;
-
-    private void Awake()
-    {
-        if (inventory == null)
-        {
-            inventory =
-                InventoryController.instance;
-        }
-    }
 
     private void Start()
     {
@@ -46,27 +34,21 @@ public class InventoryItemSelection : MonoBehaviour
 
     private void SelectSlot(int index)
     {
-        if (inventory == null)
+        if (InventoryController.instance == null)
+        {
+            Debug.LogWarning(
+                "InventoryItemSelection: InventoryController não encontrado."
+            );
+
+            return;
+        }
+
+        Item item =
+            InventoryController.instance.GetItemAtSlot(index);
+
+        if (item == null)
             return;
 
-        if (inventory.slots == null)
-            return;
-
-        if (index < 0 ||
-            index >= inventory.slots.Length)
-            return;
-
-        Item selectedItem =
-            inventory.slots[index];
-
-        if (selectedItem == null)
-            return;
-
-        if (inventory.slotAmount[index] <= 0)
-            return;
-
-        OnItemSelected?.Invoke(
-            selectedItem
-        );
+        OnItemSelected?.Invoke(item);
     }
 }
