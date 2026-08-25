@@ -47,7 +47,7 @@ public class CaboProjetor : MonoBehaviour, IRaycastInteractable
 
     private void FixedUpdate()
     {
-        if (!EstaSegurando || pontoMao == null)
+        if (!EstaSegurando)
         {
             return;
         }
@@ -93,7 +93,7 @@ public class CaboProjetor : MonoBehaviour, IRaycastInteractable
 
     public void Conectar(Transform snapPoint)
     {
-        if (EstaConectado || snapPoint == null)
+        if (EstaConectado)
         {
             return;
         }
@@ -115,7 +115,7 @@ public class CaboProjetor : MonoBehaviour, IRaycastInteractable
 
     private bool DeveSoltarCabo()
     {
-        if (!EstaSegurando || EstaConectado || interagirAction == null)
+        if (!EstaSegurando || EstaConectado)
         {
             return false;
         }
@@ -150,8 +150,7 @@ public class CaboProjetor : MonoBehaviour, IRaycastInteractable
 
     private void DesenharCabo()
     {
-        if (linha == null || pontoProjetor == null ||
-            linha.positionCount < 2)
+        if (linha.positionCount < 2)
         {
             return;
         }
@@ -184,11 +183,6 @@ public class CaboProjetor : MonoBehaviour, IRaycastInteractable
     private bool EstaMirandoNaTomada()
     {
         Camera cameraPrincipal = Camera.main;
-
-        if (cameraPrincipal == null)
-        {
-            return false;
-        }
 
         Ray raio = new Ray(
             cameraPrincipal.transform.position,

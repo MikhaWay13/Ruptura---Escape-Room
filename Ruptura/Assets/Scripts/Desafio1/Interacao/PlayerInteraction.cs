@@ -240,6 +240,8 @@ public class PlayerInteraction : MonoBehaviour
                 // =========================================
 
                 if (
+                    interactable != null &&
+                    interactable.item != null &&
                     interactable.item.movable &&
                     InteractAction.WasPressedThisFrame())
                 {
@@ -256,7 +258,10 @@ public class PlayerInteraction : MonoBehaviour
                 // =========================================
             
                        
-                    if (interactable != null && interactable != interactable.item.movable && pressAction.WasPressedThisFrame())
+                    if (interactable != null &&
+                        interactable.item != null &&
+                        !interactable.item.movable &&
+                        pressAction.WasPressedThisFrame())
                     {
                         if (interactable.isMoving)
                         {
