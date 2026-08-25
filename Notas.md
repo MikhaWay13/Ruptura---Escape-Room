@@ -42,7 +42,7 @@ iluminação da sala
 
 \-> Refinar design da sala
 
-\-> Ajustar o Cabo com a tomado pois está difícil de conectar
+\-> Ajustar o Cabo com a tomado pois está difícil de conectar ✅
 
 
 
