@@ -11,42 +11,66 @@ public class ClockHand : MonoBehaviour
     [Header("Configuração")]
     [SerializeField] private HandType handType;
 
+    [Header("Visual")]
     [SerializeField] private Transform visual;
 
     [Header("Rotação")]
-    [SerializeField] private float degreesPerStep = 1f;
+    [SerializeField] private float rotationSpeed = 0.35f;
+    [SerializeField] private bool invertRotation = false;
 
     private float currentAngle;
 
     public HandType Type => handType;
     public float CurrentAngle => currentAngle;
 
+    private void Awake()
+    {
+        currentAngle = 0f;
+        ApplyRotation();
+    }
+
+    public void RotateFromMouse(float mouseDeltaX)
+    {
+        float direction = invertRotation ? -1f : 1f;
+
+        currentAngle += mouseDeltaX * rotationSpeed * direction;
+        currentAngle = Mathf.Repeat(currentAngle, 360f);
+
+        ApplyRotation();
+    }
+
     public void SetAngle(float angle)
     {
         currentAngle = Mathf.Repeat(angle, 360f);
-
-        if (visual != null)
-        {
-            visual.localRotation =
-                Quaternion.Euler(
-                    0f,
-                    0f,
-                    -currentAngle
-                );
-        }
+        ApplyRotation();
     }
 
-    public void Rotate(float amount)
+    private void ApplyRotation()
     {
-        SetAngle(currentAngle + amount);
+        if (visual == null)
+            return;
+
+        visual.localRotation = Quaternion.Euler(0f, 0f, -currentAngle);
+    }
+
+    public int GetMinute()
+    {
+        float angle = Mathf.Repeat(currentAngle, 360f);
+        int minute = Mathf.RoundToInt(angle / 6f);
+
+        return minute % 60;
+    }
+
+    public float GetHourValue()
+    {
+        float angle = Mathf.Repeat(currentAngle, 360f);
+
+        return angle / 30f;
     }
 
     public int GetHour()
     {
-        float normalized = Mathf.Repeat(currentAngle, 360f);
-
-        int hour =
-            Mathf.RoundToInt(normalized / 30f);
+        int hour = Mathf.RoundToInt(GetHourValue());
 
         hour %= 12;
 
@@ -54,15 +78,5 @@ public class ClockHand : MonoBehaviour
             hour = 12;
 
         return hour;
-    }
-
-    public int GetMinute()
-    {
-        float normalized = Mathf.Repeat(currentAngle, 360f);
-
-        int minute =
-            Mathf.RoundToInt(normalized / 6f);
-
-        return minute % 60;
     }
 }
