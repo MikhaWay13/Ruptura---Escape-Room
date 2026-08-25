@@ -2912,6 +2912,8 @@ MonoBehaviour:
         m_CallState: 2
   outlineColor: {r: 1, g: 0.92156863, b: 0.015686275, a: 1}
   outlineWidth: 4
+  movableSpeed: 8
+  collisionPadding: 0.05
 --- !u!1001 &498837131
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -5554,7 +5556,7 @@ PrefabInstance:
       addedObject: {fileID: 1008703067}
     - targetCorrespondingSourceObject: {fileID: 1467964783057150, guid: e68a619303cb1e44ea3dde236af3366e, type: 3}
       insertIndex: -1
-      addedObject: {fileID: 1008703073}
+      addedObject: {fileID: 1008703068}
   m_SourcePrefab: {fileID: 100100000, guid: e68a619303cb1e44ea3dde236af3366e, type: 3}
 --- !u!1 &1008703066 stripped
 GameObject:
@@ -5582,7 +5584,7 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 0.5715062, y: 0.042401683, z: 1.1549208}
   m_Center: {x: 0.0006502652, y: -0.2788029, z: 0.5774604}
---- !u!114 &1008703073
+--- !u!114 &1008703068
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -5591,16 +5593,11 @@ MonoBehaviour:
   m_GameObject: {fileID: 1008703066}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2bb7ae7e35f32a04d8f95d6731d385c0, type: 3}
+  m_Script: {fileID: 11500000, guid: 13fab787119b7634eb3da676cbc03cac, type: 3}
   m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::MoveObject
-  holdDistance: 2
-  followSpeed: 12
-  collisionRadius: 0.35
-  wallOffset: 0.1
-  collisionLayers:
-    serializedVersion: 2
-    m_Bits: 192
+  m_EditorClassIdentifier: Assembly-CSharp::Interactables
+  item: {fileID: 11400000, guid: 4367ba62a8afb0846b18d6a1e1b6367c, type: 2}
+  isMoving: 0
 --- !u!1001 &1023808457
 PrefabInstance:
   m_ObjectHideFlags: 0

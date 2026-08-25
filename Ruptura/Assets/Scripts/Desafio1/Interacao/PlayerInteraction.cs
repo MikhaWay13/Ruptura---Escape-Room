@@ -11,6 +11,7 @@ public class PlayerInteraction : MonoBehaviour
     public float RotateSpeed = 200f;
 
     public Transform objectViewer;
+    public Transform objectViewer2;
 
     public UnityEvent OnView;
     public UnityEvent OnFinishView;
@@ -31,7 +32,6 @@ public class PlayerInteraction : MonoBehaviour
     private Interactables currentInteractable;
     private Outline currentOutline;
 
-    // NOVO: objeto sendo carregado
     private Interactables currentMovableObject;
     private Rigidbody movableRb;
 
@@ -63,6 +63,7 @@ public class PlayerInteraction : MonoBehaviour
 
         lookAction =
             InputSystem.actions.FindAction("Interaction/Look");
+
     }
 
 
@@ -238,8 +239,7 @@ public class PlayerInteraction : MonoBehaviour
                 // NOVO: ITEM MOVIMENTÁVEL
                 // =========================================
 
-                if (interactable != null &&
-                    interactable.item != null &&
+                if (
                     interactable.item.movable &&
                     InteractAction.WasPressedThisFrame())
                 {
@@ -254,58 +254,59 @@ public class PlayerInteraction : MonoBehaviour
                 // =========================================
                 // INSPEÇÃO ANTIGA
                 // =========================================
-
-                if (interactable != null &&
-                    pressAction.WasPressedThisFrame())
-                {
-                    if (interactable.isMoving)
+            
+                       
+                    if (interactable != null && interactable != interactable.item.movable && pressAction.WasPressedThisFrame())
                     {
-                        return;
-                    }
+                        if (interactable.isMoving)
+                        {
+                            return;
+                        }
 
-                    OnView.Invoke();
+                        OnView.Invoke();
 
-                    currentInteractable =
-                        interactable;
+                        currentInteractable =
+                            interactable;
 
-                    isViewing = true;
+                        isViewing = true;
 
-                    Invoke(
-                        "CanFinish",
-                        1f
-                    );
-
-
-                    if (currentInteractable
-                        .item.hasReadableUI)
-                    {
-                        UIManager.instance.OpenItemUI(
-                            currentInteractable.item
+                        Invoke(
+                            "CanFinish",
+                            1f
                         );
 
-                        return;
+
+                        if (currentInteractable
+                            .item.hasReadableUI)
+                        {
+                            UIManager.instance.OpenItemUI(
+                                currentInteractable.item
+                            );
+
+                            return;
+                        }
+
+
+                        if (currentInteractable
+                            .item.grabbable)
+                        {
+                            originPosition =
+                                currentInteractable
+                                .transform.position;
+
+                            originRotation =
+                                currentInteractable
+                                .transform.rotation;
+
+                            StartCoroutine(
+                                MovingObject(
+                                    currentInteractable,
+                                    objectViewer.position
+                                )
+                            );
+                        }
                     }
-
-
-                    if (currentInteractable
-                        .item.grabbable)
-                    {
-                        originPosition =
-                            currentInteractable
-                            .transform.position;
-
-                        originRotation =
-                            currentInteractable
-                            .transform.rotation;
-
-                        StartCoroutine(
-                            MovingObject(
-                                currentInteractable,
-                                objectViewer.position
-                            )
-                        );
-                    }
-                }
+                
             }
             else
             {
@@ -359,6 +360,8 @@ public class PlayerInteraction : MonoBehaviour
         rb.useGravity = false;
         rb.isKinematic = true;
 
+       
+
         obj.isMoving = true;
     }
 
@@ -366,7 +369,7 @@ public class PlayerInteraction : MonoBehaviour
     private void MoveMovableObject()
     {
         Vector3 movement =
-            objectViewer.position -
+            objectViewer2.position -
             movableRb.position;
 
         float distance =
@@ -426,6 +429,7 @@ public class PlayerInteraction : MonoBehaviour
         currentMovableObject.isMoving =
             false;
 
+
         currentMovableObject = null;
         movableRb = null;
     }
@@ -434,7 +438,7 @@ public class PlayerInteraction : MonoBehaviour
     // =====================================================
     // TODO ABAIXO É O SISTEMA ANTIGO
     // =====================================================
-
+   
     void CanFinish()
     {
         canFinish = true;
@@ -602,41 +606,113 @@ public class PlayerInteraction : MonoBehaviour
     // MESMA ROTAÇÃO, AGORA ACEITANDO OPCIONALMENTE UM OBJETO
     // =====================================================
 
-    void RotateObject(
-        Interactables obj = null)
+    void RotateObject(Interactables obj = null)
     {
         Interactables target =
-            obj != null
-                ? obj
-                : currentInteractable;
-
+            obj != null ? obj : currentInteractable;
 
         Vector2 mouseDelta =
             lookAction.ReadValue<Vector2>();
 
         float x =
-            mouseDelta.x;
+            Mathf.Deg2Rad *
+            mouseDelta.x *
+            RotateSpeed;
 
         float y =
-            mouseDelta.y;
+            Mathf.Deg2Rad *
+            mouseDelta.y *
+            RotateSpeed;
 
+          if (obj == null)
+        {
+            target.transform.Rotate(
+                myCam.transform.right,
+                y,
+                Space.World
+            );
 
-        target.transform.Rotate(
+            target.transform.Rotate(
+                myCam.transform.up,
+                x,
+                Space.World
+            );
+
+            return;
+        }
+            
+        RotateWithCollision(
+            target,
             myCam.transform.right,
-            Mathf.Deg2Rad *
-            y *
-            RotateSpeed,
-            Space.World
+            y
         );
 
-
-        target.transform.Rotate(
+        RotateWithCollision(
+            target,
             myCam.transform.up,
-            Mathf.Deg2Rad *
-            x *
-            RotateSpeed,
-            Space.World
+            x
         );
+    }
+    private void RotateWithCollision(
+    Interactables obj,
+    Vector3 axis,
+    float angle)
+    {
+        float maxStep = 2f;
+
+        int steps =
+            Mathf.Max(
+                1,
+                Mathf.CeilToInt(
+                    Mathf.Abs(angle) / maxStep
+                )
+            );
+
+        float step =
+            angle / steps;
+
+        for (int i = 0; i < steps; i++)
+        {
+            Quaternion previousRotation =
+                obj.transform.rotation;
+
+            obj.transform.Rotate(
+                axis,
+                step,
+                Space.World
+            );
+
+            Physics.SyncTransforms();
+
+            if (IsOverlapping(obj))
+            {
+                obj.transform.rotation =
+                    previousRotation;
+
+                Physics.SyncTransforms();
+
+                break;
+            }
+        }
+    }
+
+    private bool IsOverlapping (Interactables obj)
+    {
+        Collider[] colliders = obj.GetComponentsInChildren<Collider>();
+
+        Physics.SyncTransforms();
+
+        foreach(Collider col in colliders)
+        {
+            Collider[] hits = Physics.OverlapBox(col.bounds.center, col.bounds.extents, Quaternion.identity, ~0, QueryTriggerInteraction.Ignore);     
+
+            foreach(Collider hit in hits)
+            {
+                if (!hit.transform.IsChildOf(obj.transform))
+                    return true;
+            }
+        }
+        return false;
     }
 
 
