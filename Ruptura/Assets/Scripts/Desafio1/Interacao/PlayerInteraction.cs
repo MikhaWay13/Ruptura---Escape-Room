@@ -102,7 +102,7 @@ public class PlayerInteraction : MonoBehaviour
                 FinishView();
 
 
-            if (canFinish && InteractAction.WasPressedThisFrame() && currentInteractable.item.ToInventory)
+            if (canFinish && InteractAction.WasPressedThisFrame() && currentInteractable.item.ToInventory) //inventário
             {
                 bool verificate = InventoryController.instance.AddItem(currentInteractable.item);
 
@@ -112,6 +112,7 @@ public class PlayerInteraction : MonoBehaviour
                     canFinish = false;
 
                     UIManager.instance.SetBackImage(false);
+                    UIManager.instance.SetPressE(false);
 
                     OnFinishView.Invoke();
 
