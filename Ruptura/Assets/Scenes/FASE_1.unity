@@ -7475,19 +7475,19 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::PlayerInteraction
   rayDistance: 1
-  RotateSpeed: 200
+  RotateSpeed: 100
   objectViewer: {fileID: 262143287}
   objectViewer2: {fileID: 0}
   OnView:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 679716717}
-        m_TargetAssemblyTypeName: 
-        m_MethodName: 
-        m_Mode: 0
+      - m_Target: {fileID: 679716718}
+        m_TargetAssemblyTypeName: PlayerController, Assembly-CSharp
+        m_MethodName: set_enabled
+        m_Mode: 6
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: 
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
           m_IntArgument: 0
           m_FloatArgument: 0
           m_StringArgument: 
@@ -7496,17 +7496,17 @@ MonoBehaviour:
   OnFinishView:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 679716717}
-        m_TargetAssemblyTypeName: 
-        m_MethodName: 
-        m_Mode: 0
+      - m_Target: {fileID: 679716718}
+        m_TargetAssemblyTypeName: PlayerController, Assembly-CSharp
+        m_MethodName: set_enabled
+        m_Mode: 6
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: 
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
           m_IntArgument: 0
           m_FloatArgument: 0
           m_StringArgument: 
-          m_BoolArgument: 0
+          m_BoolArgument: 1
         m_CallState: 2
   outlineColor: {r: 1, g: 0.92156863, b: 0.015686275, a: 1}
   outlineWidth: 4
@@ -12071,6 +12071,22 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 65388427261484334, guid: e659ac473f42b244dbbecd69649dcabe, type: 3}
+      propertyPath: m_Size.y
+      value: 1.0803298
+      objectReference: {fileID: 0}
+    - target: {fileID: 65388427261484334, guid: e659ac473f42b244dbbecd69649dcabe, type: 3}
+      propertyPath: m_Size.z
+      value: 1.038551
+      objectReference: {fileID: 0}
+    - target: {fileID: 65388427261484334, guid: e659ac473f42b244dbbecd69649dcabe, type: 3}
+      propertyPath: m_Center.y
+      value: 0.040164202
+      objectReference: {fileID: 0}
+    - target: {fileID: 65388427261484334, guid: e659ac473f42b244dbbecd69649dcabe, type: 3}
+      propertyPath: m_Center.z
+      value: 0.025492072
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -15718,7 +15734,7 @@ MonoBehaviour:
   painelInventory: {fileID: 1317897401}
   HandCursor: {fileID: 1186235582}
   BackImage: {fileID: 849532439}
-  PressE: {fileID: 0}
+  PressE: {fileID: 924957607}
   itemUIPanel: {fileID: 184985118}
   itemUITitleText: {fileID: 1037885023}
   itemUIBodyText: {fileID: 220298007}
@@ -23245,6 +23261,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 543450652952210519}
     m_Modifications:
+    - target: {fileID: 942028880442966011, guid: aa98b31669a3fad42bc915572a659598, type: 3}
+      propertyPath: item
+      value: 
+      objectReference: {fileID: 11400000, guid: 98e109aca4990f741a42bcb988e8066b, type: 2}
     - target: {fileID: 3341092785445735581, guid: aa98b31669a3fad42bc915572a659598, type: 3}
       propertyPath: m_Name
       value: Cego
