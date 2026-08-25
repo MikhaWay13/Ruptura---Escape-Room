@@ -11,7 +11,7 @@ public class ClockPuzzle : MonoBehaviour
     [SerializeField] private ClockHand hourHand;
     [SerializeField] private ClockHand minuteHand;
 
-    [Header("Itens")]
+    [Header("Itens do inventário")]
     [SerializeField] private Item hourItem;
     [SerializeField] private Item minuteItem;
 
@@ -23,89 +23,93 @@ public class ClockPuzzle : MonoBehaviour
     [SerializeField] private Transform hourPivot;
     [SerializeField] private Transform minutePivot;
 
-    [Header("Câmera / Saída")]
+    [Header("Input Actions")]
     [SerializeField] private InputActionReference backAction;
+    [SerializeField] private InputActionReference lookAction;
 
     [Header("Resposta")]
     [SerializeField] private GameObject clockDoor;
-
     [SerializeField] private Animator clockDoorAnimator;
     [SerializeField] private string openTrigger = "Open";
 
     [Header("Inventário")]
     [SerializeField] private InventoryItemSelection itemSelection;
+
     public bool IsOpen => isOpen;
+    public bool IsSolved => isSolved;
 
     private InputAction backInput;
+    private InputAction lookInput;
 
     private bool isOpen;
+    private bool isSolved;
     private bool hourInserted;
     private bool minuteInserted;
 
     private GameObject hourVisual;
     private GameObject minuteVisual;
 
+    private ClockHand selectedHand;
 
     private void Awake()
     {
         if (backAction != null)
             backInput = backAction.action;
+
+        if (lookAction != null)
+            lookInput = lookAction.action;
     }
 
     private void OnEnable()
     {
         if (backInput != null)
-        {
             backInput.Enable();
-        }
+
+        if (lookInput != null)
+            lookInput.Enable();
 
         if (itemSelection != null)
-        {
             itemSelection.OnItemSelected += HandleItemSelected;
-        }
     }
 
     private void OnDisable()
     {
         if (backInput != null)
-        {
             backInput.Disable();
-        }
+
+        if (lookInput != null)
+            lookInput.Disable();
 
         if (itemSelection != null)
-        {
             itemSelection.OnItemSelected -= HandleItemSelected;
-        }
-    }
-
-    private void HandleItemSelected(Item item)
-    {
-        if (!isOpen)
-            return;
-
-        if (item == null)
-            return;
-
-        TryInsertItem(item);
     }
 
     private void Update()
     {
-        if (!isOpen)
+        if (!isOpen || isSolved)
             return;
 
         if (backInput != null &&
             backInput.WasPressedThisFrame())
         {
             CloseClock();
+            return;
         }
 
         HandleClockRotation();
     }
 
+    private void HandleItemSelected(Item item)
+    {
+        if (!isOpen || isSolved || item == null)
+            return;
+
+        TryInsertItem(item);
+    }
+
     public void OpenClock()
     {
-        if (isOpen)
+        if (isOpen || isSolved)
             return;
 
         if (cameraController == null)
@@ -133,8 +137,10 @@ public class ClockPuzzle : MonoBehaviour
             return;
 
         isOpen = false;
+        selectedHand = null;
 
-        cameraController.ExitClockView();
+        if (cameraController != null)
+            cameraController.ExitClockView();
 
         if (playerController != null)
             playerController.SetGameplayControlEnabled(true);
@@ -142,20 +148,10 @@ public class ClockPuzzle : MonoBehaviour
 
     private void HandleClockRotation()
     {
-        if (hourInserted == false &&
-            minuteInserted == false)
+        if (selectedHand == null || lookInput == null)
             return;
 
-        InputAction lookAction =
-            InputSystem.actions.FindAction(
-                "Interaction/Look"
-            );
-
-        if (lookAction == null)
-            return;
-
-        Vector2 input =
-            lookAction.ReadValue<Vector2>();
+        Vector2 input = lookInput.ReadValue<Vector2>();
 
         if (Mathf.Abs(input.x) < 0.01f)
             return;
@@ -163,95 +159,134 @@ public class ClockPuzzle : MonoBehaviour
         float rotation =
             input.x * 60f * Time.deltaTime;
 
-        if (minuteInserted)
-            minuteHand.Rotate(rotation);
+        selectedHand.Rotate(rotation);
 
         CheckPuzzle();
     }
 
     public bool TryInsertItem(Item item)
     {
-        if (item == null)
+        if (item == null ||
+            InventoryController.instance == null)
             return false;
 
         if (item == hourItem &&
             !hourInserted)
         {
-            if (!InventoryController.instance.HasItem(hourItem))
-                return false;
-
-            if (!InventoryController.instance.RemoveItem(hourItem))
-                return false;
-
-            InsertHourHand();
-
-            return true;
+            return InsertHourHand();
         }
 
         if (item == minuteItem &&
             !minuteInserted)
         {
-            if (!InventoryController.instance.HasItem(minuteItem))
-                return false;
-
-            if (!InventoryController.instance.RemoveItem(minuteItem))
-                return false;
-
-            InsertMinuteHand();
-
-            return true;
+            return InsertMinuteHand();
         }
 
         return false;
     }
 
-    private void InsertHourHand()
+    private bool InsertHourHand()
     {
+        if (hourVisualPrefab == null ||
+            hourPivot == null ||
+            hourHand == null)
+        {
+            Debug.LogWarning(
+                "ClockPuzzle: Configure Hour Visual Prefab, Hour Pivot e Hour Hand."
+            );
+
+            return false;
+        }
+
+        if (!InventoryController.instance.HasItem(hourItem))
+            return false;
+
+        if (!InventoryController.instance.RemoveItem(hourItem))
+            return false;
+
         hourInserted = true;
 
-        if (hourVisualPrefab != null &&
-            hourPivot != null)
-        {
-            hourVisual =
-                Instantiate(
-                    hourVisualPrefab,
-                    hourPivot
-                );
+        hourVisual =
+            Instantiate(
+                hourVisualPrefab,
+                hourPivot
+            );
 
-            hourVisual.transform.localPosition =
-                Vector3.zero;
+        hourVisual.transform.localPosition =
+            Vector3.zero;
 
-            hourVisual.transform.localRotation =
-                Quaternion.identity;
-        }
+        hourVisual.transform.localRotation =
+            Quaternion.identity;
+
+        selectedHand = hourHand;
+
+        Debug.Log(
+            "Ponteiro de horas inserido e selecionado."
+        );
+
+        CheckPuzzle();
+
+        return true;
     }
 
-    private void InsertMinuteHand()
+    private bool InsertMinuteHand()
     {
+        if (minuteVisualPrefab == null ||
+            minutePivot == null ||
+            minuteHand == null)
+        {
+            Debug.LogWarning(
+                "ClockPuzzle: Configure Minute Visual Prefab, Minute Pivot e Minute Hand."
+            );
+
+            return false;
+        }
+
+        if (!InventoryController.instance.HasItem(minuteItem))
+            return false;
+
+        if (!InventoryController.instance.RemoveItem(minuteItem))
+            return false;
+
         minuteInserted = true;
 
-        if (minuteVisualPrefab != null &&
-            minutePivot != null)
-        {
-            minuteVisual =
-                Instantiate(
-                    minuteVisualPrefab,
-                    minutePivot
-                );
+        minuteVisual =
+            Instantiate(
+                minuteVisualPrefab,
+                minutePivot
+            );
 
-            minuteVisual.transform.localPosition =
-                Vector3.zero;
+        minuteVisual.transform.localPosition =
+            Vector3.zero;
 
-            minuteVisual.transform.localRotation =
-                Quaternion.identity;
-        }
+        minuteVisual.transform.localRotation =
+            Quaternion.identity;
+
+        selectedHand = minuteHand;
+
+        Debug.Log(
+            "Ponteiro de minutos inserido e selecionado."
+        );
+
+        CheckPuzzle();
+
+        return true;
     }
 
     private void CheckPuzzle()
     {
-        if (!hourInserted ||
+        if (isSolved ||
+            !hourInserted ||
             !minuteInserted)
+        {
             return;
+        }
+
+        if (hourHand == null ||
+            minuteHand == null)
+        {
+            return;
+        }
 
         int hour =
             hourHand.GetHour();
@@ -268,7 +303,15 @@ public class ClockPuzzle : MonoBehaviour
 
     private void SolvePuzzle()
     {
-        Debug.Log("RELÓGIO RESOLVIDO: 10:35");
+        if (isSolved)
+            return;
+
+        isSolved = true;
+        selectedHand = null;
+
+        Debug.Log(
+            "RELÓGIO RESOLVIDO: 10:35"
+        );
 
         if (clockDoorAnimator != null)
         {
