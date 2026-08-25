@@ -30,17 +30,17 @@ iluminação da sala
 
 
 
-\-> Terminar de arrumar a iluminação da sala e sombra ## Essencial
+\-> Terminar de arrumar a iluminação da sala e sombra ## Essencial ✅
 
 \-> Fazer os diálogos ## Essencial 
 
 \-> Todos os sons ## Essencial
 
-\-> Terminar de ajustar o Canva ## Essencial
+\-> Terminar de ajustar o Canva ## Essencial ✅
 
 \-> Modelo final da estatueta ## Essencial ✅
 
-\-> Refinar design da sala
+\-> Refinar design da sala ✅
 
 \-> Ajustar o Cabo com a tomado pois está difícil de conectar ✅
 

@@ -9,24 +9,18 @@ public class TomadaProjetor : MonoBehaviour, IRaycastInteractable
     [SerializeField] private Light luzProjetor;
     [SerializeField] private PuzzleSombra puzzleSombra;
 
-    [Header("Configuração")]
-    [SerializeField, Min(0.1f)] private float distanciaEncaixe = 0.75f;
-
     private bool conectado;
 
     public bool EstaConectada => conectado;
 
     private void Awake()
     {
-        if (luzProjetor != null)
-        {
-            luzProjetor.enabled = false;
-        }
+        luzProjetor.enabled = false;
     }
 
     public void Interact()
     {
-        if (conectado || cabo == null || pontoEncaixe == null)
+        if (conectado)
         {
             return;
         }
@@ -37,38 +31,17 @@ public class TomadaProjetor : MonoBehaviour, IRaycastInteractable
             return;
         }
 
-        if (!PlugueEstaPerto())
-        {
-            Debug.Log("Aproxime o plugue da tomada.", this);
-            return;
-        }
-
+        // O PlayerInteraction já limita o alcance. Se o jogador estiver
+        // segurando o plugue e mirando na tomada, ela encaixa automaticamente.
         conectado = true;
         cabo.Conectar(pontoEncaixe);
         LigarProjetor();
         Debug.Log("Projetor conectado e ligado.", this);
     }
 
-    private bool PlugueEstaPerto()
-    {
-        float distancia = Vector3.Distance(
-            cabo.transform.position,
-            pontoEncaixe.position
-        );
-
-        return distancia <= distanciaEncaixe;
-    }
-
     private void LigarProjetor()
     {
-        if (luzProjetor != null)
-        {
-            luzProjetor.enabled = true;
-        }
-
-        if (puzzleSombra != null)
-        {
-            puzzleSombra.AtivarProjetor();
-        }
+        luzProjetor.enabled = true;
+        puzzleSombra.AtivarProjetor();
     }
 }

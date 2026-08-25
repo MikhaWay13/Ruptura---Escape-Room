@@ -9,6 +9,7 @@ public class PuzzleSombra : MonoBehaviour, IRaycastInteractable
     [SerializeField] private Transform estante;
     [SerializeField] private TMP_Text textoStatus;
     [SerializeField] private PlayerController jogador;
+    [SerializeField] private GameObject referenciaSilhueta;
 
     [Header("Estado do projetor")]
     [SerializeField] private bool projetorLigadoNoInicio;
@@ -40,20 +41,18 @@ public class PuzzleSombra : MonoBehaviour, IRaycastInteractable
         lookAction = InputSystem.actions.FindAction("Interaction/Look");
         backAction = InputSystem.actions.FindAction("Interaction/Back");
 
-        if (estante != null)
-        {
-            posicaoAbertaEstante = estante.position + deslocamentoEstante;
-        }
+        posicaoAbertaEstante = estante.position + deslocamentoEstante;
 
         projetorLigado = projetorLigadoNoInicio;
+        MostrarReferencia(projetorLigado);
     }
 
     private void Start()
     {
         AtualizarTexto(
             projetorLigado
-                ? "Aponte para a estatueta e pressione E"
-                : "Conecte o cabo para ligar o projetor"
+                ? "Alinhe a sombra\nAponte para o macaco e pressione E."
+                : "Ligue o projetor\nConecte o cabo à tomada."
         );
     }
 
@@ -89,7 +88,7 @@ public class PuzzleSombra : MonoBehaviour, IRaycastInteractable
 
         if (!projetorLigado)
         {
-            AtualizarTexto("Conecte o cabo para ligar o projetor");
+            AtualizarTexto("Ligue o projetor\nConecte o cabo à tomada.");
             return;
         }
 
@@ -99,20 +98,18 @@ public class PuzzleSombra : MonoBehaviour, IRaycastInteractable
     public void AtivarProjetor()
     {
         projetorLigado = true;
+        MostrarReferencia(true);
 
         if (!puzzleAtivo && !puzzleConcluido)
         {
-            AtualizarTexto("Projetor ligado! Aponte para a estatueta e pressione E");
+            AtualizarTexto(
+                "Alinhe a sombra\nAponte para o macaco e pressione E."
+            );
         }
     }
 
     private void AbrirEstante()
     {
-        if (estante == null)
-        {
-            return;
-        }
-
         estante.position = Vector3.MoveTowards(
             estante.position,
             posicaoAbertaEstante,
@@ -122,14 +119,12 @@ public class PuzzleSombra : MonoBehaviour, IRaycastInteractable
 
     private bool JogadorPediuParaSair()
     {
-        return backAction != null && backAction.WasPressedThisFrame();
+        return backAction.WasPressedThisFrame();
     }
 
     private void GirarEstatueta()
     {
-        Vector2 entrada = lookAction != null
-            ? lookAction.ReadValue<Vector2>()
-            : Vector2.zero;
+        Vector2 entrada = lookAction.ReadValue<Vector2>();
 
         anguloHorizontal += entrada.x * sensibilidadeMouse;
         anguloVertical = Mathf.Clamp(
@@ -152,13 +147,7 @@ public class PuzzleSombra : MonoBehaviour, IRaycastInteractable
             alvoRotacao.rotation
         );
 
-        if (textoStatus != null)
-        {
-            textoStatus.SetText(
-                "Mouse: girar  |  Botão direito: sair\nDiferença: {0:0} graus",
-                diferenca
-            );
-        }
+        AtualizarDicaDeAlinhamento(diferenca);
 
         if (diferenca <= toleranciaRotacao)
         {
@@ -172,14 +161,19 @@ public class PuzzleSombra : MonoBehaviour, IRaycastInteractable
         anguloHorizontal = transform.eulerAngles.y;
         anguloVertical = NormalizarAngulo(transform.eulerAngles.x);
         DefinirControleDoJogador(false);
-        AtualizarTexto("Mouse: girar  |  Botão direito: sair");
+        AtualizarTexto(
+            "Faça a sombra cobrir a silhueta\n" +
+            "Mova o mouse  •  Botão direito: sair"
+        );
     }
 
     private void EncerrarAjuste()
     {
         puzzleAtivo = false;
         DefinirControleDoJogador(true);
-        AtualizarTexto("Aponte para a estatueta e pressione E");
+        AtualizarTexto(
+            "Alinhe a sombra\nAponte para o macaco e pressione E."
+        );
     }
 
     private void ConcluirPuzzle()
@@ -188,12 +182,13 @@ public class PuzzleSombra : MonoBehaviour, IRaycastInteractable
         puzzleAtivo = false;
         transform.rotation = alvoRotacao.rotation;
         DefinirControleDoJogador(true);
-        AtualizarTexto("Sombra correta!\nEstante destravada.");
+        MostrarReferencia(false);
+        AtualizarTexto("Sombra alinhada!\nA estante foi destravada.");
     }
 
     private void OnDisable()
     {
-        if (puzzleAtivo && jogador != null)
+        if (puzzleAtivo)
         {
             puzzleAtivo = false;
             DefinirControleDoJogador(true);
@@ -202,18 +197,42 @@ public class PuzzleSombra : MonoBehaviour, IRaycastInteractable
 
     private void DefinirControleDoJogador(bool ativo)
     {
-        if (jogador != null)
-        {
-            jogador.enabled = ativo;
-        }
+        jogador.enabled = ativo;
     }
 
     private void AtualizarTexto(string mensagem)
     {
-        if (textoStatus != null)
+        textoStatus.text = mensagem;
+    }
+
+    private void AtualizarDicaDeAlinhamento(float diferenca)
+    {
+        if (diferenca <= toleranciaRotacao * 2f)
         {
-            textoStatus.text = mensagem;
+            AtualizarTexto(
+                "Quase! Faça um ajuste pequeno\n" +
+                "Mova o mouse  •  Botão direito: sair"
+            );
         }
+        else if (diferenca <= 45f)
+        {
+            AtualizarTexto(
+                "A sombra está se aproximando\n" +
+                "Continue movendo o mouse"
+            );
+        }
+        else
+        {
+            AtualizarTexto(
+                "Faça a sombra cobrir a silhueta\n" +
+                "Mova o mouse  •  Botão direito: sair"
+            );
+        }
+    }
+
+    private void MostrarReferencia(bool mostrar)
+    {
+        referenciaSilhueta.SetActive(mostrar);
     }
 
     private static float NormalizarAngulo(float angulo)

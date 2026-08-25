@@ -22,11 +22,6 @@ public class GavetaInterativa : MonoBehaviour, IRaycastInteractable
 
     private void Awake()
     {
-        if (gavetaMovel == null)
-        {
-            gavetaMovel = transform;
-        }
-
         posicaoFechada = gavetaMovel.localPosition;
         posicaoAberta = posicaoFechada + deslocamentoAberta;
     }
@@ -71,11 +66,6 @@ public class GavetaInterativa : MonoBehaviour, IRaycastInteractable
 
     private void AtualizarTexto()
     {
-        if (textoStatus == null)
-        {
-            return;
-        }
-
         textoStatus.text = aberta
             ? "Alavanca encontrada! Clique esquerdo para inspecionar."
             : "Encontre a alavanca dentro da gaveta.";

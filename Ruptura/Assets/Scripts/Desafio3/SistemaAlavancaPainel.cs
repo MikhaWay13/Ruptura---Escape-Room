@@ -61,7 +61,7 @@ public class SistemaAlavancaPainel : MonoBehaviour, IRaycastInteractable
             return;
         }
 
-        if (painel == null || !painel.EstaAberto)
+        if (!painel.EstaAberto)
         {
             AtualizarTexto("Abra completamente o painel elétrico.");
             return;
@@ -78,11 +78,6 @@ public class SistemaAlavancaPainel : MonoBehaviour, IRaycastInteractable
 
     private void ConfigurarRotacoes()
     {
-        if (alavancaInstalada == null)
-        {
-            return;
-        }
-
         rotacaoDesligada = alavancaInstalada.localRotation;
 
         Vector3 angulosLigados = alavancaInstalada.localEulerAngles;
@@ -92,8 +87,7 @@ public class SistemaAlavancaPainel : MonoBehaviour, IRaycastInteractable
 
     private void InstalarAlavanca()
     {
-        if (InventoryController.instance == null ||
-            !InventoryController.instance.HasItem(itemAlavanca))
+        if (!InventoryController.instance.HasItem(itemAlavanca))
         {
             AtualizarTexto("Você precisa encontrar a alavanca.");
             return;
@@ -112,9 +106,7 @@ public class SistemaAlavancaPainel : MonoBehaviour, IRaycastInteractable
 
     private IEnumerator LigarEnergia()
     {
-        Quaternion inicio = alavancaInstalada != null
-            ? alavancaInstalada.localRotation
-            : Quaternion.identity;
+        Quaternion inicio = alavancaInstalada.localRotation;
 
         float tempo = 0f;
 
@@ -138,10 +130,7 @@ public class SistemaAlavancaPainel : MonoBehaviour, IRaycastInteractable
         estado = EstadoAlavanca.Ligada;
         DefinirIluminacao(true);
 
-        if (caboProjetor != null)
-        {
-            caboProjetor.LiberarCabo();
-        }
+        caboProjetor.LiberarCabo();
 
         AtualizarTexto("Energia ligada! Pegue o cabo do projetor.");
         animacao = null;
@@ -149,58 +138,32 @@ public class SistemaAlavancaPainel : MonoBehaviour, IRaycastInteractable
 
     private void DefinirRotacao(Quaternion rotacao)
     {
-        if (alavancaInstalada != null)
-        {
-            alavancaInstalada.localRotation = rotacao;
-        }
+        alavancaInstalada.localRotation = rotacao;
     }
 
     private void DefinirAlavancaVisivel(bool visivel)
     {
-        if (renderizadoresAlavanca == null)
-        {
-            return;
-        }
-
         foreach (Renderer renderizador in renderizadoresAlavanca)
         {
-            if (renderizador != null)
-            {
-                renderizador.enabled = visivel;
-            }
+            renderizador.enabled = visivel;
         }
     }
 
     private void DefinirIluminacao(bool ligada)
     {
-        if (luzAmbiente != null)
-        {
-            luzAmbiente.intensity = ligada
-                ? intensidadeAmbienteLigada
-                : intensidadeAmbienteDesligada;
-        }
-
-        if (luzesPrincipais == null)
-        {
-            return;
-        }
+        luzAmbiente.intensity = ligada
+            ? intensidadeAmbienteLigada
+            : intensidadeAmbienteDesligada;
 
         foreach (Light luz in luzesPrincipais)
         {
-            if (luz != null)
-            {
-                luz.enabled = ligada;
-            }
+            luz.enabled = ligada;
         }
     }
 
     private void AtualizarTexto(string mensagem)
     {
-        if (textoStatus != null)
-        {
-            textoStatus.text = mensagem;
-        }
-
+        textoStatus.text = mensagem;
         Debug.Log(mensagem, this);
     }
 }
