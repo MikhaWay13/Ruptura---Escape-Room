@@ -78352,7 +78352,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2d9cadb71ac195d438d87d1b09da72e1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Inventory
-  items: []
 --- !u!1001 &1534225412
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -82412,9 +82411,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::InventoryController
   slots:
   - {fileID: 0}
-  slotImage:
-  - {fileID: 1633631127}
+  slotImages: []
   slotAmount: 00000000
+  slotTexts: []
+  slotObjects: []
+  optionsSlots: []
 --- !u!114 &1589028466
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -97150,16 +97151,11 @@ MonoBehaviour:
   - {fileID: 0}
   - {fileID: 0}
   - {fileID: 0}
-  slotImage:
-  - {fileID: 546077884}
-  - {fileID: 483645152}
-  - {fileID: 1574430415}
-  - {fileID: 1057224261}
-  - {fileID: 1247683039}
-  - {fileID: 1655562344}
-  - {fileID: 601715682}
-  - {fileID: 1203499187}
+  slotImages: []
   slotAmount: 0000000000000000000000000000000000000000000000000000000000000000
+  slotTexts: []
+  slotObjects: []
+  optionsSlots: []
 --- !u!114 &1886078973
 MonoBehaviour:
   m_ObjectHideFlags: 0
