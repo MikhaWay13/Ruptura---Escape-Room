@@ -2,25 +2,25 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
-using TMPro; // troque por Text (j� usando UnityEngine.UI) se n�o usar TextMeshPro
+using TMPro; 
 
 public class UIManager : MonoBehaviour
 {
     public static UIManager instance; //singleton
 
 
-    //invent�rio
+    //inventário
     public GameObject painelInventory;
-    //intera��o
+    //interação
     public GameObject HandCursor;
     public GameObject BackImage;
-    public GameObject PressE;
 
     //leitura de item
     public GameObject itemUIPanel;
     public TMP_Text itemUITitleText;
     public TMP_Text itemUIBodyText;
     public Image itemUIImage;
+    public GameObject pressE;
 
     private void Awake()
     {
@@ -31,7 +31,7 @@ public class UIManager : MonoBehaviour
     {
         painelInventory.SetActive(false);
         itemUIPanel.SetActive(false);
-        PressE.SetActive(false);
+        pressE.SetActive(false);
     }
 
     public void SetHandCursor(bool state)
@@ -44,14 +44,15 @@ public class UIManager : MonoBehaviour
         BackImage.SetActive(state);
     }
 
-    public void SetPressE (bool state)
+    public void SetPressE(bool state)
     {
-        PressE.SetActive(state);
+        pressE.SetActive(state);
     }
+
 
     public void SetInventory(bool invActive)
     {
-        invActive = !invActive;
+        //invActive = !invActive;
         painelInventory.SetActive(invActive);
         if (invActive)
         {

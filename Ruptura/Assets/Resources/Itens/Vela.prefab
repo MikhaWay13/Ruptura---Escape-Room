@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 23749381157034682}
   - component: {fileID: 64886344061715266}
   m_Layer: 0
-  m_Name: Candle01b_on
+  m_Name: Vela
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

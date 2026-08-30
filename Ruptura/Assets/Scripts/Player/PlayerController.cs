@@ -60,16 +60,17 @@ public class PlayerController : MonoBehaviour
     {
         Inventario();
 
-    }
 
-    private void FixedUpdate()
-    {
         if (!gameplayControlEnabled)
+        {
             return;
+        }
 
         Move();
-        
+
+
     }
+
 
     private void LateUpdate()
     {
@@ -80,27 +81,24 @@ public class PlayerController : MonoBehaviour
 
 
 
- private void Inventario()
+private void Inventario()
+{
+    if (PlayerInventory.WasPressedThisFrame())
     {
-
-
-        if (PlayerInventory.WasPressedThisFrame())
+        // Se o controle do jogador está ATIVO, significa que o inventário está FECHADO e vamos ABRIR
+        if (gameplayControlEnabled)
         {
-            if (verify)
-            {
-                SetGameplayControlEnabled(true);
-                UIManager.instance.SetInventory(true);
-                verify = false;
-            }
-            else
-            {
-                SetGameplayControlEnabled(false);
-                UIManager.instance.SetInventory(false);
-                verify = true;
-            }
+            SetGameplayControlEnabled(false);      // Desativa movimentação
+            UIManager.instance.SetInventory(true); // Abre o inventário visualmente
         }
-        
+        // Se o controle está DESATIVADO, significa que o inventário está ABERTO e vamos FECHAR
+        else
+        {
+            SetGameplayControlEnabled(true);        // Reativa movimentação
+            UIManager.instance.SetInventory(false); // Fecha o inventário visualmente
+        }
     }
+}
 
 
 
