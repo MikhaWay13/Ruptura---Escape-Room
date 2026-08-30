@@ -20,7 +20,7 @@ public class InventoryController : MonoBehaviour
     // Cor escura Hexadecimal: #151A1D
    private readonly Color corVazia = new Color32(0x15, 0x1A, 0x1D, 255);
 
-    private void Awake()
+private void Awake()
     {
         instance = this;
         FecharTodasOpcoes();
@@ -28,7 +28,6 @@ public class InventoryController : MonoBehaviour
 
     private void Start()
     {
-        // Atualiza a cor/sprite de cada slot no início
         for (int i = 0; i < slots.Length; i++)
         {
             AtualizarVisualSlot(i);
@@ -37,7 +36,6 @@ public class InventoryController : MonoBehaviour
 
     public void OnSlotPointerEnter(int index)
     {
-        // Se o slot estiver vazio (sem item), não abre as opções
         if (slots[index] == null || slotAmount[index] <= 0)
         {
             return;
@@ -78,15 +76,13 @@ public class InventoryController : MonoBehaviour
     // ==========================================
     // GERENCIAMENTO DE ITENS
     // ==========================================
-
-public bool AddItem(Item newItem)
+    public bool AddItem(Item newItem)
     {
         if (newItem == null)
         {
             return false;
         }
 
-        // 1. Tenta empilhar no item que já existe
         for (int i = 0; i < slots.Length; i++)
         {
             if (slots[i] != null && slots[i].itemName == newItem.itemName)
@@ -97,7 +93,6 @@ public bool AddItem(Item newItem)
             }
         }
 
-        // 2. Se não tem igual, acha o primeiro espaço vazio
         for (int i = 0; i < slots.Length; i++)
         {
             if (slots[i] == null)
@@ -145,6 +140,12 @@ public bool AddItem(Item newItem)
 
                 if (slotAmount[i] <= 0)
                 {
+                    // Se o item que acabou estava equipado, desequipa
+                    if (PlayerEquipar.instance != null && PlayerEquipar.instance.slotEquipadoIndex == i)
+                    {
+                        PlayerEquipar.instance.Desequipar();
+                    }
+
                     slots[i] = null;
                     slotAmount[i] = 0;
 
@@ -162,35 +163,36 @@ public bool AddItem(Item newItem)
         return false;
     }
 
-  public void AtualizarVisualSlot(int index)
+    // ==========================================
+    // ATUALIZAÇÃO VISUAL
+    // ==========================================
+    public void AtualizarVisualSlot(int index)
     {
-        // 1. Atualiza a imagem/fundo
         if (index >= 0 && index < slotImages.Length && slotImages[index] != null)
         {
             if (slots[index] != null && slotAmount[index] > 0)
             {
                 slotImages[index].sprite = slots[index].itemSprite;
-                slotImages[index].color = Color.white;            // Fica branco para mostrar o item
+                slotImages[index].color = Color.white;
                 slotImages[index].enabled = true;
             }
             else
             {
                 slotImages[index].sprite = null;
-                slotImages[index].color = corVazia;               // Cor #151A1D quando vazio
+                slotImages[index].color = corVazia;
                 slotImages[index].enabled = true;
             }
         }
 
-        // 2. Atualiza o texto do nome do item
         if (index >= 0 && index < slotTexts.Length && slotTexts[index] != null)
         {
             if (slots[index] != null && slotAmount[index] > 0)
             {
-                slotTexts[index].text = slots[index].itemName;    // Escreve o nome do item
+                slotTexts[index].text = slots[index].itemName;
             }
             else
             {
-                slotTexts[index].text = "";                       // Deixa vazio se não tiver item
+                slotTexts[index].text = "";
             }
         }
     }
@@ -215,19 +217,13 @@ public bool AddItem(Item newItem)
     // ==========================================
     public void EquiparSlot(int index)
     {
-        Item item = GetItemAtSlot(index);
-        
-        if (item != null)
+       
+        if (PlayerEquipar.instance != null)
         {
-            // Avisa o PlayerEquipment que este item foi equipado
-            if (Player_Equipar.instance != null)
-            {
-                Player_Equipar.instance.EquiparItem(item);
-            }
-
-            // Fecha o menu de opções
-            FecharTodasOpcoes();
+            PlayerEquipar.instance.Equipar(index);
         }
+
+        FecharTodasOpcoes();
     }
 
     public void RotacionarSlot(int index)
@@ -240,5 +236,3 @@ public bool AddItem(Item newItem)
         }
     }
 }
-
-

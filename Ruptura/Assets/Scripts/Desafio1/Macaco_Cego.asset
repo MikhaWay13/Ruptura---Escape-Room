@@ -10,15 +10,15 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 350becae4b414014c835792cadb25726, type: 3}
-  m_Name: Macaco_Surdo
+  m_Name: Macaco_Cego
   m_EditorClassIdentifier: Assembly-CSharp::Item
-  grabbable: 1
+  grabbable: 0
   movable: 0
   audioClip: {fileID: 0}
   text: 
-  ToInventory: 1
-  itemName: Surdo
-  itemSprite: {fileID: 21300000, guid: ede3dbf6fe836694081e05c393907b61, type: 3}
+  ToInventory: 0
+  itemName: 
+  itemSprite: {fileID: 0}
   hasReadableUI: 0
   uiText: 
   uiImage: {fileID: 0}
