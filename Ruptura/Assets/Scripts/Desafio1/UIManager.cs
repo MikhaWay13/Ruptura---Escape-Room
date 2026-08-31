@@ -21,6 +21,8 @@ public class UIManager : MonoBehaviour
     public TMP_Text itemUIBodyText;
     public Image itemUIImage;
     public GameObject pressE;
+    public GameObject interact;   // Arraste o objeto "Press(E) Interagir"
+    public GameObject painelAviso;   // Arraste o objeto "Aviso"
 
     private void Awake()
     {
@@ -49,10 +51,26 @@ public class UIManager : MonoBehaviour
         pressE.SetActive(state);
     }
 
+    public void SetPressEInteracao(bool state)
+    {
+        if (interact != null)
+        {
+            interact.SetActive(state);
+        }
+    }
+
+    public void SetAvisoEquipar(bool state)
+    {
+        if (painelAviso != null)
+        {
+            painelAviso.SetActive(state);
+        }
+    }
+
 
     public void SetInventory(bool invActive)
     {
-        //invActive = !invActive;
+      
         painelInventory.SetActive(invActive);
         if (invActive)
         {

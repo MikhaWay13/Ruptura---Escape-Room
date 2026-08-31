@@ -45,6 +45,13 @@ public class MonumentoPuzzle : MonoBehaviour, IRaycastInteractable
             {
                 Item itemParaColocar = PlayerEquipar.instance.itemEquipado;
 
+                // [NOVA CHECAGEM]: Se NÃO for um dos 3 macacos do puzzle, rejeita!
+                if (!EhItemDoPuzzle(itemParaColocar.itemName))
+                {
+                    
+                    return;
+                }
+
                 // 1. Guarda o item neste monumento
                 itemColocado = itemParaColocar;
 
@@ -71,6 +78,10 @@ public class MonumentoPuzzle : MonoBehaviour, IRaycastInteractable
             else
             {
                 Debug.Log("Você precisa equipar um item no inventário primeiro!");
+                if (UIManager.instance != null)
+                {
+                    UIManager.instance.SetAvisoEquipar(true);
+                }
             }
         }
         // ---------------------------------------------------------------------
@@ -102,27 +113,52 @@ public class MonumentoPuzzle : MonoBehaviour, IRaycastInteractable
     }
 
     // =========================================================================
-    // 4. CONTROLE DOS MODELOS 3D
+    // 4. FILTRO: APENAS OS MACACOS SÃO ACEITOS NO PEDESTAL
+    // =========================================================================
+    private bool EhItemDoPuzzle(string nomeDoItem)
+    {
+        // Se o nome for de qualquer um dos 3 macacos, retorna verdadeiro
+        if (nomeDoItem == "Cego")
+        {
+            return true;
+        }
+
+        if (nomeDoItem == "Surdo")
+        {
+            return true;
+        }
+
+        if (nomeDoItem == "Mudo")
+        {
+            return true;
+        }
+
+        // Se for uma vela ou qualquer outro objeto comum, retorna falso
+        return false;
+    }
+
+    // =========================================================================
+    // 5. CONTROLE DOS MODELOS 3D
     // =========================================================================
     private void MostrarModelo(string nomeDoItem)
     {
         EsconderTodosOsModelos();
 
-        if (nomeDoItem == "Cego" || nomeDoItem == "macaco_cego")
+        if (nomeDoItem == "Cego")
         {
             if (modeloCego != null)
             {
                 modeloCego.SetActive(true);
             }
         }
-        else if (nomeDoItem == "Surdo" || nomeDoItem == "macaco_surdo")
+        else if (nomeDoItem == "Surdo")
         {
             if (modeloSurdo != null)
             {
                 modeloSurdo.SetActive(true);
             }
         }
-        else if (nomeDoItem == "Mudo" || nomeDoItem == "Quieto" || nomeDoItem == "macaco_mudo")
+        else if (nomeDoItem == "Mudo")
         {
             if (modeloMudo != null)
             {
@@ -150,7 +186,7 @@ public class MonumentoPuzzle : MonoBehaviour, IRaycastInteractable
     }
 
     // =========================================================================
-    // 5. VERIFICAÇÃO DE SUCESSO
+    // 6. VERIFICAÇÃO DE SUCESSO
     // =========================================================================
     public bool EstaCorreto()
     {

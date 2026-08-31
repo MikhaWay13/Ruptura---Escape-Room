@@ -168,8 +168,31 @@ public class PlayerInteraction : MonoBehaviour
             if (directInteractable != null || interactable != null)
             {
                 SetHandCursor(true);
+                
 
                 SetOutline(directInteractable is MonoBehaviour directBehaviour ? directBehaviour.gameObject : interactable.gameObject);
+
+
+
+                bool ShowPressEinteract = false;
+
+                if(directInteractable != null)
+                {
+                    ShowPressEinteract = true;
+                }
+                else if(interactable != null && interactable.item != null)
+                {
+                    if(!interactable.item.grabbable || interactable.item.movable)
+                    {
+                        ShowPressEinteract = true;
+                    }
+                    
+                }
+
+                UIManager.instance.SetPressEInteracao(ShowPressEinteract);
+
+
+
 
                 // INTERAÇÃO DIRETA (MONUMENTOS, ALAVANCAS, PORTAS)
                 if (directInteractable != null && InteractAction != null && InteractAction.WasPressedThisFrame())
@@ -184,6 +207,9 @@ public class PlayerInteraction : MonoBehaviour
                     PickUpMovableObject(interactable);
                     return;
                 }
+
+
+                
 
                 // INSPEÇÃO DE ITEM (PROTEGIDO CONTRA NULL)
                 if (interactable != null && interactable.item != null && !interactable.item.movable && pressAction != null && pressAction.WasPressedThisFrame())
@@ -224,6 +250,8 @@ public class PlayerInteraction : MonoBehaviour
             {
                 SetHandCursor(false);
                 SetOutline(null);
+                UIManager.instance.SetAvisoEquipar(false);
+                UIManager.instance.SetPressEInteracao(false);
             }
         }
         else
