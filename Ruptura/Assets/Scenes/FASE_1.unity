@@ -9634,7 +9634,7 @@ MonoBehaviour:
   outlineWidth: 4
   movableSpeed: 8
   collisionPadding: 0.05
-  cutsceneVidro: {fileID: 1579799647}
+  cutsceneVidro: {fileID: 1956616022}
 --- !u!114 &679716725
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -23633,8 +23633,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1579799649}
   - component: {fileID: 1579799648}
-  - component: {fileID: 1579799647}
-  - component: {fileID: 1579799646}
+  - component: {fileID: 1579799650}
   m_Layer: 0
   m_Name: Cutscene_Transicao
   m_TagString: Untagged
@@ -23642,68 +23641,6 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!114 &1579799646
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1579799645}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e52de21a22b6dd44c9cc19f810c65059, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Unity.Timeline::UnityEngine.Timeline.SignalReceiver
-  m_Events:
-    m_Signals:
-    - {fileID: 11400000, guid: 816e360d33d93924098bc8c7d205ae90, type: 2}
-    - {fileID: 11400000, guid: ff7cde09307b6684e899d036bb9ba503, type: 2}
-    m_Events:
-    - m_PersistentCalls:
-        m_Calls:
-        - m_Target: {fileID: 1579799647}
-          m_TargetAssemblyTypeName: CutsceneController, Assembly-CSharp
-          m_MethodName: TeleportarParaFase2
-          m_Mode: 1
-          m_Arguments:
-            m_ObjectArgument: {fileID: 0}
-            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-            m_IntArgument: 0
-            m_FloatArgument: 0
-            m_StringArgument: 
-            m_BoolArgument: 0
-          m_CallState: 2
-    - m_PersistentCalls:
-        m_Calls:
-        - m_Target: {fileID: 1579799647}
-          m_TargetAssemblyTypeName: CutsceneController, Assembly-CSharp
-          m_MethodName: FinalizarCutscene
-          m_Mode: 1
-          m_Arguments:
-            m_ObjectArgument: {fileID: 0}
-            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-            m_IntArgument: 0
-            m_FloatArgument: 0
-            m_StringArgument: 
-            m_BoolArgument: 0
-          m_CallState: 2
---- !u!114 &1579799647
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1579799645}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 24e725eaa5796e34fb339f4fa8ab25d7, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::CutsceneController
-  vidro: {fileID: 11400000, guid: 514417f427efda745929f9c3431e4754, type: 2}
-  playableDirector: {fileID: 1579799648}
-  playerController: {fileID: 679716718}
-  playerInteraction: {fileID: 679716724}
-  destinoFase2: {fileID: 501632062}
 --- !u!320 &1579799648
 PlayableDirector:
   m_ObjectHideFlags: 0
@@ -23726,7 +23663,7 @@ PlayableDirector:
   - key: {fileID: -7584213811781721545, guid: 32fca9f6ffe37114c86cf5d3346daa90, type: 2}
     value: {fileID: 443655384}
   - key: {fileID: -7538785956196246755, guid: 32fca9f6ffe37114c86cf5d3346daa90, type: 2}
-    value: {fileID: 1579799646}
+    value: {fileID: 1579799650}
   m_ExposedReferences:
     m_References: []
 --- !u!4 &1579799649
@@ -23744,6 +23681,36 @@ Transform:
   m_Children: []
   m_Father: {fileID: 1956616021}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1579799650
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1579799645}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e52de21a22b6dd44c9cc19f810c65059, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Unity.Timeline::UnityEngine.Timeline.SignalReceiver
+  m_Events:
+    m_Signals:
+    - {fileID: 11400000, guid: 816e360d33d93924098bc8c7d205ae90, type: 2}
+    m_Events:
+    - m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 1956616022}
+          m_TargetAssemblyTypeName: CutsceneController, Assembly-CSharp
+          m_MethodName: Teleportar
+          m_Mode: 1
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
 --- !u!1 &1581610016
 GameObject:
   m_ObjectHideFlags: 0
@@ -23932,7 +23899,7 @@ PlayableDirector:
   m_Enabled: 1
   serializedVersion: 3
   m_PlayableAsset: {fileID: 11400000, guid: 6c0603acd2aebf9499aef13ddc4fcd01, type: 2}
-  m_InitialState: 1
+  m_InitialState: 0
   m_WrapMode: 2
   m_DirectorUpdateMode: 1
   m_InitialTime: 0
@@ -25753,7 +25720,7 @@ Transform:
   m_GameObject: {fileID: 1720369324}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -0.039122656, y: 0.6298701, z: -0.0039440915}
+  m_LocalPosition: {x: -0.03912271, y: 0.625, z: -0.0039440915}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -29244,6 +29211,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1956616021}
+  - component: {fileID: 1956616022}
   m_Layer: 0
   m_Name: Cutscenes
   m_TagString: Untagged
@@ -29268,6 +29236,31 @@ Transform:
   - {fileID: 1590084120}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1956616022
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1956616020}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 24e725eaa5796e34fb339f4fa8ab25d7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::CutsceneController
+  cutscenes:
+  - nome: "In\xEDcio"
+    director: {fileID: 1590084121}
+    iniciarAutomaticamente: 1
+    itemGatilho: {fileID: 0}
+    destinoTeleport: {fileID: 0}
+  - nome: TransicaoVidro
+    director: {fileID: 1579799648}
+    iniciarAutomaticamente: 0
+    itemGatilho: {fileID: 11400000, guid: 514417f427efda745929f9c3431e4754, type: 2}
+    destinoTeleport: {fileID: 501632062}
+  playerController: {fileID: 679716718}
+  playerInteraction: {fileID: 679716724}
 --- !u!1 &1960082124
 GameObject:
   m_ObjectHideFlags: 0
