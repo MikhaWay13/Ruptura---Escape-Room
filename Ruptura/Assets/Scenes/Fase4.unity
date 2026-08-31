@@ -3545,16 +3545,11 @@ MonoBehaviour:
   - {fileID: 0}
   - {fileID: 0}
   - {fileID: 0}
-  slotImage:
-  - {fileID: 1349981865}
-  - {fileID: 1963609334}
-  - {fileID: 2129115938}
-  - {fileID: 1429747137}
-  - {fileID: 1522531584}
-  - {fileID: 1050062360}
-  - {fileID: 443953226}
-  - {fileID: 2061417166}
+  slotImages: []
   slotAmount: 0000000000000000000000000000000000000000000000000000000000000000
+  slotTexts: []
+  slotObjects: []
+  optionsSlots: []
 --- !u!114 &488830815
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3605,6 +3600,7 @@ MonoBehaviour:
   outlineWidth: 4
   movableSpeed: 8
   collisionPadding: 1
+  cutsceneVidro: {fileID: 0}
 --- !u!1001 &498837131
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -9661,6 +9657,9 @@ MonoBehaviour:
   itemUITitleText: {fileID: 1926944176}
   itemUIBodyText: {fileID: 1750588732}
   itemUIImage: {fileID: 649316840}
+  pressE: {fileID: 541149239}
+  interact: {fileID: 0}
+  painelAviso: {fileID: 0}
 --- !u!114 &1392247813
 MonoBehaviour:
   m_ObjectHideFlags: 0

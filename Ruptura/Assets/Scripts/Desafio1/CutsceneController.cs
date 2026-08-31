@@ -3,49 +3,117 @@ using UnityEngine.Playables;
 
 public class CutsceneController : MonoBehaviour
 {
- 
-    [Header("Item que inicia a cutscene")]
-    [SerializeField] private Item vidro;
+    [System.Serializable]
+    public class CutsceneData
+    {
+        public string nome;
+        public PlayableDirector director;
+        public bool iniciarAutomaticamente;
+        public Item itemGatilho;
+        public Transform destinoTeleport;
+    }
 
-    [Header("Timeline")]
-    [SerializeField] private PlayableDirector playableDirector;
+    [Header("Cutscenes do jogo")]
+    [SerializeField] private CutsceneData[] cutscenes;
 
     [Header("Player")]
     [SerializeField] private PlayerController playerController;
     [SerializeField] private PlayerInteraction playerInteraction;
-    [SerializeField] private Transform destinoFase2;
 
+    private CutsceneData cutsceneAtual;
     private CharacterController characterController;
-    private bool cutsceneIniciada;
+    private bool cutsceneEmAndamento;
 
     private void Awake()
     {
-        if (playableDirector == null)
-        {
-            playableDirector = GetComponent<PlayableDirector>();
-        }
-
         if (playerController != null)
         {
             characterController = playerController.GetComponent<CharacterController>();
         }
     }
 
+    private void Start()
+    {
+        for (int i = 0; i < cutscenes.Length; i++)
+        {
+            if (cutscenes[i] != null && cutscenes[i].iniciarAutomaticamente)
+            {
+                IniciarCutscene(cutscenes[i]);
+                break;
+            }
+        }
+    }
+
     public void TentarIniciar(Item itemColetado)
     {
-        if (cutsceneIniciada || itemColetado != vidro)
+        if (itemColetado == null)
         {
             return;
         }
 
-        if (playableDirector == null)
+        for (int i = 0; i < cutscenes.Length; i++)
         {
-            Debug.LogWarning("Playable Director não configurado.", this);
+            CutsceneData cutscene = cutscenes[i];
+
+            if (cutscene != null && cutscene.itemGatilho == itemColetado)
+            {
+                IniciarCutscene(cutscene);
+                return;
+            }
+        }
+    }
+
+    public void IniciarPorIndice(int indice)
+    {
+        if (indice < 0 || indice >= cutscenes.Length)
+        {
+            Debug.LogWarning("Índice de cutscene inválido: " + indice, this);
             return;
         }
 
-        cutsceneIniciada = true;
+        IniciarCutscene(cutscenes[indice]);
+    }
 
+    public void IniciarPorNome(string nome)
+    {
+        for (int i = 0; i < cutscenes.Length; i++)
+        {
+            if (cutscenes[i] != null && cutscenes[i].nome == nome)
+            {
+                IniciarCutscene(cutscenes[i]);
+                return;
+            }
+        }
+
+        Debug.LogWarning("Cutscene não encontrada: " + nome, this);
+    }
+
+    private void IniciarCutscene(CutsceneData cutscene)
+    {
+        if (cutsceneEmAndamento)
+        {
+            Debug.LogWarning("Já existe uma cutscene em andamento.", this);
+            return;
+        }
+
+        if (cutscene == null || cutscene.director == null)
+        {
+            Debug.LogWarning("Cutscene sem Playable Director configurado.", this);
+            return;
+        }
+
+        cutsceneAtual = cutscene;
+        cutsceneEmAndamento = true;
+
+        BloquearControles();
+
+        cutsceneAtual.director.stopped += AoFinalizarDirector;
+        cutsceneAtual.director.time = 0;
+        cutsceneAtual.director.Play();
+    }
+
+    private void BloquearControles()
+    {
         if (playerController != null)
         {
             playerController.SetGameplayControlEnabled(false);
@@ -55,36 +123,9 @@ public class CutsceneController : MonoBehaviour
         {
             playerInteraction.enabled = false;
         }
-
-        playableDirector.time = 0;
-        playableDirector.Play();
     }
 
-    public void TeleportarParaFase2()
-    {
-        if (playerController == null || destinoFase2 == null)
-        {
-            Debug.LogWarning("Player ou destino da fase 2 não configurado.", this);
-            return;
-        }
-
-        if (characterController != null)
-        {
-            characterController.enabled = false;
-        }
-
-        playerController.transform.SetPositionAndRotation(
-            destinoFase2.position,
-            destinoFase2.rotation
-        );
-
-        if (characterController != null)
-        {
-            characterController.enabled = true;
-        }
-    }
-
-    public void FinalizarCutscene()
+    private void LiberarControles()
     {
         if (playerInteraction != null)
         {
@@ -96,5 +137,73 @@ public class CutsceneController : MonoBehaviour
             playerController.SetGameplayControlEnabled(true);
         }
     }
-}
 
+    public void Teleportar()
+    {
+        if (cutsceneAtual == null || cutsceneAtual.destinoTeleport == null)
+        {
+            Debug.LogWarning("A cutscene atual não possui destino de teleporte.", this);
+            return;
+        }
+
+        if (playerController == null)
+        {
+            Debug.LogWarning("Player Controller não configurado.", this);
+            return;
+        }
+
+        if (characterController != null)
+        {
+            characterController.enabled = false;
+        }
+
+        playerController.transform.SetPositionAndRotation(
+            cutsceneAtual.destinoTeleport.position,
+            cutsceneAtual.destinoTeleport.rotation
+        );
+
+        if (characterController != null)
+        {
+            characterController.enabled = true;
+        }
+    }
+
+    public void Finalizar()
+    {
+        if (!cutsceneEmAndamento)
+        {
+            return;
+        }
+
+        if (cutsceneAtual != null && cutsceneAtual.director != null)
+        {
+            cutsceneAtual.director.stopped -= AoFinalizarDirector;
+        }
+
+        LiberarControles();
+
+        cutsceneAtual = null;
+        cutsceneEmAndamento = false;
+    }
+
+    private void AoFinalizarDirector(PlayableDirector director)
+    {
+        Finalizar();
+    }
+
+    private void OnDisable()
+    {
+        if (cutsceneAtual != null && cutsceneAtual.director != null)
+        {
+            cutsceneAtual.director.stopped -= AoFinalizarDirector;
+        }
+
+        if (cutsceneEmAndamento)
+        {
+            LiberarControles();
+        }
+
+        cutsceneAtual = null;
+        cutsceneEmAndamento = false;
+    }
+}

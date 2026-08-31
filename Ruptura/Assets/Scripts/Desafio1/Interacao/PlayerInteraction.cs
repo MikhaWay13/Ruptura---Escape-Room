@@ -31,6 +31,7 @@ public class PlayerInteraction : MonoBehaviour
     private Outline currentOutline;
     private Interactables currentMovableObject;
     private Rigidbody movableRb;
+    private Coroutine movingObjectCoroutine;
 
 
     private bool originalGravity;
@@ -122,8 +123,15 @@ public class PlayerInteraction : MonoBehaviour
 
                         if (verificate)
                         {
-                            Item itemColetado = currentInteractable.item;
-                            
+                            Interactables objetoColetado = currentInteractable;
+                            Item itemColetado = objetoColetado.item;
+
+                            if(movingObjectCoroutine != null)
+                            {
+                                StopCoroutine(movingObjectCoroutine);
+                                movingObjectCoroutine = null;
+                            }
+
                             isViewing = false;
                             canFinish = false;
 
@@ -193,9 +201,9 @@ public class PlayerInteraction : MonoBehaviour
                 {
                     ShowPressEinteract = true;
                 }
-                else if(interactable != null && interactable.item != null)
+                else if(interactable != null && interactable.item != null&&!interactable.item.hasReadableUI)
                 {
-                    if(!interactable.item.grabbable || interactable.item.movable)
+                    if( !interactable.item.grabbable || interactable.item.movable )
                     {
                         ShowPressEinteract = true;
                     }
@@ -255,7 +263,7 @@ public class PlayerInteraction : MonoBehaviour
                     {
                         originPosition = currentInteractable.transform.position;
                         originRotation = currentInteractable.transform.rotation;
-                        StartCoroutine(MovingObject(currentInteractable, objectViewer.position));
+                        movingObjectCoroutine = StartCoroutine(MovingObject(currentInteractable, objectViewer.position));
                     }
                 }
             }
@@ -336,7 +344,17 @@ public class PlayerInteraction : MonoBehaviour
     private void CanFinish()
     {
         canFinish = true;
+        if (currentInteractable != null &&
+        currentInteractable.item != null &&
+        currentInteractable.item.hasReadableUI)
+    {
+        SetPressE(false);
+    }
+    else
+    {
         SetPressE(true);
+    }
+
         SetBackImage(true);
     }
 
@@ -359,7 +377,7 @@ public class PlayerInteraction : MonoBehaviour
             else if (currentInteractable.item.grabbable)
             {
                 currentInteractable.transform.rotation = originRotation;
-                StartCoroutine(MovingObject(currentInteractable, originPosition));
+                movingObjectCoroutine = StartCoroutine(MovingObject(currentInteractable, originPosition));
             }
         }
 
@@ -371,18 +389,35 @@ public class PlayerInteraction : MonoBehaviour
 
     private IEnumerator MovingObject(Interactables obj, Vector3 position)
     {
-        obj.isMoving = true;
-        float timer = 0f;
+        if (obj == null)
+    {
+        movingObjectCoroutine = null;
+        yield break;
+    }
 
-        while (timer < 1f)
+    obj.isMoving = true;
+    float timer = 0f;
+
+    while (timer < 1f)
+    {
+        if (obj == null)
         {
-            obj.transform.position = Vector3.Lerp(obj.transform.position, position, Time.deltaTime * 5f);
-            timer += Time.deltaTime;
-            yield return null;
+            movingObjectCoroutine = null;
+            yield break;
         }
 
+        obj.transform.position = Vector3.Lerp(obj.transform.position, position, Time.deltaTime * 5f);
+        timer += Time.deltaTime;
+        yield return null;
+    }
+
+    if (obj != null)
+    {
         obj.transform.position = position;
         obj.isMoving = false;
+    }
+
+    movingObjectCoroutine = null;
     }
 
     // =========================================================================
@@ -468,12 +503,18 @@ private void SetAvisoEquipar(bool state)
 
     private void OnDisable()
     {
-        SetOutline(null);
+        if (movingObjectCoroutine != null)
+    {
+        StopCoroutine(movingObjectCoroutine);
+        movingObjectCoroutine = null;
+    }
 
-        if (currentMovableObject != null)
-        {
-            DropMovableObject();
-        }
+    SetOutline(null);
+
+    if (currentMovableObject != null)
+    {
+        DropMovableObject();
+    }
     }
 
     // =========================================================================
