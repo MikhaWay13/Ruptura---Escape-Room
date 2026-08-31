@@ -47,18 +47,23 @@ MonoBehaviour:
   - {fileID: -5392930651259734711}
   - {fileID: 1009245822883863098}
   - {fileID: 6313398412803976386}
+  - {fileID: 4707350848829511037}
   EditorParameters: []
   MasterBanks:
   - {fileID: 7031780368334577041}
   StringsBanks:
   - {fileID: 8139959197402777260}
   cacheVersion: 131859
-  cacheTime: 639237888973023587
+  cacheTime: 639237957393428998
   SerializableEventsDict:
-  - key: event:/BG
+  - key: event:/DialogoNarrador
     index: 0
-  - key: event:/Fs Principal
+  - key: event:/Music 2
     index: 1
+  - key: event:/DialogoPlayer
+    index: 2
+  - key: event:/ItemCollect
+    index: 3
 --- !u!114 &1009245822883863098
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -86,6 +91,33 @@ MonoBehaviour:
   MinDistance: 1
   MaxDistance: 20
   Length: 205000
+--- !u!114 &4707350848829511037
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/ItemCollect
+  m_EditorClassIdentifier: FMODUnityEditor::FMODUnity.EditorEventRef
+  Path: event:/ItemCollect
+  Guid:
+    Data1: 275263727
+    Data2: 1171859535
+    Data3: -1265146959
+    Data4: 628904561
+  Banks:
+  - {fileID: 7179270961117431224}
+  IsStream: 0
+  Is3D: 0
+  IsOneShot: 1
+  Parameters: []
+  MinDistance: 1
+  MaxDistance: 20
+  Length: 875
 --- !u!114 &6313398412803976386
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -128,7 +160,7 @@ MonoBehaviour:
   Path: ../FMOD/Ruptura_FMOD/Build/Desktop/Master.bank
   Name: Master
   StudioPath: bank:/Master
-  lastModified: 639237888972823624
+  lastModified: 639237957381644843
   FileSizes:
   - Name: Desktop
     Value: 2265120
@@ -148,10 +180,10 @@ MonoBehaviour:
   Path: ../FMOD/Ruptura_FMOD/Build/Desktop/SFX.bank
   Name: SFX
   StudioPath: bank:/SFX
-  lastModified: 639237888973023587
+  lastModified: 639237957393428998
   FileSizes:
   - Name: Desktop
-    Value: 506
+    Value: 118720
   Exists: 1
 --- !u!114 &8139959197402777260
 MonoBehaviour:
@@ -168,8 +200,8 @@ MonoBehaviour:
   Path: ../FMOD/Ruptura_FMOD/Build/Desktop/Master.strings.bank
   Name: Master.strings
   StudioPath: bank:/Master.strings
-  lastModified: 639237888972863590
+  lastModified: 639237957381694814
   FileSizes:
   - Name: Desktop
-    Value: 922
+    Value: 964
   Exists: 1

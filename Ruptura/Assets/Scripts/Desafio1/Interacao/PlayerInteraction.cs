@@ -117,8 +117,12 @@ public class PlayerInteraction : MonoBehaviour
 
                 if (canFinish && InteractAction != null && InteractAction.WasPressedThisFrame() && currentInteractable.item.ToInventory)
                 {
+                    AudioManager.instance.PlayOneShot(FMODEvent.instance.itemCollectEvent, currentInteractable.transform.position); //toca som
+
                     if (InventoryController.instance != null)
                     {
+                        
+
                         bool verificate = InventoryController.instance.AddItem(currentInteractable.item);
 
                         if (verificate)
@@ -235,6 +239,7 @@ public class PlayerInteraction : MonoBehaviour
                 // INSPEÇÃO DE ITEM (PROTEGIDO CONTRA NULL)
                 if (interactable != null && interactable.item != null && !interactable.item.movable && pressAction != null && pressAction.WasPressedThisFrame())
                 {
+
                     if (interactable.isMoving)
                     {
                         return;
@@ -255,6 +260,8 @@ public class PlayerInteraction : MonoBehaviour
                         if (UIManager.instance != null)
                         {
                             UIManager.instance.OpenItemUI(currentInteractable.item);
+
+                            AudioManager.instance.PlayOneShot(FMODEvent.instance.itemCollectEvent, currentInteractable.transform.position); //toca som
                         }
                         return;
                     }
@@ -265,6 +272,8 @@ public class PlayerInteraction : MonoBehaviour
                         originRotation = currentInteractable.transform.rotation;
                         movingObjectCoroutine = StartCoroutine(MovingObject(currentInteractable, objectViewer.position));
                     }
+                    
+                    AudioManager.instance.PlayOneShot(FMODEvent.instance.itemCollectEvent, currentInteractable.transform.position); //toca som
                 }
             }
             else
@@ -372,6 +381,8 @@ public class PlayerInteraction : MonoBehaviour
                 if (UIManager.instance != null)
                 {
                     UIManager.instance.CloseItemUI();
+
+                    AudioManager.instance.PlayOneShot(FMODEvent.instance.itemCollectEvent, currentInteractable.transform.position); //toca som
                 }
             }
             else if (currentInteractable.item.grabbable)

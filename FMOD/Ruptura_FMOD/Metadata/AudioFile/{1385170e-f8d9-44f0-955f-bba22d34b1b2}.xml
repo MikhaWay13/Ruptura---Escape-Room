@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<objects serializationModel="Studio.02.03.00">
+	<object class="AudioFile" id="{1385170e-f8d9-44f0-955f-bba22d34b1b2}">
+		<property name="assetPath">
+			<value>SFX/Item/itemCollect (8).wav</value>
+		</property>
+		<property name="frequencyInKHz">
+			<value>48</value>
+		</property>
+		<property name="channelCount">
+			<value>1</value>
+		</property>
+		<property name="length">
+			<value>1.8306041666666666</value>
+		</property>
+		<relationship name="masterAssetFolder">
+			<destination>{81a9fb7a-aeca-4357-b425-8277b892d60d}</destination>
+		</relationship>
+	</object>
+</objects>

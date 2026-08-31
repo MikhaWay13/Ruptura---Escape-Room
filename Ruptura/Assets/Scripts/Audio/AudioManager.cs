@@ -3,13 +3,13 @@ using FMODUnity;
 
 public class AudioManager : MonoBehaviour
 {
-    public static AudioManager Instance { get; private set; }
+    public static AudioManager instance { get; private set; }
 
     private void Awake()
     {
-        if (Instance != null)
+        if (instance != null)
         {
-            Print("Não foi encontrado um Audio Manager na cena.");
+            Debug.Log(" foi encontrado mais de um Audio Manager na cena.");
             
         }   
         instance = this;
