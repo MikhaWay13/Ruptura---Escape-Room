@@ -2,7 +2,7 @@
 <objects serializationModel="Studio.02.03.00">
 	<object class="AudioFile" id="{40f9dd8a-dd16-4998-a012-6600f49d43cb}">
 		<property name="assetPath">
-			<value>bleep025.mp3</value>
+			<value>Dialogo/bleep025.mp3</value>
 		</property>
 		<property name="frequencyInKHz">
 			<value>44.0999985</value>
