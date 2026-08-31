@@ -1,4 +1,4 @@
-using UnityEngine;
+/*using UnityEngine;
 using UnityEngine.InputSystem;
 
 public class ClockPuzzle : MonoBehaviour
@@ -352,4 +352,4 @@ public class ClockPuzzle : MonoBehaviour
     }
 
 
-}
+}*/

@@ -24,11 +24,14 @@ public class PlayerInteraction : MonoBehaviour
     [SerializeField] private float movableSpeed = 8f;
     [SerializeField] private float collisionPadding = 0.05f;
 
+    [SerializeField] private CutsceneController cutsceneVidro;
+
     private Camera myCam;
     private Interactables currentInteractable;
     private Outline currentOutline;
     private Interactables currentMovableObject;
     private Rigidbody movableRb;
+
 
     private bool originalGravity;
     private bool originalKinematic;
@@ -36,6 +39,7 @@ public class PlayerInteraction : MonoBehaviour
     private Quaternion originRotation;
     private bool isViewing;
     private bool canFinish;
+
 
     private InputAction InteractAction;
     private InputAction pressAction;
@@ -118,6 +122,8 @@ public class PlayerInteraction : MonoBehaviour
 
                         if (verificate)
                         {
+                            Item itemColetado = currentInteractable.item;
+                            
                             isViewing = false;
                             canFinish = false;
 
@@ -136,6 +142,13 @@ public class PlayerInteraction : MonoBehaviour
 
                             Destroy(currentInteractable.gameObject);
                             currentInteractable = null;
+
+
+                             if (cutsceneVidro != null)
+                            {
+                                cutsceneVidro.TentarIniciar(itemColetado);
+                            }
+
                             return;
                         }
                     }
@@ -189,7 +202,7 @@ public class PlayerInteraction : MonoBehaviour
                     
                 }
 
-                UIManager.instance.SetPressEInteracao(ShowPressEinteract);
+                SetPressEInteracao(ShowPressEinteract);
 
 
 
@@ -250,14 +263,16 @@ public class PlayerInteraction : MonoBehaviour
             {
                 SetHandCursor(false);
                 SetOutline(null);
-                UIManager.instance.SetAvisoEquipar(false);
-                UIManager.instance.SetPressEInteracao(false);
+                SetAvisoEquipar(false);
+                SetPressEInteracao(false);
             }
         }
         else
         {
             SetHandCursor(false);
             SetOutline(null);
+            SetAvisoEquipar(false);
+            SetPressEInteracao(false);
         }
     }
 
@@ -380,6 +395,22 @@ public class PlayerInteraction : MonoBehaviour
             UIManager.instance.SetHandCursor(state);
         }
     }
+
+    private void SetPressEInteracao(bool state)
+{
+    if (UIManager.instance != null)
+    {
+        UIManager.instance.SetPressEInteracao(state);
+    }
+}
+
+private void SetAvisoEquipar(bool state)
+{
+    if (UIManager.instance != null)
+    {
+        UIManager.instance.SetAvisoEquipar(state);
+    }
+}
 
     private void SetBackImage(bool state)
     {

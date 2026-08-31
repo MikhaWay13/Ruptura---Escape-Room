@@ -1,5 +1,12 @@
 fileFormatVersion: 2
 guid: 95e4c9296fc28a84f86a99e2ece290a9
+AssetOrigin:
+  serializedVersion: 1
+  productId: 330666
+  packageName: Wooden Furniture Pack Lite
+  packageVersion: 1.0
+  assetPath: Assets/Wooden Furniture Pack Lite/Meshes/US Furniture Pack 3.fbx
+  uploadId: 787878
 ModelImporter:
   serializedVersion: 24200
   internalIDToNameTable: []
@@ -40,7 +47,7 @@ ModelImporter:
     extraExposedTransformPaths: []
     extraUserProperties: []
     clipAnimations: []
-    isReadable: 0
+    isReadable: 1
   meshes:
     lODScreenPercentages: []
     globalScale: 1
@@ -118,10 +125,3 @@ ModelImporter:
   userData: 
   assetBundleName: 
   assetBundleVariant: 
-AssetOrigin:
-  serializedVersion: 1
-  productId: 330666
-  packageName: Wooden Furniture Pack Lite
-  packageVersion: 1.0
-  assetPath: Assets/Wooden Furniture Pack Lite/Meshes/US Furniture Pack 3.fbx
-  uploadId: 787878

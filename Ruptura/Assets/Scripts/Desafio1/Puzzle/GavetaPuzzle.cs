@@ -1,17 +1,15 @@
-
 using System.Collections;
-using TMPro;
 using UnityEngine;
+
 [DisallowMultipleComponent]
-public class GavetaInterativa : MonoBehaviour, IRaycastInteractable
+public class GavetaPuzzle : MonoBehaviour
 {
     [Header("Referências")]
     [SerializeField] private Transform gavetaMovel;
-    [SerializeField] private TMP_Text textoStatus;
 
     [Header("Movimento")]
     [SerializeField] private Vector3 deslocamentoAberta = new Vector3(-0.7f, 0f, 0f);
-    [SerializeField, Min(0.05f)] private float duracaoMovimento = 0.55f;
+    [SerializeField] private float duracaoMovimento = 0.55f;
 
     public bool EstaAberta => aberta && animacao == null;
 
@@ -22,21 +20,26 @@ public class GavetaInterativa : MonoBehaviour, IRaycastInteractable
 
     private void Awake()
     {
+        if (gavetaMovel == null)
+        {
+            Debug.LogError("GavetaPuzzle: a referência da gaveta móvel não foi configurada.", this);
+            enabled = false;
+            return;
+        }
+
         posicaoFechada = gavetaMovel.localPosition;
         posicaoAberta = posicaoFechada + deslocamentoAberta;
     }
 
-    public void Interact()
+    public void Abrir()
     {
-        if (animacao != null)
+        if (aberta || animacao != null)
         {
             return;
         }
 
-        aberta = !aberta;
-        animacao = StartCoroutine(MoverGaveta(
-aberta ? posicaoAberta : posicaoFechada
-        ));
+        aberta = true;
+        animacao = StartCoroutine(MoverGaveta(posicaoAberta));
     }
 
     private IEnumerator MoverGaveta(Vector3 destino)
@@ -47,27 +50,16 @@ aberta ? posicaoAberta : posicaoFechada
         while (tempo < duracaoMovimento)
         {
             tempo += Time.deltaTime;
+
             float progresso = Mathf.Clamp01(tempo / duracaoMovimento);
             progresso = Mathf.SmoothStep(0f, 1f, progresso);
 
-            gavetaMovel.localPosition = Vector3.Lerp(
-                origem,
-                destino,
-                progresso
-            );
+            gavetaMovel.localPosition = Vector3.Lerp(origem, destino, progresso);
 
             yield return null;
         }
 
         gavetaMovel.localPosition = destino;
         animacao = null;
-        AtualizarTexto();
-    }
-
-    private void AtualizarTexto()
-    {
-        textoStatus.text = aberta
-            ? "Alavanca encontrada! Clique esquerdo para inspecionar."
-            : "Encontre a alavanca dentro da gaveta.";
     }
 }

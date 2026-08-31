@@ -4572,11 +4572,13 @@ MonoBehaviour:
   painelInventory: {fileID: 1363972943}
   HandCursor: {fileID: 1580396804}
   BackImage: {fileID: 645210245}
-  PressE: {fileID: 591256908}
   itemUIPanel: {fileID: 427983270}
   itemUITitleText: {fileID: 1107481697}
   itemUIBodyText: {fileID: 1425980892}
   itemUIImage: {fileID: 1180639994}
+  pressE: {fileID: 591256908}
+  interact: {fileID: 0}
+  painelAviso: {fileID: 0}
 --- !u!114 &678323888
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -10752,16 +10754,11 @@ MonoBehaviour:
   - {fileID: 0}
   - {fileID: 0}
   - {fileID: 0}
-  slotImage:
-  - {fileID: 2082282489}
-  - {fileID: 2022964196}
-  - {fileID: 261676407}
-  - {fileID: 191911321}
-  - {fileID: 1288931928}
-  - {fileID: 589818231}
-  - {fileID: 328587173}
-  - {fileID: 1808408901}
+  slotImages: []
   slotAmount: 0000000000000000000000000000000000000000000000000000000000000000
+  slotTexts: []
+  slotObjects: []
+  optionsSlots: []
 --- !u!1 &1425980889
 GameObject:
   m_ObjectHideFlags: 0

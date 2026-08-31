@@ -7,6 +7,9 @@ public class PuzzleMacacos : MonoBehaviour
     public MonumentoPuzzle pedestalGramofone;  // Espera o Macaco Surdo
     public MonumentoPuzzle pedestalMicrofone;  // Espera o Macaco Mudo
 
+    [Header("Gaveta do puzzle")]
+    [SerializeField] private GavetaPuzzle gavetaPuzzle;
+
     private bool puzzleJaResolvido = false;
 
     // Função que checa se os 3 pedestais estão com os itens corretos
@@ -25,7 +28,19 @@ public class PuzzleMacacos : MonoBehaviour
         if (pedestalOculos.EstaCorreto() && pedestalGramofone.EstaCorreto() && pedestalMicrofone.EstaCorreto())
         {
             puzzleJaResolvido = true;
-            print("funcionou! O armário foi aberto!"); // Mensagem de sucesso!
+
+             if (gavetaPuzzle != null)
+        {
+            gavetaPuzzle.Abrir();
         }
+        else
+        {
+            Debug.LogWarning("A GavetaPuzzle não foi configurada.", this);
+        }
+
+        }
+
+
+
     }
 }
