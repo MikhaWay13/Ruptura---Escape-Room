@@ -10560,6 +10560,11 @@ MonoBehaviour:
   lookSensitivity: 0.1
   minPitch: -80
   maxPitch: 80
+  footstepInterval: 0.45
+  minimumMovementSpeed: 0.1
+  headBobHorizontalAmount: 0.025
+  headBobVerticalAmount: 0.04
+  headBobSmoothing: 12
 --- !u!143 &1417248271
 CharacterController:
   m_ObjectHideFlags: 0
@@ -10733,6 +10738,7 @@ MonoBehaviour:
   outlineWidth: 4
   movableSpeed: 8
   collisionPadding: 0.05
+  cutsceneVidro: {fileID: 0}
 --- !u!114 &1417248277
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -11810,7 +11816,7 @@ MonoBehaviour:
       Data2: 1181771924
       Data3: 798823305
       Data4: -1841944589
-    Path: event:/Music 2
+    Path: event:/Music_Menu
   Event: 
   EventPlayTrigger: 1
   EventStopTrigger: 0

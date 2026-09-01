@@ -19,5 +19,5 @@ MonoBehaviour:
       Data2: 1094660635
       Data3: -379477059
       Data4: -1468290671
-    Path: event:/DialogoPlayer
+    Path: event:/Player/DialogoPlayer
   nameColor: {r: 0.4433962, g: 0.45114297, b: 1, a: 1}

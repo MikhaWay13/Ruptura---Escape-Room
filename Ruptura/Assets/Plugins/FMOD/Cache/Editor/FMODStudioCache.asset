@@ -27,6 +27,33 @@ MonoBehaviour:
   MinDistance: 1
   MaxDistance: 20
   Length: 156
+--- !u!114 &-5175371145805242368
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/Player/DialogoPlayer
+  m_EditorClassIdentifier: FMODUnityEditor::FMODUnity.EditorEventRef
+  Path: event:/Player/DialogoPlayer
+  Guid:
+    Data1: -1076570651
+    Data2: 1094660635
+    Data3: -379477059
+    Data4: -1468290671
+  Banks:
+  - {fileID: 7031780368334577041}
+  IsStream: 0
+  Is3D: 0
+  IsOneShot: 1
+  Parameters: []
+  MinDistance: 1
+  MaxDistance: 20
+  Length: 156
 --- !u!114 &11400000
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -43,28 +70,35 @@ MonoBehaviour:
   - {fileID: 8139959197402777260}
   - {fileID: 7031780368334577041}
   - {fileID: 7179270961117431224}
+  - {fileID: 8180097618835262319}
   EditorEvents:
   - {fileID: -5392930651259734711}
-  - {fileID: 1009245822883863098}
-  - {fileID: 6313398412803976386}
   - {fileID: 4707350848829511037}
+  - {fileID: 8336433912768500803}
+  - {fileID: -5175371145805242368}
+  - {fileID: 2109657697547140390}
+  - {fileID: 2764168990844718373}
   EditorParameters: []
   MasterBanks:
   - {fileID: 7031780368334577041}
   StringsBanks:
   - {fileID: 8139959197402777260}
   cacheVersion: 131859
-  cacheTime: 639237957393428998
+  cacheTime: 639238074844333059
   SerializableEventsDict:
   - key: event:/DialogoNarrador
     index: 0
-  - key: event:/Music 2
-    index: 1
-  - key: event:/DialogoPlayer
-    index: 2
   - key: event:/ItemCollect
+    index: 1
+  - key: event:/Music_Menu
+    index: 2
+  - key: event:/Player/DialogoPlayer
     index: 3
---- !u!114 &1009245822883863098
+  - key: event:/Music_Radio
+    index: 4
+  - key: event:/Player/PlayerFS
+    index: 5
+--- !u!114 &2109657697547140390
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -74,23 +108,50 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
-  m_Name: event:/Music 2
+  m_Name: event:/Music_Radio
   m_EditorClassIdentifier: FMODUnityEditor::FMODUnity.EditorEventRef
-  Path: event:/Music 2
+  Path: event:/Music_Radio
   Guid:
-    Data1: -59063887
-    Data2: 1181771924
-    Data3: 798823305
-    Data4: -1841944589
+    Data1: 1975616314
+    Data2: 1077146923
+    Data3: -410622542
+    Data4: 189955897
   Banks:
-  - {fileID: 7031780368334577041}
+  - {fileID: 8180097618835262319}
   IsStream: 1
   Is3D: 1
-  IsOneShot: 0
+  IsOneShot: 1
   Parameters: []
   MinDistance: 1
   MaxDistance: 20
-  Length: 205000
+  Length: 208927
+--- !u!114 &2764168990844718373
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/Player/PlayerFS
+  m_EditorClassIdentifier: FMODUnityEditor::FMODUnity.EditorEventRef
+  Path: event:/Player/PlayerFS
+  Guid:
+    Data1: -909838883
+    Data2: 1156274067
+    Data3: 70868884
+    Data4: 881864946
+  Banks:
+  - {fileID: 7179270961117431224}
+  IsStream: 0
+  Is3D: 0
+  IsOneShot: 1
+  Parameters: []
+  MinDistance: 1
+  MaxDistance: 20
+  Length: 304
 --- !u!114 &4707350848829511037
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -118,33 +179,6 @@ MonoBehaviour:
   MinDistance: 1
   MaxDistance: 20
   Length: 875
---- !u!114 &6313398412803976386
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
-  m_Name: event:/DialogoPlayer
-  m_EditorClassIdentifier: FMODUnityEditor::FMODUnity.EditorEventRef
-  Path: event:/DialogoPlayer
-  Guid:
-    Data1: -1076570651
-    Data2: 1094660635
-    Data3: -379477059
-    Data4: -1468290671
-  Banks:
-  - {fileID: 7031780368334577041}
-  IsStream: 0
-  Is3D: 0
-  IsOneShot: 1
-  Parameters: []
-  MinDistance: 1
-  MaxDistance: 20
-  Length: 156
 --- !u!114 &7031780368334577041
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -160,7 +194,7 @@ MonoBehaviour:
   Path: ../FMOD/Ruptura_FMOD/Build/Desktop/Master.bank
   Name: Master
   StudioPath: bank:/Master
-  lastModified: 639237957381644843
+  lastModified: 639238074842667305
   FileSizes:
   - Name: Desktop
     Value: 2265120
@@ -180,10 +214,10 @@ MonoBehaviour:
   Path: ../FMOD/Ruptura_FMOD/Build/Desktop/SFX.bank
   Name: SFX
   StudioPath: bank:/SFX
-  lastModified: 639237957393428998
+  lastModified: 639238074843602571
   FileSizes:
   - Name: Desktop
-    Value: 118720
+    Value: 132064
   Exists: 1
 --- !u!114 &8139959197402777260
 MonoBehaviour:
@@ -200,8 +234,55 @@ MonoBehaviour:
   Path: ../FMOD/Ruptura_FMOD/Build/Desktop/Master.strings.bank
   Name: Master.strings
   StudioPath: bank:/Master.strings
-  lastModified: 639237957381694814
+  lastModified: 639238074842717325
   FileSizes:
   - Name: Desktop
-    Value: 964
+    Value: 1114
   Exists: 1
+--- !u!114 &8180097618835262319
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c18180ecb35941f4682ae60107b85b7c, type: 3}
+  m_Name: bank:/Music.bank
+  m_EditorClassIdentifier: FMODUnityEditor::FMODUnity.EditorBankRef
+  Path: ../FMOD/Ruptura_FMOD/Build/Desktop/Music.bank
+  Name: Music
+  StudioPath: bank:/Music
+  lastModified: 639238074844333059
+  FileSizes:
+  - Name: Desktop
+    Value: 2224960
+  Exists: 1
+--- !u!114 &8336433912768500803
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/Music_Menu
+  m_EditorClassIdentifier: FMODUnityEditor::FMODUnity.EditorEventRef
+  Path: event:/Music_Menu
+  Guid:
+    Data1: -59063887
+    Data2: 1181771924
+    Data3: 798823305
+    Data4: -1841944589
+  Banks:
+  - {fileID: 7031780368334577041}
+  IsStream: 1
+  Is3D: 1
+  IsOneShot: 0
+  Parameters: []
+  MinDistance: 1
+  MaxDistance: 20
+  Length: 205000
