@@ -122,6 +122,15 @@
                     "processors": "",
                     "interactions": "",
                     "initialStateCheck": false
+                },
+                {
+                    "name": "ClockConfirm",
+                    "type": "Button",
+                    "id": "463e9a58-c61b-47ea-b9ad-92a886d4b184",
+                    "expectedControlType": "",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
                 }
             ],
             "bindings": [
@@ -562,6 +571,17 @@
                     "processors": "",
                     "groups": ";Keyboard&Mouse",
                     "action": "Back",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "3b418ac6-59ac-4e1a-9dc4-92ac1293a8b7",
+                    "path": "<Keyboard>/q",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "ClockConfirm",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }
