@@ -15,8 +15,8 @@ public class ClockHand : MonoBehaviour
     [SerializeField] private Transform visual;
 
     [Header("Rotação")]
-    [SerializeField] private float rotationSpeed = 0.35f;
     [SerializeField] private bool invertRotation = false;
+    [SerializeField] private float rotationSensitivity = 1f;
 
     private float currentAngle;
     private Quaternion initialVisualRotation;
@@ -34,19 +34,34 @@ public class ClockHand : MonoBehaviour
         ApplyRotation();
     }
 
-    public void RotateFromMouse(float mouseDeltaX)
+    public void SetAngle(float angle)
     {
-        float direction = invertRotation ? -1f : 1f;
+        if (invertRotation)
+            angle = -angle;
 
-        currentAngle += mouseDeltaX * rotationSpeed * direction;
-        currentAngle = Mathf.Repeat(currentAngle, 360f);
+        currentAngle =
+            Mathf.Repeat(
+                angle * rotationSensitivity,
+                360f
+            );
 
         ApplyRotation();
     }
 
-    public void SetAngle(float angle)
+    public void RotateByAngle(float angleDelta)
     {
-        currentAngle = Mathf.Repeat(angle, 360f);
+        if (invertRotation)
+            angleDelta = -angleDelta;
+
+        currentAngle +=
+            angleDelta * rotationSensitivity;
+
+        currentAngle =
+            Mathf.Repeat(
+                currentAngle,
+                360f
+            );
+
         ApplyRotation();
     }
 
@@ -55,27 +70,48 @@ public class ClockHand : MonoBehaviour
         if (visual == null)
             return;
 
-        visual.localRotation = initialVisualRotation * Quaternion.Euler(0f, 0f, -currentAngle);
+        visual.localRotation =
+            initialVisualRotation *
+            Quaternion.Euler(
+                0f,
+                0f,
+                -currentAngle
+            );
     }
 
     public int GetMinute()
     {
-        float angle = Mathf.Repeat(currentAngle, 360f);
-        int minute = Mathf.RoundToInt(angle / 6f);
+        float angle =
+            Mathf.Repeat(
+                currentAngle,
+                360f
+            );
+
+        int minute =
+            Mathf.RoundToInt(
+                angle / 6f
+            );
 
         return minute % 60;
     }
 
     public float GetHourValue()
     {
-        float angle = Mathf.Repeat(currentAngle, 360f);
+        float angle =
+            Mathf.Repeat(
+                currentAngle,
+                360f
+            );
 
         return angle / 30f;
     }
 
     public int GetHour()
     {
-        int hour = Mathf.RoundToInt(GetHourValue());
+        int hour =
+            Mathf.RoundToInt(
+                GetHourValue()
+            );
 
         hour %= 12;
 

@@ -14,23 +14,17 @@ public class ClockPuzzleInput : MonoBehaviour
     [Header("Raycast")]
     [SerializeField] private float handRayDistance = 5f;
 
-    [Header("Rotação")]
-    [SerializeField] private float rotationSensitivity = 1f;
-
-    private InputAction pressInput;
     private InputAction backInput;
     private InputAction inventoryInput;
-    private InputAction confirmInput;
+    private InputAction checkInput;
 
     private ClockHand selectedHand;
-    private bool cursorUnlocked;
 
     private void Awake()
     {
-        pressInput = InputSystem.actions.FindAction("Interaction/Press");
         backInput = InputSystem.actions.FindAction("Interaction/Back");
         inventoryInput = InputSystem.actions.FindAction("Player/Inventory");
-        confirmInput = InputSystem.actions.FindAction("Interaction/ClockConfirm");
+        checkInput = InputSystem.actions.FindAction("Interaction/Press");
     }
 
     private void OnEnable()
@@ -50,133 +44,162 @@ public class ClockPuzzleInput : MonoBehaviour
         if (inventoryInput != null)
             inventoryInput.performed -= OnInventoryPerformed;
 
-        RestoreCursor();
+        selectedHand = null;
+
+        Cursor.lockState = CursorLockMode.Locked;
+        Cursor.visible = false;
     }
 
     private void Update()
     {
-        if (clockPuzzle == null || !clockPuzzle.IsOpen || clockPuzzle.IsSolved)
+        if (clockPuzzle == null ||
+            !clockPuzzle.IsOpen ||
+            clockPuzzle.IsSolved)
         {
             selectedHand = null;
-            RestoreCursor();
             return;
         }
 
-        UnlockCursor();
-        HandleHandSelection();
-        HandleHandRotation();
-        HandleClockConfirmation();
-    }
-
-    private void UnlockCursor()
-    {
-        if (cursorUnlocked)
-            return;
-
         Cursor.lockState = CursorLockMode.None;
         Cursor.visible = true;
-        cursorUnlocked = true;
+
+        HandleHandSelection();
+        HandleHandRotation();
+
+        if (checkInput != null &&
+            checkInput.WasPressedThisFrame())
+        {
+            clockPuzzle.CheckClock();
+        }
     }
 
-    private void RestoreCursor()
+    private void HandleHandSelection()
     {
-        if (!cursorUnlocked)
+        if (clockCamera == null ||
+            Mouse.current == null)
             return;
 
-        Cursor.lockState = CursorLockMode.Locked;
-        Cursor.visible = false;
-        cursorUnlocked = false;
+        if (!Mouse.current.leftButton.wasPressedThisFrame)
+            return;
+
+        Vector2 mousePosition =
+            Mouse.current.position.ReadValue();
+
+        Ray ray =
+            clockCamera.ScreenPointToRay(mousePosition);
+
+        LayerMask combinedLayer =
+            hourHandLayer | minuteHandLayer;
+
+        if (!Physics.Raycast(
+            ray,
+            out RaycastHit hit,
+            handRayDistance,
+            combinedLayer,
+            QueryTriggerInteraction.Ignore))
+        {
+            selectedHand = null;
+            return;
+        }
+
+        ClockHand hand =
+            hit.collider.GetComponentInParent<ClockHand>();
+
+        if (hand == null)
+        {
+            selectedHand = null;
+            return;
+        }
+
+        if (!clockPuzzle.CanSelectHand(hand))
+        {
+            selectedHand = null;
+            return;
+        }
+
+        selectedHand = hand;
     }
 
-    private void OnBackPerformed(InputAction.CallbackContext context)
+    private void HandleHandRotation()
     {
-        if (clockPuzzle == null || !clockPuzzle.IsOpen || clockPuzzle.IsSolved)
+        if (selectedHand == null ||
+            Mouse.current == null ||
+            clockCamera == null)
             return;
 
-        if (UIManager.instance != null && UIManager.instance.IsInventoryOpen)
+        if (!Mouse.current.leftButton.isPressed)
+        {
+            selectedHand = null;
+            return;
+        }
+
+        Vector2 mousePosition =
+            Mouse.current.position.ReadValue();
+
+        Vector3 handScreenPosition =
+            clockCamera.WorldToScreenPoint(
+                selectedHand.transform.position
+            );
+
+        Vector2 center =
+            new Vector2(
+                handScreenPosition.x,
+                handScreenPosition.y
+            );
+
+        Vector2 direction =
+            mousePosition - center;
+
+        if (direction.sqrMagnitude < 4f)
+            return;
+
+        float mouseAngle =
+            Mathf.Atan2(
+                direction.y,
+                direction.x
+            ) * Mathf.Rad2Deg;
+
+        float desiredAngle =
+            mouseAngle - 90f;
+
+        selectedHand.SetAngle(
+            desiredAngle
+        );
+    }
+
+    private void OnBackPerformed(
+        InputAction.CallbackContext context)
+    {
+        if (clockPuzzle == null ||
+            !clockPuzzle.IsOpen ||
+            clockPuzzle.IsSolved)
+            return;
+
+        if (UIManager.instance != null &&
+            UIManager.instance.IsInventoryOpen)
         {
             UIManager.instance.SetInventory(false);
             return;
         }
 
         selectedHand = null;
+
         clockPuzzle.CloseClock();
     }
 
-    private void OnInventoryPerformed(InputAction.CallbackContext context)
+    private void OnInventoryPerformed(
+        InputAction.CallbackContext context)
     {
-        if (clockPuzzle == null || !clockPuzzle.IsOpen || clockPuzzle.IsSolved)
+        if (clockPuzzle == null ||
+            !clockPuzzle.IsOpen ||
+            clockPuzzle.IsSolved)
             return;
 
         if (UIManager.instance == null)
             return;
 
-        UIManager.instance.SetInventory(!UIManager.instance.IsInventoryOpen);
-    }
-
-    private void HandleClockConfirmation()
-    {
-        if (confirmInput == null)
-            return;
-
-        if (!confirmInput.WasPressedThisFrame())
-            return;
-
-        clockPuzzle.CheckClock();
-    }
-
-    private void HandleHandSelection()
-    {
-        if (pressInput == null || clockCamera == null || Mouse.current == null)
-            return;
-
-        if (!pressInput.WasPressedThisFrame())
-            return;
-
-        Vector2 mousePosition = Mouse.current.position.ReadValue();
-        Ray ray = clockCamera.ScreenPointToRay(mousePosition);
-
-        if (Physics.Raycast(ray, out RaycastHit hourHit, handRayDistance, hourHandLayer, QueryTriggerInteraction.Ignore))
-        {
-            ClockHand hand = hourHit.collider.GetComponentInParent<ClockHand>();
-
-            if (hand != null && clockPuzzle.CanSelectHand(hand))
-            {
-                selectedHand = hand;
-                return;
-            }
-        }
-
-        if (Physics.Raycast(ray, out RaycastHit minuteHit, handRayDistance, minuteHandLayer, QueryTriggerInteraction.Ignore))
-        {
-            ClockHand hand = minuteHit.collider.GetComponentInParent<ClockHand>();
-
-            if (hand != null && clockPuzzle.CanSelectHand(hand))
-            {
-                selectedHand = hand;
-                return;
-            }
-        }
-
-        selectedHand = null;
-    }
-
-    private void HandleHandRotation()
-    {
-        if (selectedHand == null || pressInput == null || Mouse.current == null)
-            return;
-
-        if (!pressInput.IsPressed())
-        {
-            selectedHand = null;
-            return;
-        }
-
-        Vector2 mouseDelta = Mouse.current.delta.ReadValue();
-
-        if (mouseDelta.sqrMagnitude < 0.001f)
-            return;
-
-        selectedHand.RotateFromMouse(mouseDelta.x * rotationSensitivity);
+        UIManager.instance.SetInventory(
+            !UIManager.instance.IsInventoryOpen
+        );
     }
 }
