@@ -11,20 +11,40 @@ public class ClockPuzzleInput : MonoBehaviour
     [SerializeField] private LayerMask hourHandLayer;
     [SerializeField] private LayerMask minuteHandLayer;
 
+    [Header("Layer do relógio")]
+    [SerializeField] private LayerMask clockLayer;
+
     [Header("Raycast")]
     [SerializeField] private float handRayDistance = 5f;
 
+    [Header("Rotação")]
+    [SerializeField] private float rotationSensitivity = 1f;
+    [SerializeField] private bool invertRotation = false;
+
     private InputAction backInput;
     private InputAction inventoryInput;
-    private InputAction checkInput;
+    private InputAction confirmInput;
 
     private ClockHand selectedHand;
 
+    private Vector2 previousMousePosition;
+
     private void Awake()
     {
-        backInput = InputSystem.actions.FindAction("Interaction/Back");
-        inventoryInput = InputSystem.actions.FindAction("Player/Inventory");
-        checkInput = InputSystem.actions.FindAction("Interaction/Press");
+        backInput =
+            InputSystem.actions.FindAction(
+                "Interaction/Back"
+            );
+
+        inventoryInput =
+            InputSystem.actions.FindAction(
+                "Player/Inventory"
+            );
+
+        confirmInput =
+            InputSystem.actions.FindAction(
+                "Interaction/Confirm"
+            );
     }
 
     private void OnEnable()
@@ -46,7 +66,9 @@ public class ClockPuzzleInput : MonoBehaviour
 
         selectedHand = null;
 
-        Cursor.lockState = CursorLockMode.Locked;
+        Cursor.lockState =
+            CursorLockMode.Locked;
+
         Cursor.visible = false;
     }
 
@@ -60,17 +82,21 @@ public class ClockPuzzleInput : MonoBehaviour
             return;
         }
 
-        Cursor.lockState = CursorLockMode.None;
+        Cursor.lockState =
+            CursorLockMode.None;
+
         Cursor.visible = true;
 
         HandleHandSelection();
         HandleHandRotation();
 
-        if (checkInput != null &&
-            checkInput.WasPressedThisFrame())
+        // Q = confirmar
+        if (confirmInput != null &&
+            confirmInput.WasPressedThisFrame())
         {
-            clockPuzzle.CheckClock();
+            clockPuzzle.ConfirmClock();
         }
+        HandleClockConfirmation();
     }
 
     private void HandleHandSelection()
@@ -86,10 +112,13 @@ public class ClockPuzzleInput : MonoBehaviour
             Mouse.current.position.ReadValue();
 
         Ray ray =
-            clockCamera.ScreenPointToRay(mousePosition);
+            clockCamera.ScreenPointToRay(
+                mousePosition
+            );
 
         LayerMask combinedLayer =
-            hourHandLayer | minuteHandLayer;
+            hourHandLayer |
+            minuteHandLayer;
 
         if (!Physics.Raycast(
             ray,
@@ -118,6 +147,9 @@ public class ClockPuzzleInput : MonoBehaviour
         }
 
         selectedHand = hand;
+
+        previousMousePosition =
+            mousePosition;
     }
 
     private void HandleHandRotation()
@@ -133,7 +165,7 @@ public class ClockPuzzleInput : MonoBehaviour
             return;
         }
 
-        Vector2 mousePosition =
+        Vector2 currentMousePosition =
             Mouse.current.position.ReadValue();
 
         Vector3 handScreenPosition =
@@ -147,24 +179,86 @@ public class ClockPuzzleInput : MonoBehaviour
                 handScreenPosition.y
             );
 
-        Vector2 direction =
-            mousePosition - center;
+        Vector2 previousDirection =
+            previousMousePosition - center;
 
-        if (direction.sqrMagnitude < 4f)
+        Vector2 currentDirection =
+            currentMousePosition - center;
+
+        if (previousDirection.sqrMagnitude < 25f ||
+            currentDirection.sqrMagnitude < 25f)
+        {
+            previousMousePosition =
+                currentMousePosition;
+
             return;
+        }
 
-        float mouseAngle =
+        float previousAngle =
             Mathf.Atan2(
-                direction.y,
-                direction.x
+                previousDirection.y,
+                previousDirection.x
             ) * Mathf.Rad2Deg;
 
-        float desiredAngle =
-            mouseAngle - 90f;
+        float currentAngle =
+            Mathf.Atan2(
+                currentDirection.y,
+                currentDirection.x
+            ) * Mathf.Rad2Deg;
 
-        selectedHand.SetAngle(
-            desiredAngle
+        float angleDelta =
+            Mathf.DeltaAngle(
+                previousAngle,
+                currentAngle
+            );
+
+        if (invertRotation)
+            angleDelta = -angleDelta;
+
+        angleDelta *= rotationSensitivity;
+
+        selectedHand.RotateByAngle(
+            angleDelta
         );
+
+        previousMousePosition =
+            currentMousePosition;
+    }
+
+    private void HandleClockConfirmation()
+    {
+        if (clockCamera == null ||
+            Mouse.current == null)
+            return;
+
+        if (!Mouse.current.leftButton.wasPressedThisFrame)
+            return;
+
+        Vector2 mousePosition =
+            Mouse.current.position.ReadValue();
+
+        Ray ray =
+            clockCamera.ScreenPointToRay(
+                mousePosition
+            );
+
+        if (!Physics.Raycast(
+            ray,
+            out RaycastHit hit,
+            handRayDistance,
+            clockLayer,
+            QueryTriggerInteraction.Ignore))
+        {
+            return;
+        }
+
+        ClockInteraction clock =
+            hit.collider.GetComponentInParent<ClockInteraction>();
+
+        if (clock != null)
+        {
+            clockPuzzle.ConfirmClock();
+        }
     }
 
     private void OnBackPerformed(

@@ -2375,10 +2375,11 @@ MonoBehaviour:
   minuteHand: {fileID: 1462840534}
   hourItem: {fileID: 11400000, guid: 7acb1d073a95e66468888681dc69342e, type: 2}
   minuteItem: {fileID: 11400000, guid: 2a47491db778c0f4fa2aa038937375f1, type: 2}
-  targetHour: 10
-  targetMinute: 35
-  hourTolerance: 1
-  minuteTolerance: 1
+  clockCamera: {fileID: 0}
+  hourMinZ: -144.399
+  hourMaxZ: -126.156
+  minuteMinZ: -57.964
+  minuteMaxZ: -40.264
   clockDoor: {fileID: 1621978390}
   doorOpenAxis: {x: 0, y: 112.959, z: 0}
   doorOpenAngle: 90
@@ -2404,7 +2405,12 @@ MonoBehaviour:
   minuteHandLayer:
     serializedVersion: 2
     m_Bits: 512
+  clockLayer:
+    serializedVersion: 2
+    m_Bits: 0
   handRayDistance: 5
+  rotationSensitivity: 1
+  invertRotation: 0
 --- !u!1001 &260896200
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -11265,19 +11271,19 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2165661427249281482, guid: 265be03e50f14cf40950bc8142ac77c5, type: 3}
       propertyPath: m_LocalRotation.w
-      value: 0.99993235
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 2165661427249281482, guid: 265be03e50f14cf40950bc8142ac77c5, type: 3}
       propertyPath: m_LocalRotation.x
-      value: -0.000000048183004
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 2165661427249281482, guid: 265be03e50f14cf40950bc8142ac77c5, type: 3}
       propertyPath: m_LocalRotation.y
-      value: -0.00000004272725
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 2165661427249281482, guid: 265be03e50f14cf40950bc8142ac77c5, type: 3}
       propertyPath: m_LocalRotation.z
-      value: -0.011633164
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 2165661427249281482, guid: 265be03e50f14cf40950bc8142ac77c5, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
@@ -11289,7 +11295,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2165661427249281482, guid: 265be03e50f14cf40950bc8142ac77c5, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
-      value: -1.333
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 2729172508396232750, guid: 265be03e50f14cf40950bc8142ac77c5, type: 3}
       propertyPath: m_Name
@@ -14556,9 +14562,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::ClockHand
   handType: 1
-  visual: {fileID: 121093277}
+  visual: {fileID: 1462840535}
   invertRotation: 0
-  rotationSensitivity: 0.3
 --- !u!4 &1462840535 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 1287447108473329652, guid: 17891ac5627ec2a4a923d4ac7fafaac3, type: 3}
@@ -16553,14 +16558,14 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1621978389}
   serializedVersion: 2
-  m_LocalRotation: {x: -0, y: 0.8995838, z: -0, w: 0.43674815}
-  m_LocalPosition: {x: -0.994, y: 5.18, z: 18.057077}
-  m_LocalScale: {x: 1.5193999, y: 1, z: 1}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -0.979, y: 5.18, z: 18.057077}
+  m_LocalScale: {x: 1.6260617, y: 1.0729, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 8124098636579947270}
   m_Father: {fileID: 586950868}
-  m_LocalEulerAnglesHint: {x: 0, y: 128.207, z: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &1630012201
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -17903,9 +17908,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::ClockHand
   handType: 0
-  visual: {fileID: 893933118}
+  visual: {fileID: 1815287966}
   invertRotation: 1
-  rotationSensitivity: 0.3
 --- !u!4 &1815287966 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 2165661427249281482, guid: 265be03e50f14cf40950bc8142ac77c5, type: 3}
@@ -57388,13 +57392,13 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5244974796702682604}
   serializedVersion: 2
-  m_LocalRotation: {x: -0.7070765, y: -0.006557554, z: -0.0065574637, w: 0.7070763}
+  m_LocalRotation: {x: -0.7071068, y: 0, z: 0, w: 0.7071068}
   m_LocalPosition: {x: -0.013297753, y: 0.0019874573, z: 0.008041382}
   m_LocalScale: {x: 10.248411, y: 9.247172, z: 7.858255}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 1621978390}
-  m_LocalEulerAnglesHint: {x: -90, y: 0, z: -1.063}
+  m_LocalEulerAnglesHint: {x: -90, y: 0, z: 0}
 --- !u!1 &8124268359932422285
 GameObject:
   m_ObjectHideFlags: 0

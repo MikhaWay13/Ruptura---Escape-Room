@@ -16,7 +16,6 @@ public class ClockHand : MonoBehaviour
 
     [Header("Rotação")]
     [SerializeField] private bool invertRotation = false;
-    [SerializeField] private float rotationSensitivity = 1f;
 
     private float currentAngle;
     private Quaternion initialVisualRotation;
@@ -36,14 +35,8 @@ public class ClockHand : MonoBehaviour
 
     public void SetAngle(float angle)
     {
-        if (invertRotation)
-            angle = -angle;
-
         currentAngle =
-            Mathf.Repeat(
-                angle * rotationSensitivity,
-                360f
-            );
+            Mathf.Repeat(angle, 360f);
 
         ApplyRotation();
     }
@@ -53,8 +46,7 @@ public class ClockHand : MonoBehaviour
         if (invertRotation)
             angleDelta = -angleDelta;
 
-        currentAngle +=
-            angleDelta * rotationSensitivity;
+        currentAngle += angleDelta;
 
         currentAngle =
             Mathf.Repeat(

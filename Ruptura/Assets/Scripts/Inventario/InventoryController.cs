@@ -297,9 +297,7 @@ private void Awake()
     }
 
 
-    // ==========================================
-    // FUNÇÕES DOS BOTÕES (EQUIPAR / ROTACIONAR)
-    // ==========================================
+
     public void EquiparSlot(int index)
 {
     if (ClockPuzzle.instance != null && ClockPuzzle.instance.IsOpen)
