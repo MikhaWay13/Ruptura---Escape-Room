@@ -10974,7 +10974,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &224142492
 Transform:
   m_ObjectHideFlags: 0
@@ -15055,6 +15055,7 @@ Transform:
   m_Children:
   - {fileID: 1904007531}
   - {fileID: 339929852}
+  - {fileID: 1307510865}
   m_Father: {fileID: 553043234}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &296754701
@@ -31193,7 +31194,7 @@ MonoBehaviour:
   alvoRotacao: {fileID: 89685056}
   estante: {fileID: 1232025414}
   textoStatus: {fileID: 1635271624}
-  jogador: {fileID: 1589028464}
+  jogador: {fileID: 1484535628}
   referenciaSilhueta: {fileID: 980940047}
   projetorLigadoNoInicio: 0
   sensibilidadeMouse: 0.15
@@ -47338,7 +47339,6 @@ Transform:
   - {fileID: 1072203213}
   - {fileID: 1064602398}
   - {fileID: 890670398}
-  - {fileID: 1389335446}
   - {fileID: 273821825}
   - {fileID: 601852867}
   - {fileID: 1635277529}
@@ -69178,7 +69178,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 1768265427}
+  m_Father: {fileID: 296754700}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &1308841127
 PrefabInstance:
@@ -72794,7 +72794,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &1382242687
 Transform:
   m_ObjectHideFlags: 0
@@ -73133,7 +73133,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 895730875}
+  m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &1389335447
 MonoBehaviour:
@@ -73200,7 +73200,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &1390915830
 Transform:
   m_ObjectHideFlags: 0
@@ -74619,7 +74619,6 @@ GameObject:
   - component: {fileID: 1415700348}
   - component: {fileID: 1415700347}
   - component: {fileID: 1415700346}
-  - component: {fileID: 1415700345}
   m_Layer: 5
   m_Name: Canvas
   m_TagString: Untagged
@@ -74652,28 +74651,6 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0, y: 0}
---- !u!114 &1415700345
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1415700343}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 8d3209fe10f1360489722d1c14194eb3, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::UIManager
-  painelInventory: {fileID: 1291503342}
-  HandCursor: {fileID: 1743300710}
-  BackImage: {fileID: 1569112418}
-  itemUIPanel: {fileID: 1821015648}
-  itemUITitleText: {fileID: 1834672602}
-  itemUIBodyText: {fileID: 1646231758}
-  itemUIImage: {fileID: 1104840013}
-  pressE: {fileID: 0}
-  interact: {fileID: 0}
-  painelAviso: {fileID: 0}
 --- !u!114 &1415700346
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -74681,7 +74658,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1415700343}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: dc42784cf147c0c48a680349fa168899, type: 3}
   m_Name: 
@@ -83656,7 +83633,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!114 &1589028464
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -94213,7 +94190,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &1768265427
 Transform:
   m_ObjectHideFlags: 0
@@ -94227,7 +94204,6 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
-  - {fileID: 1307510865}
   - {fileID: 644246615}
   m_Father: {fileID: 951520911}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -107473,7 +107449,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &2037341800
 RectTransform:
   m_ObjectHideFlags: 0
@@ -115602,3 +115578,4 @@ SceneRoots:
   - {fileID: 951520911}
   - {fileID: 1195302349}
   - {fileID: 77883154}
+  - {fileID: 1389335446}

@@ -19,7 +19,6 @@ public class InventoryController : MonoBehaviour
     public GameObject[] optionsSlots;   
 
     private int slotSobMouse = -1;
-    private int frameUltimoEquipar = -1;
 
     // Cor escura Hexadecimal: #151A1D
    private readonly Color corVazia = new Color32(0x15, 0x1A, 0x1D, 255);
@@ -57,22 +56,6 @@ private void Awake()
             {
                 novoSlotSobMouse = i;
                 break;
-            }
-        }
-
-        if (novoSlotSobMouse >= 0 &&
-            optionsSlots[novoSlotSobMouse].activeSelf &&
-            Mouse.current.leftButton.wasPressedThisFrame)
-        {
-            RectTransform botaoEquipar = optionsSlots[novoSlotSobMouse]
-                .transform.Find("Equipar")
-                .GetComponent<RectTransform>();
-
-            if (RectTransformUtility.RectangleContainsScreenPoint(botaoEquipar, posicaoMouse) &&
-                frameUltimoEquipar != Time.frameCount)
-            {
-                EquiparSlot(novoSlotSobMouse);
-                return;
             }
         }
 
@@ -278,8 +261,6 @@ private void Awake()
     // ==========================================
     public void EquiparSlot(int index)
     {
-        frameUltimoEquipar = Time.frameCount;
-
         if (PlayerEquipar.instance != null)
         {
             PlayerEquipar.instance.Equipar(index);
