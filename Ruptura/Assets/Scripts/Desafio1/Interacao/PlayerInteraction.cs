@@ -181,6 +181,7 @@ public class PlayerInteraction : MonoBehaviour
         {
             IRaycastInteractable directInteractable = hit.collider.GetComponentInParent<IRaycastInteractable>();
             Interactables interactable = hit.collider.GetComponentInParent<Interactables>();
+            RotacaoCofre rotacaoCofre = hit.collider.GetComponentInParent<RotacaoCofre>();
 
             // Prioriza o interactable mais próximo na hierarquia caso haja sobreposição
             if (directInteractable is MonoBehaviour directComponent && interactable != null)
@@ -216,6 +217,12 @@ public class PlayerInteraction : MonoBehaviour
                 }
 
                 SetPressEInteracao(ShowPressEinteract);
+
+                if (rotacaoCofre != null && pressAction != null && pressAction.WasPressedThisFrame())
+                {
+                    rotacaoCofre.Press();
+                    return;
+                }
 
 
 
