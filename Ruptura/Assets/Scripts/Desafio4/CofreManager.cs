@@ -16,12 +16,15 @@ public class CofreManager : MonoBehaviour, IRaycastInteractable
     private Quaternion playerRotation;
 
     private InputAction BackAction;
+    private CharacterController characterController;
 
     private bool controle = true;
 
     private void Awake()
     {
         BackAction = InputSystem.actions.FindAction("Interaction/Back");
+
+        characterController = player.GetComponent<CharacterController>(); 
     }
 
     private void Update()
@@ -34,23 +37,44 @@ public class CofreManager : MonoBehaviour, IRaycastInteractable
 
     public void Interact()
     {
-            playerPosition = player.position;
-            playerRotation = player.rotation;
+        Debug.Log(
+      "ANTES | Objeto: " + player.name +
+      " | Player: " + player.position +
+      " | Tranca: " + tranca.position
+  );
+
         if (controle)
         {
+            playerPosition = player.position;
+            playerRotation = player.rotation;
+            Debug.Log("POSIÇÃO REALMENTE GUARDADA: " + playerPosition);
+
             playerController.SetMovementEnabled(false);
-            player.SetPositionAndRotation(tranca.position, tranca.rotation);
+            TeleportarPlayer(tranca.position, tranca.rotation);
             controle = false;
+            Debug.Log("APÓS A MOVIMENTAÇÃO: " + playerPosition);
         }
     }
 
     public void Back()
     {
-      
-            player.SetPositionAndRotation(playerPosition, playerRotation);
-            playerController.SetMovementEnabled(true);
+
+        TeleportarPlayer(playerPosition, playerRotation);
+        Debug.Log("VOLTA PARA A INICIAL: " + playerPosition);
+        playerController.SetMovementEnabled(true);
             controle = true;
+   
        
+    }
+
+    private void TeleportarPlayer(Vector3 posicao, Quaternion rotacao)
+    {
+        characterController.enabled = false;
+
+        player.SetPositionAndRotation(posicao, rotacao);
+        Physics.SyncTransforms();
+
+        characterController.enabled = true;
     }
 
 }
