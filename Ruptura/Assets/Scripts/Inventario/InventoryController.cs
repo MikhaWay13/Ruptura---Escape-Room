@@ -4,9 +4,11 @@ using UnityEngine.UI;
 using UnityEngine.EventSystems;
 using TMPro;
 
+
 public class InventoryController : MonoBehaviour
 {
     public static InventoryController instance;
+
 
     [Header("Dados do Inventário")]
     public Item[] slots;
@@ -14,20 +16,25 @@ public class InventoryController : MonoBehaviour
     public int[] slotAmount;
     public TextMeshProUGUI[] slotTexts;
 
+
     [Header("Sistema de Opções")]
     public GameObject[] slotObjects;    
-    public GameObject[] optionsSlots;   
+    public GameObject[] optionsSlots;  
+
 
     private int slotSobMouse = -1;
 
+
     // Cor escura Hexadecimal: #151A1D
    private readonly Color corVazia = new Color32(0x15, 0x1A, 0x1D, 255);
+
 
 private void Awake()
     {
         instance = this;
         FecharTodasOpcoes();
     }
+
 
     private void Start()
     {
@@ -37,6 +44,7 @@ private void Awake()
         }
     }
 
+
     private void LateUpdate()
     {
         if (!UIManager.instance.painelInventory.activeInHierarchy)
@@ -45,12 +53,15 @@ private void Awake()
             return;
         }
 
+
         Vector2 posicaoMouse = Mouse.current.position.ReadValue();
         int novoSlotSobMouse = -1;
+
 
         for (int i = 0; i < slotObjects.Length; i++)
         {
             RectTransform slot = slotObjects[i].GetComponent<RectTransform>();
+
 
             if (RectTransformUtility.RectangleContainsScreenPoint(slot, posicaoMouse))
             {
@@ -59,14 +70,17 @@ private void Awake()
             }
         }
 
+
         if (novoSlotSobMouse == slotSobMouse &&
             (novoSlotSobMouse < 0 || optionsSlots[novoSlotSobMouse].activeSelf))
         {
             return;
         }
 
+
         FecharTodasOpcoes();
         slotSobMouse = novoSlotSobMouse;
+
 
         if (slotSobMouse >= 0 &&
             slots[slotSobMouse] != null &&
@@ -76,6 +90,7 @@ private void Awake()
         }
     }
 
+
     public void OnSlotPointerEnter(int index)
     {
         if (slots[index] == null || slotAmount[index] <= 0)
@@ -83,13 +98,16 @@ private void Awake()
             return;
         }
 
+
         FecharTodasOpcoes();
+
 
         if (index < optionsSlots.Length && optionsSlots[index] != null)
         {
             optionsSlots[index].SetActive(true);
         }
     }
+
 
     public void OnSlotPointerExit(int index)
     {
@@ -99,12 +117,14 @@ private void Awake()
         }
     }
 
+
     private void FecharTodasOpcoes()
     {
         if (optionsSlots == null)
         {
             return;
         }
+
 
         for (int i = 0; i < optionsSlots.Length; i++)
         {
@@ -115,17 +135,20 @@ private void Awake()
         }
     }
 
+
     // ==========================================
     // GERENCIAMENTO DE ITENS
     // ==========================================
     public bool AddItem(Item newItem)
     {
-        
+       
+
 
         if (newItem == null)
         {
             return false;
         }
+
 
         for (int i = 0; i < slots.Length; i++)
         {
@@ -136,6 +159,7 @@ private void Awake()
                 return true;
             }
         }
+
 
         for (int i = 0; i < slots.Length; i++)
         {
@@ -148,8 +172,10 @@ private void Awake()
             }
         }
 
+
         return false;
     }
+
 
     public bool HasItem(Item item)
     {
@@ -157,6 +183,7 @@ private void Awake()
         {
             return false;
         }
+
 
         for (int i = 0; i < slots.Length; i++)
         {
@@ -166,8 +193,10 @@ private void Awake()
             }
         }
 
+
         return false;
     }
+
 
     public bool RemoveItem(Item item)
     {
@@ -176,11 +205,13 @@ private void Awake()
             return false;
         }
 
+
         for (int i = 0; i < slots.Length; i++)
         {
             if (slots[i] != null && slots[i].itemName == item.itemName && slotAmount[i] > 0)
             {
                 slotAmount[i]--;
+
 
                 if (slotAmount[i] <= 0)
                 {
@@ -190,8 +221,10 @@ private void Awake()
                         PlayerEquipar.instance.Desequipar();
                     }
 
+
                     slots[i] = null;
                     slotAmount[i] = 0;
+
 
                     if (i < optionsSlots.Length && optionsSlots[i] != null)
                     {
@@ -199,13 +232,16 @@ private void Awake()
                     }
                 }
 
+
                 AtualizarVisualSlot(i);
                 return true;
             }
         }
 
+
         return false;
     }
+
 
     // ==========================================
     // ATUALIZAÇÃO VISUAL
@@ -228,6 +264,7 @@ private void Awake()
             }
         }
 
+
         if (index >= 0 && index < slotTexts.Length && slotTexts[index] != null)
         {
             if (slots[index] != null && slotAmount[index] > 0)
@@ -241,6 +278,7 @@ private void Awake()
         }
     }
 
+
     public Item GetItemAtSlot(int index)
     {
         if (index < 0 || index >= slots.Length)
@@ -248,31 +286,44 @@ private void Awake()
             return null;
         }
 
+
         if (slotAmount[index] <= 0)
         {
             return null;
         }
 
+
         return slots[index];
     }
+
 
     // ==========================================
     // FUNÇÕES DOS BOTÕES (EQUIPAR / ROTACIONAR)
     // ==========================================
     public void EquiparSlot(int index)
+{
+    if (ClockPuzzle.instance != null && ClockPuzzle.instance.IsOpen)
     {
-        if (PlayerEquipar.instance != null)
-        {
-            PlayerEquipar.instance.Equipar(index);
-        }
-
+        ClockPuzzle.instance.InsertItemFromSlot(index);
         FecharTodasOpcoes();
+        return;
     }
+
+
+    if (PlayerEquipar.instance != null)
+    {
+        PlayerEquipar.instance.Equipar(index);
+    }
+
+
+    FecharTodasOpcoes();
+}
+
 
     public void RotacionarSlot(int index)
     {
         Item item = GetItemAtSlot(index);
-        
+       
         if (item != null)
         {
             Debug.Log("Rotacionando item do slot " + index + ": " + item.itemName);

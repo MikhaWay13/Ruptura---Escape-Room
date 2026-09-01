@@ -2,11 +2,14 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
-using TMPro; 
+using TMPro;
+
 
 public class UIManager : MonoBehaviour
 {
     public static UIManager instance; //singleton
+
+
 
 
     //inventário
@@ -14,6 +17,7 @@ public class UIManager : MonoBehaviour
     //interação
     public GameObject HandCursor;
     public GameObject BackImage;
+
 
     //leitura de item
     public GameObject itemUIPanel;
@@ -23,11 +27,12 @@ public class UIManager : MonoBehaviour
     public GameObject pressE;
     public GameObject interact;   // Arraste o objeto "Press(E) Interagir"
     public GameObject painelAviso;   // Arraste o objeto "Aviso"
-
+    public bool IsInventoryOpen => painelInventory != null && painelInventory.activeSelf;
     private void Awake()
     {
         instance = this; //singleton
     }
+
 
     private void Start()
     {
@@ -36,20 +41,24 @@ public class UIManager : MonoBehaviour
         pressE.SetActive(false);
     }
 
+
     public void SetHandCursor(bool state)
     {
         HandCursor.SetActive(state);
     }
+
 
     public void SetBackImage(bool state)
     {
         BackImage.SetActive(state);
     }
 
+
     public void SetPressE(bool state)
     {
         pressE.SetActive(state);
     }
+
 
     public void SetPressEInteracao(bool state)
     {
@@ -58,6 +67,7 @@ public class UIManager : MonoBehaviour
             interact.SetActive(state);
         }
     }
+
 
     public void SetAvisoEquipar(bool state)
     {
@@ -68,9 +78,12 @@ public class UIManager : MonoBehaviour
     }
 
 
+
+
     public void SetInventory(bool invActive)
     {
-      
+
+
         painelInventory.SetActive(invActive);
         if (invActive)
         {
@@ -84,17 +97,21 @@ public class UIManager : MonoBehaviour
         }
     }
 
+
     public void OpenItemUI(Item item)
     {
         itemUITitleText.text = item.itemName;
         itemUIBodyText.text = item.uiText;
 
+
         bool hasImage = item.uiImage != null;
         itemUIImage.gameObject.SetActive(hasImage);
         if (hasImage) itemUIImage.sprite = item.uiImage;
 
+
         itemUIPanel.SetActive(true);
     }
+
 
     public void CloseItemUI()
     {
