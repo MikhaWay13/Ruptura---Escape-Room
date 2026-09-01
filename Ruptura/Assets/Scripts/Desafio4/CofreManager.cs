@@ -37,22 +37,18 @@ public class CofreManager : MonoBehaviour, IRaycastInteractable
 
     public void Interact()
     {
-        Debug.Log(
-      "ANTES | Objeto: " + player.name +
-      " | Player: " + player.position +
-      " | Tranca: " + tranca.position
-  );
+      
 
         if (controle)
         {
             playerPosition = player.position;
             playerRotation = player.rotation;
-            Debug.Log("POSIÇÃO REALMENTE GUARDADA: " + playerPosition);
+          
 
             playerController.SetMovementEnabled(false);
             TeleportarPlayer(tranca.position, tranca.rotation);
             controle = false;
-            Debug.Log("APÓS A MOVIMENTAÇÃO: " + playerPosition);
+       
         }
     }
 
@@ -60,7 +56,7 @@ public class CofreManager : MonoBehaviour, IRaycastInteractable
     {
 
         TeleportarPlayer(playerPosition, playerRotation);
-        Debug.Log("VOLTA PARA A INICIAL: " + playerPosition);
+   
         playerController.SetMovementEnabled(true);
             controle = true;
    
