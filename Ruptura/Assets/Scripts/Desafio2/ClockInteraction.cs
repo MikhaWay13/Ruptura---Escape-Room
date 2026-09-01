@@ -1,4 +1,4 @@
-/*using UnityEngine;
+using UnityEngine;
 
 public class ClockInteraction : MonoBehaviour, IRaycastInteractable
 {
@@ -18,4 +18,4 @@ public class ClockInteraction : MonoBehaviour, IRaycastInteractable
 
         clockPuzzle.OpenClock();
     }
-}*/
+}
