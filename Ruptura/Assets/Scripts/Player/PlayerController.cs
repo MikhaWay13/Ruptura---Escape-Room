@@ -61,6 +61,7 @@ public class PlayerController : MonoBehaviour
 
     // Controle geral
     private bool gameplayControlEnabled = true;
+    private bool inventoryOpen;
 
     // Cofre Américo
     private bool movementEnabled = true;
@@ -174,18 +175,29 @@ public class PlayerController : MonoBehaviour
         if (!playerInventory.WasPressedThisFrame())
             return;
 
-        // Se o jogador estiver ativo, abre o inventário.
-        if (gameplayControlEnabled)
+        ToggleInventory();
+    }
+
+    private void ToggleInventory()
+    {
+        if (inventoryOpen)
         {
-            SetGameplayControlEnabled(false);
-            UIManager.instance.SetInventory(true);
-        }
-        // Se o inventário estiver aberto, volta ao jogo.
-        else
-        {
+            inventoryOpen = false;
             SetGameplayControlEnabled(true);
             UIManager.instance.SetInventory(false);
+            return;
         }
+
+        // Se outro sistema bloqueou o jogador, como a inspeção,
+        // o inventário não pode ser aberto.
+        if (!gameplayControlEnabled)
+        {
+            return;
+        }
+
+        inventoryOpen = true;
+        SetGameplayControlEnabled(false);
+        UIManager.instance.SetInventory(true);
     }
 
     public void SetGameplayControlEnabled(bool isEnabled)
