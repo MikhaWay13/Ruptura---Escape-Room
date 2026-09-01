@@ -80,12 +80,8 @@ public class ClockPuzzle : MonoBehaviour
         if (!isOpen || isSolved)
             return;
 
-
         if (playerController != null)
             playerController.SetGameplayControlEnabled(false);
-
-
-        CheckPuzzle();
     }
 
 
@@ -238,40 +234,31 @@ public class ClockPuzzle : MonoBehaviour
             UIManager.instance.SetInventory(false);
     }
 
+    public void CheckClock()
+{
+    if (!isOpen || isSolved)
+        return;
 
-    private void CheckPuzzle()
-    {
-        if (isSolved || !hourInserted || !minuteInserted)
-            return;
+    if (!hourInserted || !minuteInserted)
+        return;
 
+    if (hourHand == null || minuteHand == null)
+        return;
 
-        if (hourHand == null || minuteHand == null)
-            return;
+    int actualMinute = minuteHand.GetMinute();
+    float actualHour = hourHand.GetHourValue();
 
+    float targetHour = (this.targetHour % 12) + (this.targetMinute / 60f);
 
-        float actualHour = hourHand.GetHourValue();
-        float actualMinute = minuteHand.GetMinute();
+    float hourDifference = Mathf.Abs(Mathf.DeltaAngle(actualHour * 30f, targetHour * 30f));
+    float minuteDifference = Mathf.Abs(Mathf.DeltaAngle(actualMinute * 6f, this.targetMinute * 6f));
 
+    bool hourCorrect = hourDifference <= hourTolerance * 30f;
+    bool minuteCorrect = minuteDifference <= minuteTolerance * 6f;
 
-        float targetHourValue = (targetHour % 12) + (targetMinute / 60f);
-
-
-        float actualHourAngle = actualHour * 30f;
-        float targetHourAngle = targetHourValue * 30f;
-
-
-        float minuteAngle = actualMinute * 6f;
-        float targetMinuteAngle = targetMinute * 6f;
-
-
-        float hourDifference = Mathf.Abs(Mathf.DeltaAngle(actualHourAngle, targetHourAngle));
-        float minuteDifference = Mathf.Abs(Mathf.DeltaAngle(minuteAngle, targetMinuteAngle));
-
-
-        if (hourDifference <= hourTolerance * 30f && minuteDifference <= minuteTolerance * 6f)
-            SolvePuzzle();
-    }
-
+    if (hourCorrect && minuteCorrect)
+        SolvePuzzle();
+}
 
     private void SolvePuzzle()
     {

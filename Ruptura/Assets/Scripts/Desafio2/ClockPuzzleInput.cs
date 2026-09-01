@@ -20,6 +20,7 @@ public class ClockPuzzleInput : MonoBehaviour
     private InputAction pressInput;
     private InputAction backInput;
     private InputAction inventoryInput;
+    private InputAction confirmInput;
 
     private ClockHand selectedHand;
     private bool cursorUnlocked;
@@ -29,6 +30,7 @@ public class ClockPuzzleInput : MonoBehaviour
         pressInput = InputSystem.actions.FindAction("Interaction/Press");
         backInput = InputSystem.actions.FindAction("Interaction/Back");
         inventoryInput = InputSystem.actions.FindAction("Player/Inventory");
+        confirmInput = InputSystem.actions.FindAction("Interaction/ClockConfirm");
     }
 
     private void OnEnable()
@@ -63,6 +65,7 @@ public class ClockPuzzleInput : MonoBehaviour
         UnlockCursor();
         HandleHandSelection();
         HandleHandRotation();
+        HandleClockConfirmation();
     }
 
     private void UnlockCursor()
@@ -109,6 +112,17 @@ public class ClockPuzzleInput : MonoBehaviour
             return;
 
         UIManager.instance.SetInventory(!UIManager.instance.IsInventoryOpen);
+    }
+
+    private void HandleClockConfirmation()
+    {
+        if (confirmInput == null)
+            return;
+
+        if (!confirmInput.WasPressedThisFrame())
+            return;
+
+        clockPuzzle.CheckClock();
     }
 
     private void HandleHandSelection()
