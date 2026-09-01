@@ -1,5 +1,8 @@
+using System.Collections;
+using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.SceneManagement;
+using UnityEngine.Events;
+using UnityEngine.InputSystem;
 
 public class CofreManager : MonoBehaviour, IRaycastInteractable
 {
@@ -8,31 +11,46 @@ public class CofreManager : MonoBehaviour, IRaycastInteractable
     [SerializeField] private PlayerController playerController;
     [SerializeField] private Transform player;
     [SerializeField] private Transform tranca;
-    [SerializeField] private Transform cameraPlayer;
 
     private Vector3 playerPosition;
+    private Quaternion playerRotation;
 
-    private void Start()
+    private InputAction BackAction;
+
+    private bool controle = true;
+
+    private void Awake()
     {
-
+        BackAction = InputSystem.actions.FindAction("Interaction/Back");
     }
 
     private void Update()
     {
-        playerPosition = player.position;
+        if(!controle && BackAction != null && BackAction.WasPressedThisFrame())
+        {
+            Back();
+        }
     }
 
     public void Interact()
     {
-
-
-        cameraPlayer.transform.position = tranca.position;
-
+            playerPosition = player.position;
+            playerRotation = player.rotation;
+        if (controle)
+        {
+            playerController.SetMovementEnabled(false);
+            player.SetPositionAndRotation(tranca.position, tranca.rotation);
+            controle = false;
+        }
     }
 
     public void Back()
     {
-
+      
+            player.SetPositionAndRotation(playerPosition, playerRotation);
+            playerController.SetMovementEnabled(true);
+            controle = true;
+       
     }
 
 }

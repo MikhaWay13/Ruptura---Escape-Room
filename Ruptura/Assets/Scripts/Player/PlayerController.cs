@@ -62,6 +62,9 @@ public class PlayerController : MonoBehaviour
     // Controle geral
     private bool gameplayControlEnabled = true;
 
+    // Cofre Américo
+    private bool movementEnabled = true;
+
     private void Awake()
     {
         controller = GetComponent<CharacterController>();
@@ -134,8 +137,16 @@ public class PlayerController : MonoBehaviour
             return;
         }
 
-        Move();
-        UpdateFootsteps();
+        if (movementEnabled)
+        {
+           Move();
+           UpdateFootsteps();
+        }
+        else
+        {
+            velocity = Vector3.zero;
+            ResetFootsteps();
+        }
     }
 
     private void LateUpdate()
@@ -144,7 +155,11 @@ public class PlayerController : MonoBehaviour
             return;
 
         Look();
-        UpdateHeadBob();
+
+        if (movementEnabled)
+        {
+            UpdateHeadBob();
+        }
     }
 
     // ==================================================
@@ -432,5 +447,17 @@ public class PlayerController : MonoBehaviour
             controller.isGrounded &&
             hasMovementInput &&
             isActuallyMoving;
+    }
+
+    public void SetMovementEnabled(bool isEnabled)
+    {
+        movementEnabled = isEnabled;
+
+        if (!isEnabled)
+        {
+            velocity = Vector3.zero;
+            ResetFootsteps();
+            ResetHeadBob(true);
+        }
     }
 }
