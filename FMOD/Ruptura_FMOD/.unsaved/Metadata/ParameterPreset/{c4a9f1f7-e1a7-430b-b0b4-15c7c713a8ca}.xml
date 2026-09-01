@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<objects serializationModel="Studio.02.03.00">
+	<object class="ParameterPreset" id="{c4a9f1f7-e1a7-430b-b0b4-15c7c713a8ca}">
+		<property name="name">
+			<value>Cenas</value>
+		</property>
+		<relationship name="folder">
+			<destination>{696ab9ee-a3f8-4522-be11-cdf6b0a8e796}</destination>
+		</relationship>
+		<relationship name="parameter">
+			<destination>{772d114c-5100-4e5a-b74f-1909aa13cd6f}</destination>
+		</relationship>
+	</object>
+	<object class="GameParameter" id="{772d114c-5100-4e5a-b74f-1909aa13cd6f}">
+		<property name="parameterType">
+			<value>2</value>
+		</property>
+		<property name="maximum">
+			<value>2</value>
+		</property>
+		<property name="enumerationLabels">
+			<value>Cena_Menu</value>
+			<value>Jogo</value>
+		</property>
+		<property name="initialValue">
+			<value>0</value>
+		</property>
+	</object>
+</objects>

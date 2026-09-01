@@ -1,35 +1,56 @@
 using UnityEngine;
+using UnityEngine.Playables;
 using UnityEngine.SceneManagement;
 
 public class MenuPrincipal : MonoBehaviour
 {
-    [SerializeField] private string nomeDoLevelDeJogo;
+    [SerializeField] private string nomeDoLevelDeJogo = "Jogo";
+
     [SerializeField] private GameObject Canvas;
     [SerializeField] private GameObject Gatilho;
+    [SerializeField] private PlayableDirector cutsceneInicial;
 
     [SerializeField] private GameObject painelMenuInicial;
     [SerializeField] private GameObject painelOpcoes;
     [SerializeField] private GameObject painelCreditos;
     [SerializeField] private GameObject painelSair;
-    public bool PlayGame=false;
-    public void Jogar()
+    [SerializeField] private GameObject audio;
+
+    public bool PlayGame = false;
+
+    private void Start()
     {
-        PlayGame=true;
-        Canvas.SetActive(false);
-         Gatilho.SetActive(true); 
-        print("Cutscene iniciada");
-    }
-
-
-void Start(){
-    painelMenuInicial.SetActive(true);
+        painelMenuInicial.SetActive(true);
         painelOpcoes.SetActive(false);
         painelCreditos.SetActive(false);
         painelSair.SetActive(false);
+        audio.SetActive(true);
         Gatilho.SetActive(false);
-}
 
-//opções
+        
+        cutsceneInicial.stopped += FinalizarCutscene;
+    }
+
+    public void Jogar()
+    {
+        PlayGame = true;
+        audio.SetActive(false);
+
+
+        Canvas.SetActive(false);
+        Gatilho.SetActive(true);
+
+        cutsceneInicial.Play();
+
+        Debug.Log("Cutscene iniciada");
+    }
+
+    private void FinalizarCutscene(PlayableDirector director)
+    {
+        SceneManager.LoadScene("Jogo");
+    }
+
+    // Opções
     public void AbrirOpcoes()
     {
         painelMenuInicial.SetActive(false);
@@ -42,8 +63,8 @@ void Start(){
         painelOpcoes.SetActive(false);
     }
 
-//Créditos
-     public void AbrirCreditos()
+    // Créditos
+    public void AbrirCreditos()
     {
         painelMenuInicial.SetActive(false);
         painelCreditos.SetActive(true);
@@ -55,7 +76,7 @@ void Start(){
         painelCreditos.SetActive(false);
     }
 
-    //saida
+    // Saída
     public void AbrirConfirmacao()
     {
         painelMenuInicial.SetActive(false);
@@ -68,25 +89,17 @@ void Start(){
         painelSair.SetActive(false);
     }
 
-
-
     public void Menu()
     {
         SceneManager.LoadScene("Menu");
     }
 
-
     public void SairJogo()
     {
-  #if UNITY_EDITOR
+#if UNITY_EDITOR
         UnityEditor.EditorApplication.isPlaying = false;
-        Debug.Log("Sair");
-        painelMenuInicial.SetActive(true);
-        painelSair.SetActive(false);
+#else
         Application.Quit();
-        #endif
-        Application.Quit();
+#endif
     }
-
-
 }

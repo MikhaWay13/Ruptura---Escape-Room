@@ -6,6 +6,9 @@ public class AudioManager : MonoBehaviour
 {
     public static AudioManager instance { get; private set; }
 
+    private EventInstance ambienceEventInstance;
+    private EventInstance musicEventInstance;
+
     private void Awake()
     {
         if (instance != null)
@@ -28,5 +31,31 @@ public class AudioManager : MonoBehaviour
         EventInstance eventInstance = RuntimeManager.CreateInstance(eventReference);
         return eventInstance;
     }
+
+    private void Start()
+    {
+        InitializeAmbience(FMODEvent.instance.ambience);
+        InitializeMusic(FMODEvent.instance.music);
+    }
+
+
+
+    private void InitializeAmbience(EventReference ambienceEvent)
+    {
+        ambienceEventInstance = CreateEventInstance(ambienceEvent);
+        ambienceEventInstance.start();
+    }
+
+    private void InitializeMusic(EventReference musicEvent)
+    {
+        musicEventInstance = CreateEventInstance(musicEvent);
+        musicEventInstance.start();
+    }
+
+    public void SetAmbienceParameter(string parameterName, float value)
+    {
+        ambienceEventInstance.setParameterByName(parameterName, value);
+    }
+    
 
 }

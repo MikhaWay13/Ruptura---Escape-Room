@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<objects serializationModel="Studio.02.03.00">
+	<object class="ParameterPreset" id="{e1901b6c-f9a4-41de-86a2-bc82f16fa8eb}">
+		<property name="note" />
+		<property name="name">
+			<value>wind_intensity</value>
+		</property>
+		<relationship name="folder">
+			<destination>{696ab9ee-a3f8-4522-be11-cdf6b0a8e796}</destination>
+		</relationship>
+		<relationship name="parameter">
+			<destination>{8db2bba8-b1d5-4ee4-848c-c32bdf0ad1a2}</destination>
+		</relationship>
+	</object>
+	<object class="GameParameter" id="{8db2bba8-b1d5-4ee4-848c-c32bdf0ad1a2}">
+		<property name="initialValue">
+			<value>0</value>
+		</property>
+		<relationship name="modulators">
+			<destination>{ef47cb94-737a-4f0b-9dfe-4818e53226b9}</destination>
+		</relationship>
+	</object>
+	<object class="SeekModulator" id="{ef47cb94-737a-4f0b-9dfe-4818e53226b9}">
+		<property name="nameOfPropertyBeingModulated">
+			<value>cursorPosition</value>
+		</property>
+		<property name="speedAscending">
+			<value>0.34999999403953552</value>
+		</property>
+		<property name="asymmetric">
+			<value>true</value>
+		</property>
+	</object>
+</objects>

@@ -1,5 +1,25 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
+--- !u!114 &-6584088948930775691
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c18180ecb35941f4682ae60107b85b7c, type: 3}
+  m_Name: bank:/Ambience.bank
+  m_EditorClassIdentifier: FMODUnityEditor::FMODUnity.EditorBankRef
+  Path: ../FMOD/Ruptura_FMOD/Build/Desktop/Ambience.bank
+  Name: Ambience
+  StudioPath: bank:/Ambience
+  lastModified: 639238183278110959
+  FileSizes:
+  - Name: Desktop
+    Value: 149792
+  Exists: 1
 --- !u!114 &-5392930651259734711
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -71,6 +91,7 @@ MonoBehaviour:
   - {fileID: 7031780368334577041}
   - {fileID: 7179270961117431224}
   - {fileID: 8180097618835262319}
+  - {fileID: -6584088948930775691}
   EditorEvents:
   - {fileID: -5392930651259734711}
   - {fileID: 4707350848829511037}
@@ -78,13 +99,15 @@ MonoBehaviour:
   - {fileID: -5175371145805242368}
   - {fileID: 2109657697547140390}
   - {fileID: 2764168990844718373}
+  - {fileID: 4562686743762274425}
+  - {fileID: 7067667724829912023}
   EditorParameters: []
   MasterBanks:
   - {fileID: 7031780368334577041}
   StringsBanks:
   - {fileID: 8139959197402777260}
   cacheVersion: 131859
-  cacheTime: 639238074844333059
+  cacheTime: 639238185067200679
   SerializableEventsDict:
   - key: event:/DialogoNarrador
     index: 0
@@ -98,6 +121,10 @@ MonoBehaviour:
     index: 4
   - key: event:/Player/PlayerFS
     index: 5
+  - key: event:/Cutscene_Menu
+    index: 6
+  - key: event:/Ambiente/Wind
+    index: 7
 --- !u!114 &2109657697547140390
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -120,10 +147,10 @@ MonoBehaviour:
   - {fileID: 8180097618835262319}
   IsStream: 1
   Is3D: 1
-  IsOneShot: 1
+  IsOneShot: 0
   Parameters: []
   MinDistance: 1
-  MaxDistance: 20
+  MaxDistance: 15
   Length: 208927
 --- !u!114 &2764168990844718373
 MonoBehaviour:
@@ -152,6 +179,58 @@ MonoBehaviour:
   MinDistance: 1
   MaxDistance: 20
   Length: 304
+--- !u!114 &3562739200790741149
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fecb8ef7f94ca804a8ab72049b86782e, type: 3}
+  m_Name: parameter:/Wind/wind_intensity
+  m_EditorClassIdentifier: FMODUnityEditor::FMODUnity.EditorParamRef
+  Name: wind_intensity
+  StudioPath: 
+  Min: 0
+  Max: 1
+  Default: 0
+  ID:
+    data1: 4013653615
+    data2: 1618089603
+  Type: 0
+  IsGlobal: 0
+  Labels: []
+  Exists: 1
+--- !u!114 &4562686743762274425
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/Cutscene_Menu
+  m_EditorClassIdentifier: FMODUnityEditor::FMODUnity.EditorEventRef
+  Path: event:/Cutscene_Menu
+  Guid:
+    Data1: 2130529446
+    Data2: 1208111747
+    Data3: -1037348221
+    Data4: 1073778873
+  Banks:
+  - {fileID: 7179270961117431224}
+  IsStream: 0
+  Is3D: 0
+  IsOneShot: 1
+  Parameters:
+  - {fileID: 6440888100992116672}
+  MinDistance: 1
+  MaxDistance: 20
+  Length: 0
 --- !u!114 &4707350848829511037
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -179,6 +258,32 @@ MonoBehaviour:
   MinDistance: 1
   MaxDistance: 20
   Length: 875
+--- !u!114 &6440888100992116672
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fecb8ef7f94ca804a8ab72049b86782e, type: 3}
+  m_Name: parameter:/Cutscene_Menu/Cenas
+  m_EditorClassIdentifier: FMODUnityEditor::FMODUnity.EditorParamRef
+  Name: Cenas
+  StudioPath: 
+  Min: 0
+  Max: 1
+  Default: 0
+  ID:
+    data1: 2225380470
+    data2: 1982453280
+  Type: 2
+  IsGlobal: 0
+  Labels:
+  - Cena_Menu
+  - Jogo
+  Exists: 1
 --- !u!114 &7031780368334577041
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -194,11 +299,39 @@ MonoBehaviour:
   Path: ../FMOD/Ruptura_FMOD/Build/Desktop/Master.bank
   Name: Master
   StudioPath: bank:/Master
-  lastModified: 639238074842667305
+  lastModified: 639238185067140724
   FileSizes:
   - Name: Desktop
-    Value: 2265120
+    Value: 2264832
   Exists: 1
+--- !u!114 &7067667724829912023
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/Ambiente/Wind
+  m_EditorClassIdentifier: FMODUnityEditor::FMODUnity.EditorEventRef
+  Path: event:/Ambiente/Wind
+  Guid:
+    Data1: -301666803
+    Data2: 1257381100
+    Data3: -299070576
+    Data4: -847503771
+  Banks:
+  - {fileID: -6584088948930775691}
+  IsStream: 1
+  Is3D: 0
+  IsOneShot: 0
+  Parameters:
+  - {fileID: 3562739200790741149}
+  MinDistance: 1
+  MaxDistance: 20
+  Length: 12000
 --- !u!114 &7179270961117431224
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -214,10 +347,10 @@ MonoBehaviour:
   Path: ../FMOD/Ruptura_FMOD/Build/Desktop/SFX.bank
   Name: SFX
   StudioPath: bank:/SFX
-  lastModified: 639238074843602571
+  lastModified: 639238150332361184
   FileSizes:
   - Name: Desktop
-    Value: 132064
+    Value: 262144
   Exists: 1
 --- !u!114 &8139959197402777260
 MonoBehaviour:
@@ -234,10 +367,10 @@ MonoBehaviour:
   Path: ../FMOD/Ruptura_FMOD/Build/Desktop/Master.strings.bank
   Name: Master.strings
   StudioPath: bank:/Master.strings
-  lastModified: 639238074842717325
+  lastModified: 639238185067200679
   FileSizes:
   - Name: Desktop
-    Value: 1114
+    Value: 1346
   Exists: 1
 --- !u!114 &8180097618835262319
 MonoBehaviour:
@@ -254,10 +387,10 @@ MonoBehaviour:
   Path: ../FMOD/Ruptura_FMOD/Build/Desktop/Music.bank
   Name: Music
   StudioPath: bank:/Music
-  lastModified: 639238074844333059
+  lastModified: 639238127754491785
   FileSizes:
   - Name: Desktop
-    Value: 2224960
+    Value: 2225088
   Exists: 1
 --- !u!114 &8336433912768500803
 MonoBehaviour:
@@ -280,7 +413,7 @@ MonoBehaviour:
   Banks:
   - {fileID: 7031780368334577041}
   IsStream: 1
-  Is3D: 1
+  Is3D: 0
   IsOneShot: 0
   Parameters: []
   MinDistance: 1
