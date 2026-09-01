@@ -15,7 +15,7 @@ MonoBehaviour:
   Path: ../FMOD/Ruptura_FMOD/Build/Desktop/Master.strings.bank
   Name: Master.strings
   StudioPath: bank:/Master.strings
-  lastModified: 639238185067200679
+  lastModified: 639238535561997846
   FileSizes:
   - Name: Desktop
     Value: 1346
@@ -233,7 +233,7 @@ MonoBehaviour:
   Path: ../FMOD/Ruptura_FMOD/Build/Desktop/SFX.bank
   Name: SFX
   StudioPath: bank:/SFX
-  lastModified: 639238299569694852
+  lastModified: 639238535570229124
   FileSizes:
   - Name: Desktop
     Value: 262144
@@ -300,7 +300,7 @@ MonoBehaviour:
   Path: ../FMOD/Ruptura_FMOD/Build/Desktop/Master.bank
   Name: Master
   StudioPath: bank:/Master
-  lastModified: 639238185067140724
+  lastModified: 639238535561927875
   FileSizes:
   - Name: Desktop
     Value: 2264832
@@ -338,7 +338,7 @@ MonoBehaviour:
   StringsBanks:
   - {fileID: -8805874284735588798}
   cacheVersion: 131859
-  cacheTime: 639238299569694852
+  cacheTime: 639238535570229124
   SerializableEventsDict:
   - key: event:/DialogoNarrador
     index: 0
