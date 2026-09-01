@@ -4,7 +4,6 @@ using UnityEngine.SceneManagement;
 
 public class MenuPrincipal : MonoBehaviour
 {
-    [SerializeField] private string nomeDoLevelDeJogo = "Jogo";
 
     [SerializeField] private GameObject Canvas;
     [SerializeField] private GameObject Gatilho;
@@ -47,7 +46,7 @@ public class MenuPrincipal : MonoBehaviour
 
     private void FinalizarCutscene(PlayableDirector director)
     {
-        SceneManager.LoadScene("Jogo");
+        SceneManager.LoadScene("Loading");
     }
 
     // Opções
