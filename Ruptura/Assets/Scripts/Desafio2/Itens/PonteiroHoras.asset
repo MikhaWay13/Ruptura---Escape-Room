@@ -17,7 +17,7 @@ MonoBehaviour:
   audioClip: {fileID: 0}
   text: 
   ToInventory: 1
-  itemName: Ponteiros Horas
+  itemName: Ponteiro Minutos
   itemSprite: {fileID: 21300000, guid: 16577f96955b8144daa29bf14d7e676b, type: 3}
   hasReadableUI: 0
   uiText: 

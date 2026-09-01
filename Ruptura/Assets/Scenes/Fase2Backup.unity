@@ -204,7 +204,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 0}
+      - m_Target: {fileID: 1417248277}
         m_TargetAssemblyTypeName: InventoryController, Assembly-CSharp
         m_MethodName: EquiparSlot
         m_Mode: 3
@@ -994,7 +994,7 @@ GameObject:
   m_Component:
   - component: {fileID: 121093277}
   m_Layer: 0
-  m_Name: HoraPivot
+  m_Name: MinutoPivot
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1834,7 +1834,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 1223586244255593491, guid: 17891ac5627ec2a4a923d4ac7fafaac3, type: 3}
       propertyPath: m_Name
-      value: PonteiroHoras 1
+      value: PonteiroMinutos
       objectReference: {fileID: 0}
     - target: {fileID: 1223586244255593491, guid: 17891ac5627ec2a4a923d4ac7fafaac3, type: 3}
       propertyPath: m_IsActive
@@ -1854,11 +1854,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1287447108473329652, guid: 17891ac5627ec2a4a923d4ac7fafaac3, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 0.0048383474
+      value: 0.0002
       objectReference: {fileID: 0}
     - target: {fileID: 1287447108473329652, guid: 17891ac5627ec2a4a923d4ac7fafaac3, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0.0025348663
+      value: 0.0014
       objectReference: {fileID: 0}
     - target: {fileID: 1287447108473329652, guid: 17891ac5627ec2a4a923d4ac7fafaac3, type: 3}
       propertyPath: m_LocalPosition.z
@@ -1891,6 +1891,26 @@ PrefabInstance:
     - target: {fileID: 1287447108473329652, guid: 17891ac5627ec2a4a923d4ac7fafaac3, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6173886334531505688, guid: 17891ac5627ec2a4a923d4ac7fafaac3, type: 3}
+      propertyPath: m_Size.x
+      value: 0.00043747737
+      objectReference: {fileID: 0}
+    - target: {fileID: 6173886334531505688, guid: 17891ac5627ec2a4a923d4ac7fafaac3, type: 3}
+      propertyPath: m_Size.z
+      value: 0.0003451186
+      objectReference: {fileID: 0}
+    - target: {fileID: 6173886334531505688, guid: 17891ac5627ec2a4a923d4ac7fafaac3, type: 3}
+      propertyPath: m_Center.x
+      value: -0.000008882201
+      objectReference: {fileID: 0}
+    - target: {fileID: 6173886334531505688, guid: 17891ac5627ec2a4a923d4ac7fafaac3, type: 3}
+      propertyPath: m_Center.y
+      value: 0.0010783934
+      objectReference: {fileID: 0}
+    - target: {fileID: 6173886334531505688, guid: 17891ac5627ec2a4a923d4ac7fafaac3, type: 3}
+      propertyPath: m_Center.z
+      value: -0.000011901954
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -2346,27 +2366,18 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::ClockPuzzle
   cameraController: {fileID: 696119652}
   playerController: {fileID: 1417248270}
-  hourHand: {fileID: 1462840534}
-  minuteHand: {fileID: 1815287965}
+  hourHand: {fileID: 1815287965}
+  minuteHand: {fileID: 1462840534}
   hourItem: {fileID: 11400000, guid: 7acb1d073a95e66468888681dc69342e, type: 2}
   minuteItem: {fileID: 11400000, guid: 2a47491db778c0f4fa2aa038937375f1, type: 2}
-  itemSelection: {fileID: 0}
-  clockCamera: {fileID: 1552353528}
-  pressAction: {fileID: -5597186577059202543, guid: 052faaac586de48259a63d0c4782560b, type: 3}
-  backAction: {fileID: -4371676268687273221, guid: 052faaac586de48259a63d0c4782560b, type: 3}
-  lookAction: {fileID: 7205458907196077326, guid: 052faaac586de48259a63d0c4782560b, type: 3}
-  handRayDistance: 3
-  handLayer:
-    serializedVersion: 2
-    m_Bits: 4294967295
   targetHour: 10
   targetMinute: 35
   hourTolerance: 0.5
   minuteTolerance: 0.5
   clockDoor: {fileID: 0}
-  clockDoorAnimator: {fileID: 0}
-  openTrigger: Open
-  keyCollider: {fileID: 7754424092322490329}
+  doorOpenAxis: {x: 0, y: 112.959, z: 0}
+  doorOpenAngle: 90
+  doorOpenDuration: 0.5
   mirrorCollider: {fileID: 941424667}
 --- !u!114 &249505860
 MonoBehaviour:
@@ -2377,11 +2388,15 @@ MonoBehaviour:
   m_GameObject: {fileID: 249505857}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 13fab787119b7634eb3da676cbc03cac, type: 3}
+  m_Script: {fileID: 11500000, guid: 443de2a318c4f0e40b293c5ef3bbe2e4, type: 3}
   m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::Interactables
-  item: {fileID: 0}
-  isMoving: 0
+  m_EditorClassIdentifier: Assembly-CSharp::ClockPuzzleInput
+  clockPuzzle: {fileID: 249505859}
+  clockCamera: {fileID: 1552353528}
+  handRayDistance: 3
+  handLayer:
+    serializedVersion: 2
+    m_Bits: 4294967295
 --- !u!1001 &260896200
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -4542,7 +4557,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 0}
+      - m_Target: {fileID: 1417248277}
         m_TargetAssemblyTypeName: InventoryController, Assembly-CSharp
         m_MethodName: EquiparSlot
         m_Mode: 3
@@ -5725,7 +5740,7 @@ BoxCollider:
   m_LayerOverridePriority: 0
   m_IsTrigger: 0
   m_ProvidesContacts: 0
-  m_Enabled: 0
+  m_Enabled: 1
   serializedVersion: 3
   m_Size: {x: 0.5894933, y: 1.9779972, z: 0.3212559}
   m_Center: {x: -1.149688, y: 4.7531223, z: 17.95095}
@@ -8015,7 +8030,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 0}
+      - m_Target: {fileID: 1417248277}
         m_TargetAssemblyTypeName: InventoryController, Assembly-CSharp
         m_MethodName: EquiparSlot
         m_Mode: 3
@@ -8149,7 +8164,7 @@ GameObject:
   m_Component:
   - component: {fileID: 893933118}
   m_Layer: 0
-  m_Name: MinutoPivot
+  m_Name: HoraPivot
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -9563,7 +9578,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 0}
+      - m_Target: {fileID: 1417248277}
         m_TargetAssemblyTypeName: InventoryController, Assembly-CSharp
         m_MethodName: EquiparSlot
         m_Mode: 3
@@ -10879,7 +10894,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 0}
+      - m_Target: {fileID: 1417248277}
         m_TargetAssemblyTypeName: InventoryController, Assembly-CSharp
         m_MethodName: EquiparSlot
         m_Mode: 3
@@ -11274,11 +11289,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2165661427249281482, guid: 265be03e50f14cf40950bc8142ac77c5, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 0.0048383474
+      value: 0.0001
       objectReference: {fileID: 0}
     - target: {fileID: 2165661427249281482, guid: 265be03e50f14cf40950bc8142ac77c5, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0.0025348663
+      value: 0.0026
       objectReference: {fileID: 0}
     - target: {fileID: 2165661427249281482, guid: 265be03e50f14cf40950bc8142ac77c5, type: 3}
       propertyPath: m_LocalPosition.z
@@ -11314,7 +11329,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2729172508396232750, guid: 265be03e50f14cf40950bc8142ac77c5, type: 3}
       propertyPath: m_Name
-      value: PonteiroMinutos
+      value: PonteiroHoras
       objectReference: {fileID: 0}
     - target: {fileID: 2729172508396232750, guid: 265be03e50f14cf40950bc8142ac77c5, type: 3}
       propertyPath: m_IsActive
@@ -11327,6 +11342,9 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 2729172508396232750, guid: 265be03e50f14cf40950bc8142ac77c5, type: 3}
       insertIndex: -1
       addedObject: {fileID: 1815287965}
+    - targetCorrespondingSourceObject: {fileID: 2729172508396232750, guid: 265be03e50f14cf40950bc8142ac77c5, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1815287967}
   m_SourcePrefab: {fileID: 100100000, guid: 265be03e50f14cf40950bc8142ac77c5, type: 3}
 --- !u!1 &1154489098
 GameObject:
@@ -14209,11 +14227,43 @@ MonoBehaviour:
   - {fileID: 0}
   - {fileID: 0}
   - {fileID: 0}
-  slotImages: []
-  slotAmount: 0000000000000000000000000000000000000000000000000000000000000000
-  slotTexts: []
-  slotObjects: []
-  optionsSlots: []
+  slotImages:
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  slotAmount: 0000000001000000020000000300000004000000050000000600000007000000
+  slotTexts:
+  - {fileID: 86769969}
+  - {fileID: 547618719}
+  - {fileID: 1825107243}
+  - {fileID: 1892418202}
+  - {fileID: 1358299621}
+  - {fileID: 700977684}
+  - {fileID: 1454231847}
+  - {fileID: 1555024331}
+  slotObjects:
+  - {fileID: 1570886748}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  optionsSlots:
+  - {fileID: 1246127223}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
 --- !u!1 &1439904165
 GameObject:
   m_ObjectHideFlags: 0
@@ -14537,12 +14587,12 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1462840533}
-  m_Enabled: 0
+  m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 47a38346d3d011b409ba12298178df16, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::ClockHand
-  handType: 0
+  handType: 1
   visual: {fileID: 1462840535}
   rotationSpeed: 0.35
   invertRotation: 0
@@ -16276,7 +16326,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 0}
+      - m_Target: {fileID: 1417248277}
         m_TargetAssemblyTypeName: InventoryController, Assembly-CSharp
         m_MethodName: EquiparSlot
         m_Mode: 3
@@ -16541,7 +16591,7 @@ Transform:
   m_GameObject: {fileID: 1621978389}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -1.06565, y: 5.18, z: 18.057077}
+  m_LocalPosition: {x: -0.994, y: 5.18, z: 18.057077}
   m_LocalScale: {x: 1.5193999, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -17884,12 +17934,12 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1815287964}
-  m_Enabled: 0
+  m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 47a38346d3d011b409ba12298178df16, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::ClockHand
-  handType: 1
+  handType: 0
   visual: {fileID: 1815287966}
   rotationSpeed: 0.35
   invertRotation: 0
@@ -17898,6 +17948,27 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 2165661427249281482, guid: 265be03e50f14cf40950bc8142ac77c5, type: 3}
   m_PrefabInstance: {fileID: 1153437014}
   m_PrefabAsset: {fileID: 0}
+--- !u!65 &1815287967
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1815287964}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 0.0005220464, y: 0.001745595, z: 0.0010280202}
+  m_Center: {x: 0.000017939492, y: 0.0007275395, z: -0.0001456645}
 --- !u!1 &1816242319
 GameObject:
   m_ObjectHideFlags: 0
@@ -19877,7 +19948,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 0}
+      - m_Target: {fileID: 1417248277}
         m_TargetAssemblyTypeName: InventoryController, Assembly-CSharp
         m_MethodName: EquiparSlot
         m_Mode: 3
@@ -20012,7 +20083,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 0}
+      - m_Target: {fileID: 1417248277}
         m_TargetAssemblyTypeName: InventoryController, Assembly-CSharp
         m_MethodName: EquiparSlot
         m_Mode: 3
@@ -57456,9 +57527,9 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5244974796702682604}
   serializedVersion: 2
-  m_LocalRotation: {x: -0.70707655, y: -0.006557555, z: -0.0065574646, w: 0.7070764}
-  m_LocalPosition: {x: 0.033859, y: 0.0019875, z: 0.0080415}
-  m_LocalScale: {x: 10.24841, y: 9.247171, z: 7.858253}
+  m_LocalRotation: {x: -0.7070765, y: -0.006557554, z: -0.0065574637, w: 0.7070763}
+  m_LocalPosition: {x: -0.013297753, y: 0.0019874573, z: 0.008041382}
+  m_LocalScale: {x: 10.248411, y: 9.247172, z: 7.858255}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 1621978390}
@@ -58035,35 +58106,13 @@ GameObject:
   - component: {fileID: 4265630000632088805}
   - component: {fileID: 8190607541447670975}
   - component: {fileID: 3557152262456534584}
-  - component: {fileID: 8267820892604152083}
   m_Layer: 0
-  m_Name: defaultMaterial.001
+  m_Name: RelogioTodo
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!65 &8267820892604152083
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8267820892604152082}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 0
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Size: {x: 0.0041928194, y: 0.0028799796, z: 0.019999996}
-  m_Center: {x: 0, y: -0.000000029802322, z: -0.0000000018626451}
 --- !u!114 &8272946498567977081
 MonoBehaviour:
   m_ObjectHideFlags: 0
