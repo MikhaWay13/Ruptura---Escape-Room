@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.InputSystem;
 using UnityEngine.UI;
 using UnityEngine.EventSystems;
 using TMPro;
@@ -17,6 +18,9 @@ public class InventoryController : MonoBehaviour
     public GameObject[] slotObjects;    
     public GameObject[] optionsSlots;   
 
+    private int slotSobMouse = -1;
+    private int frameUltimoEquipar = -1;
+
     // Cor escura Hexadecimal: #151A1D
    private readonly Color corVazia = new Color32(0x15, 0x1A, 0x1D, 255);
 
@@ -31,6 +35,61 @@ private void Awake()
         for (int i = 0; i < slots.Length; i++)
         {
             AtualizarVisualSlot(i);
+        }
+    }
+
+    private void LateUpdate()
+    {
+        if (!UIManager.instance.painelInventory.activeInHierarchy)
+        {
+            slotSobMouse = -1;
+            return;
+        }
+
+        Vector2 posicaoMouse = Mouse.current.position.ReadValue();
+        int novoSlotSobMouse = -1;
+
+        for (int i = 0; i < slotObjects.Length; i++)
+        {
+            RectTransform slot = slotObjects[i].GetComponent<RectTransform>();
+
+            if (RectTransformUtility.RectangleContainsScreenPoint(slot, posicaoMouse))
+            {
+                novoSlotSobMouse = i;
+                break;
+            }
+        }
+
+        if (novoSlotSobMouse >= 0 &&
+            optionsSlots[novoSlotSobMouse].activeSelf &&
+            Mouse.current.leftButton.wasPressedThisFrame)
+        {
+            RectTransform botaoEquipar = optionsSlots[novoSlotSobMouse]
+                .transform.Find("Equipar")
+                .GetComponent<RectTransform>();
+
+            if (RectTransformUtility.RectangleContainsScreenPoint(botaoEquipar, posicaoMouse) &&
+                frameUltimoEquipar != Time.frameCount)
+            {
+                EquiparSlot(novoSlotSobMouse);
+                return;
+            }
+        }
+
+        if (novoSlotSobMouse == slotSobMouse &&
+            (novoSlotSobMouse < 0 || optionsSlots[novoSlotSobMouse].activeSelf))
+        {
+            return;
+        }
+
+        FecharTodasOpcoes();
+        slotSobMouse = novoSlotSobMouse;
+
+        if (slotSobMouse >= 0 &&
+            slots[slotSobMouse] != null &&
+            slotAmount[slotSobMouse] > 0)
+        {
+            optionsSlots[slotSobMouse].SetActive(true);
         }
     }
 
@@ -219,7 +278,8 @@ private void Awake()
     // ==========================================
     public void EquiparSlot(int index)
     {
-       
+        frameUltimoEquipar = Time.frameCount;
+
         if (PlayerEquipar.instance != null)
         {
             PlayerEquipar.instance.Equipar(index);

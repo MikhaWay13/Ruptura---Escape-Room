@@ -87,9 +87,18 @@ public class SistemaAlavancaPainel : MonoBehaviour, IRaycastInteractable
 
     private void InstalarAlavanca()
     {
-        if (!InventoryController.instance.HasItem(itemAlavanca))
+        if (PlayerEquipar.instance == null ||
+            PlayerEquipar.instance.itemEquipado != itemAlavanca)
         {
-            AtualizarTexto("Você precisa encontrar a alavanca.");
+            if (InventoryController.instance.HasItem(itemAlavanca))
+            {
+                AtualizarTexto("Abra o inventário e equipe a alavanca.");
+            }
+            else
+            {
+                AtualizarTexto("Você precisa encontrar a alavanca.");
+            }
+
             return;
         }
 
@@ -97,6 +106,8 @@ public class SistemaAlavancaPainel : MonoBehaviour, IRaycastInteractable
         {
             return;
         }
+
+        PlayerEquipar.instance.Desequipar();
 
         DefinirRotacao(rotacaoDesligada);
         DefinirAlavancaVisivel(true);

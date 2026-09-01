@@ -117,7 +117,7 @@ public class PlayerInteraction : MonoBehaviour
 
                 if (canFinish && InteractAction != null && InteractAction.WasPressedThisFrame() && currentInteractable.item.ToInventory)
                 {
-                    AudioManager.instance.PlayOneShot(FMODEvent.instance.itemCollectEvent, currentInteractable.transform.position); //toca som
+                    TocarSomDoItem(currentInteractable.transform.position);
 
                     if (InventoryController.instance != null)
                     {
@@ -152,6 +152,7 @@ public class PlayerInteraction : MonoBehaviour
                                 UIManager.instance.CloseItemUI();
                             }
 
+                            SetOutline(null);
                             Destroy(currentInteractable.gameObject);
                             currentInteractable = null;
 
@@ -261,7 +262,7 @@ public class PlayerInteraction : MonoBehaviour
                         {
                             UIManager.instance.OpenItemUI(currentInteractable.item);
 
-                            AudioManager.instance.PlayOneShot(FMODEvent.instance.itemCollectEvent, currentInteractable.transform.position); //toca som
+                            TocarSomDoItem(currentInteractable.transform.position);
                         }
                         return;
                     }
@@ -273,7 +274,7 @@ public class PlayerInteraction : MonoBehaviour
                         movingObjectCoroutine = StartCoroutine(MovingObject(currentInteractable, objectViewer.position));
                     }
                     
-                    AudioManager.instance.PlayOneShot(FMODEvent.instance.itemCollectEvent, currentInteractable.transform.position); //toca som
+                    TocarSomDoItem(currentInteractable.transform.position);
                 }
             }
             else
@@ -382,7 +383,7 @@ public class PlayerInteraction : MonoBehaviour
                 {
                     UIManager.instance.CloseItemUI();
 
-                    AudioManager.instance.PlayOneShot(FMODEvent.instance.itemCollectEvent, currentInteractable.transform.position); //toca som
+                    TocarSomDoItem(currentInteractable.transform.position);
                 }
             }
             else if (currentInteractable.item.grabbable)
@@ -429,6 +430,17 @@ public class PlayerInteraction : MonoBehaviour
     }
 
     movingObjectCoroutine = null;
+    }
+
+    private void TocarSomDoItem(Vector3 posicao)
+    {
+        if (AudioManager.instance != null && FMODEvent.instance != null)
+        {
+            AudioManager.instance.PlayOneShot(
+                FMODEvent.instance.itemCollectEvent,
+                posicao
+            );
+        }
     }
 
     // =========================================================================
