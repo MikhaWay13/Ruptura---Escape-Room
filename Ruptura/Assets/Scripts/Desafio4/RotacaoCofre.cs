@@ -1,7 +1,5 @@
 using UnityEngine;
 using System.Collections;
-using System.Collections.Generic;
-
 using System;
 
 public class RotacaoCofre : MonoBehaviour
@@ -39,12 +37,12 @@ public class RotacaoCofre : MonoBehaviour
         coroutineAllowed = true;
 
         numberShow += 1;
-        print(numberShow);
 
-        if (numberShow >= 9)
+        if (numberShow > 9)
         {
-            numberShow = -1;
+            numberShow = 0;
         }
+        print(numberShow);
 
         Rotated(name, numberShow);
 

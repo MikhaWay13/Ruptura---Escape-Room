@@ -1,6 +1,5 @@
 using UnityEngine;
 using System.Collections;
-using System.Collections.Generic;
 using System;
 
 public class ControleSenha : MonoBehaviour
@@ -12,7 +11,7 @@ public class ControleSenha : MonoBehaviour
     {
         result = new int[] {5,5,5};
         correctCombination = new int[] { 3, 7, 9 };
-        RotacaoCofre.Rotated += CheckResults();
+        RotacaoCofre.Rotated += CheckResults;
     }
 
     // Update is called once per frame
