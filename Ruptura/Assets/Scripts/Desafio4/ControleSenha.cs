@@ -5,7 +5,7 @@ using System;
 
 public class ControleSenha : MonoBehaviour
 {
-    private int[] result = new int[] { 0, 0, 0, 0, 0, 0, 0, 0 };
+    [SerializeField] private int[] result = new int[] { 0, 0, 0, 0, 0, 0, 0, 0 };
     private int[] correctCombination = new int[] { 5, 1, 7, 2, 9, 9, 8, 9 };
     private int indice = 0;
    
