@@ -17,6 +17,7 @@ public class ControleSenha : MonoBehaviour
     private Quaternion closedRotation;
     private Quaternion openRotation;
     private Coroutine currentCoroutine;
+    public Collider meuCollider;
 
     public bool EstaAberto => isOpen && currentCoroutine == null;
 
@@ -28,6 +29,12 @@ public class ControleSenha : MonoBehaviour
         openRotation =
             Quaternion.AngleAxis(openAngle, Vector3.up) * closedRotation;
     }
+
+    void Desativar()
+    {
+        meuCollider.enabled = false;
+    }
+
 
     private void CheckResults(string nomeRoda, int numero)
     {
@@ -47,6 +54,7 @@ public class ControleSenha : MonoBehaviour
             Quaternion destino = isOpen ? openRotation : closedRotation;
             currentCoroutine = StartCoroutine(GirarPainel(destino));
             abriu = true;
+            Desativar();
         }
     }
 
