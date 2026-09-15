@@ -372,7 +372,7 @@ MonoBehaviour:
   StringsBanks:
   - {fileID: 8001141439748541239}
   cacheVersion: 131859
-  cacheTime: 639238689970926112
+  cacheTime: 639238535570229124
   SerializableEventsDict:
   - key: event:/Ambiente/Wind
     index: 0
@@ -405,7 +405,7 @@ MonoBehaviour:
   Path: ../FMOD/Ruptura_FMOD/Build/Desktop/SFX.bank
   Name: SFX
   StudioPath: bank:/SFX
-  lastModified: 639238689970926112
+  lastModified: 639238535570229124
   FileSizes:
   - Name: Desktop
     Value: 262144
@@ -633,7 +633,7 @@ MonoBehaviour:
   Path: ../FMOD/Ruptura_FMOD/Build/Desktop/Music.bank
   Name: Music
   StudioPath: bank:/Music
-  lastModified: 639238689969066734
+  lastModified: 639238127754491785
   FileSizes:
   - Name: Desktop
     Value: 2225088
@@ -758,7 +758,7 @@ MonoBehaviour:
   Path: ../FMOD/Ruptura_FMOD/Build/Desktop/Ambience.bank
   Name: Ambience
   StudioPath: bank:/Ambience
-  lastModified: 639238689937527826
+  lastModified: 639238183278110959
   FileSizes:
   - Name: Desktop
     Value: 149792
@@ -954,7 +954,7 @@ MonoBehaviour:
   Path: ../FMOD/Ruptura_FMOD/Build/Desktop/Master.strings.bank
   Name: Master.strings
   StudioPath: bank:/Master.strings
-  lastModified: 639238689968777216
+  lastModified: 639238535561997846
   FileSizes:
   - Name: Desktop
     Value: 1346
@@ -1069,7 +1069,7 @@ MonoBehaviour:
   Path: ../FMOD/Ruptura_FMOD/Build/Desktop/Master.bank
   Name: Master
   StudioPath: bank:/Master
-  lastModified: 639238689968757210
+  lastModified: 639238535561927875
   FileSizes:
   - Name: Desktop
     Value: 2264832
