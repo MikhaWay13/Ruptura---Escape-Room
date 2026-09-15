@@ -58,15 +58,24 @@ public class ClockPuzzleInput : MonoBehaviour
         Cursor.visible = false;
     }
 
-    private void Update()
-    {
-        bool isUsingClock = CanUseClockInput();
-        Cursor.lockState = isUsingClock ? CursorLockMode.None : CursorLockMode.Locked;
-        Cursor.visible = isUsingClock;
+   private void Update()
+{
+    // Se o inventário estiver aberto, não interfere no estado do cursor
+    if (UIManager.instance != null && UIManager.instance.IsInventoryOpen)
+        return;
 
-        if (!isUsingClock)
-            SetSelectedHand(null);
+    bool isUsingClock = CanUseClockInput();
+
+    if (isUsingClock)
+    {
+        Cursor.lockState = CursorLockMode.None;
+        Cursor.visible = true;
     }
+    else
+    {
+        SetSelectedHand(null);
+    }
+}
 
     private void OnSelectPerformed(InputAction.CallbackContext context)
     {

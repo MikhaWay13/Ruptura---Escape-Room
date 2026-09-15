@@ -1,0 +1,17 @@
+{17a71317-a522-4347-882e-1573453c9a9f} bank:/Ambience
+{9e2f970f-bd8c-4884-89d5-d5a8ec816219} bank:/Master
+{0632b7db-ccf7-04c6-0f9c-5f561d726481} bank:/Master.strings
+{85a929bc-d200-43a6-bb43-35d42faf424e} bank:/Music
+{99c2b176-b331-4058-bffb-109308984659} bank:/SFX
+{c3d909b8-0c41-4dc2-a8b0-3fd204ce7bc9} bus:/
+{c5f87f17-3a40-4dfc-9e01-f72121e7934f} bus:/Reverb
+{ee04ee0d-1cec-4af2-908b-2cee651e7ccd} event:/Ambiente/Wind
+{7efd4ca6-5283-4802-8352-2bc2b9900040} event:/Cutscene_Menu
+{b558536c-02f1-43b4-b9f4-0a1b2d4d1f69} event:/DialogoNarrador
+{106830ef-284f-45d9-b163-97b471527c25} event:/ItemCollect
+{fc7ac1b1-6894-4670-8913-9d2ff3273692} event:/Music_Menu
+{75c1833a-f52b-4033-b265-86e7397f520b} event:/Music_Radio
+{bfd4d5e5-321b-413f-bda3-61e991a97ba8} event:/Player/DialogoPlayer
+{c9c4f5dd-5793-44eb-945f-3904f2309034} event:/Player/PlayerFS
+{772d114c-5100-4e5a-b74f-1909aa13cd6f} parameter:/Cenas
+{8db2bba8-b1d5-4ee4-848c-c32bdf0ad1a2} parameter:/wind_intensity

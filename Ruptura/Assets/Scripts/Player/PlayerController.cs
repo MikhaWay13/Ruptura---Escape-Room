@@ -182,23 +182,22 @@ public class PlayerController : MonoBehaviour
     }
 
     private void ToggleInventory()
+{
+    if (inventoryOpen)
     {
-        if (inventoryOpen)
-        {
-            inventoryOpen = false;
-            SetGameplayControlEnabled(true);
-            UIManager.instance.SetInventory(false);
-            return;
-        }
+        inventoryOpen = false;
+        SetGameplayControlEnabled(true);
+        UIManager.instance.SetInventory(false);
+        return;
+    }
 
-        
-        if (gameplayControlEnabled)
-        {
+    if (gameplayControlEnabled)
+    {
         inventoryOpen = true;
         SetGameplayControlEnabled(false);
         UIManager.instance.SetInventory(true);
-        }
     }
+}
 
     public void SetGameplayControlEnabled(bool isEnabled)
     {

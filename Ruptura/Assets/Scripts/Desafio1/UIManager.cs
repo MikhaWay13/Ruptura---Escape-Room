@@ -79,24 +79,21 @@ public class UIManager : MonoBehaviour
 
 
 
-
-    public void SetInventory(bool invActive)
+public void SetInventory(bool invActive)
+{
+    painelInventory.SetActive(invActive);
+    
+    if (invActive)
     {
-
-
-        painelInventory.SetActive(invActive);
-        if (invActive)
-        {
-            Cursor.lockState = CursorLockMode.None;
-            Cursor.visible = true;
-        }
-        else
-        {
-            Cursor.lockState = CursorLockMode.Locked;
-            Cursor.visible = false;
-        }
+        Cursor.lockState = CursorLockMode.None;
+        Cursor.visible = true;
     }
-
+    else
+    {
+        Cursor.lockState = CursorLockMode.Locked;
+        Cursor.visible = false;
+    }
+}
 
     public void OpenItemUI(Item item)
     {
