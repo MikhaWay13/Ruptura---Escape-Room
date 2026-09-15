@@ -104,3 +104,20 @@ InitTestScene*.unity*
 
 # Auto-generated cache in Assets folder
 /[Aa]ssets/[Ss]ceneDependencyCache*
+# ==========================================
+# FMOD Unity Integration
+# ==========================================
+
+# 1. Ignore local FMOD caches and logs
+/[Aa]ssets/**/FMODStudioCache.asset
+/[Aa]ssets/**/FMODStudioCache.asset.meta
+/[Aa]ssets/Plugins/FMOD/Cache/
+/[Aa]ssets/Plugins/FMOD/Cache.meta
+fmod.log
+fmod_editor.log
+
+# 2. NEVER ignore required FMOD native binaries and assets
+!/[Aa]ssets/Plugins/FMOD/**/*.dll
+!/[Aa]ssets/Plugins/FMOD/**/*.bundle
+!/[Aa]ssets/Gizmos/FMOD/*
+!/[Aa]ssets/Editor Default Resources/FMOD/*
