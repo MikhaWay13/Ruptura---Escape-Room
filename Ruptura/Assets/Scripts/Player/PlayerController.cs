@@ -170,12 +170,15 @@ public class PlayerController : MonoBehaviour
     private void Inventory()
     {
         if (playerInventory == null)
+        {
             return;
+        }
 
-        if (!playerInventory.WasPressedThisFrame())
-            return;
-
+        if (playerInventory.WasPressedThisFrame())
+        {
         ToggleInventory();
+        }
+
     }
 
     private void ToggleInventory()
@@ -188,16 +191,13 @@ public class PlayerController : MonoBehaviour
             return;
         }
 
-        // Se outro sistema bloqueou o jogador, como a inspeção,
-        // o inventário não pode ser aberto.
-        if (!gameplayControlEnabled)
+        
+        if (gameplayControlEnabled)
         {
-            return;
-        }
-
         inventoryOpen = true;
         SetGameplayControlEnabled(false);
         UIManager.instance.SetInventory(true);
+        }
     }
 
     public void SetGameplayControlEnabled(bool isEnabled)
