@@ -1,35 +1,4 @@
-# ==========================================
-# Gitignore for Freedom Planet 2 / FDMods
-# ==========================================
-
-# Mod Loader Directories
-# ------------------------------------------
-# Ignores local mod installations and builds
-/FDMods/
-/Mods/
-
-# BepInEx Base Files
-# ------------------------------------------
-# Ignores core loader files in the game root
-/BepInEx/
-/doorstop_config.ini
-/winhttp.dll
-/changelog.txt
-
-# Build and Cache Outputs
-# ------------------------------------------
-# Ignores compiler outputs and temporary files
-*.dll
-*.pdb
-*.user
-/bin/
-/obj/
-.BepInEx/
-
-# IDE and System Files
-# ------------------------------------------
-.vs/
-.vscode/
-*.suo
-*.userosscache
-*.sln.docstates
+# FMOD Studio Project ignore rules
+.cache/
+.restore/
+.user/
