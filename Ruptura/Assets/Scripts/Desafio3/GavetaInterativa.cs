@@ -27,15 +27,8 @@ public class GavetaInterativa : MonoBehaviour, IRaycastInteractable
 
     public void Interact()
     {
-        if (animacao != null)
-        {
-            return;
-        }
-
         aberta = !aberta;
-        animacao = StartCoroutine(MoverGaveta(
-aberta ? posicaoAberta : posicaoFechada
-        ));
+        animacao = StartCoroutine(MoverGaveta(aberta ? posicaoAberta : posicaoFechada));
     }
 
     private IEnumerator MoverGaveta(Vector3 destino)

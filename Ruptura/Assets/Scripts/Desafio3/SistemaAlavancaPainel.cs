@@ -86,8 +86,7 @@ public class SistemaAlavancaPainel : MonoBehaviour, IRaycastInteractable
 
     private void InstalarAlavanca()
     {
-        if (PlayerEquipar.instance == null ||
-            PlayerEquipar.instance.itemEquipado != itemAlavanca)
+        if (PlayerEquipar.instance == null || PlayerEquipar.instance.itemEquipado != itemAlavanca)
         {
             if (InventoryController.instance.HasItem(itemAlavanca))
             {
