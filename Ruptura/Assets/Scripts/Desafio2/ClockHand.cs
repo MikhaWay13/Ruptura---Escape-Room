@@ -10,106 +10,75 @@ public class ClockHand : MonoBehaviour
 
     [Header("Configuração")]
     [SerializeField] private HandType handType;
-
-    [Header("Visual")]
     [SerializeField] private Transform visual;
+    [SerializeField] private bool invertRotation;
 
-    [Header("Rotação")]
-    [SerializeField] private bool invertRotation = false;
+    [Header("Feedback de seleção")]
+    [SerializeField] private Color selectedOutlineColor = Color.yellow;
+    [SerializeField, Range(0f, 10f)] private float selectedOutlineWidth = 4f;
 
-    private float currentAngle;
-    private Quaternion initialVisualRotation;
+    private Quaternion initialLocalRotation;
+    private Outline selectionOutline;
 
     public HandType Type => handType;
-    public float CurrentAngle => currentAngle;
 
     private void Awake()
     {
-        currentAngle = 0f;
-
         if (visual != null)
-            initialVisualRotation = visual.localRotation;
+            initialLocalRotation = visual.localRotation;
 
-        ApplyRotation();
+        selectionOutline = GetComponent<Outline>();
+
+        if (selectionOutline != null)
+            selectionOutline.enabled = false;
     }
 
-    public void SetAngle(float angle)
+    private void OnDisable()
     {
-        currentAngle =
-            Mathf.Repeat(angle, 360f);
-
-        ApplyRotation();
+        SetSelected(false);
     }
 
-    public void RotateByAngle(float angleDelta)
+    public void ResetRotation()
     {
-        if (invertRotation)
-            angleDelta = -angleDelta;
-
-        currentAngle += angleDelta;
-
-        currentAngle =
-            Mathf.Repeat(
-                currentAngle,
-                360f
-            );
-
-        ApplyRotation();
+        if (visual != null)
+            visual.localRotation = initialLocalRotation;
     }
 
-    private void ApplyRotation()
+    public void Rotate(float rotationAmount)
     {
         if (visual == null)
             return;
 
-        visual.localRotation =
-            initialVisualRotation *
-            Quaternion.Euler(
-                0f,
-                0f,
-                -currentAngle
-            );
+        if (invertRotation)
+            rotationAmount = -rotationAmount;
+
+        visual.Rotate(Vector3.forward, rotationAmount, Space.Self);
     }
 
-    public int GetMinute()
+    public void SetSelected(bool selected)
     {
-        float angle =
-            Mathf.Repeat(
-                currentAngle,
-                360f
-            );
+        if (!selected)
+        {
+            if (selectionOutline != null)
+                selectionOutline.enabled = false;
 
-        int minute =
-            Mathf.RoundToInt(
-                angle / 6f
-            );
+            return;
+        }
 
-        return minute % 60;
+        if (selectionOutline == null)
+            selectionOutline = gameObject.AddComponent<Outline>();
+
+        selectionOutline.OutlineMode = Outline.Mode.OutlineVisible;
+        selectionOutline.OutlineColor = selectedOutlineColor;
+        selectionOutline.OutlineWidth = selectedOutlineWidth;
+        selectionOutline.enabled = true;
     }
 
-    public float GetHourValue()
+    public bool IsAlignedWith(Transform reference, float tolerance)
     {
-        float angle =
-            Mathf.Repeat(
-                currentAngle,
-                360f
-            );
+        if (visual == null || reference == null)
+            return false;
 
-        return angle / 30f;
-    }
-
-    public int GetHour()
-    {
-        int hour =
-            Mathf.RoundToInt(
-                GetHourValue()
-            );
-
-        hour %= 12;
-
-        if (hour == 0)
-            hour = 12;
-
-        return hour;
+        return Quaternion.Angle(visual.rotation, reference.rotation) <= tolerance;
     }
 }
