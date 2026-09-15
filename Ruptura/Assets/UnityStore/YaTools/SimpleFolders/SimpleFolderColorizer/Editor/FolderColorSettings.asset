@@ -1,0 +1,73 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 57ed6a95224d46044999e66337ec4be7, type: 3}
+  m_Name: FolderColorSettings
+  m_EditorClassIdentifier: Yasinski.SimpleFolders.Colorizer.Editor::YaTools.SimpleFolders.SimpleFolderColorizer.Editor.FolderColorSettings
+  folderColors:
+  - guid: f1cbd1c911b0b7f4396b17da66f0a450
+    color: {r: 0.48235294, g: 0.83137256, b: 0.7058824, a: 1}
+  - guid: c9776b691fe80e046ad41e57c5514d5b
+    color: {r: 1, g: 0.48235294, b: 0.48235294, a: 1}
+  - guid: 7df12e53cb95a614db0d4336f9fb7904
+    color: {r: 1, g: 0.8156863, b: 0.48235294, a: 1}
+  - guid: e2a6f9bc943642d43b7d60b8707138ad
+    color: {r: 0.6156863, g: 0.9411765, b: 0.627451, a: 1}
+  - guid: 040a62948882cfc4aba916e75f8404a7
+    color: {r: 0.6901961, g: 0.48235294, b: 0.9411765, a: 1}
+  - guid: 16d7fad5b464f5b44b318d91a191e44c
+    color: {r: 0.627451, g: 0.627451, b: 0.627451, a: 1}
+  - guid: 129ef71a8dbaaf347bf0e683085a53f5
+    color: {r: 0.6156863, g: 0.9411765, b: 0.627451, a: 1}
+  - guid: 7197145ddc02a574d95a8c4d36a79e31
+    color: {r: 0.48235294, g: 0.72156864, b: 0.9411765, a: 1}
+  - guid: ac4802d860406cf4cbf9400a7eaf361a
+    color: {r: 0.48235294, g: 0.56078434, b: 0.9411765, a: 1}
+  - guid: ad83ba32e36ee7b41a4dac0a4d7c5c4f
+    color: {r: 0.48235294, g: 0.83137256, b: 0.7058824, a: 1}
+  - guid: 3b5a2c5038a4b99488a55c2d809f4613
+    color: {r: 0.48235294, g: 0.83137256, b: 0.7058824, a: 1}
+  - guid: 38bc86c7f55f37043ac54abede777a87
+    color: {r: 1, g: 0.8156863, b: 0.48235294, a: 1}
+  - guid: d656f194c99438b4487c70346c4aae1a
+    color: {r: 1, g: 0.60784316, b: 0.48235294, a: 1}
+  - guid: b4905560de61fcb4898c0eabc01c6627
+    color: {r: 0.9098039, g: 0.48235294, b: 0.9411765, a: 1}
+  - guid: c373a5766fc6caf44b156b336b9f29f7
+    color: {r: 0.3764706, g: 0.3764706, b: 0.3764706, a: 1}
+  - guid: 98c2e21c488c6504e874e12f7d927c1e
+    color: {r: 1, g: 0.48235294, b: 0.48235294, a: 1}
+  - guid: b29b4649751649d459448ce87bed87db
+    color: {r: 1, g: 0.60784316, b: 0.48235294, a: 1}
+  - guid: 709f11a7f3c4041caa4ef136ea32d874
+    color: {r: 0.9607843, g: 0.9411765, b: 0.48235294, a: 1}
+  - guid: 06ae579381df01a4a87bb149dec89954
+    color: {r: 0.6901961, g: 0.48235294, b: 0.9411765, a: 1}
+  - guid: b675122f32d214946a1ea946c199bd6d
+    color: {r: 0.9098039, g: 0.48235294, b: 0.9411765, a: 1}
+  - guid: 251d37b84c728054bac2ad91e90f5893
+    color: {r: 0.9411765, g: 0.48235294, b: 0.72156864, a: 1}
+  customPresets:
+  - {r: 1, g: 0.48235294, b: 0.48235294, a: 1}
+  - {r: 1, g: 0.60784316, b: 0.48235294, a: 1}
+  - {r: 1, g: 0.8156863, b: 0.48235294, a: 1}
+  - {r: 0.9607843, g: 0.9411765, b: 0.48235294, a: 1}
+  - {r: 0.6156863, g: 0.9411765, b: 0.627451, a: 1}
+  - {r: 0.48235294, g: 0.83137256, b: 0.7058824, a: 1}
+  - {r: 0.48235294, g: 0.72156864, b: 0.9411765, a: 1}
+  - {r: 0.48235294, g: 0.56078434, b: 0.9411765, a: 1}
+  - {r: 0.6901961, g: 0.48235294, b: 0.9411765, a: 1}
+  - {r: 0.9098039, g: 0.48235294, b: 0.9411765, a: 1}
+  - {r: 0.9411765, g: 0.48235294, b: 0.72156864, a: 1}
+  - {r: 0.9411765, g: 0.9411765, b: 0.9411765, a: 1}
+  - {r: 0.627451, g: 0.627451, b: 0.627451, a: 1}
+  - {r: 0.3764706, g: 0.3764706, b: 0.3764706, a: 1}
+  - {r: 0.16470589, g: 0.16470589, b: 0.16470589, a: 1}
