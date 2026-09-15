@@ -55970,7 +55970,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &1037519431
 Transform:
   m_ObjectHideFlags: 0
@@ -66636,7 +66636,6 @@ Transform:
   - {fileID: 187853078}
   - {fileID: 1180388167}
   - {fileID: 965650222}
-  - {fileID: 1977328787}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 90, z: 0}
 --- !u!1 &1195735146
@@ -81473,12 +81472,12 @@ GameObject:
   - component: {fileID: 1484535626}
   - component: {fileID: 1484535629}
   m_Layer: 0
-  m_Name: Player BUGADO
+  m_Name: Player
   m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &1484535625
 Transform:
   m_ObjectHideFlags: 0
@@ -81488,7 +81487,7 @@ Transform:
   m_GameObject: {fileID: 1484535624}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: 0.7523759, z: -0, w: -0.6587341}
-  m_LocalPosition: {x: -5.17, y: 3.535, z: -22.94}
+  m_LocalPosition: {x: 26.68, y: 3.535, z: -8.19}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -91240,7 +91239,7 @@ MonoBehaviour:
   itemUITitleText: {fileID: 241542152}
   itemUIBodyText: {fileID: 624584883}
   itemUIImage: {fileID: 388750635}
-  pressE: {fileID: 0}
+  pressE: {fileID: 1233213143}
   interact: {fileID: 102315025}
   painelAviso: {fileID: 1310124070}
 --- !u!114 &1643203267
@@ -107740,91 +107739,6 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1974931877}
   m_Mesh: {fileID: -7387051713255999722, guid: 2de4b7466c2e9c54faf355fa859dcd6f, type: 3}
---- !u!1 &1977328786
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 1977328787}
-  - component: {fileID: 1977328789}
-  - component: {fileID: 1977328788}
-  m_Layer: 0
-  m_Name: AudioManager
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &1977328787
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1977328786}
-  serializedVersion: 2
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -11.132431, y: 6.01857, z: -1.1626291}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 1195302349}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &1977328788
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1977328786}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 07351fb42c787cd458f2fb1ced863845, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::FMODEvent
-  <itemCollectEvent>k__BackingField:
-    Guid:
-      Data1: 0
-      Data2: 0
-      Data3: 0
-      Data4: 0
-    Path: 
-  <playerFootstepsEvent>k__BackingField:
-    Guid:
-      Data1: 0
-      Data2: 0
-      Data3: 0
-      Data4: 0
-    Path: 
-  <ambience>k__BackingField:
-    Guid:
-      Data1: 0
-      Data2: 0
-      Data3: 0
-      Data4: 0
-    Path: 
-  <music>k__BackingField:
-    Guid:
-      Data1: 0
-      Data2: 0
-      Data3: 0
-      Data4: 0
-    Path: 
---- !u!114 &1977328789
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1977328786}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 0b87749e8e958344b80c91233b89d218, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::AudioManager
 --- !u!1 &1977474376 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 3591644860445115680, guid: a55e8b944b49e774899ecb13192840e5, type: 3}
