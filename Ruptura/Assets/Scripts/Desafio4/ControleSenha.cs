@@ -5,10 +5,13 @@ using System;
 
 public class ControleSenha : MonoBehaviour
 {
+    [SerializeField] private Animator portaAnimator;
+    [SerializeField] private CofreManager cofreManager;
     [SerializeField] private int[] result = new int[] { 0, 0, 0, 0, 0, 0, 0, 0 };
     private int[] correctCombination = new int[] { 5, 1, 7, 2, 9, 9, 8, 9 };
     private int indice = 0;
-   
+    private bool abriu = false;
+
     private void Start()
     {
         RotacaoCofre.Rotated += CheckResults;
@@ -20,9 +23,11 @@ public class ControleSenha : MonoBehaviour
 
         result[indice] = numero;
 
-        if (result.SequenceEqual(correctCombination))
+        if (!abriu && result.SequenceEqual(correctCombination))
         {
-            Debug.Log("Abriu");
+            abriu = true;
+            cofreManager.Back();
+            portaAnimator.Play("Abrir", 0, 0f);
         }
     }
 }
