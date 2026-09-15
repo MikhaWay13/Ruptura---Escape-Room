@@ -11,6 +11,8 @@ public class CofreManager : MonoBehaviour, IRaycastInteractable
     [SerializeField] private PlayerController playerController;
     [SerializeField] private Transform player;
     [SerializeField] private Transform tranca;
+    [SerializeField] private Item chave1;
+    [SerializeField] private Item chave2;
 
     private Vector3 playerPosition;
     private Quaternion playerRotation;
@@ -39,7 +41,7 @@ public class CofreManager : MonoBehaviour, IRaycastInteractable
     {
       
 
-        if (controle)
+        if (controle && InventoryController.instance.HasItem(chave1) && InventoryController.instance.HasItem(chave2))
         {
             playerPosition = player.position;
             playerRotation = player.rotation;
