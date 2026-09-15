@@ -3424,23 +3424,6 @@ MonoBehaviour:
   controleCorrou: 0.01
   reiniciaCont: 9
   position: {x: 0, y: 0, z: -3}
---- !u!114 &56580518
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 56580514}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 10bca7dcc5f9dbc4eaf87de848b3e3bf, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::CofreManager
-  playerController: {fileID: 0}
-  player: {fileID: 0}
-  tranca: {fileID: 1864294220}
-  chave1: {fileID: 0}
-  chave2: {fileID: 0}
 --- !u!1 &57847953
 GameObject:
   m_ObjectHideFlags: 0
@@ -10414,9 +10397,6 @@ PrefabInstance:
     m_AddedComponents:
     - targetCorrespondingSourceObject: {fileID: 1141020929729019925, guid: 434e2cda7e91c604b9fbdd09a0830ad7, type: 3}
       insertIndex: -1
-      addedObject: {fileID: 1801526565}
-    - targetCorrespondingSourceObject: {fileID: 1141020929729019925, guid: 434e2cda7e91c604b9fbdd09a0830ad7, type: 3}
-      insertIndex: -1
       addedObject: {fileID: 1801526564}
     - targetCorrespondingSourceObject: {fileID: 1141020929729019925, guid: 434e2cda7e91c604b9fbdd09a0830ad7, type: 3}
       insertIndex: -1
@@ -14895,9 +14875,6 @@ PrefabInstance:
     m_AddedComponents:
     - targetCorrespondingSourceObject: {fileID: 1141020929729019925, guid: 434e2cda7e91c604b9fbdd09a0830ad7, type: 3}
       insertIndex: -1
-      addedObject: {fileID: 1704222855}
-    - targetCorrespondingSourceObject: {fileID: 1141020929729019925, guid: 434e2cda7e91c604b9fbdd09a0830ad7, type: 3}
-      insertIndex: -1
       addedObject: {fileID: 1704222854}
     - targetCorrespondingSourceObject: {fileID: 1141020929729019925, guid: 434e2cda7e91c604b9fbdd09a0830ad7, type: 3}
       insertIndex: -1
@@ -16523,23 +16500,6 @@ MonoBehaviour:
   controleCorrou: 0.01
   reiniciaCont: 9
   position: {x: 0, y: 0, z: -3}
---- !u!114 &306239481
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 306239477}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 10bca7dcc5f9dbc4eaf87de848b3e3bf, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::CofreManager
-  playerController: {fileID: 0}
-  player: {fileID: 0}
-  tranca: {fileID: 1864294220}
-  chave1: {fileID: 0}
-  chave2: {fileID: 0}
 --- !u!1001 &306605949
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -47452,9 +47412,6 @@ PrefabInstance:
     m_AddedComponents:
     - targetCorrespondingSourceObject: {fileID: 1141020929729019925, guid: 434e2cda7e91c604b9fbdd09a0830ad7, type: 3}
       insertIndex: -1
-      addedObject: {fileID: 2087260161}
-    - targetCorrespondingSourceObject: {fileID: 1141020929729019925, guid: 434e2cda7e91c604b9fbdd09a0830ad7, type: 3}
-      insertIndex: -1
       addedObject: {fileID: 2087260160}
     - targetCorrespondingSourceObject: {fileID: 1141020929729019925, guid: 434e2cda7e91c604b9fbdd09a0830ad7, type: 3}
       insertIndex: -1
@@ -50680,23 +50637,6 @@ MonoBehaviour:
   controleCorrou: 0.01
   reiniciaCont: 9
   position: {x: 0, y: 0, z: -3}
---- !u!114 &930987611
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 930987607}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 10bca7dcc5f9dbc4eaf87de848b3e3bf, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::CofreManager
-  playerController: {fileID: 0}
-  player: {fileID: 0}
-  tranca: {fileID: 1864294220}
-  chave1: {fileID: 0}
-  chave2: {fileID: 0}
 --- !u!1001 &931300392
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -58378,9 +58318,6 @@ PrefabInstance:
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
     m_AddedComponents:
-    - targetCorrespondingSourceObject: {fileID: 1141020929729019925, guid: 434e2cda7e91c604b9fbdd09a0830ad7, type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 1929623705}
     - targetCorrespondingSourceObject: {fileID: 1141020929729019925, guid: 434e2cda7e91c604b9fbdd09a0830ad7, type: 3}
       insertIndex: -1
       addedObject: {fileID: 1929623704}
@@ -67182,9 +67119,6 @@ PrefabInstance:
     m_AddedComponents:
     - targetCorrespondingSourceObject: {fileID: 1141020929729019925, guid: 434e2cda7e91c604b9fbdd09a0830ad7, type: 3}
       insertIndex: -1
-      addedObject: {fileID: 1898666125}
-    - targetCorrespondingSourceObject: {fileID: 1141020929729019925, guid: 434e2cda7e91c604b9fbdd09a0830ad7, type: 3}
-      insertIndex: -1
       addedObject: {fileID: 1898666124}
     - targetCorrespondingSourceObject: {fileID: 1141020929729019925, guid: 434e2cda7e91c604b9fbdd09a0830ad7, type: 3}
       insertIndex: -1
@@ -72059,9 +71993,6 @@ PrefabInstance:
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
     m_AddedComponents:
-    - targetCorrespondingSourceObject: {fileID: 1141020929729019925, guid: 434e2cda7e91c604b9fbdd09a0830ad7, type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 930987611}
     - targetCorrespondingSourceObject: {fileID: 1141020929729019925, guid: 434e2cda7e91c604b9fbdd09a0830ad7, type: 3}
       insertIndex: -1
       addedObject: {fileID: 930987610}
@@ -86439,9 +86370,6 @@ PrefabInstance:
     m_AddedComponents:
     - targetCorrespondingSourceObject: {fileID: 1141020929729019925, guid: 434e2cda7e91c604b9fbdd09a0830ad7, type: 3}
       insertIndex: -1
-      addedObject: {fileID: 56580518}
-    - targetCorrespondingSourceObject: {fileID: 1141020929729019925, guid: 434e2cda7e91c604b9fbdd09a0830ad7, type: 3}
-      insertIndex: -1
       addedObject: {fileID: 56580517}
     - targetCorrespondingSourceObject: {fileID: 1141020929729019925, guid: 434e2cda7e91c604b9fbdd09a0830ad7, type: 3}
       insertIndex: -1
@@ -93813,23 +93741,6 @@ MonoBehaviour:
   controleCorrou: 0.01
   reiniciaCont: 9
   position: {x: 0, y: 0, z: -3}
---- !u!114 &1704222855
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1704222851}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 10bca7dcc5f9dbc4eaf87de848b3e3bf, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::CofreManager
-  playerController: {fileID: 0}
-  player: {fileID: 0}
-  tranca: {fileID: 1864294220}
-  chave1: {fileID: 0}
-  chave2: {fileID: 0}
 --- !u!1 &1704922271 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 1672476037069410, guid: fb71d571078e952469f83dcc9bb68890, type: 3}
@@ -96936,9 +96847,6 @@ PrefabInstance:
     m_AddedComponents:
     - targetCorrespondingSourceObject: {fileID: 1141020929729019925, guid: 434e2cda7e91c604b9fbdd09a0830ad7, type: 3}
       insertIndex: -1
-      addedObject: {fileID: 306239481}
-    - targetCorrespondingSourceObject: {fileID: 1141020929729019925, guid: 434e2cda7e91c604b9fbdd09a0830ad7, type: 3}
-      insertIndex: -1
       addedObject: {fileID: 306239480}
     - targetCorrespondingSourceObject: {fileID: 1141020929729019925, guid: 434e2cda7e91c604b9fbdd09a0830ad7, type: 3}
       insertIndex: -1
@@ -98981,23 +98889,6 @@ MonoBehaviour:
   controleCorrou: 0.01
   reiniciaCont: 9
   position: {x: 0, y: 0, z: -3}
---- !u!114 &1801526565
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1801526561}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 10bca7dcc5f9dbc4eaf87de848b3e3bf, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::CofreManager
-  playerController: {fileID: 0}
-  player: {fileID: 0}
-  tranca: {fileID: 1864294220}
-  chave1: {fileID: 0}
-  chave2: {fileID: 0}
 --- !u!1 &1801888620
 GameObject:
   m_ObjectHideFlags: 0
@@ -103630,23 +103521,6 @@ MonoBehaviour:
   controleCorrou: 0.01
   reiniciaCont: 9
   position: {x: 0, y: 0, z: -3}
---- !u!114 &1898666125
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1898666121}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 10bca7dcc5f9dbc4eaf87de848b3e3bf, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::CofreManager
-  playerController: {fileID: 1484535628}
-  player: {fileID: 1484535625}
-  tranca: {fileID: 1864294220}
-  chave1: {fileID: 11400000, guid: 65fc2e7b91a54dd40941c381762c1f8c, type: 2}
-  chave2: {fileID: 11400000, guid: 34b0bf40f6ad33346963c748948c476f, type: 2}
 --- !u!1 &1899784274 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 257306753051222671, guid: 453498c669729d84eb6ee43d8d5700d2, type: 3}
@@ -105277,23 +105151,6 @@ MonoBehaviour:
   controleCorrou: 0.01
   reiniciaCont: 9
   position: {x: 0, y: 0, z: -3}
---- !u!114 &1929623705
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1929623701}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 10bca7dcc5f9dbc4eaf87de848b3e3bf, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::CofreManager
-  playerController: {fileID: 0}
-  player: {fileID: 0}
-  tranca: {fileID: 1864294220}
-  chave1: {fileID: 0}
-  chave2: {fileID: 0}
 --- !u!1 &1930189084
 GameObject:
   m_ObjectHideFlags: 0
@@ -113058,23 +112915,6 @@ MonoBehaviour:
   controleCorrou: 0.01
   reiniciaCont: 9
   position: {x: 0, y: 0, z: -3}
---- !u!114 &2087260161
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2087260157}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 10bca7dcc5f9dbc4eaf87de848b3e3bf, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::CofreManager
-  playerController: {fileID: 0}
-  player: {fileID: 0}
-  tranca: {fileID: 1864294220}
-  chave1: {fileID: 0}
-  chave2: {fileID: 0}
 --- !u!1001 &2090844597
 PrefabInstance:
   m_ObjectHideFlags: 0
