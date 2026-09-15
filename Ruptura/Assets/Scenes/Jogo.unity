@@ -23892,6 +23892,28 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 0.005182043, y: 0.0059447424, z: 0.008711908}
   m_Center: {x: -0.000000007450581, y: -0.0003168508, z: 0.004355952}
+--- !u!95 &442466482
+Animator:
+  serializedVersion: 7
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 442466477}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 63785ca2f8ceab24cb408b35ab967380, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_AnimatePhysics: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorStateOnDisable: 0
+  m_WriteDefaultValuesOnDisable: 0
 --- !u!1 &444187610
 GameObject:
   m_ObjectHideFlags: 0
@@ -91289,7 +91311,6 @@ MonoBehaviour:
   itemUITitleText: {fileID: 241542152}
   itemUIBodyText: {fileID: 624584883}
   itemUIImage: {fileID: 388750635}
-  pressE: {fileID: 1233213143}
   interact: {fileID: 102315025}
   painelAviso: {fileID: 1310124070}
 --- !u!114 &1643203267
@@ -96546,6 +96567,9 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 3758510207804427498, guid: 5f6c86834d1ea52429f5ecb7e5551c43, type: 3}
       insertIndex: -1
       addedObject: {fileID: 442466479}
+    - targetCorrespondingSourceObject: {fileID: 3758510207804427498, guid: 5f6c86834d1ea52429f5ecb7e5551c43, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 442466482}
   m_SourcePrefab: {fileID: 100100000, guid: 5f6c86834d1ea52429f5ecb7e5551c43, type: 3}
 --- !u!1001 &1751101306
 PrefabInstance:
@@ -102105,6 +102129,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c32cef7704b7f9d498a5f7397bca5aad, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::ControleSenha
+  portaAnimator: {fileID: 442466482}
+  cofreManager: {fileID: 265575913}
   result: 0000000000000000000000000000000000000000000000000000000000000000
 --- !u!1 &1865698211
 GameObject:
@@ -103616,11 +103642,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 10bca7dcc5f9dbc4eaf87de848b3e3bf, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::CofreManager
-  playerController: {fileID: 0}
-  player: {fileID: 0}
+  playerController: {fileID: 1484535628}
+  player: {fileID: 1484535625}
   tranca: {fileID: 1864294220}
-  chave1: {fileID: 0}
-  chave2: {fileID: 0}
+  chave1: {fileID: 11400000, guid: 65fc2e7b91a54dd40941c381762c1f8c, type: 2}
+  chave2: {fileID: 11400000, guid: 34b0bf40f6ad33346963c748948c476f, type: 2}
 --- !u!1 &1899784274 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 257306753051222671, guid: 453498c669729d84eb6ee43d8d5700d2, type: 3}
