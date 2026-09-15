@@ -30,6 +30,8 @@ public class TomadaProjetor : MonoBehaviour, IRaycastInteractable
             return;
         }
 
+        // O PlayerInteraction já limita o alcance. Se o jogador estiver
+        // segurando o plugue e mirando na tomada, ela encaixa automaticamente.
         conectado = true;
         cabo.Conectar(pontoEncaixe);
         LigarProjetor();
