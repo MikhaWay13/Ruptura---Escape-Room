@@ -119,8 +119,7 @@ public class CaboProjetor : MonoBehaviour, IRaycastInteractable
             return false;
         }
 
-        // Ignora o mesmo E usado para pegar. Se estiver olhando para a tomada,
-        // ela recebe o E e conecta o plugue em vez de soltá-lo.
+        // Ignore o E usado para pegar. Se estiver olhando para a tomada, ela recebe o E e conecta o plugue em vez de soltá-lo.
         return Time.frameCount != quadroEmQuePegou &&
             interagirAction.WasPressedThisFrame() &&
             !EstaMirandoNaTomada();
