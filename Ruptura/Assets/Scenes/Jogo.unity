@@ -49037,21 +49037,22 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::ClockPuzzle
   cameraController: {fileID: 0}
   playerController: {fileID: 0}
-  inventoryBridge: {fileID: 0}
   hourHand: {fileID: 0}
   minuteHand: {fileID: 0}
   hourItem: {fileID: 0}
   minuteItem: {fileID: 0}
-  clockCamera: {fileID: 0}
-  hourMinZ: -144.399
-  hourMaxZ: -126.156
-  minuteMinZ: -57.964
-  minuteMaxZ: -40.264
+  correctHour: {fileID: 0}
+  correctMinute: {fileID: 0}
+  hourTolerance: 5
+  minuteTolerance: 5
   clockDoor: {fileID: 0}
   doorOpenAxis: {x: 1, y: 0, z: 0}
   doorOpenAngle: 90
   doorOpenDuration: 0.5
   mirrorCollider: {fileID: 0}
+  onSolved:
+    m_PersistentCalls:
+      m_Calls: []
 --- !u!114 &914983364
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -81472,12 +81473,12 @@ GameObject:
   - component: {fileID: 1484535626}
   - component: {fileID: 1484535629}
   m_Layer: 0
-  m_Name: Player
+  m_Name: Player BUGADO
   m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &1484535625
 Transform:
   m_ObjectHideFlags: 0
@@ -91239,6 +91240,7 @@ MonoBehaviour:
   itemUITitleText: {fileID: 241542152}
   itemUIBodyText: {fileID: 624584883}
   itemUIImage: {fileID: 388750635}
+  pressE: {fileID: 0}
   interact: {fileID: 102315025}
   painelAviso: {fileID: 1310124070}
 --- !u!114 &1643203267
@@ -91437,6 +91439,8 @@ MonoBehaviour:
   handType: 1
   visual: {fileID: 1645941116}
   invertRotation: 0
+  selectedOutlineColor: {r: 1, g: 0.92156863, b: 0.015686275, a: 1}
+  selectedOutlineWidth: 4
 --- !u!1 &1648981488
 GameObject:
   m_ObjectHideFlags: 0
@@ -110666,6 +110670,8 @@ MonoBehaviour:
   handType: 0
   visual: {fileID: 2035099636}
   invertRotation: 0
+  selectedOutlineColor: {r: 1, g: 0.92156863, b: 0.015686275, a: 1}
+  selectedOutlineWidth: 4
 --- !u!1001 &2035249786
 PrefabInstance:
   m_ObjectHideFlags: 0

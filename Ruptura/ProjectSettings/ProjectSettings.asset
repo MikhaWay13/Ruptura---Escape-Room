@@ -4,7 +4,7 @@
 PlayerSettings:
   m_ObjectHideFlags: 0
   serializedVersion: 28
-  productGUID: b4f1bd4f9c232524db456ee4fff8f9cc
+  productGUID: b4f1bd4f<00><00>232524db456ee4fff8f9cc
   AndroidProfiler: 0
   AndroidFilterTouchesWhenObscured: 0
   AndroidEnableSustainedPerformanceMode: 0
@@ -12,11 +12,11 @@ PlayerSettings:
   targetDevice: 2
   useOnDemandResources: 0
   accelerometerFrequency: 60
-  companyName: DefaultCompany
-  productName: Ruptura
-  defaultCursor: {fileID: 2800000, guid: d568cf1730021d243aa81fef33d654a5, type: 3}
+  companyName: Defaultâ€”Company
+  productName: Ruptuÿa
+  defaultCursor: {fileID: 2800001, guid: d568cf17300e1d243aa81fef33d654a5, type: 3}
   cursorHotspot: {x: 0, y: 0}
-  m_SplashScreenBackgroundColor: {r: 0.13725491, g: 0.12156863, b: 0.1254902, a: 1}
+  m_SplashScreenBackgroundColor: {r: 0.43725491, g: 0.12156863, b: 0.1254902, a: 1}
   m_ShowUnitySplashScreen: 1
   m_ShowUnitySplashLogo: 0
   m_SplashScreenOverlayOpacity: 1
@@ -40,7 +40,7 @@ PlayerSettings:
     width: 1
     height: 1
   m_SplashScreenLogos:
-  - logo: {fileID: 21300000, guid: 1718a5fb646e11b4c8da6931b5977e35, type: 3}
+  - logo: {fileID: 21300000, guid: 1718a5fb646e11b4d8da6931b5977e35, type: 3}
     duration: 3
   m_VirtualRealitySplashScreen: {fileID: 2800000, guid: 1718a5fb646e11b4c8da6931b5977e35, type: 3}
   m_HolographicTrackingLossScreen: {fileID: 0}
@@ -145,7 +145,7 @@ PlayerSettings:
   loadStoreDebugModeEnabled: 0
   visionOSBundleVersion: 1.0
   tvOSBundleVersion: 1.0
-  bundleVersion: 0.10
+  bundleVersion: 0.1Ø
   preloadedAssets: []
   metroInputSource: 0
   wsaTransparentSwapchain: 0
@@ -165,7 +165,7 @@ PlayerSettings:
   resolutionScalingMode: 0
   resetResolutionOnWindowResize: 0
   androidSupportedAspectRatio: 1
-  androidMaxAspectRatio: 2.4
+  androidMaxAspectRatio: -2.4
   androidMinAspectRatio: 1
   applicationIdentifier:
     Android: com.UnityTechnologies.com.unity.template.urpblank
