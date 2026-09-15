@@ -121,7 +121,7 @@ public class PlayerInteraction : MonoBehaviour
 
                     if (InventoryController.instance != null)
                     {
-                        
+
 
                         bool verificate = InventoryController.instance.AddItem(currentInteractable.item);
 
@@ -130,7 +130,7 @@ public class PlayerInteraction : MonoBehaviour
                             Interactables objetoColetado = currentInteractable;
                             Item itemColetado = objetoColetado.item;
 
-                            if(movingObjectCoroutine != null)
+                            if (movingObjectCoroutine != null)
                             {
                                 StopCoroutine(movingObjectCoroutine);
                                 movingObjectCoroutine = null;
@@ -157,7 +157,7 @@ public class PlayerInteraction : MonoBehaviour
                             currentInteractable = null;
 
 
-                             if (cutsceneVidro != null)
+                            if (cutsceneVidro != null)
                             {
                                 cutsceneVidro.TentarIniciar(itemColetado);
                             }
@@ -181,9 +181,9 @@ public class PlayerInteraction : MonoBehaviour
         {
             RotacaoCofre rotacaoCofre = hit.collider.GetComponentInParent<RotacaoCofre>();
 
-            if(rotacaoCofre != null && pressAction != null && pressAction.WasPressedThisFrame())
+            if (rotacaoCofre != null && pressAction != null && pressAction.WasPressedThisFrame())
             {
-                rotacaoCofre.Press();
+                rotacaoCofre.Interact();
                 return;
             }
 
@@ -202,7 +202,7 @@ public class PlayerInteraction : MonoBehaviour
             if (directInteractable != null || interactable != null)
             {
                 SetHandCursor(true);
-                
+
 
                 SetOutline(directInteractable is MonoBehaviour directBehaviour ? directBehaviour.gameObject : interactable.gameObject);
 
@@ -210,24 +210,24 @@ public class PlayerInteraction : MonoBehaviour
 
                 bool ShowPressEinteract = false;
 
-                if(directInteractable != null)
+                if (directInteractable != null)
                 {
                     ShowPressEinteract = true;
                 }
-                else if(interactable != null && interactable.item != null&&!interactable.item.hasReadableUI)
+                else if (interactable != null && interactable.item != null && !interactable.item.hasReadableUI)
                 {
-                    if( !interactable.item.grabbable || interactable.item.movable )
+                    if (!interactable.item.grabbable || interactable.item.movable)
                     {
                         ShowPressEinteract = true;
                     }
-                    
+
                 }
 
                 SetPressEInteracao(ShowPressEinteract);
 
                 if (rotacaoCofre != null && pressAction != null && pressAction.WasPressedThisFrame())
                 {
-                    rotacaoCofre.Press();
+                    rotacaoCofre.Interact();
                     return;
                 }
 
@@ -249,7 +249,7 @@ public class PlayerInteraction : MonoBehaviour
                 }
 
 
-                
+
 
                 // INSPEÇÃO DE ITEM (PROTEGIDO CONTRA NULL)
                 if (interactable != null && interactable.item != null && !interactable.item.movable && pressAction != null && pressAction.WasPressedThisFrame())
@@ -287,7 +287,7 @@ public class PlayerInteraction : MonoBehaviour
                         originRotation = currentInteractable.transform.rotation;
                         movingObjectCoroutine = StartCoroutine(MovingObject(currentInteractable, objectViewer.position));
                     }
-                    
+
                     TocarSomDoItem(currentInteractable.transform.position);
                 }
             }
@@ -371,13 +371,13 @@ public class PlayerInteraction : MonoBehaviour
         if (currentInteractable != null &&
         currentInteractable.item != null &&
         currentInteractable.item.hasReadableUI)
-    {
-        SetPressE(false);
-    }
-    else
-    {
-        SetPressE(true);
-    }
+        {
+            SetPressE(false);
+        }
+        else
+        {
+            SetPressE(true);
+        }
 
         SetBackImage(true);
     }
@@ -416,34 +416,34 @@ public class PlayerInteraction : MonoBehaviour
     private IEnumerator MovingObject(Interactables obj, Vector3 position)
     {
         if (obj == null)
-    {
-        movingObjectCoroutine = null;
-        yield break;
-    }
-
-    obj.isMoving = true;
-    float timer = 0f;
-
-    while (timer < 1f)
-    {
-        if (obj == null)
         {
             movingObjectCoroutine = null;
             yield break;
         }
 
-        obj.transform.position = Vector3.Lerp(obj.transform.position, position, Time.deltaTime * 5f);
-        timer += Time.deltaTime;
-        yield return null;
-    }
+        obj.isMoving = true;
+        float timer = 0f;
 
-    if (obj != null)
-    {
-        obj.transform.position = position;
-        obj.isMoving = false;
-    }
+        while (timer < 1f)
+        {
+            if (obj == null)
+            {
+                movingObjectCoroutine = null;
+                yield break;
+            }
 
-    movingObjectCoroutine = null;
+            obj.transform.position = Vector3.Lerp(obj.transform.position, position, Time.deltaTime * 5f);
+            timer += Time.deltaTime;
+            yield return null;
+        }
+
+        if (obj != null)
+        {
+            obj.transform.position = position;
+            obj.isMoving = false;
+        }
+
+        movingObjectCoroutine = null;
     }
 
     private void TocarSomDoItem(Vector3 posicao)
@@ -469,20 +469,20 @@ public class PlayerInteraction : MonoBehaviour
     }
 
     private void SetPressEInteracao(bool state)
-{
-    if (UIManager.instance != null)
     {
-        UIManager.instance.SetPressEInteracao(state);
+        if (UIManager.instance != null)
+        {
+            UIManager.instance.SetPressEInteracao(state);
+        }
     }
-}
 
-private void SetAvisoEquipar(bool state)
-{
-    if (UIManager.instance != null)
+    private void SetAvisoEquipar(bool state)
     {
-        UIManager.instance.SetAvisoEquipar(state);
+        if (UIManager.instance != null)
+        {
+            UIManager.instance.SetAvisoEquipar(state);
+        }
     }
-}
 
     private void SetBackImage(bool state)
     {
@@ -541,17 +541,17 @@ private void SetAvisoEquipar(bool state)
     private void OnDisable()
     {
         if (movingObjectCoroutine != null)
-    {
-        StopCoroutine(movingObjectCoroutine);
-        movingObjectCoroutine = null;
-    }
+        {
+            StopCoroutine(movingObjectCoroutine);
+            movingObjectCoroutine = null;
+        }
 
-    SetOutline(null);
+        SetOutline(null);
 
-    if (currentMovableObject != null)
-    {
-        DropMovableObject();
-    }
+        if (currentMovableObject != null)
+        {
+            DropMovableObject();
+        }
     }
 
     // =========================================================================
