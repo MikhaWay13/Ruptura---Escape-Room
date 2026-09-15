@@ -2,7 +2,7 @@ using UnityEngine;
 using System.Collections;
 using System;
 
-public class RotacaoCofre : MonoBehaviour
+public class RotacaoCofre : MonoBehaviour, IRaycastInteractable
 {
     public static event Action<string, int> Rotated = delegate { };
 
@@ -13,7 +13,7 @@ public class RotacaoCofre : MonoBehaviour
     [SerializeField] private int reiniciaCont = 9;
     [SerializeField] private Vector3 position = new Vector3(0f, 0f, -3f);
 
-    public void Press()
+    public void Interact()
     {
         if (coroutineAllowed)
         {
@@ -43,5 +43,5 @@ public class RotacaoCofre : MonoBehaviour
 
         Rotated(name, numberShow);
 
-            }
+    }
 }
