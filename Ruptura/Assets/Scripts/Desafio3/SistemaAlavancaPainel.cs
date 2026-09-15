@@ -3,7 +3,6 @@ using TMPro;
 using UnityEngine;
 
 [DefaultExecutionOrder(100)]
-[DisallowMultipleComponent]
 public class SistemaAlavancaPainel : MonoBehaviour, IRaycastInteractable
 {
     // A interação avança sempre nesta ordem:

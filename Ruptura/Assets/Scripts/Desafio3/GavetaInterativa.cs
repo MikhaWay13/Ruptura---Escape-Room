@@ -2,7 +2,6 @@
 using System.Collections;
 using TMPro;
 using UnityEngine;
-[DisallowMultipleComponent]
 public class GavetaInterativa : MonoBehaviour, IRaycastInteractable
 {
     [Header("Referências")]

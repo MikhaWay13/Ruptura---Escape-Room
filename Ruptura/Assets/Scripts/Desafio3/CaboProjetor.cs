@@ -1,7 +1,6 @@
 using UnityEngine;
 using UnityEngine.InputSystem;
 
-[DisallowMultipleComponent]
 public class CaboProjetor : MonoBehaviour, IRaycastInteractable
 {
     [Header("Referências")]

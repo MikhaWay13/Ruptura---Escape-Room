@@ -1,6 +1,5 @@
 using UnityEngine;
 
-[DisallowMultipleComponent]
 public class TomadaProjetor : MonoBehaviour, IRaycastInteractable
 {
     [Header("Referências")]
