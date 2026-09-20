@@ -1,3 +1,4 @@
+using System.Collections;
 using UnityEngine;
 using UnityEngine.Playables;
 
@@ -11,7 +12,16 @@ public class CutsceneController : MonoBehaviour
         public bool iniciarAutomaticamente;
         public Item itemGatilho;
         public Transform destinoTeleport;
+
+        [Header("Configuração da Fase/Cômodo")]
+        public int indiceFase = -1;
+        
+        [Tooltip("Tempo exato (em segundos) da timeline em que a fase será ativada.")]
+        public float tempoTrocaFase = 0f; 
     }
+
+    [Header("Fases / Cômodos do Jogo")]
+    [SerializeField] private GameObject[] fasesGame;
 
     [Header("Cutscenes do jogo")]
     [SerializeField] private CutsceneData[] cutscenes;
@@ -28,8 +38,10 @@ public class CutsceneController : MonoBehaviour
     {
         if (playerController != null)
         {
-            characterController = playerController.GetComponent<CharacterController>();
+            playerController.TryGetComponent(out characterController);
         }
+
+        AtivarFase(0);
     }
 
     private void Start()
@@ -44,12 +56,25 @@ public class CutsceneController : MonoBehaviour
         }
     }
 
+    public void AtivarFase(int indiceFaseDesejada)
+    {
+        if (fasesGame == null || fasesGame.Length == 0) return;
+        if (indiceFaseDesejada < 0 || indiceFaseDesejada >= fasesGame.Length) return;
+
+        for (int i = 0; i < fasesGame.Length; i++)
+        {
+            if (fasesGame[i] != null)
+            {
+                fasesGame[i].SetActive(i == indiceFaseDesejada);
+            }
+        }
+
+        Debug.Log($"Fase ativada com sucesso: {fasesGame[indiceFaseDesejada].name} (Índice {indiceFaseDesejada})", this);
+    }
+
     public void TentarIniciar(Item itemColetado)
     {
-        if (itemColetado == null)
-        {
-            return;
-        }
+        if (itemColetado == null) return;
 
         for (int i = 0; i < cutscenes.Length; i++)
         {
@@ -65,12 +90,7 @@ public class CutsceneController : MonoBehaviour
 
     public void IniciarPorIndice(int indice)
     {
-        if (indice < 0 || indice >= cutscenes.Length)
-        {
-            Debug.LogWarning("Índice de cutscene inválido: " + indice, this);
-            return;
-        }
-
+        if (indice < 0 || indice >= cutscenes.Length) return;
         IniciarCutscene(cutscenes[indice]);
     }
 
@@ -84,104 +104,82 @@ public class CutsceneController : MonoBehaviour
                 return;
             }
         }
-
-        Debug.LogWarning("Cutscene não encontrada: " + nome, this);
     }
 
     private void IniciarCutscene(CutsceneData cutscene)
     {
-        if (cutsceneEmAndamento)
-        {
-            Debug.LogWarning("Já existe uma cutscene em andamento.", this);
-            return;
-        }
-
-        if (cutscene == null || cutscene.director == null)
-        {
-            Debug.LogWarning("Cutscene sem Playable Director configurado.", this);
-            return;
-        }
+        if (cutsceneEmAndamento || cutscene == null || cutscene.director == null) return;
 
         cutsceneAtual = cutscene;
         cutsceneEmAndamento = true;
 
         BloquearControles();
 
+        cutsceneAtual.director.stopped -= AoFinalizarDirector;
         cutsceneAtual.director.stopped += AoFinalizarDirector;
         cutsceneAtual.director.time = 0;
+        
+        // Inicia a animação da timeline
         cutsceneAtual.director.Play();
+
+        // Passa o diretor para a Coroutine poder vigiar o tempo dele
+        if (cutsceneAtual.indiceFase >= 0)
+        {
+            if (cutsceneAtual.tempoTrocaFase > 0f)
+            {
+                StartCoroutine(AtrasarTrocaDeFase(cutsceneAtual.indiceFase, cutsceneAtual.tempoTrocaFase, cutsceneAtual.director));
+            }
+            else
+            {
+                AtivarFase(cutsceneAtual.indiceFase);
+            }
+        }
+    }
+
+    private IEnumerator AtrasarTrocaDeFase(int indiceFase, float tempoDeEspera, PlayableDirector director)
+    {
+        // Fica verificando frame a frame o relógio interno da cutscene
+        while (director != null && director.time < tempoDeEspera)
+        {
+            yield return null; 
+        }
+        
+        // Assim que passar da marca exata (ex: 3.5 segundos), ativa a fase
+        AtivarFase(indiceFase);
     }
 
     private void BloquearControles()
     {
-        if (playerController != null)
-        {
-            playerController.SetGameplayControlEnabled(false);
-        }
-
-        if (playerInteraction != null)
-        {
-            playerInteraction.enabled = false;
-        }
+        if (playerController != null) playerController.SetGameplayControlEnabled(false);
+        if (playerInteraction != null) playerInteraction.enabled = false;
     }
 
     private void LiberarControles()
     {
-        if (playerInteraction != null)
-        {
-            playerInteraction.enabled = true;
-        }
-
-        if (playerController != null)
-        {
-            playerController.SetGameplayControlEnabled(true);
-        }
+        if (playerInteraction != null) playerInteraction.enabled = true;
+        if (playerController != null) playerController.SetGameplayControlEnabled(true);
     }
 
     public void Teleportar()
     {
-        if (cutsceneAtual == null || cutsceneAtual.destinoTeleport == null)
-        {
-            Debug.LogWarning("A cutscene atual não possui destino de teleporte.", this);
-            return;
-        }
+        if (cutsceneAtual == null || cutsceneAtual.destinoTeleport == null || playerController == null) return;
 
-        if (playerController == null)
-        {
-            Debug.LogWarning("Player Controller não configurado.", this);
-            return;
-        }
-
-        if (characterController != null)
-        {
-            characterController.enabled = false;
-        }
+        if (characterController != null) characterController.enabled = false;
 
         playerController.transform.SetPositionAndRotation(
             cutsceneAtual.destinoTeleport.position,
             cutsceneAtual.destinoTeleport.rotation
         );
 
-        if (characterController != null)
-        {
-            characterController.enabled = true;
-        }
+        if (characterController != null) characterController.enabled = true;
     }
 
     public void Finalizar()
     {
-        if (!cutsceneEmAndamento)
-        {
-            return;
-        }
-
-        if (cutsceneAtual != null && cutsceneAtual.director != null)
-        {
-            cutsceneAtual.director.stopped -= AoFinalizarDirector;
-        }
+        if (!cutsceneEmAndamento) return;
+        if (cutsceneAtual != null && cutsceneAtual.director != null) cutsceneAtual.director.stopped -= AoFinalizarDirector;
 
         LiberarControles();
-
         cutsceneAtual = null;
         cutsceneEmAndamento = false;
     }
@@ -193,15 +191,8 @@ public class CutsceneController : MonoBehaviour
 
     private void OnDisable()
     {
-        if (cutsceneAtual != null && cutsceneAtual.director != null)
-        {
-            cutsceneAtual.director.stopped -= AoFinalizarDirector;
-        }
-
-        if (cutsceneEmAndamento)
-        {
-            LiberarControles();
-        }
+        if (cutsceneAtual != null && cutsceneAtual.director != null) cutsceneAtual.director.stopped -= AoFinalizarDirector;
+        if (cutsceneEmAndamento) LiberarControles();
 
         cutsceneAtual = null;
         cutsceneEmAndamento = false;
