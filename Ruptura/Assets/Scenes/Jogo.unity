@@ -749,7 +749,7 @@ MonoBehaviour:
   caboProjetor: {fileID: 869227573}
   anguloLigadoX: -90
   duracaoMovimento: 0.65
-  luzAmbiente: {fileID: 0}
+  luzAmbiente: {fileID: 1259063943}
   intensidadeAmbienteDesligada: 0.05
   intensidadeAmbienteLigada: 0.1
   luzesPrincipais:
@@ -11484,9 +11484,6 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 66353336, guid: 37a55db759a372345884f6fbcefab66b, type: 3}
       insertIndex: -1
       addedObject: {fileID: 414194439}
-    - targetCorrespondingSourceObject: {fileID: 7331514416009967212, guid: 37a55db759a372345884f6fbcefab66b, type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 815886295}
   m_SourcePrefab: {fileID: 100100000, guid: 37a55db759a372345884f6fbcefab66b, type: 3}
 --- !u!1 &197339966
 GameObject:
@@ -16892,8 +16889,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 296754699}
   serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0.21463071, z: 0, w: 0.9766953}
-  m_LocalPosition: {x: 0.97617424, y: 0.42600012, z: -0.76438415}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -0.00000059604645, y: -0.00000011920929, z: -0.0000003054738}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -17025,7 +17022,7 @@ Camera:
     width: 1
     height: 1
   near clip plane: 0.3
-  far clip plane: 1000
+  far clip plane: 20
   field of view: 60.000004
   orthographic: 0
   orthographic size: 5
@@ -17257,129 +17254,6 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 1, y: 1, z: 1}
   m_Center: {x: 0, y: 0, z: 0}
---- !u!1 &301830704
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 301830705}
-  - component: {fileID: 301830709}
-  - component: {fileID: 301830708}
-  - component: {fileID: 301830707}
-  - component: {fileID: 301830706}
-  m_Layer: 0
-  m_Name: FirstPersonCamera
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &301830705
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 301830704}
-  serializedVersion: 2
-  m_LocalRotation: {x: -0, y: 0.720518, z: -0, w: 0.6934363}
-  m_LocalPosition: {x: -9.54, y: 2.3600001, z: -5.71}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 1211260574}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &301830706
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 301830704}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 89875cdc57c54474a8a74efd9b2a3b5d, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Unity.Cinemachine::Unity.Cinemachine.CinemachineInputAxisController
-  ScanRecursively: 1
-  SuppressInputWhileBlending: 1
-  IgnoreTimeScale: 0
-  m_ControllerManager:
-    Controllers: []
-  PlayerIndex: -1
-  AutoEnableInputs: 1
---- !u!114 &301830707
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 301830704}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4afa82ae3200b82408d605c3dbdd1e38, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Unity.Cinemachine::Unity.Cinemachine.CinemachineRotateWithFollowTarget
-  Damping: 0
---- !u!114 &301830708
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 301830704}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 36d1163fa822e8b418a0a603ec078d5c, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Unity.Cinemachine::Unity.Cinemachine.CinemachineHardLockToTarget
-  Damping: 0
---- !u!114 &301830709
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 301830704}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f9dfa5b682dcd46bda6128250e975f58, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Unity.Cinemachine::Unity.Cinemachine.CinemachineCamera
-  Priority:
-    Enabled: 0
-    m_Value: 0
-  OutputChannel: 1
-  StandbyUpdate: 2
-  m_StreamingVersion: 20241001
-  m_LegacyPriority: 0
-  Target:
-    TrackingTarget: {fileID: 0}
-    LookAtTarget: {fileID: 0}
-    CustomLookAtTarget: 0
-  Lens:
-    FieldOfView: 60.000004
-    OrthographicSize: 5
-    NearClipPlane: 0.3
-    FarClipPlane: 1000
-    Dutch: 0
-    ModeOverride: 0
-    PhysicalProperties:
-      GateFit: 2
-      SensorSize: {x: 21.946, y: 16.002}
-      LensShift: {x: 0, y: 0}
-      FocusDistance: 10
-      Iso: 200
-      ShutterSpeed: 0.005
-      Aperture: 16
-      BladeCount: 5
-      Curvature: {x: 2, y: 11}
-      BarrelClipping: 0.25
-      Anamorphism: 0
-  BlendHint: 0
 --- !u!1001 &302474762
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -36452,13 +36326,13 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 668765471}
   serializedVersion: 2
-  m_LocalRotation: {x: -0.5, y: -0.49999967, z: 0.50000024, w: -0.5000001}
-  m_LocalPosition: {x: -0.023, y: 0.0811, z: -0.1406}
+  m_LocalRotation: {x: -0.7011134, y: -0.09186671, z: 0.09186692, w: -0.70111406}
+  m_LocalPosition: {x: 24.243526, y: 0.487, z: 5.5062175}
   m_LocalScale: {x: 0.1496923, y: 0.14, z: 0.10811112}
   m_ConstrainProportionsScale: 1
   m_Children: []
   m_Father: {fileID: 927141830}
-  m_LocalEulerAnglesHint: {x: -270, y: 0, z: -90}
+  m_LocalEulerAnglesHint: {x: -270.02, y: 0, z: -14.93}
 --- !u!114 &668765473
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -46725,7 +46599,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &810468277
 Transform:
   m_ObjectHideFlags: 0
@@ -47301,42 +47175,6 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 815878135}
   m_Mesh: {fileID: -8798397398206838135, guid: 2de4b7466c2e9c54faf355fa859dcd6f, type: 3}
---- !u!1 &815886293 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 7331514416009967212, guid: 37a55db759a372345884f6fbcefab66b, type: 3}
-  m_PrefabInstance: {fileID: 196546941}
-  m_PrefabAsset: {fileID: 0}
---- !u!114 &815886295
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 815886293}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9a6610d2e704f1648819acc8d7460285, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: FMODUnity::FMODUnity.StudioEventEmitter
-  CollisionTag: 
-  EventReference:
-    Guid:
-      Data1: 684628950
-      Data2: 1321213088
-      Data3: -649441389
-      Data4: -600210842
-    Path: event:/FirePit
-  Event: 
-  EventPlayTrigger: 1
-  EventStopTrigger: 0
-  AllowFadeout: 1
-  TriggerOnce: 0
-  Preload: 0
-  NonRigidbodyVelocity: 0
-  Params: []
-  OverrideAttenuation: 0
-  OverrideMinDistance: 1
-  OverrideMaxDistance: 20
 --- !u!1001 &816176479
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -70277,7 +70115,6 @@ Transform:
   - {fileID: 503596036}
   - {fileID: 292865032}
   - {fileID: 1755849332}
-  - {fileID: 301830705}
   - {fileID: 1916764085}
   - {fileID: 281312591}
   - {fileID: 111856014}
@@ -84478,15 +84315,15 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1484535624}
   serializedVersion: 2
-  m_LocalRotation: {x: -0, y: 0.5548938, z: -0, w: 0.8319213}
-  m_LocalPosition: {x: -11.29, y: 0.39, z: -12.02}
+  m_LocalRotation: {x: 0, y: 0, z: -0.0018936936, w: 0.9999982}
+  m_LocalPosition: {x: 26.511, y: 3.468, z: -8.354}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
-  - {fileID: 553043234}
   - {fileID: 8793635}
+  - {fileID: 553043234}
   m_Father: {fileID: 0}
-  m_LocalEulerAnglesHint: {x: 0, y: 67.407, z: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: -0.217}
 --- !u!114 &1484535626
 MonoBehaviour:
   m_ObjectHideFlags: 0
