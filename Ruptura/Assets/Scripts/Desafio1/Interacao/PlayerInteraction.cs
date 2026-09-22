@@ -105,7 +105,7 @@ public class PlayerInteraction : MonoBehaviour
 
             if (currentInteractable != null && currentInteractable.item != null)
             {
-                if (currentInteractable.item.grabbable && pressAction != null && pressAction.IsPressed())
+                if (currentInteractable.item.grabbable && pressAction != null && pressAction.WasPressedThisFrame())
                 {
                     RotateObject();
                 }
