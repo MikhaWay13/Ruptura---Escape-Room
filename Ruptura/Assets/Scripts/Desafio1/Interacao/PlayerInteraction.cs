@@ -225,7 +225,7 @@ public class PlayerInteraction : MonoBehaviour
 
                 SetPressEInteracao(ShowPressEinteract);
 
-                if (rotacaoCofre != null && pressAction != null && pressAction.WasPressedThisFrame())
+                if (rotacaoCofre != null && InteractAction != null && InteractAction.WasPressedThisFrame())
                 {
                     rotacaoCofre.Interact();
                     return;
