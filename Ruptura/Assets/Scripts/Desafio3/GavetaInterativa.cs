@@ -58,8 +58,11 @@ public class GavetaInterativa : MonoBehaviour, IRaycastInteractable
 
     private void AtualizarTexto()
     {
-        textoStatus.text = aberta
-            ? "Alavanca encontrada! Clique esquerdo para inspecionar."
-            : "Encontre a alavanca dentro da gaveta.";
+        if (textoStatus != null)
+        {
+            textoStatus.text = aberta
+                ? "Alavanca encontrada! Clique esquerdo para inspecionar."
+                : "Encontre a alavanca dentro da gaveta.";
+        }
     }
 }

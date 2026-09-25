@@ -105,7 +105,7 @@ public class PlayerInteraction : MonoBehaviour
 
             if (currentInteractable != null && currentInteractable.item != null)
             {
-                if (currentInteractable.item.grabbable && pressAction != null && pressAction.WasPressedThisFrame())
+                if (currentInteractable.item.grabbable && pressAction != null && pressAction.IsPressed())
                 {
                     RotateObject();
                 }
@@ -181,7 +181,7 @@ public class PlayerInteraction : MonoBehaviour
         {
             RotacaoCofre rotacaoCofre = hit.collider.GetComponentInParent<RotacaoCofre>();
 
-            if (rotacaoCofre != null && pressAction != null && pressAction.WasPressedThisFrame())
+            if (rotacaoCofre != null && InteractAction != null && InteractAction.WasPressedThisFrame())
             {
                 rotacaoCofre.Interact();
                 return;

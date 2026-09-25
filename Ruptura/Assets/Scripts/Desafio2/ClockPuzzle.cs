@@ -160,23 +160,37 @@ public class ClockPuzzle : MonoBehaviour
     }
 
 
-    public void ConfirmClock()
+  public void ConfirmClock()
+{
+    Debug.Log(
+        "ConfirmClock | " +
+        "isOpen: " + isOpen +
+        " | isSolved: " + isSolved +
+        " | hourInserted: " + hourInserted +
+        " | minuteInserted: " + minuteInserted
+    );
+
+    if (!isOpen || isSolved || !hourInserted || !minuteInserted)
+        return;
+
+    bool hourCorrect =
+        hourHand != null &&
+        hourHand.IsAlignedWith(correctHour, hourTolerance);
+
+    bool minuteCorrect =
+        minuteHand != null &&
+        minuteHand.IsAlignedWith(correctMinute, minuteTolerance);
+
+    Debug.Log(
+        "Hour correct: " + hourCorrect +
+        " | Minute correct: " + minuteCorrect
+    );
+
+    if (hourCorrect && minuteCorrect)
     {
-        if (!isOpen || isSolved || !hourInserted || !minuteInserted)
-            return;
-
-        bool hourCorrect = hourHand != null &&
-                           hourHand.IsAlignedWith(correctHour, hourTolerance);
-
-        bool minuteCorrect = minuteHand != null &&
-                             minuteHand.IsAlignedWith(correctMinute, minuteTolerance);
-
-        if (hourCorrect &&
-            minuteCorrect)
-        {
-            SolvePuzzle();
-        }
+        SolvePuzzle();
     }
+}
 
     private void SolvePuzzle()
     {

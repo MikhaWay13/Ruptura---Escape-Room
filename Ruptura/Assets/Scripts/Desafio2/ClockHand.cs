@@ -8,77 +8,149 @@ public class ClockHand : MonoBehaviour
         Minutes
     }
 
+
     [Header("Configuração")]
     [SerializeField] private HandType handType;
+
     [SerializeField] private Transform visual;
+
     [SerializeField] private bool invertRotation;
 
+
     [Header("Feedback de seleção")]
-    [SerializeField] private Color selectedOutlineColor = Color.yellow;
-    [SerializeField, Range(0f, 10f)] private float selectedOutlineWidth = 4f;
+    [SerializeField] private Color selectedOutlineColor =
+        Color.yellow;
+
+    [SerializeField, Range(0f, 10f)]
+    private float selectedOutlineWidth = 4f;
+
 
     private Quaternion initialLocalRotation;
+
     private Outline selectionOutline;
 
+
     public HandType Type => handType;
+
 
     private void Awake()
     {
         if (visual != null)
-            initialLocalRotation = visual.localRotation;
+        {
+            initialLocalRotation =
+                visual.localRotation;
+        }
 
-        selectionOutline = GetComponent<Outline>();
+        selectionOutline =
+            GetComponent<Outline>();
 
         if (selectionOutline != null)
+        {
             selectionOutline.enabled = false;
+        }
     }
+
 
     private void OnDisable()
     {
         SetSelected(false);
     }
 
+
+    // =========================================================
+    // RESETAR ROTAÇÃO
+    // =========================================================
+
     public void ResetRotation()
     {
-        if (visual != null)
-            visual.localRotation = initialLocalRotation;
+        if (visual == null)
+        {
+            return;
+        }
+
+        visual.localRotation =
+            initialLocalRotation;
     }
+
+
+    // =========================================================
+    // GIRAR PONTEIRO
+    // =========================================================
 
     public void Rotate(float rotationAmount)
     {
         if (visual == null)
+        {
             return;
+        }
 
         if (invertRotation)
-            rotationAmount = -rotationAmount;
+        {
+            rotationAmount =
+                -rotationAmount;
+        }
 
-        visual.Rotate(Vector3.forward, rotationAmount, Space.Self);
+        visual.Rotate(
+            Vector3.forward,
+            rotationAmount,
+            Space.Self
+        );
     }
+
+
+    // =========================================================
+    // OUTLINE
+    // =========================================================
 
     public void SetSelected(bool selected)
     {
         if (!selected)
         {
             if (selectionOutline != null)
-                selectionOutline.enabled = false;
+            {
+                selectionOutline.enabled =
+                    false;
+            }
 
             return;
         }
 
         if (selectionOutline == null)
-            selectionOutline = gameObject.AddComponent<Outline>();
+        {
+            selectionOutline =
+                gameObject.AddComponent<Outline>();
+        }
 
-        selectionOutline.OutlineMode = Outline.Mode.OutlineVisible;
-        selectionOutline.OutlineColor = selectedOutlineColor;
-        selectionOutline.OutlineWidth = selectedOutlineWidth;
+        selectionOutline.OutlineMode =
+            Outline.Mode.OutlineVisible;
+
+        selectionOutline.OutlineColor =
+            selectedOutlineColor;
+
+        selectionOutline.OutlineWidth =
+            selectedOutlineWidth;
+
         selectionOutline.enabled = true;
     }
 
-    public bool IsAlignedWith(Transform reference, float tolerance)
-    {
-        if (visual == null || reference == null)
-            return false;
 
-        return Quaternion.Angle(visual.rotation, reference.rotation) <= tolerance;
+    // =========================================================
+    // VERIFICAR POSIÇÃO
+    // =========================================================
+
+    public bool IsAlignedWith(
+        Transform reference,
+        float tolerance)
+    {
+        if (visual == null ||
+            reference == null)
+        {
+            return false;
+        }
+
+        return Quaternion.Angle(
+            visual.rotation,
+            reference.rotation
+        ) <= tolerance;
     }
 }
